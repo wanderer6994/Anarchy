@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{18C13E5D-D4D2-4310-993C-2F2644DB8D54}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Discord</RootNamespace>
+    <AssemblyName>Anarchy</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="websocket-sharp-with-proxy-support, Version=1.0.2.28248, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\websocket-sharp-with-proxy-support.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Discord\Channel\Models\OrganizedChannelList.cs" />
+    <Compile Include="Discord\Embed\EmbedAuthor.cs" />
+    <Compile Include="Discord\Embed\EmbedField.cs" />
+    <Compile Include="Discord\Embed\EmbedFooter.cs" />
+    <Compile Include="Discord\Embed\EmbedVideo.cs" />
+    <Compile Include="Discord\Gateway\Models\GatewayOpcode.cs" />
+    <Compile Include="Discord\Gateway\Models\GatewayRole.cs" />
+    <Compile Include="Discord\Guild\Models\GuildDefaultNotifications.cs" />
+    <Compile Include="Discord\Guild\Models\Properties\GuildModProperties.cs" />
+    <Compile Include="Discord\Role\RoleProperties.cs" />
+    <Compile Include="Discord\User\Models\ClientUser.cs" />
+    <Compile Include="Discord\User\UserEventArgs.cs" />
+    <Compile Include="Discord\User\UserNotFoundException.cs" />
+    <Compile Include="Discord\DiscordHttpClient.cs" />
+    <Compile Include="Discord\Guild\Models\BasicGuild.cs" />
+    <Compile Include="Discord\Invite\InvalidInviteException.cs" />
+    <Compile Include="Discord\Message\EventArgs\MessageDeletedEventArgs.cs" />
+    <Compile Include="Discord\Message\Models\Attachment.cs" />
+    <Compile Include="Discord\Embed\Embed.cs" />
+    <Compile Include="Discord\Embed\EmbedImage.cs" />
+    <Compile Include="Discord\Message\MessageNotFoundException.cs" />
+    <Compile Include="Discord\Message\Models\MessageDelete.cs" />
+    <Compile Include="Discord\Role\RoleNotFoundException.cs" />
+    <Compile Include="Base64Image.cs" />
+    <Compile Include="Discord\Channel\ChannelNotFoundException.cs" />
+    <Compile Include="Discord\DiscordClient.cs" />
+    <Compile Include="Discord\Gateway\DiscordSocketClient.cs" />
+    <Compile Include="Discord\Reaction\ReactionProperties.cs" />
+    <Compile Include="Discord\Experiments.cs" />
+    <Compile Include="Discord\Webhook\DiscordWebhookClient.cs" />
+    <Compile Include="Discord\Channel\Models\ChannelType.cs" />
+    <Compile Include="Discord\Guild\Models\GuildVerificationLevel.cs" />
+    <Compile Include="Discord\User\Models\Hypesquad\HypesquadHouse.cs" />
+    <Compile Include="Discord\User\Models\NitroType.cs" />
+    <Compile Include="Discord\User\Models\UserStatus.cs" />
+    <Compile Include="Discord\Exceptions\AccessDeniedException.cs" />
+    <Compile Include="Discord\Exceptions\DiscordException.cs" />
+    <Compile Include="Discord\Guild\GuildNotFoundException.cs" />
+    <Compile Include="Discord\Reaction\ReactionNotFoundException.cs" />
+    <Compile Include="Discord\Ratelimit\TooManyRequestsException.cs" />
+    <Compile Include="Discord\Channel\ChannelExtensions.cs" />
+    <Compile Include="Discord\Channel\ChannelEventArgs.cs" />
+    <Compile Include="Discord\Gateway\GatewayExtensions.cs" />
+    <Compile Include="Discord\Guild\GuildExtensions.cs" />
+    <Compile Include="Discord\Invite\InviteExtensions.cs" />
+    <Compile Include="Discord\Message\MessageExtensions.cs" />
+    <Compile Include="Discord\Reaction\ReactionExtentions.cs" />
+    <Compile Include="Discord\Relations\RelationsExtensions.cs" />
+    <Compile Include="Discord\Role\RoleExtensions.cs" />
+    <Compile Include="Discord\User\UserExtensions.cs" />
+    <Compile Include="Discord\Guild\GuildEventArgs.cs" />
+    <Compile Include="Discord\Message\EventArgs\MessageEventArgs.cs" />
+    <Compile Include="Discord\Gateway\Models\GatewayLogin.cs" />
+    <Compile Include="Discord\Role\RoleEventArgs.cs" />
+    <Compile Include="Discord\Channel\Models\Channel.cs" />
+    <Compile Include="Discord\Channel\Models\ChannelProperties.cs" />
+    <Compile Include="Discord\Invite\InviteProperties.cs" />
+    <Compile Include="Discord\Gateway\Models\Requests\GatewayData.cs" />
+    <Compile Include="Discord\Gateway\Models\Requests\GatewayHeartbeat.cs" />
+    <Compile Include="Discord\Gateway\Models\Requests\GatewayIdentification.cs" />
+    <Compile Include="Discord\Gateway\Models\Requests\GatewayPresence.cs" />
+    <Compile Include="Discord\Gateway\Models\Requests\GatewayRequest.cs" />
+    <Compile Include="Discord\Gateway\Models\GatewayResponse.cs" />
+    <Compile Include="Discord\Guild\Models\Properties\GuildCreationProperties.cs" />
+    <Compile Include="Discord\Guild\Models\Guild.cs" />
+    <Compile Include="Discord\Invite\Invite.cs" />
+    <Compile Include="Discord\Guild\Models\GuildMember.cs" />
+    <Compile Include="Discord\Message\Models\Message.cs" />
+    <Compile Include="Discord\Message\Models\MessageProperties.cs" />
+    <Compile Include="Discord\Message\Models\MessageRateLimit.cs" />
+    <Compile Include="Discord\Ratelimit\RateLimit.cs" />
+    <Compile Include="Discord\Reaction\Reaction.cs" />
+    <Compile Include="Discord\Role\Role.cs" />
+    <Compile Include="Discord\User\Models\Hypesquad\Hypesquad.cs" />
+    <Compile Include="Discord\Relations\Recipient.cs" />
+    <Compile Include="Discord\User\Models\User.cs" />
+    <Compile Include="Discord\User\Models\UserSettings.cs" />
+    <Compile Include="Discord\X-Super-Properties\SPUpdatedEventArgs.cs" />
+    <Compile Include="Discord\X-Super-Properties\SuperProperties.cs" />
+    <Compile Include="Discord\Webhook\Exceptions\InvalidWebhookException.cs" />
+    <Compile Include="Discord\Webhook\Exceptions\WebhookException.cs" />
+    <Compile Include="Discord\Webhook\Exceptions\InvalidWebhookNameException.cs" />
+    <Compile Include="Discord\Webhook\Models\Webhook.cs" />
+    <Compile Include="Discord\Webhook\Models\WebhookMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Discord\X-Super-Properties\SuperPropertiesInformation.cs" />
+    <Compile Include="Discord\PermissionOverwrite.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

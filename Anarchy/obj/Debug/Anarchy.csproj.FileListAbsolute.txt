@@ -1,0 +1,17 @@
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Debug\Anarchy.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Debug\Anarchy.pdb
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\Anarchy.csproj.CoreCompileInputs.cache
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\Anarchy.csproj.CopyComplete
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\Anarchy.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\Anarchy.pdb
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Debug\Anarchy.dll
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Debug\Anarchy.pdb
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Debug\Anarchy.csprojAssemblyReference.cache
+C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Debug\Anarchy.csproj.CoreCompileInputs.cache
+C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Debug\Anarchy.csproj.CopyComplete
+C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Debug\Anarchy.dll
+C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Debug\Anarchy.pdb
