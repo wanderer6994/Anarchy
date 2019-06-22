@@ -3,7 +3,7 @@ Anarchy is an opensource Discord API wrapper, lol
 
 
 ## Read Me in progress just have this example lol.
-```
+```csharp
 class ESKETTIT
     {
         static List<long> guilds = new List<long>();
