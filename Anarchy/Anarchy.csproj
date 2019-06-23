@@ -55,8 +55,10 @@
     <Compile Include="Discord\Embed\EmbedField.cs" />
     <Compile Include="Discord\Embed\EmbedFooter.cs" />
     <Compile Include="Discord\Embed\EmbedVideo.cs" />
+    <Compile Include="Discord\Gateway\Models\GatewayMemberChunk.cs" />
     <Compile Include="Discord\Gateway\Models\GatewayOpcode.cs" />
     <Compile Include="Discord\Gateway\Models\GatewayRole.cs" />
+    <Compile Include="Discord\Gateway\Models\Requests\GatewayGuildRequestMembers.cs" />
     <Compile Include="Discord\Guild\Models\GuildDefaultNotifications.cs" />
     <Compile Include="Discord\Guild\Models\Properties\GuildModProperties.cs" />
     <Compile Include="Discord\Reaction\Properties\ReactionModProperties.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Discord\Role\RoleProperties.cs" />
     <Compile Include="Discord\User\Models\ClientUser.cs" />
     <Compile Include="Discord\User\UserEventArgs.cs" />
+    <Compile Include="Discord\User\UserListEventArgs.cs" />
     <Compile Include="Discord\User\UserNotFoundException.cs" />
     <Compile Include="Discord\DiscordHttpClient.cs" />
     <Compile Include="Discord\Guild\Models\BasicGuild.cs" />

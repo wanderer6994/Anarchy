@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Discord.Gateway
@@ -47,6 +49,33 @@ namespace Discord.Gateway
             var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.StatusChange, client.Token);
             req.Data.Status = converted;
             client.Socket.Send(JsonConvert.SerializeObject(req));
+        }
+
+        //Set limit to 0 to receive all members in chunks of 1000 members
+        public static void GetGuildMembers(this DiscordSocketClient client, long guildId, int limit = 100)
+        {
+            var req = new GatewayRequest<GatewayGuildRequestMembers>(GatewayOpcode.RequestGuildMembers, client.Token);
+            req.Data.GuildId = guildId;
+            req.Data.Limit = limit;
+            client.Socket.Send(JsonConvert.SerializeObject(req));
+        }
+
+        public static List<User> GetAllGuildMembers(this DiscordSocketClient client, long guildId)
+        {
+            List<User> members = new List<User>();
+
+            List<User> newMembers = new List<User>();
+            client.OnGuildMembersReceived += (c, args) =>
+            {
+                newMembers = args.Users;
+                members.AddRange(newMembers);
+            };
+
+            client.GetGuildMembers(guildId, 0);
+
+            while (newMembers.Count == 1000 || newMembers.Count == 0) { Thread.Sleep(20); }
+
+            return members;
         }
     }
 }

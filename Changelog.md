@@ -1,3 +1,9 @@
+## 0.0.1.2
+#### Additions
+Added new methods for getting members much quicker (since it's using the gateway it only supports DiscordSocketClient).
+
+
+
 ## 0.0.1.1
 #### Additions
 Added AddChannelPermissionOverwrite() (please keep in mind tho that a bit calculator for permissions has not been added yet).

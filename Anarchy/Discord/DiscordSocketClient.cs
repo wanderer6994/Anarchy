@@ -3,6 +3,7 @@
  */
 
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebSocketSharp;
 
@@ -12,6 +13,7 @@ namespace Discord.Gateway
     {
         #region events
         public delegate void UserHandler(DiscordSocketClient client, UserEventArgs args);
+        public delegate void UserListHandler(DiscordSocketClient client, UserListEventArgs args);
         public delegate void GuildHandler(DiscordSocketClient client, GuildEventArgs args);
         public delegate void ChannelHandler(DiscordSocketClient client, ChannelEventArgs args);
         public delegate void MessageHandler(DiscordSocketClient client, MessageEventArgs args);
@@ -36,6 +38,8 @@ namespace Discord.Gateway
 
         public delegate void MessageDeletedHandler(DiscordSocketClient client, MessageDeletedEventArgs args);
         public event MessageDeletedHandler OnMessageDeleted;
+
+        public event UserListHandler OnGuildMembersReceived;
         #endregion
 
         internal WebSocket Socket { get; set; }
@@ -173,6 +177,13 @@ namespace Discord.Gateway
                             break;
                         case "MESSAGE_DELETE":
                             OnMessageDeleted?.Invoke(this, new MessageDeletedEventArgs(JsonConvert.DeserializeObject<MessageDelete>(payload.Data.ToString())));
+                            break;
+                        case "GUILD_MEMBERS_CHUNK":
+                            List<User> users = new List<User>();
+                            foreach (var guildMember in JsonConvert.DeserializeObject<GateywayMemberChunk>(payload.Data.ToString()).Members)
+                                users.Add(guildMember.User);
+
+                            OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
                             break;
                     }
                     break;

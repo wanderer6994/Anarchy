@@ -7,7 +7,8 @@
         Heartbeat,
         Login,
         StatusChange,
-        InvalidSession = 9,
+        RequestGuildMembers = 8,
+        InvalidSession,
         Connected
     }
 }
