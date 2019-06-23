@@ -77,15 +77,15 @@
     <Compile Include="Discord\DiscordClient.cs" />
     <Compile Include="Discord\Gateway\DiscordSocketClient.cs" />
     <Compile Include="Discord\Reaction\ReactionProperties.cs" />
-    <Compile Include="Discord\Experiments.cs" />
+    <Compile Include="Discord\_Universal\Experiments.cs" />
     <Compile Include="Discord\Webhook\DiscordWebhookClient.cs" />
     <Compile Include="Discord\Channel\Models\ChannelType.cs" />
     <Compile Include="Discord\Guild\Models\GuildVerificationLevel.cs" />
     <Compile Include="Discord\User\Models\Hypesquad\HypesquadHouse.cs" />
     <Compile Include="Discord\User\Models\NitroType.cs" />
     <Compile Include="Discord\User\Models\UserStatus.cs" />
-    <Compile Include="Discord\Exceptions\AccessDeniedException.cs" />
-    <Compile Include="Discord\Exceptions\DiscordException.cs" />
+    <Compile Include="Discord\_Universal\AccessDeniedException.cs" />
+    <Compile Include="Discord\_Universal\DiscordException.cs" />
     <Compile Include="Discord\Guild\GuildNotFoundException.cs" />
     <Compile Include="Discord\Reaction\ReactionNotFoundException.cs" />
     <Compile Include="Discord\Ratelimit\TooManyRequestsException.cs" />
@@ -135,7 +135,7 @@
     <Compile Include="Discord\Webhook\Models\WebhookMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Discord\X-Super-Properties\SuperPropertiesInformation.cs" />
-    <Compile Include="Discord\PermissionOverwrite.cs" />
+    <Compile Include="Discord\_Universal\PermissionOverwrite.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
