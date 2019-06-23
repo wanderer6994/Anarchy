@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Discord
 {
-    public class ReactionProperties
+    public class ReactionCreationProperties
     {
         [JsonProperty("name")]
         public string Name { get; set; }

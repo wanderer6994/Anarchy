@@ -8,16 +8,17 @@ namespace Discord
     {
         public static Guild CreateGuild(this DiscordClient client, GuildCreationProperties properties)
         {
-            var resp = client.HttpClient.PostAsync("/guilds", JsonConvert.SerializeObject(properties)).Result;
+            var resp = client.HttpClient.Post("/guilds", JsonConvert.SerializeObject(properties));
             
             Guild guild = JsonConvert.DeserializeObject<Guild>(resp.Content.ReadAsStringAsync().Result);
             guild.Client = client;
             return guild;
         }
 
+
         public static Guild ModifyGuild(this DiscordClient client, long guildId, GuildModProperties properties)
         {
-            var resp = client.HttpClient.PatchAsync($"/guilds/{guildId}", JsonConvert.SerializeObject(properties)).Result;
+            var resp = client.HttpClient.Patch($"/guilds/{guildId}", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -27,9 +28,10 @@ namespace Discord
             return guild;
         }
 
+
         public static bool DeleteGuild(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.PostAsync($"/guilds/{guildId}/delete").Result;
+            var resp = client.HttpClient.Post($"/guilds/{guildId}/delete");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -37,9 +39,10 @@ namespace Discord
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
         
+
         public static Guild GetGuild(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.GetAsync("/guilds/" + guildId).Result;
+            var resp = client.HttpClient.Get("/guilds/" + guildId);
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -49,9 +52,10 @@ namespace Discord
             return guild;
         }
 
+
         public static bool KickGuildMember(this DiscordClient client, long guildId, long userId)
         {
-            var resp = client.HttpClient.DeleteAsync($"/guilds/{guildId}/members/{userId}").Result;
+            var resp = client.HttpClient.Delete($"/guilds/{guildId}/members/{userId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new UserNotFoundException(client, userId);
@@ -59,10 +63,11 @@ namespace Discord
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
 
+
         #region channels
         public static List<Channel> GetGuildChannels(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.GetAsync($"/guilds/{guildId}/channels").Result;
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/channels");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -72,22 +77,25 @@ namespace Discord
             return channels;
         }
 
+
         public static OrganizedChannelList Organize(this List<Channel> channels)
         {
             return new OrganizedChannelList(channels);
         }
         #endregion
 
+
         #region get guild members
         public static List<GuildMember> GetGuildMembers(this DiscordClient client, long guildId, int limit, long afterId = 0)
         {
-            var resp = client.HttpClient.GetAsync($"/guilds/{guildId}/members?limit={limit}&after={afterId}").Result;
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/members?limit={limit}&after={afterId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
             return JsonConvert.DeserializeObject<List<GuildMember>>(resp.Content.ReadAsStringAsync().Result);
         }
+
 
         //would be great to have this thing optimized if possible, cuz it's hella slow
         public static List<GuildMember> GetAllGuildMembers(this DiscordClient client, long guildId)
@@ -107,9 +115,10 @@ namespace Discord
         }
         #endregion
         
+
         public static bool ChangeNickname(this DiscordClient client, long guildId, string nickname)
         {
-            var resp = client.HttpClient.PatchAsync($"/guilds/{guildId}/members/@me/nick", "{\"nick\":\"" + nickname + "\"}").Result;
+            var resp = client.HttpClient.Patch($"/guilds/{guildId}/members/@me/nick", "{\"nick\":\"" + nickname + "\"}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);

@@ -7,7 +7,7 @@ namespace Discord
     {
         public static void TriggerTyping(this DiscordClient client, long channelId)
         {
-            var resp = client.HttpClient.PostAsync($"/channels/{channelId}/typing").Result;
+            var resp = client.HttpClient.Post($"/channels/{channelId}/typing");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
@@ -17,9 +17,10 @@ namespace Discord
                 throw new TooManyRequestsException(client, JsonConvert.DeserializeObject<MessageRateLimit>(content).Cooldown);
         }
         
+
         public static Message SendMessage(this DiscordClient client, long channelId, string message, bool tts = false)
         {
-            var resp = client.HttpClient.PostAsync($"/channels/{channelId}/messages", JsonConvert.SerializeObject(new MessageProperties() { Content = message, Tts = tts })).Result;
+            var resp = client.HttpClient.Post($"/channels/{channelId}/messages", JsonConvert.SerializeObject(new MessageProperties() { Content = message, Tts = tts }));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
@@ -29,9 +30,10 @@ namespace Discord
             return msg;
         }
         
+
         public static Message EditMessage(this DiscordClient client, long channelId, long messageId, string msg)
         {
-            var resp = client.HttpClient.PatchAsync($"/channels/{channelId}/messages/{messageId}", "{\"content\":\"" + msg + "\"}").Result;
+            var resp = client.HttpClient.Patch($"/channels/{channelId}/messages/{messageId}", "{\"content\":\"" + msg + "\"}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new MessageNotFoundException(client, messageId);
@@ -41,9 +43,10 @@ namespace Discord
             return edited;
         }
         
+
         public static bool DeleteMessage(this DiscordClient client, long channelId, long messageId)
         {
-            var resp = client.HttpClient.DeleteAsync($"/channels/{channelId}/messages/{messageId}").Result;
+            var resp = client.HttpClient.Delete($"/channels/{channelId}/messages/{messageId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new MessageNotFoundException(client, messageId);

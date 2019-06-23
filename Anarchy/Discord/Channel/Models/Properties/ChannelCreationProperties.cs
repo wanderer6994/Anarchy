@@ -3,13 +3,8 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    public class ChannelProperties
+    public class ChannelCreationProperties
     {
-        public ChannelProperties()
-        {
-            PermissionOverwrites = new List<PermissionOverwrite>();
-        }
-
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -18,8 +13,5 @@ namespace Discord
 
         [JsonProperty("type")]
         public ChannelType Type { get; set; }
-        
-        [JsonProperty("permission_overwrites")]
-        public List<PermissionOverwrite> PermissionOverwrites { get; set; }
     }
 }

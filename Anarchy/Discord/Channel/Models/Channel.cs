@@ -35,7 +35,7 @@ namespace Discord
         [JsonIgnore]
         internal DiscordClient Client { get; set; }
 
-        public Channel Modify(ChannelProperties properties)
+        public Channel Modify(ChannelModProperties properties)
         {
             Channel channel = Client.ModifyChannel(Id, properties);
             Name = channel.Name;
@@ -47,30 +47,49 @@ namespace Discord
             return channel;
         }
 
+
         public Channel Delete()
         {
             return Client.DeleteChannel(Id);
         }
+
+
+        public bool AddPermissionOverwrite(PermissionOverwrite permission)
+        {
+            if (Client.AddChannelPermissionOverwrite(Id, permission))
+            {
+                PermissionOverwrites.Add(permission);
+
+                return true;
+            }
+            else
+                return false;
+        }
+
 
         public void TriggerTyping()
         {
             Client.TriggerTyping(Id);
         }
 
+
         public Message SendMessage(string message, bool tts = false)
         {
             return Client.SendMessage(Id, message, tts);
         }
+
 
         public List<Message> GetMessages(int limit = 100, int afterId = 0)
         {
             return Client.GetChannelMessages(Id, limit, afterId);
         }
 
+
         public List<Message> GetPinnedMessages()
         {
             return Client.GetChannelPinnedMessages(Id);
         }
+
 
         #region pin message
         public bool PinMessage(long messageId)
@@ -78,17 +97,20 @@ namespace Discord
             return Client.PinChannelMessage(Id, messageId);
         }
 
+
         public bool PinMessage(Message message)
         {
             return PinMessage(message.Id);
         }
         #endregion
 
+
         #region unpin message
         public bool UnpinMessage(long messageId)
         {
             return Client.UnpinChannelMessage(Id, messageId);
         }
+
 
         public bool UnpinMessagE(Message message)
         {
@@ -100,6 +122,7 @@ namespace Discord
         {
             return Client.CreateInvite(Id, properties);
         }
+
 
         public override string ToString()
         {

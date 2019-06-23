@@ -8,16 +8,16 @@ namespace Discord
         public string Name { get; set; }
 
         [JsonProperty("permissions")]
-        public int Permissions { get; set; }
+        public int? Permissions { get; set; }
 
         [JsonProperty("color")]
-        public int Color { get; set; }
+        public int? Color { get; set; }
 
         [JsonProperty("hoist")]
-        public bool Seperated { get; set; }
+        public bool? Seperated { get; set; }
 
         [JsonProperty("mentionable")]
-        public bool Mentionable { get; set; }
+        public bool? Mentionable { get; set; }
 
         public override string ToString()
         {

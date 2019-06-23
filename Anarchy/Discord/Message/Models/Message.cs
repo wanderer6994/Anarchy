@@ -6,57 +6,60 @@ namespace Discord
     public class Message
     {
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public long Id { get; private set; }
 
         [JsonProperty("content")]
-        public string Content { get; set; }
+        public string Content { get; private set; }
 
         [JsonProperty("channel_id")]
-        public long ChannelId { get; set; }
+        public long ChannelId { get; private set; }
 
         [JsonProperty("author")]
-        public User Author { get; set; }
+        public User Author { get; private set; }
 
         [JsonProperty("tts")]
-        public bool Tts { get; set; }
+        public bool Tts { get; private set; }
 
         //if anyone knows how tf you'd differanciate between images and other files do a pull request
         [JsonProperty("attachments")]
-        public List<Attachment> Attachments { get; set; }
+        public List<Attachment> Attachments { get; private set; }
 
         [JsonProperty("guild_id")]
-        public long? GuildId { get; set; }
+        public long? GuildId { get; private set; }
 
         [JsonProperty("timestamp")]
-        public string Timestamp { get; set; }
+        public string Timestamp { get; private set; }
         
         [JsonProperty("pinned")]
-        public bool Pinned { get; set; }
+        public bool Pinned { get; private set; }
         
         [JsonProperty("mentions")]
-        public List<User> Mentions { get; set; }
+        public List<User> Mentions { get; private set; }
 
         [JsonProperty("mention_roles")]
-        public List<long> MentionedRoles { get; set; }
+        public List<long> MentionedRoles { get; private set; }
 
         [JsonProperty("mention_everyone")]
-        public bool MentionedEveryone { get; set; }
+        public bool MentionedEveryone { get; private set; }
         
         [JsonProperty("embeds")]
-        public List<Embed> Embeds { get; set; }
+        public List<Embed> Embeds { get; private set; }
 
         [JsonIgnore]
         internal DiscordClient Client { get; set; }
+
 
         public bool AddReaction(string reaction)
         {
             return Client.AddMessageReaction(ChannelId, Id, reaction);
         }
 
+
         public bool RemoveReaction(string reaction)
         {
             return Client.RemoveMessageReaction(ChannelId, Id, reaction);
         }
+
 
         public Message Edit(string message)
         {
@@ -70,9 +73,16 @@ namespace Discord
             return msg;
         }
 
+
         public bool Delete()
         {
             return Client.DeleteMessage(ChannelId, Id);
+        }
+
+
+        public override string ToString()
+        {
+            return $"{Id} | {Author}";
         }
     }
 }

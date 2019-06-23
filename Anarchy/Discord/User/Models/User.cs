@@ -13,6 +13,7 @@ namespace Discord
         [JsonProperty("bot")]
         public bool Bot { get; private set; }
 
+
         public override string ToString()
         {
             return $"{base.ToString()} ({Id})";

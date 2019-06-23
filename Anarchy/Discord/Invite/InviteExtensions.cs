@@ -8,7 +8,7 @@ namespace Discord
     {
         public static List<Invite> GetGuildInvites(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.GetAsync($"/guilds/{guildId}/invites").Result;
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/invites");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -18,9 +18,10 @@ namespace Discord
             return invites;
         }
 
+
         public static Invite GetInvite(this DiscordClient client, string invCode)
         {
-            var resp = client.HttpClient.GetAsync($"/invite/{invCode}?with_counts=true").Result;
+            var resp = client.HttpClient.Get($"/invite/{invCode}?with_counts=true");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
@@ -30,9 +31,10 @@ namespace Discord
             return invite;
         }
         
+
         public static Invite CreateInvite(this DiscordClient client, long channelId, InviteProperties properties)
         {
-            var resp = client.HttpClient.PostAsync($"/channels/{channelId}/invites", JsonConvert.SerializeObject(properties)).Result;
+            var resp = client.HttpClient.Post($"/channels/{channelId}/invites", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
@@ -42,9 +44,10 @@ namespace Discord
             return invite;
         }
 
+
         public static Invite DeleteInvite(this DiscordClient client, string invCode)
         {
-            var resp = client.HttpClient.DeleteAsync($"/invites/{invCode}").Result;
+            var resp = client.HttpClient.Delete($"/invites/{invCode}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);

@@ -8,7 +8,7 @@ namespace Discord
     {
         public static List<Role> GetGuildRoles(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.GetAsync($"/guilds/{guildId}/roles").Result;
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/roles");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -22,9 +22,10 @@ namespace Discord
             return roles;
         }
         
-        public static Role CreateGuildRole(this DiscordClient client, long guildId)
+
+        public static Role CreateRole(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.PostAsync($"/guilds/{guildId}/roles").Result;
+            var resp = client.HttpClient.Post($"/guilds/{guildId}/roles");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -35,9 +36,10 @@ namespace Discord
             return role;
         }
         
-        public static Role ChangeGuildRole(this DiscordClient client, long guildId, long roleId, RoleProperties properties)
+
+        public static Role ModifyGuildRole(this DiscordClient client, long guildId, long roleId, RoleProperties properties)
         {
-            var resp = client.HttpClient.PatchAsync($"/guilds/{guildId}/roles/{roleId}", JsonConvert.SerializeObject(properties)).Result;
+            var resp = client.HttpClient.Patch($"/guilds/{guildId}/roles/{roleId}", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new RoleNotFoundException(client, roleId);
@@ -48,9 +50,10 @@ namespace Discord
             return changed;
         }
         
+
         public static bool DeleteGuildRole(this DiscordClient client, long guildId, long roleId)
         {
-            var resp = client.HttpClient.DeleteAsync($"/guilds/{guildId}/roles/{roleId}").Result;
+            var resp = client.HttpClient.Delete($"/guilds/{guildId}/roles/{roleId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new RoleNotFoundException(client, roleId);

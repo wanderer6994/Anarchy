@@ -30,13 +30,21 @@ namespace Discord
         
         private void CheckResponse(HttpResponseMessage resp)
         {
-            if (resp.StatusCode == HttpStatusCode.Forbidden || resp.StatusCode == HttpStatusCode.Unauthorized)
-                throw new AccessDeniedException(_discordClient);
-            else if (resp.StatusCode.ToString() == "429")
+            switch (resp.StatusCode)
+            {
+                case HttpStatusCode.BadRequest:
+                    throw new InvalidParametersException(_discordClient, resp.Content.ReadAsStringAsync().Result);
+                case HttpStatusCode.Unauthorized:
+                    throw new AccessDeniedException(_discordClient);
+                case HttpStatusCode.Forbidden:
+                    throw new AccessDeniedException(_discordClient);
+            }
+
+            if (resp.StatusCode.ToString() == "429")
                 throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
         }
 
-        public async Task<HttpResponseMessage> SendAsync(string httpMethod, string url, string content = "")
+        public HttpResponseMessage Send(string httpMethod, string url, string content = null)
         {
             HttpRequestMessage msg = new HttpRequestMessage
             {
@@ -44,37 +52,37 @@ namespace Discord
                 RequestUri = new Uri("https://discordapp.com/api/v6" + url)
             };
 
-            if (!string.IsNullOrEmpty(content))
+            if (content != null)
                 msg.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
-            var resp = await _httpClient.SendAsync(msg);
+            var resp =  _httpClient.SendAsync(msg).Result;
             CheckResponse(resp);
             return resp;
         }
 
-        public async Task<HttpResponseMessage> GetAsync(string url)
+        public HttpResponseMessage Get(string url)
         {
-            return await SendAsync("GET", url);
+            return Send("GET", url);
         }
 
-        public async Task<HttpResponseMessage> PostAsync(string url, string content = "")
+        public HttpResponseMessage Post(string url, string content = "")
         {
-            return await SendAsync("POST", url, content);
+            return Send("POST", url, content);
         }
 
-        public async Task<HttpResponseMessage> DeleteAsync(string url)
+        public HttpResponseMessage Delete(string url)
         {
-            return await SendAsync("DELETE", url);
+            return Send("DELETE", url);
         }
 
-        public async Task<HttpResponseMessage> PutAsync(string url, string content = "")
+        public HttpResponseMessage Put(string url, string content = "")
         {
-            return await SendAsync("PUT", url);
+            return Send("PUT", url, content);
         }
 
-        public async Task<HttpResponseMessage> PatchAsync(string url, string content = "")
+        public HttpResponseMessage Patch(string url, string content = "")
         {
-            return await SendAsync("PATCH", url);
+            return Send("PATCH", url, content);
         }
     }
 }

@@ -19,9 +19,24 @@ namespace Discord
         [JsonIgnore]
         internal DiscordClient Client { get; set; }
 
+
+        public Reaction Modify(ReactionModProperties properties)
+        {
+            Reaction reaction = Client.ModifyGuildReaction(GuildId, Id, properties);
+            Name = reaction.Name;
+            return reaction;
+        }
+
+
         public bool Delete()
         {
-            return Client.DeleteReaction(GuildId, Id);
+            return Client.DeleteGuildReaction(GuildId, Id);
+        }
+
+
+        public override string ToString()
+        {
+            return $"{Name} ({Id})";
         }
     }
 }

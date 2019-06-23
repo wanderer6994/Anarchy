@@ -5,8 +5,9 @@ as well as modding the wrapper itself.
 # Features
 Anarchy can pretty much do anything, except voice channel stuff.
 
-### Please be aware tho
-Even tho it is able to do all this there might still be bugs, since the api wrapper hasn't been tested through 100% yet. If you find any make sure to open an issue on Github.
+### Note
+There probably is gonna be a few bugs here and there. If you find any make sure to open an issue on Github.
+Since the wrapper is still under development there ARE methods, classes etc. missing, tho they will be added as soon as possible.
 
 
 # Examples

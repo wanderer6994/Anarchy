@@ -8,7 +8,7 @@ namespace Discord
     {
         public static List<Reaction> GetGuildReactions(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.GetAsync($"/guilds/{guildId}/emojis").Result;
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/emojis");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -22,9 +22,10 @@ namespace Discord
             return reactions;
         }
 
+
         public static Reaction GetGuildReaction(this DiscordClient client, long guildId, long reactionId)
         {
-            var resp = client.HttpClient.GetAsync($"/guilds/{guildId}/emojis/{reactionId}").Result;
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/emojis/{reactionId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
@@ -35,9 +36,10 @@ namespace Discord
             return reaction;
         }
 
-        public static Reaction CreateReaction(this DiscordClient client, long guildId, ReactionProperties properties)
+
+        public static Reaction CreateGuildReaction(this DiscordClient client, long guildId, ReactionCreationProperties properties)
         {
-            var resp = client.HttpClient.PostAsync($"/guilds/{guildId}/emojis", JsonConvert.SerializeObject(properties)).Result;
+            var resp = client.HttpClient.Post($"/guilds/{guildId}/emojis", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -48,9 +50,21 @@ namespace Discord
             return reaction;
         }
         
-        public static bool DeleteReaction(this DiscordClient client, long guildId, long reactionId)
+        public static Reaction ModifyGuildReaction(this DiscordClient client, long guildId, long reactionId, ReactionModProperties properties)
         {
-            var resp = client.HttpClient.DeleteAsync($"/guilds/{guildId}/emojis/{reactionId}").Result;
+            var resp = client.HttpClient.Patch($"/guilds/{guildId}/emojis/{reactionId}", JsonConvert.SerializeObject(properties));
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new ReactionNotFoundException(client, guildId, reactionId);
+
+            Reaction reaction = JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result);
+            reaction.Client = client;
+            return reaction;
+        }
+
+        public static bool DeleteGuildReaction(this DiscordClient client, long guildId, long reactionId)
+        {
+            var resp = client.HttpClient.Delete($"/guilds/{guildId}/emojis/{reactionId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
@@ -58,9 +72,10 @@ namespace Discord
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
         
+
         public static bool AddMessageReaction(this DiscordClient client, long channelId, long messageId, string reaction)
         {
-            var resp = client.HttpClient.PutAsync($"/channels/{channelId}/messages/{messageId}/reactions/{reaction}/@me").Result;
+            var resp = client.HttpClient.Put($"/channels/{channelId}/messages/{messageId}/reactions/{reaction}/@me");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new MessageNotFoundException(client, messageId);
@@ -68,9 +83,10 @@ namespace Discord
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
 
+
         public static bool RemoveMessageReaction(this DiscordClient client, long channelId, long messageId, string reaction)
         {
-            var resp = client.HttpClient.DeleteAsync($"/channels/{channelId}/messages/{messageId}/reactions/{reaction}/@me").Result;
+            var resp = client.HttpClient.Delete($"/channels/{channelId}/messages/{messageId}/reactions/{reaction}/@me");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new MessageNotFoundException(client, messageId);

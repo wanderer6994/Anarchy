@@ -3,6 +3,7 @@
  */
 
 using Discord;
+using System.Drawing;
 using System.Threading;
 
 namespace dntest

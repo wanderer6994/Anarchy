@@ -22,6 +22,7 @@ namespace Discord
         [JsonIgnore]
         internal DiscordClient Client { get; set; }
 
+
         public Invite Delete()
         {
             return Client.DeleteInvite(Code);

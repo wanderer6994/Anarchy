@@ -10,7 +10,7 @@ namespace Discord
         #region get user
         public static User GetUser(this DiscordClient client, long userId)
         {
-            var resp = client.HttpClient.GetAsync($"/users/{userId}").Result;
+            var resp = client.HttpClient.Get($"/users/{userId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new UserNotFoundException(client, userId);
@@ -18,13 +18,14 @@ namespace Discord
             return JsonConvert.DeserializeObject<User>(resp.Content.ReadAsStringAsync().Result);
         }
 
+
         public static ClientUser GetClientUser(this DiscordClient client)
         {
             HttpResponseMessage resp;
 
             try
             {
-                resp = client.HttpClient.GetAsync("/users/@me").Result;
+                resp = client.HttpClient.Get("/users/@me");
             }
             catch (AccessDeniedException)
             {
@@ -38,19 +39,21 @@ namespace Discord
         }
         #endregion
 
-        public static List<BasicGuild> GetGuilds(this DiscordClient client)
+
+        public static List<BasicGuild> GetClientGuilds(this DiscordClient client)
         {
-            var resp = client.HttpClient.GetAsync("/users/@me/guilds").Result;
+            var resp = client.HttpClient.Get("/users/@me/guilds");
 
             List<BasicGuild> guilds = JsonConvert.DeserializeObject<List<BasicGuild>>(resp.Content.ReadAsStringAsync().Result);
             foreach (var guild in guilds) guild.Client = client;
             return guilds;
         }
 
+
         #region join/leave guild
         public static Invite JoinGuild(this DiscordClient client, string invCode)
         {
-            var resp = client.HttpClient.PostAsync($"/invite/{invCode}").Result;
+            var resp = client.HttpClient.Post($"/invite/{invCode}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
@@ -60,9 +63,10 @@ namespace Discord
             return invite;
         }
 
+
         public static bool LeaveGuild(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.DeleteAsync($"/users/@me/guilds/{guildId}").Result;
+            var resp = client.HttpClient.Delete($"/users/@me/guilds/{guildId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
@@ -71,18 +75,20 @@ namespace Discord
         }
         #endregion
 
+
         public static bool SetHypesquad(this DiscordClient client, HypesquadHouse house)
         {
             //the request protocol is different if we don't want any hypesquad
             if (house == HypesquadHouse.None)
-                return client.HttpClient.PostAsync("/hypesquad/online", JsonConvert.SerializeObject(new Hypesquad() { House = house })).Result.StatusCode == HttpStatusCode.NoContent;
+                return client.HttpClient.Post("/hypesquad/online", JsonConvert.SerializeObject(new Hypesquad() { House = house })).StatusCode == HttpStatusCode.NoContent;
 
-            return client.HttpClient.PostAsync("/hypesquad/online", JsonConvert.SerializeObject(new Hypesquad() { House = house })).Result.StatusCode == HttpStatusCode.NoContent;
+            return client.HttpClient.Post("/hypesquad/online", JsonConvert.SerializeObject(new Hypesquad() { House = house })).StatusCode == HttpStatusCode.NoContent;
         }
+
 
         public static bool ChangeSettings(this DiscordClient client, UserSettings settings)
         {
-            if (client.HttpClient.PatchAsync("/users/@me", JsonConvert.SerializeObject(settings)).Result.StatusCode == HttpStatusCode.OK)
+            if (client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings)).StatusCode == HttpStatusCode.OK)
             {
                 client.GetClientUser();
                 return true;
@@ -91,9 +97,10 @@ namespace Discord
                 return false;
         }
 
+
         internal static string GetFingerprint(this DiscordClient client)
         {
-            return JsonConvert.DeserializeObject<Experiments>(client.HttpClient.GetAsync("/experiments").Result.Content.ReadAsStringAsync().Result).Fingerprint;
+            return JsonConvert.DeserializeObject<Experiments>(client.HttpClient.Get("/experiments").Content.ReadAsStringAsync().Result).Fingerprint;
         }
     }
 }

@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Discord\Channel\Models\Properties\ChannelModProperties.cs" />
     <Compile Include="Discord\Channel\Models\OrganizedChannelList.cs" />
     <Compile Include="Discord\Embed\EmbedAuthor.cs" />
     <Compile Include="Discord\Embed\EmbedField.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Discord\Gateway\Models\GatewayRole.cs" />
     <Compile Include="Discord\Guild\Models\GuildDefaultNotifications.cs" />
     <Compile Include="Discord\Guild\Models\Properties\GuildModProperties.cs" />
+    <Compile Include="Discord\Reaction\Properties\ReactionModProperties.cs" />
+    <Compile Include="Discord\Role\Role.cs" />
     <Compile Include="Discord\Role\RoleProperties.cs" />
     <Compile Include="Discord\User\Models\ClientUser.cs" />
     <Compile Include="Discord\User\UserEventArgs.cs" />
@@ -75,10 +78,10 @@
     <Compile Include="Base64Image.cs" />
     <Compile Include="Discord\Channel\ChannelNotFoundException.cs" />
     <Compile Include="Discord\DiscordClient.cs" />
-    <Compile Include="Discord\Gateway\DiscordSocketClient.cs" />
-    <Compile Include="Discord\Reaction\ReactionProperties.cs" />
+    <Compile Include="Discord\DiscordSocketClient.cs" />
+    <Compile Include="Discord\Reaction\Properties\ReactionCreationProperties.cs" />
     <Compile Include="Discord\_Universal\Experiments.cs" />
-    <Compile Include="Discord\Webhook\DiscordWebhookClient.cs" />
+    <Compile Include="Discord\DiscordWebhookClient.cs" />
     <Compile Include="Discord\Channel\Models\ChannelType.cs" />
     <Compile Include="Discord\Guild\Models\GuildVerificationLevel.cs" />
     <Compile Include="Discord\User\Models\Hypesquad\HypesquadHouse.cs" />
@@ -104,7 +107,7 @@
     <Compile Include="Discord\Gateway\Models\GatewayLogin.cs" />
     <Compile Include="Discord\Role\RoleEventArgs.cs" />
     <Compile Include="Discord\Channel\Models\Channel.cs" />
-    <Compile Include="Discord\Channel\Models\ChannelProperties.cs" />
+    <Compile Include="Discord\Channel\Models\Properties\ChannelCreationProperties.cs" />
     <Compile Include="Discord\Invite\InviteProperties.cs" />
     <Compile Include="Discord\Gateway\Models\Requests\GatewayData.cs" />
     <Compile Include="Discord\Gateway\Models\Requests\GatewayHeartbeat.cs" />
@@ -121,7 +124,6 @@
     <Compile Include="Discord\Message\Models\MessageRateLimit.cs" />
     <Compile Include="Discord\Ratelimit\RateLimit.cs" />
     <Compile Include="Discord\Reaction\Reaction.cs" />
-    <Compile Include="Discord\Role\Role.cs" />
     <Compile Include="Discord\User\Models\Hypesquad\Hypesquad.cs" />
     <Compile Include="Discord\Relations\Recipient.cs" />
     <Compile Include="Discord\User\Models\User.cs" />
@@ -133,6 +135,7 @@
     <Compile Include="Discord\Webhook\Exceptions\InvalidWebhookNameException.cs" />
     <Compile Include="Discord\Webhook\Models\Webhook.cs" />
     <Compile Include="Discord\Webhook\Models\WebhookMessage.cs" />
+    <Compile Include="Discord\_Universal\InvalidParametersException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Discord\X-Super-Properties\SuperPropertiesInformation.cs" />
     <Compile Include="Discord\_Universal\PermissionOverwrite.cs" />

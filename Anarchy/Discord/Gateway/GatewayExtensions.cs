@@ -12,6 +12,7 @@ namespace Discord.Gateway
             client.Socket.Send(JsonConvert.SerializeObject(req));
         }
         
+
         internal static async Task StartHeartbeatHandlersAsync(this DiscordSocketClient client, int interval)
         {
             while (true)
@@ -22,6 +23,7 @@ namespace Discord.Gateway
             }
         }
         
+
         public static void ChangeStatus(this DiscordSocketClient client, UserStatus status)
         {
             string converted = "";
