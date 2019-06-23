@@ -1,6 +1,8 @@
 # Anarchy
 Anarchy is an opensource Discord API wrapper, lol
 
+## Yes its on nuget as well
+https://www.nuget.org/packages/DiscordAnarchy/
 
 ## Read Me in progress just have this example lol.
 ```csharp
