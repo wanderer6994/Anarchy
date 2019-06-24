@@ -3,6 +3,11 @@
 Added new methods for getting members much quicker (since it's using the gateway it only supports DiscordSocketClient).
 Completed list of gateway opcodes.
 
+#### Other changes
+Reorganized files and folders.
+Other minor code changes.
+
+
 
 ## 0.0.1.1
 #### Additions

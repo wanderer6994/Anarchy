@@ -52,12 +52,12 @@ Channel newChannel = newGuild.CreateChannel(new ChannelProperties() { Name = "my
 static void Main(string[] args)
 {
    // There are obviously more gateway events, i just picked a few
-   DiscordSocketClient client = new DiscordSocketClient("your token here");
+   DiscordSocketClient client = new DiscordSocketClient();
    client.OnLoggedIn += Client_OnLoggedIn;
    client.OnLoggedOut += Client_OnLoggedOut;
-
    client.OnJoinedGuild += Client_OnJoinedGuild;
    client.OnLeftGuild += Client_OnLeftGuild;
+   client.Login("your token here");
 
    Thread.Sleep(-1);
 }
