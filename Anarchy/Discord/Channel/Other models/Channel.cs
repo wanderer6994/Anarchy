@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Discord.Webhook;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Discord
@@ -121,6 +122,21 @@ namespace Discord
         public Invite CreateInvite(InviteProperties properties)
         {
             return Client.CreateInvite(Id, properties);
+        }
+
+
+        public List<Hook> GetWebhooks()
+        {
+            return Client.GetChannelWebhooks(Id);
+        }
+
+
+        public Hook CreateWebhook(WebhookProperties properties)
+        {
+            //awkward approach but it works xd
+            properties.ChannelId = null;
+
+            return Client.CreateChannelWebhook(Id, properties);
         }
 
 

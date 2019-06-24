@@ -1,6 +1,7 @@
-## 0.0.1.2
+## 0.1.0.0 [BETA]
 #### Additions
 Added new methods for getting members much quicker (since it's using the gateway it only supports DiscordSocketClient).
+DiscordWebhookClient has been depricated. Hook (webhook) now holds the data as well as basically being the new DiscordWebhookClient.
 Completed list of gateway opcodes.
 
 #### Other changes

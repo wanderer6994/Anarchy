@@ -2,7 +2,7 @@
 
 namespace Discord.Webhook
 {
-    internal class WebhookMessage
+    public class WebhookMessage
     {
         [JsonProperty("username")]
         public string Username { get; set; }

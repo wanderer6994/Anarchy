@@ -22,7 +22,7 @@ namespace Discord
             return roles;
         }
 
-        #region manage
+        #region management
         public static Role CreateGuildRole(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Post($"/guilds/{guildId}/roles");

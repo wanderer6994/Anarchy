@@ -84,8 +84,10 @@
     <Compile Include="Discord\DiscordClient.cs" />
     <Compile Include="Discord\DiscordSocketClient.cs" />
     <Compile Include="Discord\Reaction\Properties\ReactionCreationProperties.cs" />
+    <Compile Include="Discord\Webhook\WebhookNotFoundException.cs" />
+    <Compile Include="Discord\Webhook\Extensions.cs" />
+    <Compile Include="Discord\Webhook\Models\WebhookProperties.cs" />
     <Compile Include="Discord\_Universal\Models\Experiments.cs" />
-    <Compile Include="Discord\DiscordWebhookClient.cs" />
     <Compile Include="Discord\Channel\Other models\ChannelType.cs" />
     <Compile Include="Discord\Guild\Other models\GuildVerificationLevel.cs" />
     <Compile Include="Discord\User\Hypesquad\HypesquadHouse.cs" />
@@ -111,7 +113,7 @@
     <Compile Include="Discord\Channel\Properties\ChannelCreationProperties.cs" />
     <Compile Include="Discord\Invite\Models\InviteProperties.cs" />
     <Compile Include="Discord\Gateway\Requests\GatewayData.cs" />
-    <Compile Include="Discord\Gateway\Requests\GatewayHeartbeat.cs" />
+    <Compile Include="Discord\Gateway\Other models\GatewayHeartbeat.cs" />
     <Compile Include="Discord\Gateway\Requests\GatewayIdentification.cs" />
     <Compile Include="Discord\Gateway\Requests\GatewayPresence.cs" />
     <Compile Include="Discord\Gateway\Requests\GatewayRequest.cs" />
@@ -131,10 +133,7 @@
     <Compile Include="Discord\User\User\UserSettings.cs" />
     <Compile Include="Discord\X-Super-Properties\SPUpdatedEventArgs.cs" />
     <Compile Include="Discord\X-Super-Properties\SuperProperties.cs" />
-    <Compile Include="Discord\Webhook\Exceptions\InvalidWebhookException.cs" />
-    <Compile Include="Discord\Webhook\Exceptions\WebhookException.cs" />
-    <Compile Include="Discord\Webhook\Exceptions\InvalidWebhookNameException.cs" />
-    <Compile Include="Discord\Webhook\Models\Webhook.cs" />
+    <Compile Include="Discord\Webhook\Models\Hook.cs" />
     <Compile Include="Discord\Webhook\Models\WebhookMessage.cs" />
     <Compile Include="Discord\_Universal\Exceptions\InvalidParametersException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

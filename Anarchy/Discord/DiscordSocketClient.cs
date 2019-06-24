@@ -82,7 +82,6 @@ namespace Discord.Gateway
         private void SocketDataReceived(object sender, WebSocketSharp.MessageEventArgs result)
         {
             var payload = JsonConvert.DeserializeObject<GatewayResponse>(result.Data);
-
             Sequence = payload.Sequence;
 
             switch (payload.Opcode)

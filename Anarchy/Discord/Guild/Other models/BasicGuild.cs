@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using Discord.Webhook;
 
 namespace Discord
 {
@@ -78,6 +79,12 @@ namespace Discord
         public Role CreateRole()
         {
             return Client.CreateGuildRole(Id);
+        }
+
+
+        public List<Hook> GetWebhooks()
+        {
+            return Client.GetGuildWebhooks(Id);
         }
 
 
