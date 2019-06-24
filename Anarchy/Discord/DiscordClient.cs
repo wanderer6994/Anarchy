@@ -1,20 +1,18 @@
-﻿/*
- * Allows you to do anything you don't need the gateway to do
- */
-
-namespace Discord
+﻿namespace Discord
 {
     public class DiscordClient
     {
         internal DiscordHttpClient HttpClient { get; private set; }
-        
+        public SuperPropertiesInformation SuperPropertiesInfo { get; private set; }
+        public ClientUser User { get; internal set; }
+
         private string _token;
         public string Token
         {
             get { return _token; }
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                     return;
 
                 _token = value;
@@ -24,10 +22,6 @@ namespace Discord
                 this.GetClientUser();
             }
         }
-
-        public ClientUser User { get; internal set; }
-
-        public SuperPropertiesInformation SuperPropertiesInfo { get; private set; }
 
         public string UserAgent
         {

@@ -1,7 +1,7 @@
 ## 0.0.1.2
 #### Additions
 Added new methods for getting members much quicker (since it's using the gateway it only supports DiscordSocketClient).
-
+Completed list of gateway opcodes.
 
 
 ## 0.0.1.1

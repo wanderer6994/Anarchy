@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anarchy", "Anarchy\Anarchy.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dntest", "dntest\dntest.csproj", "{4F57BE90-9FCE-442C-AE26-6FA57C8028AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dntest ui", "..\..\Anarchy\Anarchy UI Project\dntest ui.csproj", "{1DEC37CC-A85A-4CD4-B035-B2B3983591E7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,14 +1,12 @@
-﻿using System;
-
-namespace Discord
+﻿namespace Discord
 {
-    public class ChannelEventArgs : EventArgs
+    public class ChannelEventArgs
     {
         public Channel Channel { get; private set; }
 
         public ChannelEventArgs(Channel channel)
         {
-            Channel = channel;
+            Channel = Channel;
         }
     }
 }

@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Discord
+﻿namespace Discord
 {
-    public class RoleEventArgs : EventArgs
+    public class RoleEventArgs
     {
         public Role Role { get; private set; }
 

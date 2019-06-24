@@ -24,3 +24,12 @@ C:\Users\kadep\Documents\Anarchy Dev\Dev\Anarchy\Anarchy\obj\Debug\Anarchy.cspro
 C:\Users\kadep\Documents\Anarchy Dev\Dev\Anarchy\Anarchy\obj\Debug\Anarchy.csproj.CopyComplete
 C:\Users\kadep\Documents\Anarchy Dev\Dev\Anarchy\Anarchy\obj\Debug\Anarchy.dll
 C:\Users\kadep\Documents\Anarchy Dev\Dev\Anarchy\Anarchy\obj\Debug\Anarchy.pdb
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\bin\Debug\Anarchy.dll
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\bin\Debug\Anarchy.pdb
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\obj\Debug\Anarchy.csprojAssemblyReference.cache
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\obj\Debug\Anarchy.csproj.CoreCompileInputs.cache
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\obj\Debug\Anarchy.csproj.CopyComplete
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\obj\Debug\Anarchy.dll
+C:\Users\ilink\source\repos\Anarchy\Dev\Anarchy\obj\Debug\Anarchy.pdb

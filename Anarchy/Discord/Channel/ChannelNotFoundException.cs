@@ -4,7 +4,7 @@
     {
         public long ChannelId { get; private set; }
 
-        public ChannelNotFoundException(DiscordClient client, long channelId) : base (client)
+        public ChannelNotFoundException(DiscordClient client, long channelId) : base(client, "Unable to find channel")
         {
             ChannelId = channelId;
         }

@@ -1,10 +1,6 @@
-﻿/*
- * Basically DiscordClient but with gateway :)
- */
-
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using WebSocketSharp;
 
 namespace Discord.Gateway
@@ -35,9 +31,7 @@ namespace Discord.Gateway
 
         public event RoleHandler OnRoleCreated;
         public event RoleHandler OnRoleUpdated;
-
-        public delegate void MessageDeletedHandler(DiscordSocketClient client, MessageDeletedEventArgs args);
-        public event MessageDeletedHandler OnMessageDeleted;
+        public event MessageHandler OnMessageDeleted;
 
         public event UserListHandler OnGuildMembersReceived;
         #endregion
@@ -47,36 +41,24 @@ namespace Discord.Gateway
         internal int? Sequence { get; set; }
         public bool LoggedIn { get; private set; }
 
-        public DiscordSocketClient() : base()
-        { }
-        public DiscordSocketClient(string token) : base(token)
-        {
-            Login();
-        }
+        public DiscordSocketClient() : base() { }
         ~DiscordSocketClient()
         {
             Logout();
         }
 
-        #region log in
-        public void Login()
+        public void Login(string token)
         {
             if (LoggedIn)
                 Logout();
+
+            Token = token;
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
             Socket.OnMessage += SocketDataReceived;
             Socket.OnClose += SocketClosed;
             Socket.Connect();
         }
-
-        public void Login(string token)
-        {
-            Token = token;
-
-            Login();
-        }
-        #endregion
 
         public void Logout()
         {
@@ -111,8 +93,7 @@ namespace Discord.Gateway
                         case "READY":
                             LoggedIn = true;
                             
-                            GatewayLogin lgn = JsonConvert.DeserializeObject<GatewayLogin>(payload.Data.ToString());
-                            this.User = lgn.User;
+                            this.User = JsonConvert.DeserializeObject<GatewayLogin>(payload.Data.ToString()).User;
                             OnLoggedIn?.Invoke(this, new UserEventArgs(this.User));
                             break;
                         case "GUILD_CREATE":
@@ -176,12 +157,13 @@ namespace Discord.Gateway
                             OnMessageEdited?.Invoke(this, new MessageEventArgs(uMsg));
                             break;
                         case "MESSAGE_DELETE":
-                            OnMessageDeleted?.Invoke(this, new MessageDeletedEventArgs(JsonConvert.DeserializeObject<MessageDelete>(payload.Data.ToString())));
+                            //it should be noted that evrything but the message id, channel id, and guild id will be null.
+                            OnMessageDeleted?.Invoke(this, new MessageEventArgs(JsonConvert.DeserializeObject<Message>(payload.Data.ToString())));
                             break;
                         case "GUILD_MEMBERS_CHUNK":
                             List<User> users = new List<User>();
-                            foreach (var guildMember in JsonConvert.DeserializeObject<GateywayMemberChunk>(payload.Data.ToString()).Members)
-                                users.Add(guildMember.User);
+                            JsonConvert.DeserializeObject<GuildMemberList>(payload.Data.ToString())
+                                                                        .Members.ForEach(member => users.Add(member.User));
 
                             OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
                             break;

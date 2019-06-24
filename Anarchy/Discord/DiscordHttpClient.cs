@@ -1,9 +1,4 @@
-﻿/*
-   An HTTP client that makes it easier to check for common errors
-*/
-
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using System.Text;
 using System.Net;
 using System.Net.Http;

@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace Discord
+﻿namespace Discord
 {
-    public class GuildEventArgs : EventArgs
+    public class GuildEventArgs
     {
         public Guild Guild { get; private set; }
 

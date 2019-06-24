@@ -1,9 +1,9 @@
 ﻿/*
-   i just use this for testing kthx
+   we just use this for testing kthx
  */
 
 using Discord;
-using System.Drawing;
+using Discord.Gateway;
 using System.Threading;
 
 namespace dntest
