@@ -39,12 +39,12 @@ namespace Discord
                 throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
         }
 
-        public HttpResponseMessage Send(string httpMethod, string url, string content = null)
+        public HttpResponseMessage Send(string httpMethod, string endpoint, string content = null)
         {
             HttpRequestMessage msg = new HttpRequestMessage
             {
                 Method = new HttpMethod(httpMethod),
-                RequestUri = new Uri("https://discordapp.com/api/v6" + url)
+                RequestUri = new Uri("https://discordapp.com/api/v6" + endpoint)
             };
 
             if (content != null)
@@ -55,29 +55,29 @@ namespace Discord
             return resp;
         }
 
-        public HttpResponseMessage Get(string url)
+        public HttpResponseMessage Get(string endpoint)
         {
-            return Send("GET", url);
+            return Send("GET", endpoint);
         }
 
-        public HttpResponseMessage Post(string url, string content = "")
+        public HttpResponseMessage Post(string endpoint, string content = "")
         {
-            return Send("POST", url, content);
+            return Send("POST", endpoint, content);
         }
 
-        public HttpResponseMessage Delete(string url)
+        public HttpResponseMessage Delete(string endpoint)
         {
-            return Send("DELETE", url);
+            return Send("DELETE", endpoint);
         }
 
-        public HttpResponseMessage Put(string url, string content = "")
+        public HttpResponseMessage Put(string endpoint, string content = "")
         {
-            return Send("PUT", url, content);
+            return Send("PUT", endpoint, content);
         }
 
-        public HttpResponseMessage Patch(string url, string content = "")
+        public HttpResponseMessage Patch(string endpoint, string content = "")
         {
-            return Send("PATCH", url, content);
+            return Send("PATCH", endpoint, content);
         }
     }
 }
