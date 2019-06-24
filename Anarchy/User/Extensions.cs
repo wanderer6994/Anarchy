@@ -33,7 +33,6 @@ namespace Discord
             }
 
             client.User = JsonConvert.DeserializeObject<ClientUser>(resp.Content.ReadAsStringAsync().Result);
-
             return client.User;
         }
 

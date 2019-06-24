@@ -6,6 +6,7 @@ using Discord;
 using Discord.Webhook;
 using Discord.Gateway;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace dntest
 {

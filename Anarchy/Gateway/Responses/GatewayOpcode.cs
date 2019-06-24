@@ -7,7 +7,7 @@
         Identify,
         StatusChange,
         VoiceStateUpdate,
-        Resume,
+        Resume = 6,
         Reconnect,
         RequestGuildMembers,
         InvalidSession,
