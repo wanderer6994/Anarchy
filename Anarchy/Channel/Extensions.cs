@@ -14,9 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
             
-            Channel channel = JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result);
-            channel.Client = client;
-            return channel;
+            return JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
 
@@ -27,9 +25,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            Channel channel = JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result);
-            channel.Client = client;
-            return channel;
+            return JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
 
@@ -40,9 +36,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            Channel channel = JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result);
-            channel.Client = client;
-            return channel;
+            return JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
 
@@ -65,9 +59,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            Channel channel = JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result);
-            channel.Client = client;
-            return channel;
+            return JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
 
@@ -78,10 +70,9 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
             
-            List<Message> messages = JsonConvert.DeserializeObject<List<Message>>(resp.Content.ReadAsStringAsync().Result);
-            foreach (var message in messages) message.Client = client;
-            return messages;
+            return JsonConvert.DeserializeObject<List<Message>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
         }
+
 
         #region pinning
         public static List<Message> GetChannelPinnedMessages(this DiscordClient client, long channelId)
@@ -91,9 +82,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            List<Message> messages = JsonConvert.DeserializeObject<List<Message>>(resp.Content.ReadAsStringAsync().Result);
-            foreach (var message in messages) message.Client = client;
-            return messages;
+            return JsonConvert.DeserializeObject<List<Message>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
         }
 
 
@@ -118,16 +107,6 @@ namespace Discord
         }
         #endregion
 
-
-        public static Channel CreateDM(this DiscordClient client, long recipientId)
-        {
-            var resp = client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}");
-            
-            Channel channel = JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result);
-            channel.Client = client;
-            return channel;
-        }
-        
 
         public static Channel LeaveGroup(this DiscordClient client, long groupId)
         {

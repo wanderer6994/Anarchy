@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
-    public class Message
+    public class Message : ClientClassBase
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
@@ -44,10 +44,6 @@ namespace Discord
         
         [JsonProperty("embeds")]
         public List<Embed> Embeds { get; private set; }
-
-        [JsonIgnore]
-        internal DiscordClient Client { get; set; }
-
 
         public bool AddReaction(string reaction)
         {

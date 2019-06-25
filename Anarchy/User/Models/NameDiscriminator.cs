@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Recipient
+    public class NameDiscriminator
     {
         [JsonProperty("username")]
         public string Username { get; internal set; }

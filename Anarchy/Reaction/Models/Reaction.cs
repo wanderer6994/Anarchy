@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Reaction
+    public class Reaction : ClientClassBase
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
@@ -15,9 +15,6 @@ namespace Discord
 
         [JsonIgnore]
         public long GuildId { get; internal set; }
-
-        [JsonIgnore]
-        internal DiscordClient Client { get; set; }
 
 
         public Reaction Modify(ReactionModProperties properties)

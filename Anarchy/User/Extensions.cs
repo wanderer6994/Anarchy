@@ -37,13 +37,11 @@ namespace Discord
         }
 
 
-        public static List<BasicGuild> GetClientGuilds(this DiscordClient client)
+        public static List<Guild> GetClientGuilds(this DiscordClient client)
         {
             var resp = client.HttpClient.Get("/users/@me/guilds");
 
-            List<BasicGuild> guilds = JsonConvert.DeserializeObject<List<BasicGuild>>(resp.Content.ReadAsStringAsync().Result);
-            foreach (var guild in guilds) guild.Client = client;
-            return guilds;
+            return JsonConvert.DeserializeObject<List<Guild>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
         }
 
 
@@ -54,9 +52,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
 
-            Invite invite = JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result);
-            invite.Client = client;
-            return invite;
+            return JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
 

@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Discord
 {
-    public class UserSettings : Recipient
+    public class UserSettings : NameDiscriminator
     {
         [JsonProperty("email")]
         public string Email { get; set; }

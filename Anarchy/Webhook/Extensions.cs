@@ -18,8 +18,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            Hook hook = JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result);
-            hook.Client = client;
+            Hook hook = JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
             hook.Modify(properties);
             return hook;
         }
@@ -31,9 +30,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new WebhookNotFoundException(client, webhookId);
 
-            Hook hook = JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result);
-            hook.Client = client;
-            return hook;
+            return JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
         public static bool DeleteChannelWebhook(this DiscordClient client, long webhookId)
@@ -54,9 +51,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new WebhookNotFoundException(client, webhookId);
 
-            Hook hook = JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result);
-            hook.Client = client;
-            return hook;
+            return JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
         public static List<Hook> GetGuildWebhooks(this DiscordClient client, long guildId)
@@ -76,9 +71,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, channelId);
 
-            List<Hook> hooks = JsonConvert.DeserializeObject<List<Hook>>(resp.Content.ReadAsStringAsync().Result);
-            foreach (var hook in hooks) hook.Client = client;
-            return hooks;
+            return JsonConvert.DeserializeObject<List<Hook>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
         }
     }
 }

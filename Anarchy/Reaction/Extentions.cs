@@ -13,12 +13,8 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
             
-            List<Reaction> reactions = JsonConvert.DeserializeObject<List<Reaction>>(resp.Content.ReadAsStringAsync().Result);
-            foreach (var reaction in reactions)
-            {
-                reaction.Client = client;
-                reaction.GuildId = guildId;
-            }
+            List<Reaction> reactions = JsonConvert.DeserializeObject<List<Reaction>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
+            foreach (var reaction in reactions) reaction.GuildId = guildId;
             return reactions;
         }
 
@@ -30,8 +26,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
 
-            Reaction reaction = JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result);
-            reaction.Client = client;
+            Reaction reaction = JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }
@@ -45,8 +40,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            Reaction reaction = JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result);
-            reaction.Client = client;
+            Reaction reaction = JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }
@@ -58,9 +52,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
 
-            Reaction reaction = JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result);
-            reaction.Client = client;
-            return reaction;
+            return JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
         public static bool DeleteGuildReaction(this DiscordClient client, long guildId, long reactionId)
@@ -73,6 +65,7 @@ namespace Discord
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
         #endregion
+
 
         public static bool AddMessageReaction(this DiscordClient client, long channelId, long messageId, string reaction)
         {

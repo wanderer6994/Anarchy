@@ -2,10 +2,16 @@
 
 namespace Discord
 {
-    public class Role : RoleProperties
+    public class Role : ClientClassBase
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("color")]
+        public int? Color { get; set; }
 
         [JsonProperty("position")]
         public int Position { get; private set; }
@@ -13,9 +19,15 @@ namespace Discord
         [JsonIgnore]
         public long GuildId { get; internal set; }
 
-        [JsonIgnore]
-        internal DiscordClient Client { get; set; }
-        
+        [JsonProperty("hoist")]
+        public bool? Seperated { get; set; }
+
+        [JsonProperty("mentionable")]
+        public bool? Mentionable { get; set; }
+
+        [JsonProperty("permissions")]
+        public int? Permissions { get; set; }
+
 
         public Role Modify(RoleProperties properties)
         {

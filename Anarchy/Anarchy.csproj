@@ -58,7 +58,7 @@
     <Compile Include="Message\Embed\EmbedVideo.cs" />
     <Compile Include="Guild\Models\GuildEventArgs.cs" />
     <Compile Include="Guild\Guild member\GuildMemberList.cs" />
-    <Compile Include="Gateway\Responses\GatewayOpcode.cs" />
+    <Compile Include="Gateway\Models\GatewayOpcode.cs" />
     <Compile Include="Gateway\Responses\GatewayRole.cs" />
     <Compile Include="Gateway\Requests\GatewayMembers.cs" />
     <Compile Include="Guild\Models\GuildDefaultNotifications.cs" />
@@ -72,7 +72,7 @@
     <Compile Include="User\EventArgs\UserListEventArgs.cs" />
     <Compile Include="User\User\UserNotFoundException.cs" />
     <Compile Include="DiscordHttpClient.cs" />
-    <Compile Include="Guild\Models\BasicGuild.cs" />
+    <Compile Include="Guild\Models\Guild.cs" />
     <Compile Include="Invite\Models\InvalidInviteException.cs" />
     <Compile Include="Message\Message\Attachment.cs" />
     <Compile Include="Message\Embed\Embed.cs" />
@@ -87,6 +87,8 @@
     <Compile Include="Webhook\Models\WebhookNotFoundException.cs" />
     <Compile Include="Webhook\Extensions.cs" />
     <Compile Include="Webhook\Models\WebhookProperties.cs" />
+    <Compile Include="_Universal\Client class\ClientClassBase.cs" />
+    <Compile Include="_Universal\Client class\ClientClassExtensions.cs" />
     <Compile Include="_Universal\Models\Experiments.cs" />
     <Compile Include="Channel\Models\ChannelType.cs" />
     <Compile Include="Guild\Models\GuildVerificationLevel.cs" />
@@ -119,7 +121,6 @@
     <Compile Include="Gateway\Requests\GatewayRequest.cs" />
     <Compile Include="Gateway\Responses\GatewayResponse.cs" />
     <Compile Include="Guild\Properties\GuildCreationProperties.cs" />
-    <Compile Include="Guild\Models\Guild.cs" />
     <Compile Include="Invite\Models\Invite.cs" />
     <Compile Include="Guild\Guild member\GuildMember.cs" />
     <Compile Include="Message\Message\Message.cs" />
@@ -128,7 +129,7 @@
     <Compile Include="_Universal\Models\RateLimit.cs" />
     <Compile Include="Reaction\Models\Reaction.cs" />
     <Compile Include="User\Models\Hypesquad.cs" />
-    <Compile Include="Relations\Recipient.cs" />
+    <Compile Include="User\Models\NameDiscriminator.cs" />
     <Compile Include="User\User\User.cs" />
     <Compile Include="User\User\UserSettings.cs" />
     <Compile Include="X-Super-Properties\SPUpdatedEventArgs.cs" />
@@ -137,7 +138,7 @@
     <Compile Include="Webhook\Models\WebhookMessage.cs" />
     <Compile Include="_Universal\Exceptions\InvalidParametersException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="X-Super-Properties\SuperPropertiesInformation.cs" />
+    <Compile Include="X-Super-Properties\SuperPropertiesInfo.cs" />
     <Compile Include="_Universal\Models\PermissionOverwrite.cs" />
   </ItemGroup>
   <ItemGroup />

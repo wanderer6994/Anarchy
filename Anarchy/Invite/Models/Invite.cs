@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Invite
+    public class Invite : ClientClassBase
     {
         [JsonProperty("code")]
         public string Code { get; private set; }
@@ -18,9 +18,6 @@ namespace Discord
 
         [JsonProperty("approximate_member_count")]
         public int TotalMembers { get; private set; }
-
-        [JsonIgnore]
-        internal DiscordClient Client { get; set; }
 
 
         public Invite Delete()

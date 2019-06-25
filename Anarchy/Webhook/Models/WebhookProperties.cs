@@ -12,7 +12,7 @@ namespace Discord.Webhook
         public string Name { get; set; }
 
         #region avatar
-        private Base64Image _image = new Base64Image();
+        private readonly Base64Image _image = new Base64Image();
 
         [JsonProperty("avatar")]
         private string _avatar

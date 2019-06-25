@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    public class Channel
+    public class Channel : ClientClassBase
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
@@ -32,9 +32,6 @@ namespace Discord
 
         [JsonProperty("permission_overwrites")]
         public List<PermissionOverwrite> PermissionOverwrites { get; private set; }
-
-        [JsonIgnore]
-        internal DiscordClient Client { get; set; }
 
         public Channel Modify(ChannelModProperties properties)
         {
@@ -118,6 +115,7 @@ namespace Discord
             return Client.UnpinChannelMessage(Id, message.Id);
         }
         #endregion
+
 
         public Invite CreateInvite(InviteProperties properties)
         {

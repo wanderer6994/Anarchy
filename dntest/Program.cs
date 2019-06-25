@@ -6,7 +6,6 @@ using Discord;
 using Discord.Webhook;
 using Discord.Gateway;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace dntest
 {
@@ -14,7 +13,6 @@ namespace dntest
     {
         static void Main(string[] args)
         {
-            Thread.Sleep(-1);
         }
     }
 }

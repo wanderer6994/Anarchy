@@ -9,7 +9,6 @@ namespace Discord.Gateway
     {
         #region events
         public delegate void UserHandler(DiscordSocketClient client, UserEventArgs args);
-        public delegate void UserListHandler(DiscordSocketClient client, UserListEventArgs args);
         public delegate void GuildHandler(DiscordSocketClient client, GuildEventArgs args);
         public delegate void ChannelHandler(DiscordSocketClient client, ChannelEventArgs args);
         public delegate void MessageHandler(DiscordSocketClient client, MessageEventArgs args);
@@ -21,19 +20,20 @@ namespace Discord.Gateway
         public event GuildHandler OnJoinedGuild;
         public event GuildHandler OnGuildUpdated;
         public event GuildHandler OnLeftGuild;
-        
+
+        public delegate void UserListHandler(DiscordSocketClient client, UserListEventArgs args);
+        public event UserListHandler OnGuildMembersReceived;
+
+        public event RoleHandler OnRoleCreated;
+        public event RoleHandler OnRoleUpdated;
+
         public event ChannelHandler OnChannelCreated;
         public event ChannelHandler OnChannelUpdated;
         public event ChannelHandler OnChannelDeleted;
         
         public event MessageHandler OnMessageReceived;
         public event MessageHandler OnMessageEdited;
-
-        public event RoleHandler OnRoleCreated;
-        public event RoleHandler OnRoleUpdated;
         public event MessageHandler OnMessageDeleted;
-
-        public event UserListHandler OnGuildMembersReceived;
         #endregion
 
         internal WebSocket Socket { get; set; }
@@ -49,8 +49,7 @@ namespace Discord.Gateway
 
         public void Login(string token)
         {
-            if (LoggedIn)
-                Logout();
+            Logout();
 
             Token = token;
 
@@ -162,7 +161,7 @@ namespace Discord.Gateway
                         case "GUILD_MEMBERS_CHUNK":
                             List<User> users = new List<User>();
                             JsonConvert.DeserializeObject<GuildMemberList>(payload.Data.ToString())
-                                                                        .Members.ForEach(member => users.Add(member.User));
+                                                                   .Members.ForEach(member => users.Add(member.User));
 
                             OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
                             break;

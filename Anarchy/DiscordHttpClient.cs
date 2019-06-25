@@ -39,11 +39,11 @@ namespace Discord
                 throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
         }
 
-        public HttpResponseMessage Send(string httpMethod, string endpoint, string content = null)
+        public HttpResponseMessage Send(HttpMethod method, string endpoint, string content = null)
         {
             HttpRequestMessage msg = new HttpRequestMessage
             {
-                Method = new HttpMethod(httpMethod),
+                Method = method,
                 RequestUri = new Uri("https://discordapp.com/api/v6" + endpoint)
             };
 
@@ -57,27 +57,27 @@ namespace Discord
 
         public HttpResponseMessage Get(string endpoint)
         {
-            return Send("GET", endpoint);
+            return Send(HttpMethod.Get, endpoint);
         }
 
         public HttpResponseMessage Post(string endpoint, string content = "")
         {
-            return Send("POST", endpoint, content);
+            return Send(HttpMethod.Post, endpoint, content);
         }
 
         public HttpResponseMessage Delete(string endpoint)
         {
-            return Send("DELETE", endpoint);
+            return Send(HttpMethod.Delete, endpoint);
         }
 
         public HttpResponseMessage Put(string endpoint, string content = "")
         {
-            return Send("PUT", endpoint, content);
+            return Send(HttpMethod.Put, endpoint, content);
         }
 
         public HttpResponseMessage Patch(string endpoint, string content = "")
         {
-            return Send("PATCH", endpoint, content);
+            return Send(new HttpMethod("PATCH"), endpoint, content);
         }
     }
 }

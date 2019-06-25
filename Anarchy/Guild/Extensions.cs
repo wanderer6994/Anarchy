@@ -6,7 +6,7 @@ namespace Discord
 {
     public static class GuildExtensions
     {
-        #region manage
+        #region management
         public static Guild CreateGuild(this DiscordClient client, GuildCreationProperties properties)
         {
             var resp = client.HttpClient.Post("/guilds", JsonConvert.SerializeObject(properties));
@@ -39,6 +39,36 @@ namespace Discord
 
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
+
+
+        public static bool KickGuildMember(this DiscordClient client, long guildId, long userId)
+        {
+            var resp = client.HttpClient.Delete($"/guilds/{guildId}/members/{userId}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new UserNotFoundException(client, userId);
+
+            return resp.StatusCode == HttpStatusCode.NoContent;
+        }
+
+
+        public static bool BanGuildMember(this DiscordClient client, long guildId, long userId, int deleteMessageDays, string reason)
+        {
+            var resp = client.HttpClient.Put($"guilds/{guildId}/bans/{userId}?delete-message-days={deleteMessageDays}&reason={reason}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new UserNotFoundException(client, userId);
+
+            return resp.StatusCode == HttpStatusCode.NoContent;
+        }
+
+
+        public static bool UnbanGuildMember(this DiscordClient client, long guildId, long userId)
+        {
+            var resp = client.HttpClient.Delete($"guilds/{guildId}/bans/{userId}");
+
+            return resp.StatusCode == HttpStatusCode.NoContent;
+        }
         #endregion
 
 
@@ -52,17 +82,6 @@ namespace Discord
             Guild guild = JsonConvert.DeserializeObject<Guild>(resp.Content.ReadAsStringAsync().Result);
             guild.Client = client;
             return guild;
-        }
-
-
-        public static bool KickGuildMember(this DiscordClient client, long guildId, long userId)
-        {
-            var resp = client.HttpClient.Delete($"/guilds/{guildId}/members/{userId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new UserNotFoundException(client, userId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
         }
 
 

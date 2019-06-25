@@ -13,9 +13,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            List<Invite> invites = JsonConvert.DeserializeObject<List<Invite>>(resp.Content.ReadAsStringAsync().Result);
-            foreach (var invite in invites) invite.Client = client;
-            return invites;
+            return JsonConvert.DeserializeObject<List<Invite>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
         }
 
 
@@ -26,9 +24,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
 
-            Invite invite = JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result);
-            invite.Client = client;
-            return invite;
+            return JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
 
@@ -39,9 +35,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            Invite invite = JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result);
-            invite.Client = client;
-            return invite;
+            return JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
 
 
@@ -52,9 +46,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
 
-            Invite deleted = JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result);
-            deleted.Client = client;
-            return deleted;
+            return JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
         }
     }
 }
