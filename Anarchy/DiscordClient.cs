@@ -19,7 +19,7 @@
                 HttpClient.Headers.Remove("Authorization");
                 HttpClient.Headers.Add("Authorization", _token);
 
-                //this.GetClientUser();
+                this.GetClientUser();
             }
         }
 

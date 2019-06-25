@@ -1,1 +1,0 @@
-Bots gets AccessDeniedExceptions from all HTTP endpoint.
