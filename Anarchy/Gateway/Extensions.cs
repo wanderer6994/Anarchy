@@ -29,26 +29,8 @@ namespace Discord.Gateway
 
         public static void ChangeStatus(this DiscordSocketClient client, UserStatus status)
         {
-            string converted = "";
-
-            switch (status)
-            {
-                case UserStatus.Online:
-                    converted = "online";
-                    break;
-                case UserStatus.Idle:
-                    converted = "idle";
-                    break;
-                case UserStatus.DoNotDisturb:
-                    converted = "dnd";
-                    break;
-                case UserStatus.Offline:
-                    converted = "offline";
-                    break;
-            }
-
             var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.StatusChange);
-            req.Data.Status = converted;
+            req.Data.Status = status != UserStatus.DoNotDisturb ? status.ToString().ToLower() : "dnd";
             client.Socket.Send(JsonConvert.SerializeObject(req));
         }
 

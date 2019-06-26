@@ -13,7 +13,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
             
-            List<Reaction> reactions = JsonConvert.DeserializeObject<List<Reaction>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
+            List<Reaction> reactions = resp.Content.Json<List<Reaction>>().SetClientsInList(client);
             foreach (var reaction in reactions) reaction.GuildId = guildId;
             return reactions;
         }
@@ -26,7 +26,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
 
-            Reaction reaction = JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            Reaction reaction = resp.Content.Json<Reaction>().SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }
@@ -40,7 +40,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            Reaction reaction = JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            Reaction reaction = resp.Content.Json<Reaction>().SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }
@@ -52,7 +52,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
 
-            return JsonConvert.DeserializeObject<Reaction>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            return resp.Content.Json<Reaction>().SetClient(client);
         }
 
         public static bool DeleteGuildReaction(this DiscordClient client, long guildId, long reactionId)

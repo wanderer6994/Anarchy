@@ -6,13 +6,15 @@ using Discord;
 using Discord.Webhook;
 using Discord.Gateway;
 using System.Threading;
+using System.Linq;
 
 namespace dntest
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
+            Thread.Sleep(-1);
         }
     }
 }

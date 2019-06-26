@@ -25,7 +25,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return JsonConvert.DeserializeObject<Message>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            return resp.Content.Json<Message>().SetClient(client);
         }
         
 
@@ -36,7 +36,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new MessageNotFoundException(client, messageId);
 
-            return JsonConvert.DeserializeObject<Message>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            return resp.Content.Json<Message>().SetClient(client);
         }
         
 

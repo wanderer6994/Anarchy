@@ -26,14 +26,20 @@ namespace Discord
         public bool? Mentionable { get; set; }
 
         [JsonProperty("permissions")]
-        public int? Permissions { get; set; }
+        private int _permissions { get; set; }
+
+
+        public bool HasPermission(GuildPermission permission)
+        {
+            return PermissionCalculator.HasPermission(_permissions, permission);
+        }
 
 
         public Role Modify(RoleProperties properties)
         {
             Role role = Client.ModifyGuildRole(GuildId, Id, properties);
             Name = role.Name;
-            Permissions = role.Permissions;
+            _permissions = role._permissions;
             Color = role.Color;
             Seperated = role.Seperated;
             Position = role.Position;

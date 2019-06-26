@@ -14,7 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new UserNotFoundException(client, userId);
 
-            return JsonConvert.DeserializeObject<User>(resp.Content.ReadAsStringAsync().Result);
+            return resp.Content.Json<User>();
         }
 
 
@@ -32,7 +32,7 @@ namespace Discord
                 throw;
             }
 
-            client.User = JsonConvert.DeserializeObject<ClientUser>(resp.Content.ReadAsStringAsync().Result);
+            client.User = resp.Content.Json<ClientUser>();
             return client.User;
         }
 
@@ -41,7 +41,7 @@ namespace Discord
         {
             var resp = client.HttpClient.Get("/users/@me/guilds");
 
-            return JsonConvert.DeserializeObject<List<Guild>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
+            return resp.Content.Json<List<Guild>>().SetClientsInList(client);
         }
 
 
@@ -52,7 +52,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
 
-            return JsonConvert.DeserializeObject<Invite>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            return resp.Content.Json<Invite>().SetClient(client);
         }
 
 

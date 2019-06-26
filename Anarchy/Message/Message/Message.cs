@@ -45,6 +45,7 @@ namespace Discord
         [JsonProperty("embeds")]
         public List<Embed> Embeds { get; private set; }
 
+
         public bool AddReaction(string reaction)
         {
             return Client.AddMessageReaction(ChannelId, Id, reaction);
@@ -78,7 +79,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return $"{Id} | {Author}";
+            return Author.ToString();
         }
     }
 }

@@ -79,7 +79,7 @@
     <Compile Include="Message\Embed\EmbedImage.cs" />
     <Compile Include="Message\Message\MessageNotFoundException.cs" />
     <Compile Include="Role\Models\RoleNotFoundException.cs" />
-    <Compile Include="_Universal\Base64Image.cs" />
+    <Compile Include="_Universal\Models\Base64Image.cs" />
     <Compile Include="Channel\Models\ChannelNotFoundException.cs" />
     <Compile Include="DiscordClient.cs" />
     <Compile Include="DiscordSocketClient.cs" />
@@ -89,6 +89,7 @@
     <Compile Include="Webhook\Models\WebhookProperties.cs" />
     <Compile Include="_Universal\Client class member\ClientMember.cs" />
     <Compile Include="_Universal\Client class member\Extensions.cs" />
+    <Compile Include="_Universal\JsonExtensions.cs" />
     <Compile Include="_Universal\Models\Experiments.cs" />
     <Compile Include="Channel\Models\ChannelType.cs" />
     <Compile Include="Guild\Models\GuildVerificationLevel.cs" />
@@ -138,7 +139,9 @@
     <Compile Include="_Universal\Exceptions\InvalidParametersException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="X-Super-Properties\SuperPropertiesInfo.cs" />
-    <Compile Include="_Universal\Models\PermissionOverwrite.cs" />
+    <Compile Include="_Universal\Permissions\PermissionCalculator.cs" />
+    <Compile Include="_Universal\Permissions\PermissionOverwrite.cs" />
+    <Compile Include="_Universal\Permissions\GuildPermission.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

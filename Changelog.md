@@ -1,10 +1,10 @@
 ## 0.1.0.0 [BETA]
 #### Additions
-Added new methods for getting members much quicker (since it's using the gateway it only supports DiscordSocketClient).
+Added much quicker ways of getting guild members (tho since it's using the gateway it only supports DiscordSocketClient).
 DiscordWebhookClient has been depricated. Hook (webhook object that depends on a DiscordClient) now holds the data as well as basically being the new DiscordWebhookClient.
-Removed the need for 2 seperate Guild objects as well as improving guild management.
 Added classes with extension methods to make it easier to populate single classes and lists of classes with a specific client.
-Improved gateway.
+Added a permission calculator, which i have tried my best to incorporate into the objects where it is needed.
+Removed the need for 2 seperate Guild objects as well as improving guild management.
 Completed list of gateway opcodes.
 
 #### Other changes

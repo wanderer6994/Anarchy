@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Net;
 using Newtonsoft.Json;
 
@@ -18,7 +14,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            Hook hook = JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            Hook hook = resp.Content.Json<Hook>().SetClient(client);
             hook.Modify(properties);
             return hook;
         }
@@ -30,7 +26,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new WebhookNotFoundException(client, webhookId);
 
-            return JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            return resp.Content.Json<Hook>().SetClient(client);
         }
 
         public static bool DeleteChannelWebhook(this DiscordClient client, long webhookId)
@@ -51,7 +47,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new WebhookNotFoundException(client, webhookId);
 
-            return JsonConvert.DeserializeObject<Hook>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            return resp.Content.Json<Hook>().SetClient(client);
         }
 
         public static List<Hook> GetGuildWebhooks(this DiscordClient client, long guildId)
@@ -61,7 +57,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return JsonConvert.DeserializeObject<List<Hook>>(resp.Content.ReadAsStringAsync().Result);
+            return resp.Content.Json<List<Hook>>().SetClientsInList(client);
         }
 
         public static List<Hook> GetChannelWebhooks(this DiscordClient client, long channelId)
@@ -71,7 +67,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, channelId);
 
-            return JsonConvert.DeserializeObject<List<Hook>>(resp.Content.ReadAsStringAsync().Result).SetClientsInList(client);
+            return resp.Content.Json<List<Hook>>().SetClientsInList(client);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Discord
         {
             var resp = client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}");
 
-            return JsonConvert.DeserializeObject<Channel>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
+            return resp.Content.Json<Channel>().SetClient(client);
         }
     }
 }

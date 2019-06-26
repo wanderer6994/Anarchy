@@ -4,9 +4,6 @@ namespace Discord.Gateway
 {
     internal class GatewayLogin
     {
-        [JsonProperty("v")]
-        public string Version { get; private set; }
-
         [JsonProperty("session_id")]
         internal string SessionId { get; private set; }
 

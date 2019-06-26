@@ -10,10 +10,8 @@ namespace Discord
         public static Guild CreateGuild(this DiscordClient client, GuildCreationProperties properties)
         {
             var resp = client.HttpClient.Post("/guilds", JsonConvert.SerializeObject(properties));
-            
-            Guild guild = JsonConvert.DeserializeObject<Guild>(resp.Content.ReadAsStringAsync().Result);
-            guild.Client = client;
-            return guild;
+
+            return resp.Content.Json<Guild>().SetClient(client);
         }
 
 
@@ -24,9 +22,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            Guild guild = JsonConvert.DeserializeObject<Guild>(resp.Content.ReadAsStringAsync().Result);
-            guild.Client = client;
-            return guild;
+            return resp.Content.Json<Guild>().SetClient(client);
         }
 
 
@@ -79,9 +75,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            Guild guild = JsonConvert.DeserializeObject<Guild>(resp.Content.ReadAsStringAsync().Result);
-            guild.Client = client;
-            return guild;
+            return resp.Content.Json<Guild>().SetClient(client);
         }
 
 
@@ -92,9 +86,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            List<Channel> channels = JsonConvert.DeserializeObject<List<Channel>>(resp.Content.ReadAsStringAsync().Result);
-            foreach (var channel in channels) channel.Client = client;
-            return channels;
+            return resp.Content.Json<List<Channel>>().SetClientsInList(client);
         }
 
 
@@ -105,7 +97,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return JsonConvert.DeserializeObject<List<GuildMember>>(resp.Content.ReadAsStringAsync().Result);
+            return resp.Content.Json<List<GuildMember>>();
         }
 
 

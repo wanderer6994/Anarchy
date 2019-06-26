@@ -23,6 +23,7 @@ namespace Discord
             _discordClient = discordClient;
         }
         
+
         private void CheckResponse(HttpResponseMessage resp)
         {
             switch (resp.StatusCode)
@@ -38,6 +39,7 @@ namespace Discord
             if (resp.StatusCode.ToString() == "429")
                 throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
         }
+
 
         public HttpResponseMessage Send(HttpMethod method, string endpoint, string content = null)
         {
@@ -55,25 +57,30 @@ namespace Discord
             return resp;
         }
 
+
         public HttpResponseMessage Get(string endpoint)
         {
             return Send(HttpMethod.Get, endpoint);
         }
+
 
         public HttpResponseMessage Post(string endpoint, string content = "")
         {
             return Send(HttpMethod.Post, endpoint, content);
         }
 
+
         public HttpResponseMessage Delete(string endpoint)
         {
             return Send(HttpMethod.Delete, endpoint);
         }
 
+
         public HttpResponseMessage Put(string endpoint, string content = "")
         {
             return Send(HttpMethod.Put, endpoint, content);
         }
+
 
         public HttpResponseMessage Patch(string endpoint, string content = "")
         {
