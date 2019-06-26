@@ -46,6 +46,12 @@ namespace Discord
         public List<Embed> Embeds { get; private set; }
 
 
+        public List<User> GetReactions(string reaction, int limit = 25, int afterId = 0)
+        {
+            return Client.GetMessageReactions(ChannelId, Id, reaction, limit, afterId);
+        }
+
+
         public bool AddReaction(string reaction)
         {
             return Client.AddMessageReaction(ChannelId, Id, reaction);

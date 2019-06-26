@@ -52,22 +52,9 @@ namespace Discord
         }
 
 
-        public bool AddPermissionOverwrite(PermissionOverwrite permission)
+        public bool TriggerTyping()
         {
-            if (Client.AddChannelPermissionOverwrite(Id, permission))
-            {
-                PermissionOverwrites.Add(permission);
-
-                return true;
-            }
-            else
-                return false;
-        }
-
-
-        public void TriggerTyping()
-        {
-            Client.TriggerTyping(Id);
+            return Client.TriggerTyping(Id);
         }
 
 
@@ -89,7 +76,6 @@ namespace Discord
         }
 
 
-        #region pin message
         public bool PinMessage(long messageId)
         {
             return Client.PinChannelMessage(Id, messageId);
@@ -100,10 +86,8 @@ namespace Discord
         {
             return PinMessage(message.Id);
         }
-        #endregion
 
 
-        #region unpin message
         public bool UnpinMessage(long messageId)
         {
             return Client.UnpinChannelMessage(Id, messageId);
@@ -114,7 +98,6 @@ namespace Discord
         {
             return Client.UnpinChannelMessage(Id, message.Id);
         }
-        #endregion
 
 
         public Invite CreateInvite(InviteProperties properties)
@@ -131,7 +114,7 @@ namespace Discord
 
         public Hook CreateWebhook(WebhookProperties properties)
         {
-            //awkward approach but it works xd
+            //not gonna let the user change the channel when we're in this context
             properties.ChannelId = null;
 
             return Client.CreateChannelWebhook(Id, properties);

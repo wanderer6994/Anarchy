@@ -8,10 +8,10 @@ namespace Discord
         public long Id { get; private set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         [JsonProperty("color")]
-        public int? Color { get; set; }
+        public int Color { get; private set; }
 
         [JsonProperty("position")]
         public int Position { get; private set; }
@@ -20,10 +20,10 @@ namespace Discord
         public long GuildId { get; internal set; }
 
         [JsonProperty("hoist")]
-        public bool? Seperated { get; set; }
+        public bool? Seperated { get; private set; }
 
         [JsonProperty("mentionable")]
-        public bool? Mentionable { get; set; }
+        public bool? Mentionable { get; private set; }
 
         [JsonProperty("permissions")]
         private int _permissions { get; set; }

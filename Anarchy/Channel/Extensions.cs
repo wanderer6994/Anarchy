@@ -38,17 +38,6 @@ namespace Discord
 
             return resp.Content.Json<Channel>().SetClient(client);
         }
-
-
-        public static bool AddChannelPermissionOverwrite(this DiscordClient client, long channelId, PermissionOverwrite permission)
-        {
-            var resp = client.HttpClient.Put($"/channels/{channelId}/permissions/{permission.Id}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, channelId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
-        }
         #endregion
 
 

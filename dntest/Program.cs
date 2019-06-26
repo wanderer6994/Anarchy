@@ -13,7 +13,6 @@ namespace dntest
     {
         static void Main()
         {
-            Thread.Sleep(-1);
         }
     }
 }

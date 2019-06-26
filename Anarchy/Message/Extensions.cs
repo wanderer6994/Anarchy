@@ -5,7 +5,7 @@ namespace Discord
 {
     public static class MessageExtensions
     {
-        public static void TriggerTyping(this DiscordClient client, long channelId)
+        public static bool TriggerTyping(this DiscordClient client, long channelId)
         {
             var resp = client.HttpClient.Post($"/channels/{channelId}/typing");
 
@@ -15,6 +15,8 @@ namespace Discord
             string content = resp.Content.ReadAsStringAsync().Result;
             if (content.Contains("cooldown"))
                 throw new TooManyRequestsException(client, JsonConvert.DeserializeObject<MessageRateLimit>(content).Cooldown);
+
+            return resp.StatusCode == HttpStatusCode.NoContent;
         }
         
 

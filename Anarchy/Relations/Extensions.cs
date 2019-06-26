@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Discord
@@ -14,13 +15,7 @@ namespace Discord
 
         public static bool AddFriend(this DiscordClient client, string username, int discriminator)
         {
-            NameDiscriminator recipient = new NameDiscriminator
-            {
-                Username = username,
-                Discriminator = discriminator
-            };
-
-            return client.AddFriend(recipient);
+            return client.AddFriend(new NameDiscriminator { Username = username, Discriminator = discriminator });
         }
 
 
@@ -34,10 +29,20 @@ namespace Discord
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
 
+
         public static bool RemoveFriend(this DiscordClient client, User user)
         {
             return client.RemoveFriend(user.Id);
         }
+
+
+        public static List<Channel> GetClientDMs(this DiscordClient client)
+        {
+            var resp = client.HttpClient.Get($"/users/@me/channels");
+
+            return resp.Content.Json<List<Channel>>().SetClientsInList(client);
+        }
+
 
         public static Channel CreateDM(this DiscordClient client, long recipientId)
         {

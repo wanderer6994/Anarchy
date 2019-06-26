@@ -30,14 +30,11 @@ namespace Discord
             {
                 case HttpStatusCode.BadRequest:
                     throw new InvalidParametersException(_discordClient, resp.Content.ReadAsStringAsync().Result);
-                case HttpStatusCode.Unauthorized:
+                case HttpStatusCode.Forbidden & HttpStatusCode.Unauthorized:
                     throw new AccessDeniedException(_discordClient);
-                case HttpStatusCode.Forbidden:
-                    throw new AccessDeniedException(_discordClient);
+                case (HttpStatusCode)429:
+                    throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
             }
-
-            if (resp.StatusCode.ToString() == "429")
-                throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
         }
 
 
@@ -46,11 +43,9 @@ namespace Discord
             HttpRequestMessage msg = new HttpRequestMessage
             {
                 Method = method,
-                RequestUri = new Uri("https://discordapp.com/api/v6" + endpoint)
+                RequestUri = new Uri("https://discordapp.com/api/v6" + endpoint),
+                Content = content != null ? new StringContent(content, Encoding.UTF8, "application/json") : null
             };
-
-            if (content != null)
-                msg.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
             var resp =  _httpClient.SendAsync(msg).Result;
             CheckResponse(resp);

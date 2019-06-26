@@ -90,66 +90,66 @@ namespace Discord.Gateway
                     {
                         case "READY":
                             LoggedIn = true;
-                            
-                            this.User = JsonConvert.DeserializeObject<GatewayLogin>(payload.Data.ToString()).User;
+
+                            this.User = payload.Json<GatewayLogin>().User;
                             OnLoggedIn?.Invoke(this, new UserEventArgs(this.User));
                             break;
                         case "GUILD_CREATE":
-                            Guild cGuild = JsonConvert.DeserializeObject<Guild>(payload.Data.ToString());
+                            Guild cGuild = payload.Json<Guild>();
                             cGuild.Client = this;
 
                             OnJoinedGuild?.Invoke(this, new GuildEventArgs(cGuild));
                             break;
                         case "GUILD_UPDATE":
-                            Guild uGuild = JsonConvert.DeserializeObject<Guild>(payload.Data.ToString());
+                            Guild uGuild = payload.Json<Guild>();
                             uGuild.Client = this;
 
                             OnGuildUpdated?.Invoke(this, new GuildEventArgs(uGuild));
                             break;
                         case "GUILD_DELETE":
-                            Guild dGuild = JsonConvert.DeserializeObject<Guild>(payload.Data.ToString());
+                            Guild dGuild = payload.Json<Guild>();
                             dGuild.Client = this;
 
                             OnLeftGuild?.Invoke(this, new GuildEventArgs(dGuild));
                             break;
                         case "CHANNEL_CREATE":
-                            Channel cChannel = JsonConvert.DeserializeObject<Channel>(payload.Data.ToString());
+                            Channel cChannel = payload.Json<Channel>();
                             cChannel.Client = this;
 
                             OnChannelCreated?.Invoke(this, new ChannelEventArgs(cChannel));
                             break;
                         case "CHANNEL_UPDATE":
-                            Channel uChannel = JsonConvert.DeserializeObject<Channel>(payload.Data.ToString());
+                            Channel uChannel = payload.Json<Channel>();
                             uChannel.Client = this;
 
                             OnChannelUpdated?.Invoke(this, new ChannelEventArgs(uChannel));
                             break;
                         case "CHANNEL_DELETE":
-                            Channel dChannel = JsonConvert.DeserializeObject<Channel>(payload.Data.ToString());
+                            Channel dChannel = payload.Json<Channel>();
                             dChannel.Client = this;
 
                             OnChannelDeleted?.Invoke(this, new ChannelEventArgs(dChannel));
                             break;
                         case "GUILD_ROLE_CREATE":
-                            GatewayRole cRole = JsonConvert.DeserializeObject<GatewayRole>(payload.Data.ToString());
+                            GatewayRole cRole = payload.Json<GatewayRole>();
                             cRole.Role.Client = this;
 
                             OnRoleCreated?.Invoke(this, new RoleEventArgs(cRole.Role));
                             break;
                         case "GUILD_ROLE_UPDATE":
-                            GatewayRole uRole = JsonConvert.DeserializeObject<GatewayRole>(payload.Data.ToString());
+                            GatewayRole uRole = payload.Json<GatewayRole>();
                             uRole.Role.Client = this;
 
                             OnRoleUpdated?.Invoke(this, new RoleEventArgs(uRole.Role));
                             break;
                         case "MESSAGE_CREATE":
-                            Message cMsg = JsonConvert.DeserializeObject<Message>(payload.Data.ToString());
+                            Message cMsg = payload.Json<Message>();
                             cMsg.Client = this;
 
                             OnMessageReceived?.Invoke(this, new MessageEventArgs(cMsg));
                             break;
                         case "MESSAGE_UPDATE":
-                            Message uMsg = JsonConvert.DeserializeObject<Message>(payload.Data.ToString());
+                            Message uMsg = payload.Json<Message>();
                             uMsg.Client = this;
 
                             OnMessageEdited?.Invoke(this, new MessageEventArgs(uMsg));
@@ -160,8 +160,7 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_MEMBERS_CHUNK":
                             List<User> users = new List<User>();
-                            JsonConvert.DeserializeObject<GuildMemberList>(payload.Data.ToString())
-                                                                   .Members.ForEach(member => users.Add(member.User));
+                            payload.Json<GuildMemberList>().Members.ForEach(member => users.Add(member.User));
 
                             OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
                             break;

@@ -3,8 +3,14 @@ using System.Drawing;
 
 namespace Discord
 {
-    public class UserSettings : NameDiscriminator
+    public class UserSettings
     {
+        [JsonProperty("username")]
+        public string Username { get; internal set; }
+
+        [JsonProperty("discriminator")]
+        public int Discriminator { get; internal set; }
+
         [JsonProperty("email")]
         public string Email { get; set; }
         

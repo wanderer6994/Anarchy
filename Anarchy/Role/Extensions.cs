@@ -6,19 +6,6 @@ namespace Discord
 {
     public static class RoleExtensions
     {
-        public static List<Role> GetGuildRoles(this DiscordClient client, long guildId)
-        {
-            var resp = client.HttpClient.Get($"/guilds/{guildId}/roles");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new GuildNotFoundException(client, guildId);
-            
-            List<Role> roles = resp.Content.Json<List<Role>>().SetClientsInList(client);
-            foreach (var role in roles) role.GuildId = guildId;
-            return roles;
-        }
-
-
         #region management
         public static Role CreateGuildRole(this DiscordClient client, long guildId, RoleProperties properties = null)
         {
@@ -26,7 +13,7 @@ namespace Discord
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
-            
+
             Role role = resp.Content.Json<Role>().SetClient(client);
             role.GuildId = guildId;
 
@@ -35,7 +22,7 @@ namespace Discord
 
             return role;
         }
-        
+
 
         public static Role ModifyGuildRole(this DiscordClient client, long guildId, long roleId, RoleProperties properties)
         {
@@ -43,12 +30,12 @@ namespace Discord
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new RoleNotFoundException(client, roleId);
-            
+
             Role changed = resp.Content.Json<Role>().SetClient(client);
             changed.GuildId = guildId;
             return changed;
         }
-        
+
 
         public static bool DeleteGuildRole(this DiscordClient client, long guildId, long roleId)
         {
@@ -60,5 +47,18 @@ namespace Discord
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
         #endregion
+
+
+        public static List<Role> GetGuildRoles(this DiscordClient client, long guildId)
+        {
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/roles");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new GuildNotFoundException(client, guildId);
+            
+            List<Role> roles = resp.Content.Json<List<Role>>().SetClientsInList(client);
+            foreach (var role in roles) role.GuildId = guildId;
+            return roles;
+        }
     }
 }

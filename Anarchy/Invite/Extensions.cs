@@ -6,17 +6,6 @@ namespace Discord
 {
     public static class InviteExtensions
     {
-        public static List<Invite> GetGuildInvites(this DiscordClient client, long guildId)
-        {
-            var resp = client.HttpClient.Get($"/guilds/{guildId}/invites");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new GuildNotFoundException(client, guildId);
-
-            return resp.Content.Json<List<Invite>>().SetClientsInList(client);
-        }
-
-
         public static Invite GetInvite(this DiscordClient client, string invCode)
         {
             var resp = client.HttpClient.Get($"/invite/{invCode}?with_counts=true");
@@ -25,6 +14,17 @@ namespace Discord
                 throw new InvalidInviteException(client, invCode);
 
             return resp.Content.Json<Invite>().SetClient(client);
+        }
+
+
+        public static List<Invite> GetGuildInvites(this DiscordClient client, long guildId)
+        {
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/invites");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new GuildNotFoundException(client, guildId);
+
+            return resp.Content.Json<List<Invite>>().SetClientsInList(client);
         }
 
 

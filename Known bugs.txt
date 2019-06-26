@@ -1,1 +1,1 @@
-If Avatar in WebhookProperties is null the webhook's avatar will also be set to null
+In many cases things that are 'null' inside of Properties classes will be set anyway.

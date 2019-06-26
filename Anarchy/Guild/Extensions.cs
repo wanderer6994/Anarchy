@@ -48,6 +48,28 @@ namespace Discord
         }
 
 
+        public static List<Ban> GetGuildBans(this DiscordClient client, long guildId)
+        {
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/bans");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new GuildNotFoundException(client, guildId);
+
+            return resp.Content.Json<List<Ban>>();
+        }
+
+
+        public static Ban GetGuildBan(this DiscordClient client, long guildId, long userId)
+        {
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/bans/{userId}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new BanNotFoundException(client, guildId);
+
+            return resp.Content.Json<Ban>();
+        }
+
+
         public static bool BanGuildMember(this DiscordClient client, long guildId, long userId, int deleteMessageDays, string reason)
         {
             var resp = client.HttpClient.Put($"guilds/{guildId}/bans/{userId}?delete-message-days={deleteMessageDays}&reason={reason}");

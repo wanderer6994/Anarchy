@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using Discord.Webhook;
-using System.Drawing;
-using System.IO;
 
 namespace Discord
 {
@@ -28,10 +26,7 @@ namespace Discord
             private set
             {
                 if (value != null)
-                {
-                    foreach (var role in value)
-                        role.GuildId = Id;
-                }
+                    foreach (var role in value) role.GuildId = Id;
 
                 _roles = value;
             }
@@ -45,10 +40,7 @@ namespace Discord
             private set
             {
                 if (value != null)
-                {
-                    foreach (var reaction in value)
-                        reaction.GuildId = Id;
-                }
+                    foreach (var reaction in value) reaction.GuildId = Id;
 
                 _reactions = value;
             }
@@ -109,6 +101,18 @@ namespace Discord
         public bool KickMember(User user)
         {
             return KickMember(user.Id);
+        }
+
+
+        public List<Ban> GetBans(long guildId)
+        {
+            return Client.GetGuildBans(guildId);
+        }
+
+
+        public Ban GetBan(long guildId, long userId)
+        {
+            return Client.GetGuildBan(guildId, userId);
         }
 
 
