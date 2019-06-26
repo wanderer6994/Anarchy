@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using Discord.Webhook;
+using System.Drawing;
+using System.IO;
 
 namespace Discord
 {
-    public class Guild : ClientClassBase
+    public class Guild : ClientMember
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
@@ -180,26 +182,15 @@ namespace Discord
         }
 
 
-        public Role CreateRole()
+        public Role CreateRole(RoleProperties properties = null)
         {
-            return Client.CreateGuildRole(Id);
+            return Client.CreateGuildRole(Id, properties);
         }
 
 
         public List<Hook> GetWebhooks()
         {
             return Client.GetGuildWebhooks(Id);
-        }
-
-
-        //TODO: Make this able to convert the bytes into an image (problems with the .webp extension i reckon)
-        public byte[] DownloadIcon()
-        {
-            if (IconId == null)
-                return null;
-
-            return Client.HttpClient.Get($"https://cdn.discordapp.com/icons/{Id}/{IconId}.webp")
-                                    .Content.ReadAsByteArrayAsync().Result;
         }
 
 

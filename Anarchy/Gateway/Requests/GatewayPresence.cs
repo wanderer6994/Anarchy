@@ -2,7 +2,7 @@
 
 namespace Discord.Gateway
 {
-    internal class GatewayPresence : GatewayData
+    internal class GatewayPresence
     {
         public GatewayPresence()
         {

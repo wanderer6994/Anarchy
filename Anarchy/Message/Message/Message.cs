@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
-    public class Message : ClientClassBase
+    public class Message : ClientMember
     {
         [JsonProperty("id")]
         public long Id { get; private set; }

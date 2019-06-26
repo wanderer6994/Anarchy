@@ -9,7 +9,8 @@ namespace Discord.Gateway
     {
         internal static void LoginToGateway(this DiscordSocketClient client)
         {
-            var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify, client.Token);
+            var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify);
+            req.Data.Token = client.Token;
             req.Data.Properties = client.SuperPropertiesInfo.Properties;
             client.Socket.Send(JsonConvert.SerializeObject(req));
         }
@@ -46,7 +47,7 @@ namespace Discord.Gateway
                     break;
             }
 
-            var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.StatusChange, client.Token);
+            var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.StatusChange);
             req.Data.Status = converted;
             client.Socket.Send(JsonConvert.SerializeObject(req));
         }
@@ -54,7 +55,7 @@ namespace Discord.Gateway
         //Set limit to 0 to receive all members in chunks of 1000
         public static void GetGuildMembers(this DiscordSocketClient client, long guildId, int limit = 100)
         {
-            var req = new GatewayRequest<GatewayMembers>(GatewayOpcode.RequestGuildMembers, client.Token);
+            var req = new GatewayRequest<GatewayMembers>(GatewayOpcode.RequestGuildMembers);
             req.Data.GuildId = guildId;
             req.Data.Limit = limit;
             client.Socket.Send(JsonConvert.SerializeObject(req));

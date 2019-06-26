@@ -2,8 +2,11 @@
 
 namespace Discord.Gateway
 {
-    internal class GatewayIdentification : GatewayData
+    internal class GatewayIdentification
     {
+        [JsonProperty("token")]
+        public string Token { get; set; }
+
         [JsonProperty("properties")]
         public SuperProperties Properties { get; set; }
 

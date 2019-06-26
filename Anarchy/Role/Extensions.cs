@@ -19,7 +19,7 @@ namespace Discord
         }
 
         #region management
-        public static Role CreateGuildRole(this DiscordClient client, long guildId)
+        public static Role CreateGuildRole(this DiscordClient client, long guildId, RoleProperties properties = null)
         {
             var resp = client.HttpClient.Post($"/guilds/{guildId}/roles");
 
@@ -28,6 +28,10 @@ namespace Discord
             
             Role role = JsonConvert.DeserializeObject<Role>(resp.Content.ReadAsStringAsync().Result).SetClient(client);
             role.GuildId = guildId;
+
+            if (properties != null)
+                role.Modify(properties);
+
             return role;
         }
         

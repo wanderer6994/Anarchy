@@ -98,12 +98,6 @@ namespace Discord
         }
 
 
-        public static OrganizedChannelList Organize(this List<Channel> channels)
-        {
-            return new OrganizedChannelList(channels);
-        }
-
-
         public static List<GuildMember> GetGuildMembers(this DiscordClient client, long guildId, int limit, long afterId = 0)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/members?limit={limit}&after={afterId}");

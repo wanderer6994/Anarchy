@@ -2,14 +2,11 @@
 
 namespace Discord.Gateway
 {
-    internal class GatewayRequest<T> where T : GatewayData, new()
+    internal class GatewayRequest<T> where T : new()
     {
-        public GatewayRequest(GatewayOpcode opcode, string token)
+        public GatewayRequest(GatewayOpcode opcode)
         {
-            Data = new T
-            {
-                Token = token
-            };
+            Data = new T();
             Opcode = opcode;
         }
 

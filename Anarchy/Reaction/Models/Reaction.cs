@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Reaction : ClientClassBase
+    public class Reaction : ClientMember
     {
         [JsonProperty("id")]
         public long Id { get; private set; }

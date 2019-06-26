@@ -4,6 +4,7 @@ Added new methods for getting members much quicker (since it's using the gateway
 DiscordWebhookClient has been depricated. Hook (webhook object that depends on a DiscordClient) now holds the data as well as basically being the new DiscordWebhookClient.
 Removed the need for 2 seperate Guild objects as well as improving guild management.
 Added classes with extension methods to make it easier to populate single classes and lists of classes with a specific client.
+Improved gateway.
 Completed list of gateway opcodes.
 
 #### Other changes

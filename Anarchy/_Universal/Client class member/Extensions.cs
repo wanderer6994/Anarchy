@@ -2,17 +2,16 @@
 
 namespace Discord
 {
-    //More bad names
-    public static class ClientClassExtensions
+    public static class ClientMemberExtensions
     {
-        public static T SetClient<T>(this T @class, DiscordClient client) where T : ClientClassBase
+        public static T SetClient<T>(this T @class, DiscordClient client) where T : ClientMember
         {
             @class.Client = client;
 
             return @class;
         }
 
-        public static List<T> SetClientsInList<T>(this List<T> classes, DiscordClient client) where T : ClientClassBase
+        public static List<T> SetClientsInList<T>(this List<T> classes, DiscordClient client) where T : ClientMember
         {
             foreach (var @class in classes)
                 @class.Client = client;

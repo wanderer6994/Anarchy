@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Invite : ClientClassBase
+    public class Invite : ClientMember
     {
         [JsonProperty("code")]
         public string Code { get; private set; }

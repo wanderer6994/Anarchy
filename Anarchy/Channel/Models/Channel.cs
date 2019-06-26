@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    public class Channel : ClientClassBase
+    public class Channel : ClientMember
     {
         [JsonProperty("id")]
         public long Id { get; private set; }

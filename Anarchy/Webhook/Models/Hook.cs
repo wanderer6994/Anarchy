@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Discord.Webhook
 {
-    public class Hook : ClientClassBase
+    public class Hook : ClientMember
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
