@@ -108,9 +108,7 @@ namespace Discord
             while (true)
             {
                 List<GuildMember> newMembers = client.GetGuildMembers(guildId, 1000, members[members.Count - 1].User.Id);
-
                 if (newMembers.Count == 0) break;
-
                 members.AddRange(newMembers);
             }
 

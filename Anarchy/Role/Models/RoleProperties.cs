@@ -8,7 +8,7 @@ namespace Discord
         public string Name { get; set; }
 
         [JsonProperty("permissions")]
-        private int _permissions { get; set; }
+        public int? Permissions { get; set; }
 
         [JsonProperty("color")]
         public int? Color { get; set; }
@@ -22,19 +22,29 @@ namespace Discord
 
         public void AddPermission(GuildPermission permission)
         {
-            PermissionCalculator.AddPermission(_permissions, permission);
+            //if you have not set Permissions to anything it will default it to 'no permissions'
+            if (Permissions == null)
+                Permissions = 512;
+
+            Permissions = PermissionCalculator.AddPermission((int)Permissions, permission);
         }
 
 
         public void RemovePermission(GuildPermission permission)
         {
-            PermissionCalculator.RemovePermission(_permissions, permission);
+            if (Permissions == null)
+                return;
+
+            Permissions = PermissionCalculator.RemovePermission((int)Permissions, permission);
         }
 
 
         public bool HasPermission(GuildPermission permission)
         {
-            return PermissionCalculator.HasPermission(_permissions, permission);
+            if (Permissions == null)
+                return false;
+
+            return PermissionCalculator.HasPermission((int)Permissions, permission);
         }
 
 
