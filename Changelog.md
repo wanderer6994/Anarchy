@@ -3,6 +3,7 @@
 Added much quicker ways of getting guild members (tho since it's using the gateway it only supports DiscordSocketClient).
 Added stuff to make it easier to populate classes with a specific client.
 Added a permission calculator, which currently has not been incorporated into the objects, but you can still use the calculator: PermissionCalculator.
+Modifying guilds, channels, roles etc. is now more secure, because of many unspecified options being set to a default.
 Completed list of gateway opcodes.
 
 #### Changes

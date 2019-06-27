@@ -15,5 +15,11 @@ namespace Discord.Gateway
 
         [JsonProperty("s")]
         public int? Sequence { get; private set; }
+
+
+        public override string ToString()
+        {
+            return $"{Opcode} Title: {Title} Sequence: {Sequence}";
+        }
     }
 }

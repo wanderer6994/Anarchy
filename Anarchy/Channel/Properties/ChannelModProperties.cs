@@ -18,5 +18,11 @@ namespace Discord
 
         [JsonProperty("position")]
         public int? Position { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"Name: {Name} Position: {Position}";
+        }
     }
 }

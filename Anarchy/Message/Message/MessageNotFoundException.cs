@@ -8,5 +8,11 @@
         {
             MessageId = messageId;
         }
+
+
+        public override string ToString()
+        {
+            return MessageId.ToString();
+        }
     }
 }

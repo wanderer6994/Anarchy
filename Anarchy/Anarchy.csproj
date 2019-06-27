@@ -88,7 +88,7 @@
     <Compile Include="Webhook\Models\WebhookNotFoundException.cs" />
     <Compile Include="Webhook\Extensions.cs" />
     <Compile Include="Webhook\Models\WebhookProperties.cs" />
-    <Compile Include="_Universal\Client member class\ClientMember.cs" />
+    <Compile Include="_Universal\Client member class\ControllableModel.cs" />
     <Compile Include="_Universal\Client member class\Extensions.cs" />
     <Compile Include="_Universal\JsonExtensions.cs" />
     <Compile Include="_Universal\Models\Experiments.cs" />

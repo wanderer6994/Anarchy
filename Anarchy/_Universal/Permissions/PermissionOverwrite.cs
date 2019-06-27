@@ -15,5 +15,11 @@ namespace Discord
 
         [JsonProperty("allow")]
         public int Allow { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"{Type} permission | Allow: {Allow} Deny: {Deny}";
+        }
     }
 }

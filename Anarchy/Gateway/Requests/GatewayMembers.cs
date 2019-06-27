@@ -17,5 +17,11 @@ namespace Discord.Gateway
 
         [JsonProperty("limit")]
         public int Limit { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"Guild id: {GuildId} Limit: {Limit}";
+        }
     }
 }

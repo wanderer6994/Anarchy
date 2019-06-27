@@ -8,5 +8,11 @@
         {
             UserId = userId;
         }
+
+
+        public override string ToString()
+        {
+            return UserId.ToString();
+        }
     }
 }

@@ -15,5 +15,11 @@ namespace Discord
 
         [JsonProperty("size")]
         public int FileSize { get; private set; }
+
+
+        public override string ToString()
+        {
+            return $"{Id} ({Url})";
+        }
     }
 }

@@ -4,12 +4,19 @@ namespace Discord
 {
     public class InvalidParametersException : DiscordException
     {
-        // Currently a dynamic object since there isn't really any keys that are persistent across requests
-        public dynamic ErrorJsonContent { get; private set; }
+        public string ErrorJson { get; private set; }
+        public dynamic ErrorJsonObject { get; private set; }
 
         public InvalidParametersException(DiscordClient client, string errorJson) : base(client, "Invalid parameters were passed")
         {
-            ErrorJsonContent = JsonConvert.DeserializeObject<dynamic>(errorJson);
+            ErrorJson = errorJson;
+            ErrorJsonObject = JsonConvert.DeserializeObject<dynamic>(ErrorJson);
+        }
+
+
+        public override string ToString()
+        {
+            return $"Error: {ErrorJson}";
         }
     }
 }

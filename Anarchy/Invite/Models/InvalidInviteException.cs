@@ -8,5 +8,11 @@
         {
             InviteCode = inviteCode;
         }
+
+
+        public override string ToString()
+        {
+            return InviteCode;
+        }
     }
 }

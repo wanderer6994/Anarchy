@@ -4,8 +4,20 @@ using Discord.Webhook;
 
 namespace Discord
 {
-    public class Guild : ClientMember
+    public class Guild : ControllableModel
     {
+        public Guild()
+        {
+            OnClientUpdated += (sender, e) =>
+            {
+                if (Roles != null)
+                    Roles.SetClientsInList(Client);
+
+                if (Reactions != null)
+                    Reactions.SetClientsInList(Client);
+            };
+        }
+
         [JsonProperty("id")]
         public long Id { get; private set; }
 
@@ -54,22 +66,6 @@ namespace Discord
 
         [JsonProperty("owner_id")]
         public long? OwnerId { get; private set; }
-
-        private DiscordClient _client;
-        internal override DiscordClient Client
-        {
-            get { return _client; }
-            set
-            {
-                _client = value;
-
-                if (Roles != null)
-                    Roles.SetClientsInList(value);
-
-                if (Reactions != null)
-                    Reactions.SetClientsInList(value);
-            }
-        }
 
 
         public Guild Modify(GuildModProperties properties)

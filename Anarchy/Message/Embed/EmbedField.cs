@@ -12,5 +12,11 @@ namespace Discord
 
         [JsonProperty("inline")]
         public bool Inline { get; private set; }
+
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

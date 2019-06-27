@@ -15,5 +15,11 @@ namespace Discord.Gateway
 
         [JsonProperty("compress")]
         public bool Compress { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"Token: {Token} Compress: {Compress}";
+        }
     }
 }

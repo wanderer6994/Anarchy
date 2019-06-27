@@ -12,5 +12,11 @@ namespace Discord
 
         [JsonProperty("type")]
         public ChannelType Type { get; set; }
+
+
+        public override string ToString()
+        {
+            return $"Type: {Type} Name: {Name}";
+        }
     }
 }

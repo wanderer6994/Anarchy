@@ -8,5 +8,11 @@
         {
             Channel = Channel;
         }
+
+
+        public override string ToString()
+        {
+            return Channel.ToString();
+        }
     }
 }

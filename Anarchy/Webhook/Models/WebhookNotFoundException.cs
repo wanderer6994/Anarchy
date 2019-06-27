@@ -8,5 +8,11 @@
         {
             WebhookId = webhookId;
         }
+
+
+        public override string ToString()
+        {
+            return WebhookId.ToString();
+        }
     }
 }

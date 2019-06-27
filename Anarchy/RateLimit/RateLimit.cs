@@ -12,5 +12,11 @@ namespace Discord
 
         [JsonProperty("retry_after")]
         public int RetryAfter { get; private set; }
+
+
+        public override string ToString()
+        {
+            return RetryAfter.ToString();
+        }
     }
 }

@@ -10,5 +10,11 @@ namespace Discord
         {
             Message = msg;
         }
+
+
+        public override string ToString()
+        {
+            return Message.ToString();
+        }
     }
 }

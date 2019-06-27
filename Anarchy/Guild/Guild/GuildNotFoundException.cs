@@ -8,5 +8,11 @@
         {
             GuildId = guildId;
         }
+
+
+        public override string ToString()
+        {
+            return GuildId.ToString();
+        }
     }
 }

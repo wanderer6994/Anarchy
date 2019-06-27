@@ -8,5 +8,10 @@
         {
             ChannelId = channelId;
         }
+
+        public override string ToString()
+        {
+            return $"Id: {ChannelId}";
+        }
     }
 }

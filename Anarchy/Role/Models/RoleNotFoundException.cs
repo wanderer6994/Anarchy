@@ -8,5 +8,11 @@
         {
             RoleId = roleId;
         }
+
+
+        public override string ToString()
+        {
+            return RoleId.ToString();
+        }
     }
 }

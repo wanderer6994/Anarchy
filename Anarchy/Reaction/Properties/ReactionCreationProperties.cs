@@ -30,5 +30,11 @@ namespace Discord
             }
         }
         #endregion
+
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

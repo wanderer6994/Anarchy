@@ -22,5 +22,11 @@ namespace Discord.Gateway
 
         [JsonProperty("afk")]
         public bool Afk { get; set; }
+
+
+        public override string ToString()
+        {
+            return Status;
+        }
     }
 }

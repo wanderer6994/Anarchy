@@ -10,5 +10,11 @@
             GuildId = guildId;
             ReactionId = reactionId;
         }
+
+
+        public override string ToString()
+        {
+            return $"Guild: {GuildId} Reaction: {ReactionId}";
+        }
     }
 }

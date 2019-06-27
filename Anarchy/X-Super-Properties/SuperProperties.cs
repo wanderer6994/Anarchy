@@ -42,5 +42,11 @@ namespace Discord
 
         [JsonProperty("client_event_source")]
         public string EventSource { get; set; }
+
+
+        public override string ToString()
+        {
+            return UserAgent;
+        }
     }
 }

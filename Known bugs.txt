@@ -1,1 +1,0 @@
-In many cases things members that are not set inside of Properties classes will be set anyway (attempting to fix that).

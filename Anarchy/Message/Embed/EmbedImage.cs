@@ -12,5 +12,11 @@ namespace Discord
 
         [JsonProperty("height")]
         public int Height { get; private set; }
+
+
+        public override string ToString()
+        {
+            return $"{Url} (W: {Width}, H: {Height})";
+        }
     }
 }

@@ -15,5 +15,11 @@ namespace Discord.Gateway
 
         [JsonProperty("d")]
         public T Data { get; set; }
+
+
+        public override string ToString()
+        {
+            return Opcode.ToString();
+        }
     }
 }

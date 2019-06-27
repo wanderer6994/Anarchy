@@ -16,7 +16,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return $"{User.Username}{(Nickname != null ? $"/{Nickname}" : "")}#{User.Discriminator} ({User.Id})";
+            return User.ToString();
         }
     }
 }

@@ -2,8 +2,16 @@
 
 namespace Discord
 {
-    public class Invite : ClientMember
+    public class Invite : ControllableModel
     {
+        public Invite()
+        {
+            OnClientUpdated += (sender, e) =>
+            {
+                Guild.Client = Client;
+            };
+        }
+
         [JsonProperty("code")]
         public string Code { get; private set; }
 
@@ -38,6 +46,12 @@ namespace Discord
         public Invite Delete()
         {
             return Client.DeleteInvite(Code);
+        }
+
+
+        public override string ToString()
+        {
+            return Code;
         }
     }
 }

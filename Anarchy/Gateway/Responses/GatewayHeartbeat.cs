@@ -6,5 +6,11 @@ namespace Discord.Gateway
     {
         [JsonProperty("heartbeat_interval")]
         public int Interval { get; set; }
+
+
+        public override string ToString()
+        {
+            return Interval.ToString();
+        }
     }
 }

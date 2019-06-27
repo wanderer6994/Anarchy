@@ -33,5 +33,11 @@ namespace Discord.Webhook
             }
         }
         #endregion
+
+
+        public override string ToString()
+        {
+            return $"Channel: {ChannelId} Name: {Name}";
+        }
     }
 }

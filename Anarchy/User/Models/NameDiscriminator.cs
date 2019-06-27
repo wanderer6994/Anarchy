@@ -10,6 +10,7 @@ namespace Discord
         [JsonProperty("discriminator")]
         public int Discriminator { get; internal set; }
 
+
         public override string ToString()
         {
             return $"{Username}#{Discriminator}";

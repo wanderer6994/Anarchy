@@ -2,9 +2,10 @@
 Anarchy is an opensource Discord API wrapper, that focuses on making it easy to make all sorts of discord bots,
 as well as modding the wrapper itself.
 
-### Note
-There's probably gonna be a few bugs here and there. If you find any make sure to open an issue on Github.
-On top of that if you're using a bot token make sure to prefix the token with 'Bot '.
+## To those wondering
+There's probably gonna be a few bugs here and there. Make sure to open an issue on Github if you find one.
+If you're using a bot token make sure to prefix the token with 'Bot '.
+Some types/methods may not be 100% failproof yet.
 
 
 # Examples
@@ -32,7 +33,7 @@ client.LeaveGuild(322850917248663552);
 DiscordClient client = new DiscordClient("your token here");
 Channel channel = client.GetChannel(449751593483632642);
 channel.TriggerTyping(); //This is optional, but good for when you need the cooldown of sending a channel message (if there is one)
-channel.SendMessage("This was sent from my bot :D");
+channel.SendMessage("Hello, World");
 ```
 
 ## Creating guilds and channels
@@ -44,7 +45,7 @@ Guild newGuild = client.CreateGuild(new GuildCreationProperties() { Name = "cool
 Channel newChannel = newGuild.CreateChannel(new ChannelProperties() { Name = "my new channel", Type = ChannelType.Text });
 ```
 
-## Gateway events
+## Using gateway events
 ```csharp
 static void Main(string[] args)
 {
@@ -79,6 +80,26 @@ private static void Client_OnLeftGuild(DiscordSocketClient client, GuildEventArg
    Console.WriteLine($"Left guild: {args.Guild}");
 }
 ```
+
+## Downloading all members in a server
+```csharp
+private static List<User> Users = new List<User>();
+
+static void Main()
+{
+   // DiscordClient can also be used to do this, but it is incredibly slow compared to the gateway method
+   DiscordSocketClient client = new DiscordSocketClient();
+   client.OnLoggedIn += Client_OnLoggedIn;
+   client.Login("your token here");
+}
+
+private static void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs args)
+{
+   // Not running this async will result in a permenant freeze of the gateway
+   Task.Run(() => Users = client.GetAllGuildMembers(420));
+}
+```
+
 
 
 ### Subscribe or i'll eat ur kids
