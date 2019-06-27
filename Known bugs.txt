@@ -1,1 +1,1 @@
-In many cases things that are 'null' inside of Properties classes will be set anyway.
+In many cases things members that are not set inside of Properties classes will be set anyway (attempting to fix that).

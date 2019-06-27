@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="Channel\Models\ChannelEventArgs.cs" />
     <Compile Include="Channel\Properties\ChannelModProperties.cs" />
-    <Compile Include="Channel\Models\OrganizedChannelList.cs" />
     <Compile Include="Guild\Ban\Ban.cs" />
     <Compile Include="Guild\Ban\BanNotFoundException.cs" />
     <Compile Include="Message\Embed\EmbedAuthor.cs" />

@@ -74,6 +74,11 @@ namespace Discord
 
         public Guild Modify(GuildModProperties properties)
         {
+            if (properties.Name == null)
+                properties.Name = Name;
+            if (properties.Region == null)
+                properties.Region = Region;
+
             Guild guild = Client.ModifyGuild(Id, properties);
             Region = guild.Region;
             IconId = guild.IconId;

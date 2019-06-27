@@ -29,14 +29,19 @@ namespace Discord
         private int _permissions { get; set; }
 
 
-        public bool HasPermission(GuildPermission permission)
-        {
-            return PermissionCalculator.HasPermission(_permissions, permission);
-        }
-
-
         public Role Modify(RoleProperties properties)
         {
+            if (properties.Name == null)
+                properties.Name = Name;
+            if (properties.Color == null)
+                properties.Color = Color;
+            if (properties.Seperated == null)
+                properties.Seperated = Seperated;
+            if (properties.Mentionable == null)
+                properties.Mentionable = Mentionable;
+            if (properties.Permissions == null)
+                properties.Permissions = _permissions;
+
             Role role = Client.ModifyGuildRole(GuildId, Id, properties);
             Name = role.Name;
             _permissions = role._permissions;
@@ -50,6 +55,12 @@ namespace Discord
         public void Delete()
         {
             Client.DeleteGuildRole(GuildId, Id);
+        }
+
+
+        public bool HasPermission(GuildPermission permission)
+        {
+            return PermissionCalculator.HasPermission(_permissions, permission);
         }
 
 
