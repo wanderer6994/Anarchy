@@ -29,6 +29,9 @@ namespace Discord
         private int _permissions { get; set; }
 
 
+        /// <summary>
+        /// Modifies a role
+        /// </summary>
         public Role Modify(RoleProperties properties)
         {
             if (properties.Name == null)

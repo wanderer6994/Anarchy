@@ -46,6 +46,9 @@ namespace Discord
         public List<Embed> Embeds { get; private set; }
 
 
+        /// <summary>
+        /// Edits the message
+        /// </summary>
         public Message Edit(string message)
         {
             Message msg = Client.EditMessage(ChannelId, Id, message);
@@ -59,24 +62,36 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Deletes the message
+        /// </summary>
         public bool Delete()
         {
             return Client.DeleteMessage(ChannelId, Id);
         }
 
 
+        /// <summary>
+        /// Gets all occurences of a specific reaction
+        /// </summary>
         public List<User> GetReactions(string reaction, int limit = 25, int afterId = 0)
         {
             return Client.GetMessageReactions(ChannelId, Id, reaction, limit, afterId);
         }
 
 
+        /// <summary>
+        /// Adds a reaction to the message
+        /// </summary>
         public bool AddReaction(string reaction)
         {
             return Client.AddMessageReaction(ChannelId, Id, reaction);
         }
 
 
+        /// <summary>
+        /// Removes a reaction from the message
+        /// </summary>
         public bool RemoveReaction(string reaction)
         {
             return Client.RemoveMessageReaction(ChannelId, Id, reaction);

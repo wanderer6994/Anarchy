@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// A message file/image
+    /// </summary>
     public class Attachment
     {
         [JsonProperty("id")]

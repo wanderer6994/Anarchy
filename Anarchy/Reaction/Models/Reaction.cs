@@ -17,6 +17,9 @@ namespace Discord
         public long GuildId { get; internal set; }
 
 
+        /// <summary>
+        /// Modifies the reaction
+        /// </summary>
         public Reaction Modify(ReactionModProperties properties)
         {
             Reaction reaction = Client.ModifyGuildReaction(GuildId, Id, properties);
@@ -25,6 +28,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Deletes the reaction
+        /// </summary>
         public bool Delete()
         {
             return Client.DeleteGuildReaction(GuildId, Id);

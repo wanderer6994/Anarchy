@@ -5,6 +5,9 @@ namespace Discord
 {
     public static class MessageExtensions
     {
+        /// <summary>
+        /// Triggers a 'user typing...' for the client
+        /// </summary>
         public static bool TriggerTyping(this DiscordClient client, long channelId)
         {
             var resp = client.HttpClient.Post($"/channels/{channelId}/typing");
@@ -20,6 +23,9 @@ namespace Discord
         }
         
 
+        /// <summary>
+        /// Sends a channel message
+        /// </summary>
         public static Message SendMessage(this DiscordClient client, long channelId, string message, bool tts = false)
         {
             var resp = client.HttpClient.Post($"/channels/{channelId}/messages", JsonConvert.SerializeObject(new MessageProperties() { Content = message, Tts = tts }));
@@ -29,8 +35,11 @@ namespace Discord
 
             return resp.Content.Json<Message>().SetClient(client);
         }
-        
 
+
+        /// <summary>
+        /// Edits a channel message
+        /// </summary>
         public static Message EditMessage(this DiscordClient client, long channelId, long messageId, string msg)
         {
             var resp = client.HttpClient.Patch($"/channels/{channelId}/messages/{messageId}", "{\"content\":\"" + msg + "\"}");
@@ -40,8 +49,11 @@ namespace Discord
 
             return resp.Content.Json<Message>().SetClient(client);
         }
-        
 
+
+        /// <summary>
+        /// Deletes a channel message
+        /// </summary>
         public static bool DeleteMessage(this DiscordClient client, long channelId, long messageId)
         {
             var resp = client.HttpClient.Delete($"/channels/{channelId}/messages/{messageId}");

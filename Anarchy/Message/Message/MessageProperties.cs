@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for creating a message
+    /// </summary>
     internal class MessageProperties
     {
         public MessageProperties()

@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// Base class for populating classes with a specific DiscordClient
+    /// </summary>
     public class ControllableModel
     {
         protected event EventHandler OnClientUpdated;

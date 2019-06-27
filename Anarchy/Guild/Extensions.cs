@@ -89,7 +89,9 @@ namespace Discord
         }
         #endregion
 
-
+        /// <summary>
+        /// Gets a guild
+        /// </summary>
         public static Guild GetGuild(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get("/guilds/" + guildId);
@@ -101,6 +103,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Gets all channels in a guild
+        /// </summary>
         public static List<Channel> GetGuildChannels(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/channels");
@@ -112,6 +117,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Gets members in a guild
+        /// </summary>
         public static List<GuildMember> GetGuildMembers(this DiscordClient client, long guildId, int limit, long afterId = 0)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/members?limit={limit}&after={afterId}");
@@ -123,6 +131,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Gets all members in the guild
+        /// </summary>
         public static List<GuildMember> GetAllGuildMembers(this DiscordClient client, long guildId)
         {
             List<GuildMember> members = client.GetGuildMembers(guildId, 1000);
@@ -138,6 +149,9 @@ namespace Discord
         }
         
 
+        /// <summary>
+        /// Changes the client's nickname in a guild
+        /// </summary>
         public static bool ChangeNickname(this DiscordClient client, long guildId, string nickname)
         {
             var resp = client.HttpClient.Patch($"/guilds/{guildId}/members/@me/nick", "{\"nick\":\"" + nickname + "\"}");

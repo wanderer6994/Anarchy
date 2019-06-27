@@ -2,6 +2,7 @@
 
 namespace Discord
 {
+
     public class ChannelCreationProperties
     {
         [JsonProperty("name")]

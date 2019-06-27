@@ -21,7 +21,7 @@ namespace Discord.Gateway
 
         public override string ToString()
         {
-            return $"Guild id: {GuildId} Limit: {Limit}";
+            return $"Guild: {GuildId} Limit: {Limit}";
         }
     }
 }

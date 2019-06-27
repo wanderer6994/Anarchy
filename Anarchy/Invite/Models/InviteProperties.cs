@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for creating an invite
+    /// </summary>
     public class InviteProperties
     {
         [JsonProperty("max_age")]

@@ -7,6 +7,9 @@ namespace Discord.Gateway
 {
     public static class GatewayExtensions
     {
+        /// <summary>
+        /// Logs into the gateway
+        /// </summary>
         internal static void LoginToGateway(this DiscordSocketClient client)
         {
             var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify);
@@ -16,6 +19,9 @@ namespace Discord.Gateway
         }
         
 
+        /// <summary>
+        /// Sends a heartbeat every x seconds
+        /// </summary>
         internal static async Task StartHeartbeatHandlersAsync(this DiscordSocketClient client, int interval)
         {
             while (true)
@@ -27,6 +33,9 @@ namespace Discord.Gateway
         }
         
 
+        /// <summary>
+        /// Changes the client's <see cref="UserStatus"/>
+        /// </summary>
         public static void ChangeStatus(this DiscordSocketClient client, UserStatus status)
         {
             var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.StatusChange);
@@ -34,7 +43,10 @@ namespace Discord.Gateway
             client.Socket.Send(JsonConvert.SerializeObject(req));
         }
 
-        //Set limit to 0 to receive all members in chunks of 1000
+
+        /// <summary>
+        /// Gets a list of guild members (subscribe to OnGuildMembersReceived to get them)
+        /// </summary>
         public static void GetGuildMembers(this DiscordSocketClient client, long guildId, int limit = 100)
         {
             var req = new GatewayRequest<GatewayMembers>(GatewayOpcode.RequestGuildMembers);
@@ -43,6 +55,10 @@ namespace Discord.Gateway
             client.Socket.Send(JsonConvert.SerializeObject(req));
         }
 
+
+        /// <summary>
+        /// Gets all members in a guild
+        /// </summary>
         public static List<User> GetAllGuildMembers(this DiscordSocketClient client, long guildId)
         {
             List<User> members = new List<User>();

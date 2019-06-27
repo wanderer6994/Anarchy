@@ -2,6 +2,7 @@
 
 namespace Discord.Gateway
 {
+    /// <typeparam name="T">Type of data</typeparam>
     internal class GatewayRequest<T> where T : new()
     {
         public GatewayRequest(GatewayOpcode opcode)

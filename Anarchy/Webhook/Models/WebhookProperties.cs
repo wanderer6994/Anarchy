@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Discord.Webhook
 {
+    /// <summary>
+    /// Options for creating/modifying a webhook
+    /// </summary>
     public class WebhookProperties
     {
         [JsonProperty("channel_id")]

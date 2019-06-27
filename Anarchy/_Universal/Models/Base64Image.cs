@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Discord
 {
+    /// <summary>
+    /// Makes it easier to convert normal Image objects to discord's base64 format
+    /// </summary>
     public class Base64Image
     {
         public string ImageBase64 { get; private set; }

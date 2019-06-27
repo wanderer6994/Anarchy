@@ -1,5 +1,8 @@
 ﻿namespace Discord
 {
+    /// <summary>
+    /// Fired when a message is not found
+    /// </summary>
     public class MessageNotFoundException : DiscordException
     {
         public long MessageId { get; private set; }

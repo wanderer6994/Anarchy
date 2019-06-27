@@ -5,6 +5,9 @@ using WebSocketSharp;
 
 namespace Discord.Gateway
 {
+    /// <summary>
+    /// <see cref="DiscordClient"/> with gateway support
+    /// </summary>
     public class DiscordSocketClient : DiscordClient
     {
         #region events
@@ -47,6 +50,10 @@ namespace Discord.Gateway
             Logout();
         }
 
+
+        /// <summary>
+        /// Logs into the gateway
+        /// </summary>
         public void Login(string token)
         {
             Logout();
@@ -59,6 +66,10 @@ namespace Discord.Gateway
             Socket.Connect();
         }
 
+
+        /// <summary>
+        /// Logs out from the gateway
+        /// </summary>
         public void Logout()
         {
             if (LoggedIn)

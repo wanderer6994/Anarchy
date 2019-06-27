@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// Information about a guild invite
+    /// </summary>
     public class Invite : ControllableModel
     {
         public Invite()
@@ -43,6 +46,9 @@ namespace Discord
         public int TotalMembers { get; private set; }
 
 
+        /// <summary>
+        /// Deletes the invite
+        /// </summary>
         public Invite Delete()
         {
             return Client.DeleteInvite(Code);

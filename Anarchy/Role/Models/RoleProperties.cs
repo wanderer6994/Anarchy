@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for creating/modifying a role
+    /// </summary>
     public class RoleProperties
     {
         [JsonProperty("name")]

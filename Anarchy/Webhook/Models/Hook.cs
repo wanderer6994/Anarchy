@@ -27,6 +27,9 @@ namespace Discord.Webhook
         public string Avatar { get; private set; }
 
 
+        /// <summary>
+        /// Modifies the webhook
+        /// </summary>
         public Hook Modify(WebhookProperties properties)
         {
             if (properties.Name == null)
@@ -42,12 +45,18 @@ namespace Discord.Webhook
         }
 
 
+        /// <summary>
+        /// Deletes the webhook
+        /// </summary>
         public bool Delete()
         {
             return Client.DeleteChannelWebhook(Id);
         }
 
 
+        /// <summary>
+        /// Sends a message through the webhook
+        /// </summary>
         public bool SendMessage(WebhookMessage message)
         {
             var resp = Client.HttpClient.Post($"/webhooks/{Id}/{Token}", JsonConvert.SerializeObject(message));
@@ -56,6 +65,9 @@ namespace Discord.Webhook
         }
 
 
+        /// <summary>
+        /// Sends a message through the webhook
+        /// </summary>
         public bool SendMessage(string content)
         {
             WebhookMessage message = new WebhookMessage
