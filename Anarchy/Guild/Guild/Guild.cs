@@ -4,17 +4,15 @@ using Discord.Webhook;
 
 namespace Discord
 {
-    public class Guild : ControllableModel
+    public class Guild : Controllable
     {
         public Guild()
         {
             OnClientUpdated += (sender, e) =>
             {
-                if (Roles != null)
-                    Roles.SetClientsInList(Client);
+                if (Roles != null) Roles.SetClientsInList(Client);
 
-                if (Reactions != null)
-                    Reactions.SetClientsInList(Client);
+                if (Reactions != null) Reactions.SetClientsInList(Client);
             };
         }
 
@@ -59,13 +57,27 @@ namespace Discord
         }
 
         [JsonProperty("verification_level")]
-        public GuildVerificationLevel Verification { get; private set; }
+        public GuildVerificationLevel VerificationLevel { get; private set; }
 
         [JsonProperty("default_message_notifications")]
         public GuildDefaultNotifications DefaultNotifications { get; set; }
 
         [JsonProperty("owner_id")]
         public long? OwnerId { get; private set; }
+
+
+        public void Update()
+        {
+            Guild guild = Client.GetGuild(Id);
+            Name = guild.Name;
+            IconId = guild.IconId;
+            Region = guild.Region;
+            Roles = guild.Roles;
+            Reactions = guild.Reactions;
+            VerificationLevel = guild.VerificationLevel;
+            DefaultNotifications = guild.DefaultNotifications;
+            OwnerId = guild.OwnerId;
+        }
 
 
         public Guild Modify(GuildModProperties properties)
@@ -78,7 +90,7 @@ namespace Discord
             Guild guild = Client.ModifyGuild(Id, properties);
             Region = guild.Region;
             IconId = guild.IconId;
-            Verification = guild.Verification;
+            VerificationLevel = guild.VerificationLevel;
             DefaultNotifications = guild.DefaultNotifications;
             OwnerId = guild.OwnerId;
             Roles = guild.Roles;

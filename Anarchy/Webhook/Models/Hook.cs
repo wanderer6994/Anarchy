@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Discord.Webhook
 {
-    public class Hook : ControllableModel
+    public class Hook : Controllable
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
@@ -24,7 +24,17 @@ namespace Discord.Webhook
         public long ChannelId { get; private set; }
 
         [JsonProperty("avatar")]
-        public string Avatar { get; private set; }
+        public string AvatarId { get; private set; }
+
+
+        public void Update()
+        {
+            Hook hook = Client.GetWebhook(Id, Token);
+            Name = hook.Name;
+            Creator = hook.Creator;
+            ChannelId = hook.ChannelId;
+            AvatarId = hook.AvatarId;
+        }
 
 
         public Hook Modify(WebhookProperties properties)
@@ -37,7 +47,7 @@ namespace Discord.Webhook
             Hook hook = Client.ModifyChannelWebhook(Id, properties);
             Name = hook.Name;
             ChannelId = hook.ChannelId;
-            Avatar = hook.Avatar;
+            AvatarId = hook.AvatarId;
             return hook;
         }
 
@@ -62,7 +72,7 @@ namespace Discord.Webhook
             {
                 Username = Name,
                 Content = content,
-                Avatar = Avatar
+                AvatarUrl = AvatarId
             };
 
             return SendMessage(message);

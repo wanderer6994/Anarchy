@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    public class Channel : ControllableModel
+    public class Channel : Controllable
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
@@ -32,6 +32,18 @@ namespace Discord
 
         [JsonProperty("permission_overwrites")]
         public List<PermissionOverwrite> PermissionOverwrites { get; private set; }
+
+
+        public void Update()
+        {
+            Channel channel = Client.GetChannel(Id);
+            Name = channel.Name;
+            Topic = channel.Topic;
+            Position = channel.Position;
+            Nsfw = channel.Nsfw;
+            ParentId = channel.ParentId;
+            PermissionOverwrites = channel.PermissionOverwrites;
+        }
 
 
         public Channel Modify(ChannelModProperties properties)

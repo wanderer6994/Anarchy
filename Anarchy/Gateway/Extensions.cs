@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using WebSocketSharp;
 
 namespace Discord.Gateway
 {
     public static class GatewayExtensions
     {
+        public static void Send(this WebSocket socket, object json)
+        {
+            socket.Send(JsonConvert.SerializeObject(json));
+        }
+
         internal static void LoginToGateway(this DiscordSocketClient client)
         {
             var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify);
             req.Data.Token = client.Token;
             req.Data.Properties = client.SuperPropertiesInfo.Properties;
-            client.Socket.Send(JsonConvert.SerializeObject(req));
+            client.Socket.Send(req);
         }
         
 
@@ -31,7 +37,7 @@ namespace Discord.Gateway
         {
             var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.StatusChange);
             req.Data.Status = status != UserStatus.DoNotDisturb ? status.ToString().ToLower() : "dnd";
-            client.Socket.Send(JsonConvert.SerializeObject(req));
+            client.Socket.Send(req);
         }
 
 
@@ -40,7 +46,7 @@ namespace Discord.Gateway
             var req = new GatewayRequest<GatewayMembers>(GatewayOpcode.RequestGuildMembers);
             req.Data.GuildId = guildId;
             req.Data.Limit = limit;
-            client.Socket.Send(JsonConvert.SerializeObject(req));
+            client.Socket.Send(req);
         }
 
 

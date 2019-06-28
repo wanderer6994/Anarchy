@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Role : ControllableModel
+    public class Role : Controllable
     {
         [JsonProperty("id")]
         public long Id { get; private set; }

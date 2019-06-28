@@ -12,7 +12,7 @@ namespace Discord
         public string Region { get; set; }
 
         #region icon
-        private Base64Image _image = new Base64Image();
+        private readonly Base64Image _image = new Base64Image();
 
         [JsonProperty("icon")]
         private string _icon

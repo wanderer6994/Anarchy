@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Reaction : ControllableModel
+    public class Reaction : Controllable
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
@@ -15,6 +15,12 @@ namespace Discord
 
         [JsonIgnore]
         public long GuildId { get; internal set; }
+
+
+        public void Update()
+        {
+            Name = Client.GetGuildReaction(GuildId, Id).Name;
+        }
 
 
         public Reaction Modify(ReactionModProperties properties)

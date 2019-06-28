@@ -6,7 +6,7 @@
 
         public ChannelEventArgs(Channel channel)
         {
-            Channel = Channel;
+            Channel = channel;
         }
 
 

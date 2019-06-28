@@ -2,9 +2,9 @@
 
 namespace Discord
 {
-    public static class ControllableModelExtensions
+    public static class ControllableExtensions
     {
-        public static T SetClient<T>(this T @class, DiscordClient client) where T : ControllableModel
+        public static T SetClient<T>(this T @class, DiscordClient client) where T : Controllable
         {
             @class.Client = client;
 
@@ -12,7 +12,7 @@ namespace Discord
         }
 
 
-        public static List<T> SetClientsInList<T>(this List<T> classes, DiscordClient client) where T : ControllableModel
+        public static List<T> SetClientsInList<T>(this List<T> classes, DiscordClient client) where T : Controllable
         {
             foreach (var @class in classes)
                 @class.Client = client;

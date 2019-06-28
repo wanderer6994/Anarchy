@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Invite : ControllableModel
+    public class Invite : Controllable
     {
         public Invite()
         {
@@ -15,9 +15,6 @@ namespace Discord
         [JsonProperty("code")]
         public string Code { get; private set; }
 
-        [JsonProperty("temporary")]
-        public bool Temporary { get; private set; }
-
         [JsonProperty("guild")]
         public Guild Guild { get; private set; }
 
@@ -26,6 +23,9 @@ namespace Discord
 
         [JsonProperty("inviter")]
         public User Creator { get; private set; }
+
+        [JsonProperty("temporary")]
+        public bool Temporary { get; private set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; private set; }
@@ -43,9 +43,6 @@ namespace Discord
         public int TotalMembers { get; private set; }
 
 
-        /// <summary>
-        /// Deletes the invite
-        /// </summary>
         public Invite Delete()
         {
             return Client.DeleteInvite(Code);
