@@ -1,8 +1,5 @@
 ﻿namespace Discord
 {
-    /// <summary>
-    /// Fired when an invalid invite is requested
-    /// </summary>
     public class InvalidInviteException : DiscordException
     {
         public string InviteCode { get; private set; }

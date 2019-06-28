@@ -7,9 +7,6 @@ namespace Discord.Webhook
     public static class WebhookExtensions
     {
         #region management
-        /// <summary>
-        /// Creates a webhook
-        /// </summary>
         public static Hook CreateChannelWebhook(this DiscordClient client, long channelId, WebhookProperties properties)
         {
             var resp = client.HttpClient.Post($"/channels/{channelId}/webhooks", JsonConvert.SerializeObject(properties));
@@ -18,14 +15,12 @@ namespace Discord.Webhook
                 throw new ChannelNotFoundException(client, channelId);
 
             Hook hook = resp.Content.Json<Hook>().SetClient(client);
-            if (properties.ChannelId != null) hook.Modify(properties);
+            if (properties.ChannelId != null)
+                hook.Modify(properties);
             return hook;
         }
 
 
-        /// <summary>
-        /// Modifies a webhook
-        /// </summary>
         public static Hook ModifyChannelWebhook(this DiscordClient client, long webhookId, WebhookProperties properties)
         {
             var resp = client.HttpClient.Patch($"/webhooks/{webhookId}", JsonConvert.SerializeObject(properties));
@@ -36,9 +31,7 @@ namespace Discord.Webhook
             return resp.Content.Json<Hook>().SetClient(client);
         }
 
-        /// <summary>
-        /// Deletes a webhook
-        /// </summary>
+
         public static bool DeleteChannelWebhook(this DiscordClient client, long webhookId)
         {
             var resp = client.HttpClient.Delete($"/webhooks/{webhookId}");
@@ -51,9 +44,6 @@ namespace Discord.Webhook
         #endregion
 
 
-        /// <summary>
-        /// Gets a webhook
-        /// </summary>
         public static Hook GetWebhook(this DiscordClient client, long webhookId, string token = "")
         {
             var resp = client.HttpClient.Get($"/webhooks/{webhookId}/{token}");
@@ -65,9 +55,6 @@ namespace Discord.Webhook
         }
 
 
-        /// <summary>
-        /// Gets all webhooks in a guild
-        /// </summary>
         public static List<Hook> GetGuildWebhooks(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/webhooks");
@@ -79,9 +66,6 @@ namespace Discord.Webhook
         }
 
 
-        /// <summary>
-        /// Gets all webhooks in a channel
-        /// </summary>
         public static List<Hook> GetChannelWebhooks(this DiscordClient client, long channelId)
         {
             var resp = client.HttpClient.Get($"/channels/{channelId}/webhooks");

@@ -3,9 +3,6 @@ using System.Drawing;
 
 namespace Discord
 {
-    /// <summary>
-    /// Options for creating a reaction
-    /// </summary>
     public class ReactionCreationProperties
     {
         [JsonProperty("name")]

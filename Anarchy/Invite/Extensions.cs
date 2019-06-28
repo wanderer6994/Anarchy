@@ -6,9 +6,6 @@ namespace Discord
 {
     public static class InviteExtensions
     {
-        /// <summary>
-        /// Gets an invite
-        /// </summary>
         public static Invite GetInvite(this DiscordClient client, string invCode)
         {
             var resp = client.HttpClient.Get($"/invite/{invCode}?with_counts=true");
@@ -20,9 +17,6 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Gets all invites in a guild
-        /// </summary>
         public static List<Invite> GetGuildInvites(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/invites");
@@ -34,9 +28,6 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Creates a channel invite
-        /// </summary>
         public static Invite CreateInvite(this DiscordClient client, long channelId, InviteProperties properties)
         {
             var resp = client.HttpClient.Post($"/channels/{channelId}/invites", JsonConvert.SerializeObject(properties));
@@ -48,9 +39,6 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Deletes a channel invite
-        /// </summary>
         public static Invite DeleteInvite(this DiscordClient client, string invCode)
         {
             var resp = client.HttpClient.Delete($"/invites/{invCode}");

@@ -7,9 +7,6 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
-    /// <summary>
-    /// HTTP client made for Discord
-    /// </summary>
     internal class DiscordHttpClient
     {
         private readonly HttpClient _httpClient;

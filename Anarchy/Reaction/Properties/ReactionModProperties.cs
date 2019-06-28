@@ -2,9 +2,6 @@
 
 namespace Discord
 {
-    /// <summary>
-    /// Options for modifying a reaction
-    /// </summary>
     public class ReactionModProperties
     {
         [JsonProperty("name")]

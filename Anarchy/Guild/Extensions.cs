@@ -89,9 +89,7 @@ namespace Discord
         }
         #endregion
 
-        /// <summary>
-        /// Gets a guild
-        /// </summary>
+
         public static Guild GetGuild(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get("/guilds/" + guildId);
@@ -103,9 +101,6 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Gets all channels in a guild
-        /// </summary>
         public static List<Channel> GetGuildChannels(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/channels");
@@ -117,9 +112,6 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Gets members in a guild
-        /// </summary>
         public static List<GuildMember> GetGuildMembers(this DiscordClient client, long guildId, int limit, long afterId = 0)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/members?limit={limit}&after={afterId}");
@@ -131,9 +123,6 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Gets all members in the guild
-        /// </summary>
         public static List<GuildMember> GetAllGuildMembers(this DiscordClient client, long guildId)
         {
             List<GuildMember> members = client.GetGuildMembers(guildId, 1000);
@@ -147,11 +136,38 @@ namespace Discord
 
             return members;
         }
-        
 
-        /// <summary>
-        /// Changes the client's nickname in a guild
-        /// </summary>
+
+        public static List<Guild> GetClientGuilds(this DiscordClient client)
+        {
+            var resp = client.HttpClient.Get("/users/@me/guilds");
+
+            return resp.Content.Json<List<Guild>>().SetClientsInList(client);
+        }
+
+
+        public static Invite JoinGuild(this DiscordClient client, string invCode)
+        {
+            var resp = client.HttpClient.Post($"/invite/{invCode}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new InvalidInviteException(client, invCode);
+
+            return resp.Content.Json<Invite>().SetClient(client);
+        }
+
+
+        public static bool LeaveGuild(this DiscordClient client, long guildId)
+        {
+            var resp = client.HttpClient.Delete($"/users/@me/guilds/{guildId}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new GuildNotFoundException(client, guildId);
+
+            return resp.StatusCode == HttpStatusCode.NoContent;
+        }
+
+
         public static bool ChangeNickname(this DiscordClient client, long guildId, string nickname)
         {
             var resp = client.HttpClient.Patch($"/guilds/{guildId}/members/@me/nick", "{\"nick\":\"" + nickname + "\"}");

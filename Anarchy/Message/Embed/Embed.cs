@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    /// <summary>
-    /// A Discord message embed
-    /// </summary>
     public class Embed
     {
         [JsonProperty("title")]

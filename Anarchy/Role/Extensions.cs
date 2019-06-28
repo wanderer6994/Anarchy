@@ -7,9 +7,6 @@ namespace Discord
     public static class RoleExtensions
     {
         #region management
-        /// <summary>
-        /// Creates a guild role
-        /// </summary>
         public static Role CreateGuildRole(this DiscordClient client, long guildId, RoleProperties properties = null)
         {
             var resp = client.HttpClient.Post($"/guilds/{guildId}/roles");
@@ -27,9 +24,6 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Modifies a guild role
-        /// </summary>
         public static Role ModifyGuildRole(this DiscordClient client, long guildId, long roleId, RoleProperties properties)
         {
             var resp = client.HttpClient.Patch($"/guilds/{guildId}/roles/{roleId}", JsonConvert.SerializeObject(properties));
@@ -43,9 +37,6 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Deletes a guild role
-        /// </summary>
         public static bool DeleteGuildRole(this DiscordClient client, long guildId, long roleId)
         {
             var resp = client.HttpClient.Delete($"/guilds/{guildId}/roles/{roleId}");
@@ -58,9 +49,6 @@ namespace Discord
         #endregion
 
 
-        /// <summary>
-        /// Gets all roles in a guild
-        /// </summary>
         public static List<Role> GetGuildRoles(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/roles");

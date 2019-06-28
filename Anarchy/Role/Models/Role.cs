@@ -26,12 +26,9 @@ namespace Discord
         public bool? Mentionable { get; private set; }
 
         [JsonProperty("permissions")]
-        private int _permissions { get; set; }
+        public int Permissions { get; set; }
 
 
-        /// <summary>
-        /// Modifies a role
-        /// </summary>
         public Role Modify(RoleProperties properties)
         {
             if (properties.Name == null)
@@ -43,11 +40,11 @@ namespace Discord
             if (properties.Mentionable == null)
                 properties.Mentionable = Mentionable;
             if (properties.Permissions == null)
-                properties.Permissions = _permissions;
+                properties.Permissions = Permissions;
 
             Role role = Client.ModifyGuildRole(GuildId, Id, properties);
             Name = role.Name;
-            _permissions = role._permissions;
+            Permissions = role.Permissions;
             Color = role.Color;
             Seperated = role.Seperated;
             Position = role.Position;
@@ -58,12 +55,6 @@ namespace Discord
         public void Delete()
         {
             Client.DeleteGuildRole(GuildId, Id);
-        }
-
-
-        public bool HasPermission(GuildPermission permission)
-        {
-            return PermissionCalculator.HasPermission(_permissions, permission);
         }
 
 

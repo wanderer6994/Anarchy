@@ -1,19 +1,20 @@
 ## 0.1.0.0 [BETA]
+##### (Please keep in mind that these are only highlights, there has been a lot more changes than written here)
+
 #### Additions
 Added much quicker ways of getting guild members (tho since it's using the gateway it only supports DiscordSocketClient).
-Added stuff to make it easier to populate classes with a specific client.
-Added a permission calculator, which currently has not been incorporated into the objects, but you can still use the calculator: PermissionCalculator.
-Modifying guilds, channels, roles etc. is now more secure, because of many unspecified options being set to a default.
+Added a permission calculator (which has currently not been incorporated into the objects, but you can still use PermissionCalculator).
 Completed list of gateway opcodes.
 
 #### Changes
 DiscordWebhookClient has been depricated. Hook (webhook object that depends on a DiscordClient) now holds the data as well as basically being the new DiscordWebhookClient.
-Improved guild management.
-Other minor code changes.
 Reorganized files and folders.
 
 #### Deletions
-I've had to remove AddChannelPermissionOverwrite() for now because of it not being able to get channels for unknown reasons.
+I've had to remove some methods for now because of them working due to unknown reasons.
+
+#### Bug fixes
+Fixed Properties classes setting properties that are not set (or 'null').
 
 
 

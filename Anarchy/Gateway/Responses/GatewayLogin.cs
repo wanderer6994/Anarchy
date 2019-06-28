@@ -2,9 +2,6 @@
 
 namespace Discord.Gateway
 {
-    /// <summary>
-    /// Information about a user login
-    /// </summary>
     internal class GatewayLogin
     {
         [JsonProperty("session_id")]

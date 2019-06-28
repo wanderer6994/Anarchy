@@ -2,9 +2,6 @@
 
 namespace Discord
 {
-    /// <summary>
-    /// Information about a guild invite
-    /// </summary>
     public class Invite : ControllableModel
     {
         public Invite()
