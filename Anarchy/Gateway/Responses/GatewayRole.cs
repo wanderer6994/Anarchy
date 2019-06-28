@@ -2,7 +2,7 @@
 
 namespace Discord.Gateway
 {
-    public class GatewayRole
+    internal class GatewayRole
     {
         [JsonProperty("guild_id")]
         public long GuildId { get; private set; }

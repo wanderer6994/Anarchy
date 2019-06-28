@@ -8,7 +8,7 @@ namespace Discord.Gateway
 {
     public static class GatewayExtensions
     {
-        public static void Send(this WebSocket socket, object json)
+        private static void Send(this WebSocket socket, object json)
         {
             socket.Send(JsonConvert.SerializeObject(json));
         }
@@ -28,7 +28,7 @@ namespace Discord.Gateway
             {
                 await Task.Delay(interval);
 
-                client.Socket.Send($"\"op\":{GatewayOpcode.Heartbeat},\"d\":{client.Sequence}");
+                client.Socket.Send(new GatewayRequest<int?>(GatewayOpcode.Heartbeat) { Data = client.Sequence });
             }
         }
         

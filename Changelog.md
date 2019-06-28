@@ -1,14 +1,16 @@
 ## 0.1.0.0 [BETA]
-(Please keep in mind that these are only the important changes, there has been a lot more than written)
+(Please keep in mind that these are only the major/important changes, there has been a lot more than written here)
 
 #### Additions
 Added a much quicker way of getting guild members (tho since it's using the gateway it only supports DiscordSocketClient).
 Added a permission calculator (which has currently not been incorporated into the managable models, but you can still use PermissionCalculator).
-Update() methods for all managable Discord models has been added, allowing you to update the local information whenever you want.
+Added audit log functionality.
+Update() methods for all managable Discord models have been added, allowing you to update the local information whenever you want.
 Completed list of gateway opcodes.
 
 #### Changes
 DiscordWebhookClient has been depricated. Hook (webhook object that depends on a DiscordClient) now holds the data as well as basically being the new DiscordWebhookClient.
+Improved object code organization.
 Reorganized files and folders.
 
 #### Bug fixes

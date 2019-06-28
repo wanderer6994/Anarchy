@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 
@@ -14,7 +13,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new UserNotFoundException(client, userId);
 
-            return resp.Content.Json<User>();
+            return resp.Content.Deserialize<User>();
         }
 
 
@@ -32,7 +31,7 @@ namespace Discord
                 throw;
             }
 
-            client.User = resp.Content.Json<ClientUser>();
+            client.User = resp.Content.Deserialize<ClientUser>();
             return client.User;
         }
 
@@ -51,10 +50,8 @@ namespace Discord
         {
             if (client.User != null)
             {
-                if (settings.Email == null)
-                    settings.Email = client.User.Email;
-                if (settings.Username == null)
-                    settings.Username = client.User.Username;
+                if (settings.Email == null) settings.Email = client.User.Email;
+                if (settings.Username == null) settings.Username = client.User.Username;
             }
 
             if (client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings)).StatusCode == HttpStatusCode.OK)

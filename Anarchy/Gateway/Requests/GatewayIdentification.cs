@@ -19,7 +19,7 @@ namespace Discord.Gateway
 
         public override string ToString()
         {
-            return $"Token: {Token} Compress: {Compress}";
+            return Token;
         }
     }
 }

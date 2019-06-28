@@ -11,7 +11,7 @@ namespace Discord
         {
             var resp = client.HttpClient.Post("/guilds", JsonConvert.SerializeObject(properties));
 
-            return resp.Content.Json<Guild>().SetClient(client);
+            return resp.Content.Deserialize<Guild>().SetClient(client);
         }
 
 
@@ -22,7 +22,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Json<Guild>().SetClient(client);
+            return resp.Content.Deserialize<Guild>().SetClient(client);
         }
 
 
@@ -55,7 +55,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Json<List<Ban>>();
+            return resp.Content.Deserialize<List<Ban>>();
         }
 
 
@@ -66,7 +66,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new BanNotFoundException(client, guildId);
 
-            return resp.Content.Json<Ban>();
+            return resp.Content.Deserialize<Ban>();
         }
 
 
@@ -90,6 +90,12 @@ namespace Discord
         #endregion
 
 
+        public static List<PartialGuild> GetClientGuilds(this DiscordClient client, int limit = 100, long afterId = 0)
+        {
+            return client.HttpClient.Get($"/users/@me/guilds?limit={limit}&after={afterId}").Content.Deserialize<List<PartialGuild>>().SetClientsInList(client);
+        }
+
+
         public static Guild GetGuild(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get("/guilds/" + guildId);
@@ -97,7 +103,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Json<Guild>().SetClient(client);
+            return resp.Content.Deserialize<Guild>().SetClient(client);
         }
 
 
@@ -108,10 +114,11 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Json<List<Channel>>().SetClientsInList(client);
+            return resp.Content.Deserialize<List<Channel>>().SetClientsInList(client);
         }
 
 
+        #region members
         public static List<GuildMember> GetGuildMembers(this DiscordClient client, long guildId, int limit, long afterId = 0)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/members?limit={limit}&after={afterId}");
@@ -119,7 +126,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Json<List<GuildMember>>();
+            return resp.Content.Deserialize<List<GuildMember>>();
         }
 
 
@@ -136,14 +143,7 @@ namespace Discord
 
             return members;
         }
-
-
-        public static List<Guild> GetClientGuilds(this DiscordClient client)
-        {
-            var resp = client.HttpClient.Get("/users/@me/guilds");
-
-            return resp.Content.Json<List<Guild>>().SetClientsInList(client);
-        }
+        #endregion
 
 
         public static Invite JoinGuild(this DiscordClient client, string invCode)
@@ -153,7 +153,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
 
-            return resp.Content.Json<Invite>().SetClient(client);
+            return resp.Content.Deserialize<Invite>().SetClient(client);
         }
 
 

@@ -14,7 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            Reaction reaction = resp.Content.Json<Reaction>().SetClient(client);
+            Reaction reaction = resp.Content.Deserialize<Reaction>().SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }
@@ -27,7 +27,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
 
-            return resp.Content.Json<Reaction>().SetClient(client);
+            return resp.Content.Deserialize<Reaction>().SetClient(client);
         }
 
 
@@ -50,7 +50,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
             
-            List<Reaction> reactions = resp.Content.Json<List<Reaction>>().SetClientsInList(client);
+            List<Reaction> reactions = resp.Content.Deserialize<List<Reaction>>().SetClientsInList(client);
             foreach (var reaction in reactions) reaction.GuildId = guildId;
             return reactions;
         }
@@ -63,7 +63,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
 
-            Reaction reaction = resp.Content.Json<Reaction>().SetClient(client);
+            Reaction reaction = resp.Content.Deserialize<Reaction>().SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }
@@ -76,7 +76,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Json<List<User>>();
+            return resp.Content.Deserialize<List<User>>();
         }
 
 

@@ -49,10 +49,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audit log\Extensions.cs" />
+    <Compile Include="Audit log\Models\AuditLog.cs" />
+    <Compile Include="Audit log\Models\AuditLogActionType.cs" />
+    <Compile Include="Audit log\Models\AuditLogChange.cs" />
+    <Compile Include="Audit log\Models\AuditLogEntry.cs" />
+    <Compile Include="Audit log\Models\AuditLogFilters.cs" />
     <Compile Include="Channel\Models\ChannelEventArgs.cs" />
     <Compile Include="Channel\Properties\ChannelModProperties.cs" />
     <Compile Include="Guild\Ban\Ban.cs" />
     <Compile Include="Guild\Ban\BanNotFoundException.cs" />
+    <Compile Include="Guild\Guild\Guild\BaseGuild.cs" />
+    <Compile Include="Guild\Guild\Guild\PartialGuild.cs" />
     <Compile Include="Message\Embed\EmbedAuthor.cs" />
     <Compile Include="Message\Embed\EmbedField.cs" />
     <Compile Include="Message\Embed\EmbedFooter.cs" />
@@ -73,7 +81,7 @@
     <Compile Include="User\EventArgs\UserListEventArgs.cs" />
     <Compile Include="User\User\UserNotFoundException.cs" />
     <Compile Include="DiscordHttpClient.cs" />
-    <Compile Include="Guild\Guild\Guild.cs" />
+    <Compile Include="Guild\Guild\Guild\Guild.cs" />
     <Compile Include="Invite\Models\InvalidInviteException.cs" />
     <Compile Include="Message\Message\Attachment.cs" />
     <Compile Include="Message\Embed\Embed.cs" />
@@ -141,8 +149,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="X-Super-Properties\SuperPropertiesInfo.cs" />
     <Compile Include="_Universal\Permissions\PermissionCalculator.cs" />
-    <Compile Include="_Universal\Permissions\PermissionOverwrite.cs" />
-    <Compile Include="_Universal\Permissions\GuildPermission.cs" />
+    <Compile Include="Channel\Models\PermissionOverwrite.cs" />
+    <Compile Include="_Universal\Permissions\Permission.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

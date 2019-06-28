@@ -1,25 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Discord
 {
     public static class MessageExtensions
     {
-        public static bool TriggerTyping(this DiscordClient client, long channelId)
-        {
-            var resp = client.HttpClient.Post($"/channels/{channelId}/typing");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, channelId);
-            
-            string content = resp.Content.ReadAsStringAsync().Result;
-            if (content.Contains("cooldown"))
-                throw new TooManyRequestsException(client, JsonConvert.DeserializeObject<MessageRateLimit>(content).Cooldown);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
-        }
-        
-
+        #region management
         public static Message SendMessage(this DiscordClient client, long channelId, string message, bool tts = false)
         {
             var resp = client.HttpClient.Post($"/channels/{channelId}/messages", JsonConvert.SerializeObject(new MessageProperties() { Content = message, Tts = tts }));
@@ -27,7 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Json<Message>().SetClient(client);
+            return resp.Content.Deserialize<Message>().SetClient(client);
         }
 
 
@@ -38,7 +25,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new MessageNotFoundException(client, messageId);
 
-            return resp.Content.Json<Message>().SetClient(client);
+            return resp.Content.Deserialize<Message>().SetClient(client);
         }
 
 
@@ -48,6 +35,21 @@ namespace Discord
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new MessageNotFoundException(client, messageId);
+
+            return resp.StatusCode == HttpStatusCode.NoContent;
+        }
+        #endregion
+
+        public static bool TriggerTyping(this DiscordClient client, long channelId)
+        {
+            var resp = client.HttpClient.Post($"/channels/{channelId}/typing");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new ChannelNotFoundException(client, channelId);
+            
+            string content = resp.Content.ReadAsStringAsync().Result;
+            if (content.Contains("cooldown"))
+                throw new TooManyRequestsException(client, JsonConvert.DeserializeObject<MessageRateLimit>(content).Cooldown);
 
             return resp.StatusCode == HttpStatusCode.NoContent;
         }

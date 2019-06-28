@@ -14,7 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Json<Channel>().SetClient(client);
+            return resp.Content.Deserialize<Channel>().SetClient(client);
         }
 
 
@@ -25,7 +25,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Json<Channel>().SetClient(client);
+            return resp.Content.Deserialize<Channel>().SetClient(client);
         }
 
 
@@ -36,7 +36,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Json<Channel>().SetClient(client);
+            return resp.Content.Deserialize<Channel>().SetClient(client);
         }
         #endregion
 
@@ -48,10 +48,11 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Json<Channel>().SetClient(client);
+            return resp.Content.Deserialize<Channel>().SetClient(client);
         }
 
 
+        #region messages
         public static List<Message> GetChannelMessages(this DiscordClient client, long channelId, int limit = 100, int afterId = 0)
         {
             var resp = client.HttpClient.Get($"/channels/{channelId}/messages?limit={limit}&after={afterId}");
@@ -59,7 +60,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Json<List<Message>>().SetClientsInList(client);
+            return resp.Content.Deserialize<List<Message>>().SetClientsInList(client);
         }
 
 
@@ -70,7 +71,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Json<List<Message>>().SetClientsInList(client);
+            return resp.Content.Deserialize<List<Message>>().SetClientsInList(client);
         }
 
 
@@ -94,6 +95,7 @@ namespace Discord
 
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
+        #endregion
 
 
         public static Channel LeaveGroup(this DiscordClient client, long groupId)

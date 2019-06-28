@@ -14,7 +14,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            Hook hook = resp.Content.Json<Hook>().SetClient(client);
+            Hook hook = resp.Content.Deserialize<Hook>().SetClient(client);
             if (properties.ChannelId != null)
                 hook.Modify(properties);
             return hook;
@@ -28,7 +28,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new WebhookNotFoundException(client, webhookId);
 
-            return resp.Content.Json<Hook>().SetClient(client);
+            return resp.Content.Deserialize<Hook>().SetClient(client);
         }
 
 
@@ -51,7 +51,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new WebhookNotFoundException(client, webhookId);
 
-            return resp.Content.Json<Hook>().SetClient(client);
+            return resp.Content.Deserialize<Hook>().SetClient(client);
         }
 
 
@@ -62,7 +62,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Json<List<Hook>>().SetClientsInList(client);
+            return resp.Content.Deserialize<List<Hook>>().SetClientsInList(client);
         }
 
 
@@ -73,7 +73,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, channelId);
 
-            return resp.Content.Json<List<Hook>>().SetClientsInList(client);
+            return resp.Content.Deserialize<List<Hook>>().SetClientsInList(client);
         }
     }
 }

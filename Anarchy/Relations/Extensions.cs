@@ -6,6 +6,7 @@ namespace Discord
 {
     public static class RelationsExtensions
     {
+        #region add/remove friend
         public static bool AddFriend(this DiscordClient client, NameDiscriminator recipient)
         {
             return client.HttpClient.Post("/users/@me/relationships",
@@ -34,13 +35,15 @@ namespace Discord
         {
             return client.RemoveFriend(user.Id);
         }
+        #endregion
 
 
+        #region DMs
         public static List<Channel> GetClientDMs(this DiscordClient client)
         {
             var resp = client.HttpClient.Get($"/users/@me/channels");
 
-            return resp.Content.Json<List<Channel>>().SetClientsInList(client);
+            return resp.Content.Deserialize<List<Channel>>().SetClientsInList(client);
         }
 
 
@@ -48,7 +51,8 @@ namespace Discord
         {
             var resp = client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}");
 
-            return resp.Content.Json<Channel>().SetClient(client);
+            return resp.Content.Deserialize<Channel>().SetClient(client);
         }
+        #endregion
     }
 }

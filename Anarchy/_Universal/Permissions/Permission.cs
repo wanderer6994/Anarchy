@@ -1,6 +1,6 @@
 ﻿namespace Discord
 {
-    public enum GuildPermission
+    public enum Permission
     {
         CreateInstantInvite = 0x00000001,
         KickMembers = 0x00000002,

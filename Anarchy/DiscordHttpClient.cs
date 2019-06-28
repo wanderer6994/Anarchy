@@ -30,7 +30,7 @@ namespace Discord
             {
                 case HttpStatusCode.BadRequest:
                     throw new InvalidParametersException(_discordClient, resp.Content.ReadAsStringAsync().Result);
-                case HttpStatusCode.Forbidden & HttpStatusCode.Unauthorized:
+                case HttpStatusCode.Forbidden | HttpStatusCode.Unauthorized:
                     throw new AccessDeniedException(_discordClient);
                 case (HttpStatusCode)429:
                     throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
@@ -47,7 +47,7 @@ namespace Discord
                 Content = content != null ? new StringContent(content, Encoding.UTF8, "application/json") : null
             };
 
-            var resp =  _httpClient.SendAsync(msg).Result;
+            var resp = _httpClient.SendAsync(msg).Result;
             CheckResponse(resp);
             return resp;
         }
@@ -59,9 +59,9 @@ namespace Discord
         }
 
 
-        public HttpResponseMessage Post(string endpoint, string content = "")
+        public HttpResponseMessage Post(string endpoint, string json = "")
         {
-            return Send(HttpMethod.Post, endpoint, content);
+            return Send(HttpMethod.Post, endpoint, json);
         }
 
 
@@ -71,15 +71,15 @@ namespace Discord
         }
 
 
-        public HttpResponseMessage Put(string endpoint, string content = "")
+        public HttpResponseMessage Put(string endpoint, string json = "")
         {
-            return Send(HttpMethod.Put, endpoint, content);
+            return Send(HttpMethod.Put, endpoint, json);
         }
 
 
-        public HttpResponseMessage Patch(string endpoint, string content = "")
+        public HttpResponseMessage Patch(string endpoint, string json = "")
         {
-            return Send(new HttpMethod("PATCH"), endpoint, content);
+            return Send(new HttpMethod("PATCH"), endpoint, json);
         }
     }
 }
