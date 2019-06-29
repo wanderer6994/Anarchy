@@ -8,16 +8,16 @@ Added audit log functionality.<br><br>
 Update() methods for all managable Discord models have been added, allowing you to update the local information whenever you want.<br><br>
 Added multi image format support, meaning that you can now use jpg, png, and gif files.<br><br>
 Added 'partial types' that get used when Discord does not respond with full ones.<br><br>
-Completed list of gateway opcodes.<br>
+Completed list of gateway opcodes.<br><br>
 
 ### Changes
 DiscordWebhookClient has been depricated. Hook (webhook object that depends on a DiscordClient) now holds the data as well as basically being the new DiscordWebhookClient.<br><br>
 Improved object code organization.<br><br>
-Reorganized files and folders.<br>
+Reorganized files and folders.<br><br>
 
 ### Bug fixes
 Fixed Properties classes setting properties that are not set (or 'null').
-<br><br>
+<br><br><br>
 
 
 ## 0.0.1.1
