@@ -19,7 +19,7 @@ namespace Discord.Gateway
 
         public override string ToString()
         {
-            return $"{Opcode} | Title: {Title} Sequence: {Sequence}";
+            return $"{Opcode} - {Title}";
         }
     }
 }

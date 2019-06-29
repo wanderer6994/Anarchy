@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Discord.Gateway
 {
@@ -8,7 +9,7 @@ namespace Discord.Gateway
         {
             Status = "online";
             Since = 0;
-            Activities = new string[] { };
+            Activities = new List<object>();
         }
 
         [JsonProperty("status")]
@@ -17,8 +18,9 @@ namespace Discord.Gateway
         [JsonProperty("since")]
         public int Since { get; set; }
 
+        //activities have not been implemented yet
         [JsonProperty("activities")]
-        public string[] Activities { get; set; }
+        public List<object> Activities { get; set; }
 
         [JsonProperty("afk")]
         public bool Afk { get; set; }
