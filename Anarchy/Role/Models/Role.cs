@@ -16,7 +16,6 @@ namespace Discord
         [JsonProperty("position")]
         public int Position { get; private set; }
 
-        [JsonIgnore]
         public long GuildId { get; internal set; }
 
         [JsonProperty("hoist")]

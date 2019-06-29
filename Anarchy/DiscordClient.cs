@@ -12,9 +12,6 @@
             get { return _token; }
             set
             {
-                if (string.IsNullOrEmpty(value))
-                    return;
-
                 _token = value;
                 HttpClient.Headers.Remove("Authorization");
                 HttpClient.Headers.Add("Authorization", _token);

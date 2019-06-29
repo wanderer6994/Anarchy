@@ -29,6 +29,7 @@ namespace Discord
         }
         #endregion
 
+
         public static Invite GetInvite(this DiscordClient client, string invCode)
         {
             var resp = client.HttpClient.Get($"/invite/{invCode}?with_counts=true");

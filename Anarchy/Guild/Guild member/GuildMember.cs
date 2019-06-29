@@ -14,6 +14,9 @@ namespace Discord
         [JsonProperty("roles")]
         public List<long> Roles { get; private set; }
 
+        [JsonProperty("joined_at")]
+        public string JoinedAt { get; private set; }
+
         public override string ToString()
         {
             return User.ToString();

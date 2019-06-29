@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Discord
 {
@@ -17,7 +18,18 @@ namespace Discord
                     ImageBase64 = null;
                 else
                 {
-                    ImageBase64 = "data:image/png;base64," + 
+                    ImageType type;
+
+                    if (ImageFormat.Jpeg.Equals(value.RawFormat))
+                        type = ImageType.Jpeg;
+                    else if (ImageFormat.Png.Equals(value.RawFormat))
+                        type = ImageType.Png;
+                    else if (ImageFormat.Gif.Equals(value.RawFormat))
+                        type = ImageType.Gif;
+                    else
+                        return;
+
+                    ImageBase64 = $"data:image/{type.ToString().ToLower()};base64," + 
                             Convert.ToBase64String((byte[])new ImageConverter().ConvertTo(value, typeof(byte[])));
                     _image = value;
                 }

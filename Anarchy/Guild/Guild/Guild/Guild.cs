@@ -15,11 +15,17 @@ namespace Discord
             };
         }
 
+        [JsonProperty("description")]
+        public string Description { get; private set; }
+
         [JsonProperty("icon")]
         public string IconId { get; private set; }
 
         [JsonProperty("region")]
         public string Region { get; private set; }
+
+        [JsonProperty("premium_tier")]
+        public GuildPremiumTier PremiumTier { get; private set; }
 
         private List<Role> _roles;
         [JsonProperty("roles")]
@@ -58,6 +64,9 @@ namespace Discord
         [JsonProperty("owner_id")]
         public long? OwnerId { get; private set; }
 
+        [JsonProperty("vanity_url_code")]
+        public string VanityInvite { get; private set; }
+
 
         public void Update()
         {
@@ -70,6 +79,7 @@ namespace Discord
             VerificationLevel = guild.VerificationLevel;
             DefaultNotifications = guild.DefaultNotifications;
             OwnerId = guild.OwnerId;
+            VanityInvite = guild.VanityInvite;
         }
 
 

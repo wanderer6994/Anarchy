@@ -13,6 +13,7 @@ namespace Discord.Gateway
             socket.Send(JsonConvert.SerializeObject(json));
         }
 
+
         internal static void LoginToGateway(this DiscordSocketClient client)
         {
             var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify);

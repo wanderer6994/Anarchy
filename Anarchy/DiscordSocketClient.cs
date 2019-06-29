@@ -159,11 +159,15 @@ namespace Discord.Gateway
                             break;
                         case "MESSAGE_DELETE":
                             //it should be noted that evrything but the message id, channel id, and guild id will be null.
-                            OnMessageDeleted?.Invoke(this, new MessageEventArgs(JsonConvert.DeserializeObject<Message>(payload.Data.ToString())));
+                            OnMessageDeleted?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>()));
                             break;
                         case "GUILD_MEMBERS_CHUNK":
                             List<User> users = new List<User>();
-                            payload.Deserialize<GuildMemberList>().Members.ForEach(member => users.Add(member.User));
+                            foreach (var member in payload.Deserialize<GuildMemberList>().Members)
+                            {
+                                member.User.Client = this;
+                                users.Add(member.User);
+                            }
 
                             OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
                             break;

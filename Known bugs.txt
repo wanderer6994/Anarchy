@@ -1,0 +1,1 @@
+ClientUser does not have it's own Update() function, meaning that it will only be able to get information that is publicly available.

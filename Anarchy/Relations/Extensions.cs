@@ -7,16 +7,10 @@ namespace Discord
     public static class RelationsExtensions
     {
         #region add/remove friend
-        public static bool AddFriend(this DiscordClient client, NameDiscriminator recipient)
-        {
-            return client.HttpClient.Post("/users/@me/relationships",
-                JsonConvert.SerializeObject(recipient)).StatusCode == HttpStatusCode.NoContent;
-        }
-
-
         public static bool AddFriend(this DiscordClient client, string username, int discriminator)
         {
-            return client.AddFriend(new NameDiscriminator { Username = username, Discriminator = discriminator });
+            return client.HttpClient.Post("/users/@me/relationships",
+                                JsonConvert.SerializeObject(new NameDiscriminator { Username = username, Discriminator = discriminator })).StatusCode == HttpStatusCode.NoContent;
         }
 
 

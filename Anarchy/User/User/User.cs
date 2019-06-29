@@ -2,21 +2,36 @@
 
 namespace Discord
 {
-    public class User : NameDiscriminator
+    public class User : Controllable
     {
         [JsonProperty("id")]
         public long Id { get; private set; }
 
+        [JsonProperty("username")]
+        public string Username { get; internal set; }
+
+        [JsonProperty("discriminator")]
+        public int Discriminator { get; internal set; }
+
         [JsonProperty("avatar")]
-        public string Avatar { get; private set; }
+        public string AvatarId { get; private set; }
 
         [JsonProperty("bot")]
         public bool Bot { get; private set; }
 
 
+        public void Update()
+        {
+            User user = Client.GetUser(Id);
+            Username = user.Username;
+            Discriminator = user.Discriminator;
+            AvatarId = user.AvatarId;
+        }
+
+
         public override string ToString()
         {
-            return $"{base.ToString()} ({Id})";
+            return $"{Username}#{Discriminator} ({Id})";
         }
     }
 }

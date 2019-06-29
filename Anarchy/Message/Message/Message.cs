@@ -5,6 +5,18 @@ namespace Discord
 {
     public class Message : Controllable
     {
+        public Message()
+        {
+            OnClientUpdated += (sender, e) =>
+            {
+                if (Reactions != null)
+                {
+                    foreach (var reaction in Reactions)
+                        reaction.Reaction.Client = Client;
+                }
+            };
+        }
+
         [JsonProperty("id")]
         public long Id { get; private set; }
 
@@ -17,12 +29,44 @@ namespace Discord
         [JsonProperty("author")]
         public User Author { get; private set; }
 
+        [JsonProperty("webhook_id")]
+        public long? WebhookId { get; private set; }
+
+        [JsonIgnore]
+        public UserType AuthorType
+        {
+            get
+            {
+                if (WebhookId != null)
+                    return UserType.Webhook;
+                else
+                    return Author.Bot ? UserType.Bot : UserType.User;
+            }
+        }
+
         [JsonProperty("tts")]
         public bool Tts { get; private set; }
 
         //if anyone knows how tf you'd differanciate between images and other files do a pull request
         [JsonProperty("attachments")]
         public List<Attachment> Attachments { get; private set; }
+
+        [JsonProperty("embeds")]
+        public List<Embed> Embeds { get; private set; }
+
+        private List<MessageReaction> _reactions;
+        [JsonProperty("reactions")]
+        public List<MessageReaction> Reactions
+        {
+            get { return _reactions; }
+            set
+            {
+                foreach (var reaction in value)
+                    reaction.Reaction.SetClient(Client);
+
+                _reactions = value;
+            }
+        }
 
         [JsonProperty("guild_id")]
         public long? GuildId { get; private set; }
@@ -41,9 +85,9 @@ namespace Discord
 
         [JsonProperty("mention_everyone")]
         public bool MentionedEveryone { get; private set; }
-        
-        [JsonProperty("embeds")]
-        public List<Embed> Embeds { get; private set; }
+       
+        [JsonProperty("type")]
+        public MessageType Type { get; private set; }
 
 
         public Message Edit(string message)

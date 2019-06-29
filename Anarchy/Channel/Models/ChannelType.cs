@@ -6,6 +6,8 @@
         DM,
         Voice,
         Group,
-        Category
+        Category,
+        News,
+        Store
     }
 }

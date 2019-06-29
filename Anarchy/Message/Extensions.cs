@@ -40,6 +40,7 @@ namespace Discord
         }
         #endregion
 
+
         public static bool TriggerTyping(this DiscordClient client, long channelId)
         {
             var resp = client.HttpClient.Post($"/channels/{channelId}/typing");

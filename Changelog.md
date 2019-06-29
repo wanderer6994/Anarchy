@@ -6,6 +6,8 @@ Added a much quicker way of getting guild members (tho since it's using the gate
 Added a permission calculator (which has currently not been incorporated into the managable models, but you can still use PermissionCalculator).<br>
 Added audit log functionality.<br>
 Update() methods for all managable Discord models have been added, allowing you to update the local information whenever you want.<br>
+Added multi image format support, meaning that you can now use jpg, png, and gif files.
+Added 'partial types' that get used when Discord does not respond with full ones.
 Completed list of gateway opcodes.
 
 ### Changes

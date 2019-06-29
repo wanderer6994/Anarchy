@@ -1,0 +1,3 @@
+Look through Discord docs and look for types/methods/json properties, and implement them in code.
+Spend some time trying to come up with stuff to add/change, and do it.
+Check all code through. If any bugs are found, fix them.

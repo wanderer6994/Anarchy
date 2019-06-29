@@ -16,10 +16,10 @@ namespace Discord
         public string Code { get; private set; }
 
         [JsonProperty("guild")]
-        public Guild Guild { get; private set; }
+        public PartialGuild Guild { get; private set; }
 
         [JsonProperty("channel")]
-        public Channel Channel { get; private set; }
+        public PartialChannel Channel { get; private set; }
 
         [JsonProperty("inviter")]
         public User Creator { get; private set; }
