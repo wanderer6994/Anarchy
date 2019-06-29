@@ -1,4 +1,4 @@
-## 0.1.0.0 [BETA]
+# 0.1.0.0 [BETA]
 (Please keep in mind that these are only the major/important changes. There has been a lot more than written here)
 
 ### Additions
@@ -20,7 +20,7 @@ Fixed Properties classes setting properties that are not set (or 'null').
 <br><br><br>
 
 
-## 0.0.1.1
+# 0.0.1.1
 #### Additions
 Added AddChannelPermissionOverwrite() (please keep in mind tho that a bit calculator for permissions has not been added yet).
 Added InvalidParametersException. When invalid parameters are passed in, it making it harder for the wrapper to crash unexpectedly. This has been applied to DiscordHttpClient.
@@ -38,5 +38,5 @@ ChannelProperties has been split into ChannelCreationProperties and ChannelModPr
 
 
 
-## 0.0.1.0
+# 0.0.1.0
 Initial release.
