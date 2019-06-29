@@ -6,6 +6,7 @@ using Discord;
 using Discord.Webhook;
 using Discord.Gateway;
 using System.Threading;
+using System.Drawing;
 
 namespace dntest
 {
@@ -13,7 +14,6 @@ namespace dntest
     {
         static void Main()
         {
-            DiscordClient client = new DiscordClient("NTIxNjA4OTQ0ODM0MDUyMTE3.XRY9uA.Q2yi_ftBFFsqI5haeKVyUekBM80");
         }
     }
 }

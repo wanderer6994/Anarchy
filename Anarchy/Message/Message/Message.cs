@@ -10,10 +10,7 @@ namespace Discord
             OnClientUpdated += (sender, e) =>
             {
                 if (Reactions != null)
-                {
-                    foreach (var reaction in Reactions)
-                        reaction.Reaction.Client = Client;
-                }
+                    foreach (var reaction in Reactions) reaction.Reaction.SetClient(Client);
             };
         }
 
@@ -22,6 +19,9 @@ namespace Discord
 
         [JsonProperty("content")]
         public string Content { get; private set; }
+
+        [JsonProperty("tts")]
+        public bool Tts { get; private set; }
 
         [JsonProperty("channel_id")]
         public long ChannelId { get; private set; }
@@ -32,7 +32,6 @@ namespace Discord
         [JsonProperty("webhook_id")]
         public long? WebhookId { get; private set; }
 
-        [JsonIgnore]
         public UserType AuthorType
         {
             get
@@ -44,10 +43,7 @@ namespace Discord
             }
         }
 
-        [JsonProperty("tts")]
-        public bool Tts { get; private set; }
-
-        //if anyone knows how tf you'd differanciate between images and other files do a pull request
+        //if anyone knows how tf you'd differanciate between images and other files and some how put that in a single property do a pull request
         [JsonProperty("attachments")]
         public List<Attachment> Attachments { get; private set; }
 
@@ -61,9 +57,7 @@ namespace Discord
             get { return _reactions; }
             set
             {
-                foreach (var reaction in value)
-                    reaction.Reaction.SetClient(Client);
-
+                foreach (var reaction in value) reaction.Reaction.SetClient(Client);
                 _reactions = value;
             }
         }

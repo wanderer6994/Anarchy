@@ -72,7 +72,7 @@ namespace Discord.Webhook
             {
                 Username = Name,
                 Content = content,
-                AvatarUrl = AvatarId
+                Avatar = $"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.jpg"
             };
 
             return SendMessage(message);

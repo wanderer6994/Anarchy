@@ -1,4 +1,7 @@
-﻿namespace Discord
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Discord
 {
     public class DiscordClient
     {
@@ -6,15 +9,19 @@
         public SuperPropertiesInfo SuperPropertiesInfo { get; private set; }
         public ClientUser User { get; internal set; }
 
-        private string _token;
         public string Token
         {
-            get { return _token; }
+            get
+            {
+                IEnumerable<string> values;
+                HttpClient.Headers.TryGetValues("Authorization", out values);
+                if (values.ToList().Count > 0) return values.ToList()[0];
+                else return null;
+            }
             set
             {
-                _token = value;
                 HttpClient.Headers.Remove("Authorization");
-                HttpClient.Headers.Add("Authorization", _token);
+                HttpClient.Headers.Add("Authorization", value);
 
                 this.GetClientUser();
             }

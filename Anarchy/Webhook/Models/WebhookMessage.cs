@@ -11,6 +11,6 @@ namespace Discord.Webhook
         public string Content { get; set; }
 
         [JsonProperty("avatar_url")]
-        public string AvatarUrl { get; set; }
+        public string Avatar { get; set; }
     }
 }

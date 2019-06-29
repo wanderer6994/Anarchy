@@ -14,7 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            Role role = resp.Content.Deserialize<Role>().SetClient(client);
+            Role role = resp.Deserialize<Role>().SetClient(client);
             role.GuildId = guildId;
 
             if (properties != null)
@@ -31,7 +31,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new RoleNotFoundException(client, roleId);
 
-            Role changed = resp.Content.Deserialize<Role>().SetClient(client);
+            Role changed = resp.Deserialize<Role>().SetClient(client);
             changed.GuildId = guildId;
             return changed;
         }
@@ -56,7 +56,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
             
-            List<Role> roles = resp.Content.Deserialize<List<Role>>().SetClientsInList(client);
+            List<Role> roles = resp.Deserialize<List<Role>>().SetClientsInList(client);
             foreach (var role in roles) role.GuildId = guildId;
             return roles;
         }

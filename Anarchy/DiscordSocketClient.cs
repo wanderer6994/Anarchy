@@ -14,7 +14,8 @@ namespace Discord.Gateway
         public delegate void MessageHandler(DiscordSocketClient client, MessageEventArgs args);
         public delegate void RoleHandler(DiscordSocketClient client, RoleEventArgs args);
 
-        public event UserHandler OnLoggedIn;
+        public delegate void LoggedInHandler(DiscordSocketClient client, GatewayLoginEventArgs args);
+        public event LoggedInHandler OnLoggedIn;
         public event UserHandler OnLoggedOut;
 
         public event GuildHandler OnJoinedGuild;
@@ -93,81 +94,48 @@ namespace Discord.Gateway
                     {
                         case "READY":
                             LoggedIn = true;
-
-                            this.User = payload.Deserialize<GatewayLogin>().User;
-                            OnLoggedIn?.Invoke(this, new UserEventArgs(this.User));
+                            GatewayLogin login = payload.Deserialize<GatewayLogin>().SetClient(this);
+                            this.User = login.User;
+                            OnLoggedIn?.Invoke(this, new GatewayLoginEventArgs(login));
                             break;
                         case "GUILD_CREATE":
-                            Guild cGuild = payload.Deserialize<Guild>();
-                            cGuild.Client = this;
-
-                            OnJoinedGuild?.Invoke(this, new GuildEventArgs(cGuild));
+                            OnJoinedGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
                             break;
                         case "GUILD_UPDATE":
-                            Guild uGuild = payload.Deserialize<Guild>();
-                            uGuild.Client = this;
-
-                            OnGuildUpdated?.Invoke(this, new GuildEventArgs(uGuild));
+                            OnGuildUpdated?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
                             break;
                         case "GUILD_DELETE":
-                            Guild dGuild = payload.Deserialize<Guild>();
-                            dGuild.Client = this;
-
-                            OnLeftGuild?.Invoke(this, new GuildEventArgs(dGuild));
+                            OnLeftGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
                             break;
                         case "CHANNEL_CREATE":
-                            Channel cChannel = payload.Deserialize<Channel>();
-                            cChannel.Client = this;
-
-                            OnChannelCreated?.Invoke(this, new ChannelEventArgs(cChannel));
+                            OnChannelCreated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<Channel>().SetClient(this)));
                             break;
                         case "CHANNEL_UPDATE":
-                            Channel uChannel = payload.Deserialize<Channel>();
-                            uChannel.Client = this;
-
-                            OnChannelUpdated?.Invoke(this, new ChannelEventArgs(uChannel));
+                            OnChannelUpdated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<Channel>().SetClient(this)));
                             break;
                         case "CHANNEL_DELETE":
-                            Channel dChannel = payload.Deserialize<Channel>();
-                            dChannel.Client = this;
-
-                            OnChannelDeleted?.Invoke(this, new ChannelEventArgs(dChannel));
+                            OnChannelDeleted?.Invoke(this, new ChannelEventArgs(payload.Deserialize<Channel>().SetClient(this)));
                             break;
                         case "GUILD_ROLE_CREATE":
-                            GatewayRole cRole = payload.Deserialize<GatewayRole>();
-                            cRole.Role.Client = this;
-
-                            OnRoleCreated?.Invoke(this, new RoleEventArgs(cRole.Role));
+                            OnRoleCreated?.Invoke(this, new RoleEventArgs(payload.Deserialize<GatewayRole>().Role.SetClient(this)));
                             break;
                         case "GUILD_ROLE_UPDATE":
-                            GatewayRole uRole = payload.Deserialize<GatewayRole>();
-                            uRole.Role.Client = this;
-
-                            OnRoleUpdated?.Invoke(this, new RoleEventArgs(uRole.Role));
+                            OnRoleUpdated?.Invoke(this, new RoleEventArgs(payload.Deserialize<GatewayRole>().Role.SetClient(this)));
                             break;
                         case "MESSAGE_CREATE":
-                            Message cMsg = payload.Deserialize<Message>();
-                            cMsg.Client = this;
-
-                            OnMessageReceived?.Invoke(this, new MessageEventArgs(cMsg));
+                            OnMessageReceived?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>().SetClient(this)));
                             break;
                         case "MESSAGE_UPDATE":
-                            Message uMsg = payload.Deserialize<Message>();
-                            uMsg.Client = this;
-
-                            OnMessageEdited?.Invoke(this, new MessageEventArgs(uMsg));
+                            OnMessageEdited?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>().SetClient(this)));
                             break;
                         case "MESSAGE_DELETE":
                             //it should be noted that evrything but the message id, channel id, and guild id will be null.
-                            OnMessageDeleted?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>()));
+                            OnMessageDeleted?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>().SetClient(this)));
                             break;
                         case "GUILD_MEMBERS_CHUNK":
                             List<User> users = new List<User>();
                             foreach (var member in payload.Deserialize<GuildMemberList>().Members)
-                            {
-                                member.User.Client = this;
-                                users.Add(member.User);
-                            }
+                                users.Add(member.User.SetClient(this));
 
                             OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
                             break;
@@ -178,7 +146,7 @@ namespace Discord.Gateway
                     break;
                 case GatewayOpcode.Connected:
                     //keep sending heartbeats every x second so the client's socket don't get closed
-                    Task.Run(async () => await this.StartHeartbeatHandlersAsync(JsonConvert.DeserializeObject<GatewayHeartbeat>(payload.Data.ToString()).Interval));
+                    Task.Run(async () => await this.StartHeartbeatHandlersAsync(payload.Deserialize<GatewayHeartbeat>().Interval));
 
                     this.LoginToGateway();
                     break;

@@ -25,9 +25,9 @@ namespace Discord
         }
 
 
-        public Reaction Modify(ReactionModProperties properties)
+        public Reaction Modify(string name)
         {
-            Reaction reaction = Client.ModifyGuildReaction(GuildId, (long)Id, properties);
+            Reaction reaction = Client.ModifyGuildReaction(GuildId, (long)Id, name);
             Name = reaction.Name;
             return reaction;
         }

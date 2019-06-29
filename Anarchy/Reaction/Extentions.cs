@@ -14,20 +14,20 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            Reaction reaction = resp.Content.Deserialize<Reaction>().SetClient(client);
+            Reaction reaction = resp.Deserialize<Reaction>().SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }
 
 
-        public static Reaction ModifyGuildReaction(this DiscordClient client, long guildId, long reactionId, ReactionModProperties properties)
+        public static Reaction ModifyGuildReaction(this DiscordClient client, long guildId, long reactionId, string name)
         {
-            var resp = client.HttpClient.Patch($"/guilds/{guildId}/emojis/{reactionId}", JsonConvert.SerializeObject(properties));
+            var resp = client.HttpClient.Patch($"/guilds/{guildId}/emojis/{reactionId}", JsonConvert.SerializeObject(new ReactionModProperties() { Name = name }));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
 
-            return resp.Content.Deserialize<Reaction>().SetClient(client);
+            return resp.Deserialize<Reaction>().SetClient(client);
         }
 
 
@@ -50,7 +50,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
             
-            List<Reaction> reactions = resp.Content.Deserialize<List<Reaction>>().SetClientsInList(client);
+            List<Reaction> reactions = resp.Deserialize<List<Reaction>>().SetClientsInList(client);
             foreach (var reaction in reactions) reaction.GuildId = guildId;
             return reactions;
         }
@@ -63,7 +63,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ReactionNotFoundException(client, guildId, reactionId);
 
-            Reaction reaction = resp.Content.Deserialize<Reaction>().SetClient(client);
+            Reaction reaction = resp.Deserialize<Reaction>().SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }
@@ -76,7 +76,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<List<User>>();
+            return resp.Deserialize<List<User>>();
         }
 
 

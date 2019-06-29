@@ -91,6 +91,7 @@ namespace Discord
                 properties.Region = Region;
 
             Guild guild = Client.ModifyGuild(Id, properties);
+            Name = guild.Name;
             Region = guild.Region;
             IconId = guild.IconId;
             VerificationLevel = guild.VerificationLevel;

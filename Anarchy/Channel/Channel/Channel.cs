@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Discord
 {
+    // This was made for guild channels, tho they can also be used for DMs and whatever. The only difference is that some properties will not be set
     public class Channel : BaseChannel
     {
         [JsonProperty("topic")]
@@ -44,6 +45,8 @@ namespace Discord
                 properties.Nsfw = Nsfw;
             if (properties.Position == null)
                 properties.Position = Position;
+            if (properties.ParentId == null)
+                properties.ParentId = ParentId;
 
             Channel channel = Client.ModifyChannel(Id, properties);
             Name = channel.Name;

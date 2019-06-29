@@ -11,9 +11,9 @@ namespace Discord
             return JsonConvert.DeserializeObject<T>(content);
         }
 
-        public static T Deserialize<T>(this HttpContent httpContent)
+        public static T Deserialize<T>(this HttpResponseMessage httpResponse)
         {
-            return Deserialize<T>(httpContent.ReadAsStringAsync().Result);
+            return Deserialize<T>(httpResponse.Content.ReadAsStringAsync().Result);
         }
 
         public static T Deserialize<T>(this GatewayResponse response)

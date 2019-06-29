@@ -14,7 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<Invite>().SetClient(client);
+            return resp.Deserialize<Invite>().SetClient(client);
         }
 
 
@@ -25,7 +25,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
 
-            return resp.Content.Deserialize<Invite>().SetClient(client);
+            return resp.Deserialize<Invite>().SetClient(client);
         }
         #endregion
 
@@ -37,7 +37,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new InvalidInviteException(client, invCode);
 
-            return resp.Content.Deserialize<Invite>().SetClient(client);
+            return resp.Deserialize<Invite>().SetClient(client);
         }
 
 
@@ -48,7 +48,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Deserialize<List<Invite>>().SetClientsInList(client);
+            return resp.Deserialize<List<Invite>>().SetClientsInList(client);
         }
     }
 }

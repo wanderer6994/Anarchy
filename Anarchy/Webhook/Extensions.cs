@@ -9,12 +9,14 @@ namespace Discord.Webhook
         #region management
         public static Hook CreateChannelWebhook(this DiscordClient client, long channelId, WebhookProperties properties)
         {
+            properties.ChannelId = channelId;
+
             var resp = client.HttpClient.Post($"/channels/{channelId}/webhooks", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            Hook hook = resp.Content.Deserialize<Hook>().SetClient(client);
+            Hook hook = resp.Deserialize<Hook>().SetClient(client);
             if (properties.ChannelId != null)
                 hook.Modify(properties);
             return hook;
@@ -28,7 +30,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new WebhookNotFoundException(client, webhookId);
 
-            return resp.Content.Deserialize<Hook>().SetClient(client);
+            return resp.Deserialize<Hook>().SetClient(client);
         }
 
 
@@ -51,7 +53,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new WebhookNotFoundException(client, webhookId);
 
-            return resp.Content.Deserialize<Hook>().SetClient(client);
+            return resp.Deserialize<Hook>().SetClient(client);
         }
 
 
@@ -62,7 +64,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Deserialize<List<Hook>>().SetClientsInList(client);
+            return resp.Deserialize<List<Hook>>().SetClientsInList(client);
         }
 
 
@@ -73,7 +75,7 @@ namespace Discord.Webhook
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<List<Hook>>().SetClientsInList(client);
+            return resp.Deserialize<List<Hook>>().SetClientsInList(client);
         }
     }
 }

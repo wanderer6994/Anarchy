@@ -14,7 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<Message>().SetClient(client);
+            return resp.Deserialize<Message>().SetClient(client);
         }
 
 
@@ -25,7 +25,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new MessageNotFoundException(client, messageId);
 
-            return resp.Content.Deserialize<Message>().SetClient(client);
+            return resp.Deserialize<Message>().SetClient(client);
         }
 
 
@@ -48,9 +48,8 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
             
-            string content = resp.Content.ReadAsStringAsync().Result;
-            if (content.Contains("cooldown"))
-                throw new TooManyRequestsException(client, JsonConvert.DeserializeObject<MessageRateLimit>(content).Cooldown);
+            if (resp.Content.ReadAsStringAsync().Result.Contains("cooldown"))
+                throw new TooManyRequestsException(client,  resp.Deserialize<MessageRateLimit>().Cooldown);
 
             return resp.StatusCode == HttpStatusCode.NoContent;
         }

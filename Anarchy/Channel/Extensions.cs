@@ -14,7 +14,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Content.Deserialize<Channel>().SetClient(client);
+            return resp.Deserialize<Channel>().SetClient(client);
         }
 
 
@@ -25,7 +25,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<Channel>().SetClient(client);
+            return resp.Deserialize<Channel>().SetClient(client);
         }
 
 
@@ -36,7 +36,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<Channel>().SetClient(client);
+            return resp.Deserialize<Channel>().SetClient(client);
         }
         #endregion
 
@@ -48,7 +48,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<Channel>().SetClient(client);
+            return resp.Deserialize<Channel>().SetClient(client);
         }
 
 
@@ -60,7 +60,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<List<Message>>().SetClientsInList(client);
+            return resp.Deserialize<List<Message>>().SetClientsInList(client);
         }
 
 
@@ -71,7 +71,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Content.Deserialize<List<Message>>().SetClientsInList(client);
+            return resp.Deserialize<List<Message>>().SetClientsInList(client);
         }
 
 

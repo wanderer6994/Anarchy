@@ -13,7 +13,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new UserNotFoundException(client, userId);
 
-            return resp.Content.Deserialize<User>().SetClient(client);
+            return resp.Deserialize<User>().SetClient(client);
         }
 
 
@@ -31,7 +31,7 @@ namespace Discord
                 throw;
             }
 
-            client.User = resp.Content.Deserialize<ClientUser>().SetClient(client);
+            client.User = resp.Deserialize<ClientUser>().SetClient(client);
             return client.User;
         }
 
