@@ -2,8 +2,13 @@
 
 namespace Discord
 {
-    public class Ban
+    public class Ban : Controllable
     {
+        public Ban()
+        {
+            OnClientUpdated += (sender, e) => User.Client = Client;
+        }
+
         [JsonProperty("reason")]
         public string Reason { get; private set; }
 

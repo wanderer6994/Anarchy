@@ -35,17 +35,18 @@ namespace Discord
         #region DMs
         public static List<Channel> GetClientDMs(this DiscordClient client)
         {
-            var resp = client.HttpClient.Get($"/users/@me/channels");
-
-            return resp.Deserialize<List<Channel>>().SetClientsInList(client);
+            return client.HttpClient.Get($"/users/@me/channels").Deserialize<List<Channel>>().SetClientsInList(client);
         }
 
 
         public static Channel CreateDM(this DiscordClient client, long recipientId)
         {
-            var resp = client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}");
+            return client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}").Deserialize<Channel>().SetClient(client);
+        }
 
-            return resp.Deserialize<Channel>().SetClient(client);
+        public static Channel CloseDM(this DiscordClient client, long channelId)
+        {
+            return client.DeleteChannel(channelId);
         }
         #endregion
     }

@@ -62,11 +62,5 @@ namespace Discord
             else
                 return false;
         }
-
-
-        internal static string GetFingerprint(this DiscordClient client)
-        {
-            return JsonConvert.DeserializeObject<Experiments>(client.HttpClient.Get("/experiments").Content.ReadAsStringAsync().Result).Fingerprint;
-        }
     }
 }

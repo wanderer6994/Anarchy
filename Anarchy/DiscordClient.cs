@@ -41,7 +41,7 @@ namespace Discord
         public DiscordClient()
         {
             HttpClient = new DiscordHttpClient(this);
-            HttpClient.Headers.Add("X-Fingerprint", this.GetFingerprint());
+            HttpClient.UpdateFingerprint();
 
             SuperPropertiesInfo = new SuperPropertiesInfo();
             SuperPropertiesInfo.OnPropertiesUpdated += OnPropertiesUpdated;

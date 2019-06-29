@@ -55,7 +55,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Deserialize<List<Ban>>();
+            return resp.Deserialize<List<Ban>>().SetClientsInList(client);
         }
 
 
@@ -66,7 +66,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new BanNotFoundException(client, guildId);
 
-            return resp.Deserialize<Ban>();
+            return resp.Deserialize<Ban>().SetClient(client);
         }
 
 
@@ -83,9 +83,7 @@ namespace Discord
 
         public static bool UnbanGuildMember(this DiscordClient client, long guildId, long userId)
         {
-            var resp = client.HttpClient.Delete($"guilds/{guildId}/bans/{userId}");
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
+            return client.HttpClient.Delete($"guilds/{guildId}/bans/{userId}").StatusCode == HttpStatusCode.NoContent;
         }
         #endregion
 
@@ -126,7 +124,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Deserialize<List<GuildMember>>();
+            return resp.Deserialize<List<GuildMember>>().SetClientsInList(client);
         }
 
 

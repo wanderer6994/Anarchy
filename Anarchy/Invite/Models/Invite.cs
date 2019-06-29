@@ -6,10 +6,7 @@ namespace Discord
     {
         public Invite()
         {
-            OnClientUpdated += (sender, e) =>
-            {
-                Guild.Client = Client;
-            };
+            OnClientUpdated += (sender, e) => Guild.Client = Client;
         }
 
         [JsonProperty("code")]

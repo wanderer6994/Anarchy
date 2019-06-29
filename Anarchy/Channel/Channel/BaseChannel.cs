@@ -84,9 +84,6 @@ namespace Discord
 
         public Hook CreateWebhook(WebhookProperties properties)
         {
-            //not gonna let the user change the channel when we're in this context
-            properties.ChannelId = null;
-
             return Client.CreateChannelWebhook(Id, properties);
         }
 

@@ -17,8 +17,7 @@ namespace Discord
             Role role = resp.Deserialize<Role>().SetClient(client);
             role.GuildId = guildId;
 
-            if (properties != null)
-                role.Modify(properties);
+            if (properties != null) role.Modify(properties);
 
             return role;
         }

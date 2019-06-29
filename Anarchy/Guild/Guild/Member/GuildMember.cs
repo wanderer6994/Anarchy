@@ -3,8 +3,13 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    public class GuildMember
+    public class GuildMember : Controllable
     {
+        public GuildMember()
+        {
+            OnClientUpdated += (sender, e) => User.Client = Client;
+        }
+
         [JsonProperty("user")]
         public User User { get; private set; }
 

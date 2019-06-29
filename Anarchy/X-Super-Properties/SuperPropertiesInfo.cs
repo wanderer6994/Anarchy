@@ -11,8 +11,16 @@ namespace Discord
 
         public string Base64
         {
-            get { return Properties != null ? Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Properties))) : null; }
-            set { Properties = value != null ? JsonConvert.DeserializeObject<SuperProperties>(Encoding.UTF8.GetString(Convert.FromBase64String(value))) : null; }
+            get
+            {
+                return Properties != null ? 
+                    Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(Properties))) : null;
+            }
+            set
+            {
+                Properties = value != null ? 
+                    Encoding.UTF8.GetString(Convert.FromBase64String(value)).Deserialize<SuperProperties>() : null;
+            }
         }
 
         private SuperProperties _properties;

@@ -6,19 +6,19 @@ namespace Discord
 {
     internal static class JsonExtensions
     {
-        private static T Deserialize<T>(string content)
+        public static T Deserialize<T>(this string content)
         {
             return JsonConvert.DeserializeObject<T>(content);
         }
 
         public static T Deserialize<T>(this HttpResponseMessage httpResponse)
         {
-            return Deserialize<T>(httpResponse.Content.ReadAsStringAsync().Result);
+            return httpResponse.Content.ReadAsStringAsync().Result.Deserialize<T>();
         }
 
         public static T Deserialize<T>(this GatewayResponse response)
         {
-            return Deserialize<T>(response.Data.ToString());
+            return response.Data.ToString().Deserialize<T>();
         }
     }
 }

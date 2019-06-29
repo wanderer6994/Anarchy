@@ -54,6 +54,8 @@ namespace Discord.Gateway
         {
             Logout();
 
+            HttpClient.UpdateFingerprint();
+
             Token = token;
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");

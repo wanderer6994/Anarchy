@@ -9,6 +9,12 @@ namespace Discord
 {
     internal class DiscordHttpClient
     {
+        private class Experiments
+        {
+            [JsonProperty("fingerprint")]
+            public string Fingerprint { get; set; }
+        }
+
         private readonly HttpClient _httpClient;
         private readonly DiscordClient _discordClient;
 
@@ -23,6 +29,13 @@ namespace Discord
             _discordClient = discordClient;
         }
         
+
+        public void UpdateFingerprint()
+        {
+            Headers.Remove("X-Fingerprint");
+            Headers.Add("X-Fingerprint", Get("/experiments").Deserialize<Experiments>().Fingerprint);
+        }
+
 
         private void CheckResponse(HttpResponseMessage resp)
         {

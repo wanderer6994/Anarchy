@@ -17,8 +17,7 @@ namespace Discord.Webhook
                 throw new ChannelNotFoundException(client, channelId);
 
             Hook hook = resp.Deserialize<Hook>().SetClient(client);
-            if (properties.ChannelId != null)
-                hook.Modify(properties);
+            if (properties.ChannelId != null) hook.Modify(properties);
             return hook;
         }
 

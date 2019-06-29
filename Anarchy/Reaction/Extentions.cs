@@ -76,7 +76,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Deserialize<List<User>>();
+            return resp.Deserialize<List<User>>().SetClientsInList(client);
         }
 
 

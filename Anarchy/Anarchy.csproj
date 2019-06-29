@@ -62,7 +62,7 @@
     <Compile Include="Gateway\GatewayLogin\GatewayLoginEventArgs.cs" />
     <Compile Include="Guild\Ban\Ban.cs" />
     <Compile Include="Guild\Ban\BanNotFoundException.cs" />
-    <Compile Include="Guild\Guild\Enums\GuildPremiumTier.cs" />
+    <Compile Include="Guild\Guild\GuildPremiumTier.cs" />
     <Compile Include="Guild\Guild\Guild\BaseGuild.cs" />
     <Compile Include="Guild\Guild\Guild\PartialGuild.cs" />
     <Compile Include="Guild\Guild\Guild\UnavailableGuild.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="Gateway\Models\GatewayOpcode.cs" />
     <Compile Include="Gateway\Responses\GatewayRole.cs" />
     <Compile Include="Gateway\Requests\GatewayMembers.cs" />
-    <Compile Include="Guild\Guild\Enums\GuildDefaultNotifications.cs" />
+    <Compile Include="Guild\Guild\GuildDefaultNotifications.cs" />
     <Compile Include="Guild\Properties\GuildModProperties.cs" />
     <Compile Include="Message\Message\MessageReaction.cs" />
     <Compile Include="Message\Message\MessageType.cs" />
@@ -108,9 +108,8 @@
     <Compile Include="_Universal\Controllable\Controllable.cs" />
     <Compile Include="_Universal\Controllable\Extensions.cs" />
     <Compile Include="_Universal\JsonExtensions.cs" />
-    <Compile Include="_Universal\Experiments.cs" />
     <Compile Include="Channel\Models\ChannelType.cs" />
-    <Compile Include="Guild\Guild\Enums\GuildVerificationLevel.cs" />
+    <Compile Include="Guild\Guild\GuildVerificationLevel.cs" />
     <Compile Include="User\Hypesquad\HypesquadHouse.cs" />
     <Compile Include="User\Models\NitroType.cs" />
     <Compile Include="User\User\UserStatus.cs" />
