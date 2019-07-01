@@ -55,7 +55,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            IReadOnlyList<Role> roles = resp.Deserialize<List<Role>>().SetClientsInList(client);
+            IReadOnlyList<Role> roles = resp.Deserialize<IReadOnlyList<Role>>().SetClientsInList(client);
             foreach (var role in roles) role.GuildId = guildId;
             return roles;
         }

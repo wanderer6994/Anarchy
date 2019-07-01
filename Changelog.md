@@ -1,10 +1,12 @@
 # 0.1.0.0 [STABLE]
+(Please keep in mind that these are only the major/important changes. There has been a lot more than written here)
 
 ### Additions
 Added GetAvatar()/GetIcon() methods, allowing you to download images from guilds n' stuff.
 Added PermissionCalculator.Create(), which allows you to create EditablePermissions objects from lists of permissions.
 Added embed support for sending messages.
 Implemented IReadOnlyList<T> for more security.
+Added a new Type flag in User for identying users.
 
 ### Changes
 Changed 'Reaction' to 'Emoji' where it is appropriate.

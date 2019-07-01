@@ -37,7 +37,7 @@ namespace Discord
         }
 
 
-        public List<Ban> GetBans(long guildId)
+        public IReadOnlyList<Ban> GetBans(long guildId)
         {
             return Client.GetGuildBans(guildId);
         }

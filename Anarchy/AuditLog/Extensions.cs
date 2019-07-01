@@ -9,7 +9,7 @@ namespace Discord
         {
             if (filters == null) filters = new AuditLogFilters();
 
-            var resp = client.HttpClient.Get($"/guilds/{guildId}/audit-logs?{(filters.UserId != null ? $"user_id={filters.UserId}" : "")}&{(filters.ActionType != null ? $"action_type={(int)filters.ActionType}" : "")}&{(filters.BeforeId != null ? $"before={filters.BeforeId}" : "")}&{(filters.Limit != null ? $"limit={filters.Limit}" : "")}");
+            var resp = client.HttpClient.Get($"/guilds/{guildId}/audit-logs?{(filters.UserIdProperty.Set ? $"user_id={filters.UserId}" : "")}&{(filters.ActionTypeProperty.Set ? $"action_type={(int)filters.ActionType}" : "")}&{(filters.BeforeIdProperty.Set ? $"before={filters.BeforeId}" : "")}&{(filters.LimitProperty.Set ? $"limit={filters.Limit}" : "")}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);

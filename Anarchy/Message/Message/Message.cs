@@ -9,7 +9,9 @@ namespace Discord
         {
             OnClientUpdated += (sender, e) =>
             {
-                Reactions.SetClientsInList(Client);
+                if (Reactions != null)
+                    Reactions.SetClientsInList(Client);
+
                 Author.Client = Client;
             };
         }
@@ -34,17 +36,6 @@ namespace Discord
 
         [JsonProperty("webhook_id")]
         public long? WebhookId { get; private set; }
-
-        public UserType AuthorType
-        {
-            get
-            {
-                if (WebhookId != null)
-                    return UserType.Webhook;
-                else
-                    return Author.Bot ? UserType.Bot : UserType.User;
-            }
-        }
 
         [JsonProperty("attachments")]
         public IReadOnlyList<Attachment> Attachments { get; private set; }

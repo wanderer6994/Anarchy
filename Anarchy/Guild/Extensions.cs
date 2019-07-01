@@ -49,14 +49,14 @@ namespace Discord
         }
 
 
-        public static List<Ban> GetGuildBans(this DiscordClient client, long guildId)
+        public static IReadOnlyList<Ban> GetGuildBans(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/bans");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Deserialize<List<Ban>>().SetClientsInList(client);
+            return resp.Deserialize<IReadOnlyList<Ban>>().SetClientsInList(client);
         }
 
 

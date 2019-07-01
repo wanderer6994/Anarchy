@@ -50,7 +50,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            var reactions = resp.Deserialize<List<Emoji>>().SetClientsInList(client);
+            var reactions = resp.Deserialize<IReadOnlyList<Emoji>>().SetClientsInList(client);
             foreach (var reaction in reactions) reaction.GuildId = guildId;
             return reactions;
         }

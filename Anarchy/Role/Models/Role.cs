@@ -55,9 +55,9 @@ namespace Discord
         }
 
 
-        public void Delete()
+        public bool Delete()
         {
-            Client.DeleteGuildRole(GuildId, Id);
+            return Client.DeleteGuildRole(GuildId, Id);
         }
 
 

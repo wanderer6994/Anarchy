@@ -20,7 +20,19 @@ namespace Discord
         public string AvatarId { get; protected set; }
 
         [JsonProperty("bot")]
-        public bool Bot { get; protected set; }
+        private bool _bot;
+
+
+        public UserType Type
+        {
+            get
+            {
+                if (Discriminator == 0)
+                    return UserType.Webhook;
+
+                return _bot ? UserType.Bot : UserType.User;
+            }
+        }
 
 
         public virtual void Update()

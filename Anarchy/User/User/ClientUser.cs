@@ -31,7 +31,6 @@ namespace Discord
             TwoFactorAuth = user.TwoFactorAuth;
             Language = user.Language;
             Nitro = user.Nitro;
-            Bot = user.Bot;
         }
     }
 }

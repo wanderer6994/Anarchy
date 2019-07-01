@@ -60,6 +60,8 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
+            string content = resp.Content.ReadAsStringAsync().Result;
+
             return resp.Deserialize<IReadOnlyList<Message>>().SetClientsInList(client);
         }
 

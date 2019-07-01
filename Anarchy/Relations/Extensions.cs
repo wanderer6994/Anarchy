@@ -6,7 +6,7 @@ namespace Discord
 {
     public static class RelationsExtensions
     {
-        #region add/remove friend
+        #region friending
         public static bool AddFriend(this DiscordClient client, string username, int discriminator)
         {
             return client.HttpClient.Post("/users/@me/relationships",
@@ -38,6 +38,7 @@ namespace Discord
         #endregion
 
 
+        #region blocking
         public static bool BlockUser(this DiscordClient client, long userId)
         {
             var resp = client.HttpClient.Put($"/users/@me/relationships/{userId}", "{\"type\": 2}");
@@ -49,10 +50,29 @@ namespace Discord
         }
 
 
+        public static bool BlockUser(this DiscordClient client, User user)
+        {
+            return client.BlockUser(user.Id);
+        }
+
+
+        public static bool UnblockUser(this DiscordClient client, long userId)
+        {
+            return client.RemoveFriend(userId);
+        }
+
+
+        public static bool UnblockUser(this DiscordClient client, User user)
+        {
+            return client.UnblockUser(user.Id);
+        }
+        #endregion
+
+
         #region DMs
         public static IReadOnlyList<Channel> GetClientDMs(this DiscordClient client)
         {
-            return client.HttpClient.Get($"/users/@me/channels").Deserialize<List<Channel>>().SetClientsInList(client);
+            return client.HttpClient.Get($"/users/@me/channels").Deserialize<IReadOnlyList<Channel>>().SetClientsInList(client);
         }
 
 
