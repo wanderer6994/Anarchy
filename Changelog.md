@@ -2,18 +2,19 @@
 (Please keep in mind that these are only the major/important changes. There has been a lot more than written here)
 
 ### Additions
-Added GetAvatar()/GetIcon() methods, allowing you to download images from guilds n' stuff.
-Added PermissionCalculator.Create(), which allows you to create EditablePermissions objects from lists of permissions.
-Added embed support for sending messages.
-Implemented IReadOnlyList<T> for more security.
-Added a new Type flag in User for identying users.
+Added GetAvatar()/GetIcon() methods, allowing you to download images from guilds n' stuff.<br><br>
+Added PermissionCalculator.Create(), which allows you to create EditablePermissions objects from lists of permissions.<br><br>
+Added embed support for sending messages.<br><br>
+Implemented IReadOnlyList<T> for more security.<br><br>
+Added a new Type flag in User for identying users.<br><br>
 
 ### Changes
-Changed 'Reaction' to 'Emoji' where it is appropriate.
+Changed 'Reaction' to 'Emoji' where it is appropriate.<br><br>
 
 ### Bug fixes
-Added an Update() method for ClientUser.
+Added an Update() method for ClientUser.<br><br>
 Improved 'default properties' fix by implementing a new Property<T> class.
+<br><br><br>
 
 
 
