@@ -4,66 +4,66 @@ using System.Net;
 
 namespace Discord
 {
-    public static class ReactionExtentions
+    public static class EmojiExtentions
     {
         #region management
-        public static Reaction CreateGuildReaction(this DiscordClient client, long guildId, ReactionCreationProperties properties)
+        public static Emoji CreateGuildEmoji(this DiscordClient client, long guildId, EmojiCreationProperties properties)
         {
             var resp = client.HttpClient.Post($"/guilds/{guildId}/emojis", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            Reaction reaction = resp.Deserialize<Reaction>().SetClient(client);
-            reaction.GuildId = guildId;
-            return reaction;
+            Emoji emoji = resp.Deserialize<Emoji>().SetClient(client);
+            emoji.GuildId = guildId;
+            return emoji;
         }
 
 
-        public static Reaction ModifyGuildReaction(this DiscordClient client, long guildId, long reactionId, string name)
+        public static Emoji ModifyGuildEmoji(this DiscordClient client, long guildId, long reactionId, string name)
         {
-            var resp = client.HttpClient.Patch($"/guilds/{guildId}/emojis/{reactionId}", JsonConvert.SerializeObject(new ReactionModProperties() { Name = name }));
+            var resp = client.HttpClient.Patch($"/guilds/{guildId}/emojis/{reactionId}", JsonConvert.SerializeObject(new EmojiModProperties() { Name = name }));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ReactionNotFoundException(client, guildId, reactionId);
+                throw new EmojiNotFoundException(client, guildId, reactionId);
 
-            return resp.Deserialize<Reaction>().SetClient(client);
+            return resp.Deserialize<Emoji>().SetClient(client);
         }
 
 
-        public static bool DeleteGuildReaction(this DiscordClient client, long guildId, long reactionId)
+        public static bool DeleteGuildEmoji(this DiscordClient client, long guildId, long reactionId)
         {
             var resp = client.HttpClient.Delete($"/guilds/{guildId}/emojis/{reactionId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ReactionNotFoundException(client, guildId, reactionId);
+                throw new EmojiNotFoundException(client, guildId, reactionId);
 
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
         #endregion
 
 
-        public static IReadOnlyList<Reaction> GetGuildReactions(this DiscordClient client, long guildId)
+        public static IReadOnlyList<Emoji> GetGuildEmojis(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/emojis");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            var reactions = resp.Deserialize<List<Reaction>>().SetClientsInList(client);
+            var reactions = resp.Deserialize<List<Emoji>>().SetClientsInList(client);
             foreach (var reaction in reactions) reaction.GuildId = guildId;
             return reactions;
         }
 
 
-        public static Reaction GetGuildReaction(this DiscordClient client, long guildId, long reactionId)
+        public static Emoji GetGuildEmoji(this DiscordClient client, long guildId, long reactionId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/emojis/{reactionId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ReactionNotFoundException(client, guildId, reactionId);
+                throw new EmojiNotFoundException(client, guildId, reactionId);
 
-            Reaction reaction = resp.Deserialize<Reaction>().SetClient(client);
+            Emoji reaction = resp.Deserialize<Emoji>().SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
         }

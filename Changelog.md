@@ -2,8 +2,12 @@
 
 ### Additions
 Added GetAvatar()/GetIcon() methods, allowing you to download images from guilds n' stuff.
+Added PermissionCalculator.Create(), which allows you to create EditablePermissions objects from lists of permissions.
 Added embed support for sending messages.
 Implemented IReadOnlyList<T> for more security.
+
+### Changes
+Changed 'Reaction' to 'Emoji' where it is appropriate.
 
 ### Bug fixes
 Added an Update() method for ClientUser.

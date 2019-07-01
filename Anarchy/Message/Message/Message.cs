@@ -9,9 +9,7 @@ namespace Discord
         {
             OnClientUpdated += (sender, e) =>
             {
-                if (Reactions != null)
-                    Reactions.SetClientsInList(Client);
-
+                Reactions.SetClientsInList(Client);
                 Author.Client = Client;
             };
         }
@@ -54,17 +52,8 @@ namespace Discord
         [JsonProperty("embeds")]
         public IReadOnlyList<Embed> Embeds { get; private set; }
 
-        private IReadOnlyList<MessageReaction> _reactions;
         [JsonProperty("reactions")]
-        public IReadOnlyList<MessageReaction> Reactions
-        {
-            get { return _reactions; }
-            set
-            {
-                foreach (var reaction in value) reaction.Reaction.SetClient(Client);
-                _reactions = value;
-            }
-        }
+        public IReadOnlyList<MessageReaction> Reactions { get; private set; }
 
         [JsonProperty("mentions")]
         public List<User> Mentions { get; private set; }

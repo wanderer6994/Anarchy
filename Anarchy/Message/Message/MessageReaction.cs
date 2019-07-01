@@ -8,13 +8,12 @@ namespace Discord
         {
             OnClientUpdated += (sender, e) =>
             {
-                if (Reaction != null)
-                    Reaction.Client = Client;
+                Emoji.Client = Client;
             };
         }
 
         [JsonProperty("emoji")]
-        public Reaction Reaction { get; private set; }
+        public Emoji Emoji { get; private set; }
 
         [JsonProperty("count")]
         public int Count { get; private set; }
@@ -25,7 +24,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return Reaction.ToString();
+            return Emoji.ToString();
         }
     }
 }

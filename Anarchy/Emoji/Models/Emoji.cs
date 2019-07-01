@@ -2,9 +2,9 @@
 
 namespace Discord
 {
-    public class Reaction : Controllable
+    public class Emoji : Controllable
     {
-        public Reaction()
+        public Emoji()
         {
             OnClientUpdated += (sender, e) => Creator.Client = Client;
         }
@@ -26,21 +26,21 @@ namespace Discord
 
         public void Update()
         {
-            Name = Client.GetGuildReaction(GuildId, (long)Id).Name;
+            Name = Client.GetGuildEmoji(GuildId, (long)Id).Name;
         }
 
 
-        public Reaction Modify(string name)
+        public Emoji Modify(string name)
         {
-            Reaction reaction = Client.ModifyGuildReaction(GuildId, (long)Id, name);
-            Name = reaction.Name;
-            return reaction;
+            Emoji emoji = Client.ModifyGuildEmoji(GuildId, (long)Id, name);
+            Name = emoji.Name;
+            return emoji;
         }
 
 
         public bool Delete()
         {
-            return Client.DeleteGuildReaction(GuildId, (long)Id);
+            return Client.DeleteGuildEmoji(GuildId, (long)Id);
         }
 
 

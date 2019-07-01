@@ -9,9 +9,9 @@ namespace Discord
         {
             OnClientUpdated += (sender, e) =>
             {
-                if (Roles != null) Roles.SetClientsInList(Client);
+                Roles.SetClientsInList(Client);
 
-                if (Reactions != null) Reactions.SetClientsInList(Client);
+                Emojis.SetClientsInList(Client);
             };
         }
 
@@ -33,22 +33,20 @@ namespace Discord
             {
                 if (value != null)
                     foreach (var role in value) role.GuildId = Id;
-
                 _roles = value;
             }
         }
 
-        private IReadOnlyList<Reaction> _reactions;
+        private IReadOnlyList<Emoji> _emojis;
         [JsonProperty("emojis")]
-        public IReadOnlyList<Reaction> Reactions
+        public IReadOnlyList<Emoji> Emojis
         {
-            get { return _reactions; }
+            get { return _emojis; }
             private set
             {
                 if (value != null)
                     foreach (var reaction in value) reaction.GuildId = Id;
-
-                _reactions = value;
+                _emojis = value;
             }
         }
 
@@ -72,7 +70,7 @@ namespace Discord
             IconId = guild.IconId;
             Region = guild.Region;
             Roles = guild.Roles;
-            Reactions = guild.Reactions;
+            Emojis = guild.Emojis;
             VerificationLevel = guild.VerificationLevel;
             DefaultNotifications = guild.DefaultNotifications;
             OwnerId = guild.OwnerId;
@@ -99,7 +97,7 @@ namespace Discord
             DefaultNotifications = guild.DefaultNotifications;
             OwnerId = guild.OwnerId;
             Roles = guild.Roles;
-            Reactions = guild.Reactions;
+            Emojis = guild.Emojis;
             return guild;
         }
 
@@ -111,10 +109,10 @@ namespace Discord
         }
 
 
-        public override IReadOnlyList<Reaction> GetReactions()
+        public override IReadOnlyList<Emoji> GetEmojis()
         {
-            Reactions = base.GetReactions();
-            return Reactions;
+            Emojis = base.GetEmojis();
+            return Emojis;
         }
     }
 }

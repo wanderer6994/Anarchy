@@ -15,6 +15,7 @@ namespace Discord
             public string Fingerprint { get; set; }
         }
 
+
         private readonly HttpClient _httpClient;
         private readonly DiscordClient _discordClient;
 

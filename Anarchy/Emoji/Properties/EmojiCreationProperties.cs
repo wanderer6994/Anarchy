@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Discord
 {
-    public class ReactionCreationProperties
+    public class EmojiCreationProperties
     {
         [JsonProperty("name")]
         public string Name { get; set; }

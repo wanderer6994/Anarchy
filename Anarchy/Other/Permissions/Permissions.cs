@@ -17,7 +17,7 @@
 
         public bool Has(Permission permission)
         {
-            return PermissionCalculator.HasPermission(_perms, permission);
+            return PermissionCalculator.Has(_perms, permission);
         }
 
 

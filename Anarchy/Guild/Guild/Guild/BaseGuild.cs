@@ -91,15 +91,15 @@ namespace Discord
         }
 
 
-        public virtual IReadOnlyList<Reaction> GetReactions()
+        public virtual IReadOnlyList<Emoji> GetEmojis()
         {
-            return Client.GetGuildReactions(Id);
+            return Client.GetGuildEmojis(Id);
         }
 
 
-        public Reaction GetReaction(long reactionId)
+        public Emoji GetReaction(long reactionId)
         {
-            return Client.GetGuildReaction(Id, reactionId);
+            return Client.GetGuildEmoji(Id, reactionId);
         }
 
 
@@ -121,9 +121,9 @@ namespace Discord
         }
 
 
-        public Reaction CreateReaction(ReactionCreationProperties properties)
+        public Emoji CreateEmoji(EmojiCreationProperties properties)
         {
-            return Client.CreateGuildReaction(Id, properties);
+            return Client.CreateGuildEmoji(Id, properties);
         }
 
 

@@ -6,14 +6,14 @@ namespace Discord
     {
         public MessageProperties()
         {
-            Nonce = "";
+            _nonce = "";
         }
 
         [JsonProperty("content")]
         public string Content { get; set; }
 
         [JsonProperty("nonce")]
-        public string Nonce { get; set; }
+        private readonly string _nonce;
 
         [JsonProperty("tts")]
         public bool Tts { get; set; }

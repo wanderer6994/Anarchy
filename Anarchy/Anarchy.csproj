@@ -49,12 +49,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Audit log\Extensions.cs" />
-    <Compile Include="Audit log\Models\AuditLog.cs" />
-    <Compile Include="Audit log\Models\AuditLogActionType.cs" />
-    <Compile Include="Audit log\Models\AuditLogChange.cs" />
-    <Compile Include="Audit log\Models\AuditLogEntry.cs" />
-    <Compile Include="Audit log\Models\AuditLogFilters.cs" />
+    <Compile Include="AuditLog\Extensions.cs" />
+    <Compile Include="AuditLog\Models\AuditLog.cs" />
+    <Compile Include="AuditLog\Models\AuditLogActionType.cs" />
+    <Compile Include="AuditLog\Models\AuditLogChange.cs" />
+    <Compile Include="AuditLog\Models\AuditLogEntry.cs" />
+    <Compile Include="AuditLog\Models\AuditLogFilters.cs" />
     <Compile Include="Channel\Channel\BaseChannel.cs" />
     <Compile Include="Channel\Models\ChannelEventArgs.cs" />
     <Compile Include="Channel\Channel\PartialChannel.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Other\Permissions\Permissions.cs" />
     <Compile Include="Other\Property.cs" />
     <Compile Include="User\User\UserType.cs" />
-    <Compile Include="Reaction\Properties\ReactionModProperties.cs" />
+    <Compile Include="Emoji\Properties\EmojiModProperties.cs" />
     <Compile Include="Role\Models\Role.cs" />
     <Compile Include="Role\Models\RoleEventArgs.cs" />
     <Compile Include="Role\Models\RoleProperties.cs" />
@@ -103,7 +103,7 @@
     <Compile Include="Channel\Models\ChannelNotFoundException.cs" />
     <Compile Include="DiscordClient.cs" />
     <Compile Include="DiscordSocketClient.cs" />
-    <Compile Include="Reaction\Properties\ReactionCreationProperties.cs" />
+    <Compile Include="Emoji\Properties\EmojiCreationProperties.cs" />
     <Compile Include="Webhook\Models\WebhookNotFoundException.cs" />
     <Compile Include="Webhook\Extensions.cs" />
     <Compile Include="Webhook\Models\WebhookProperties.cs" />
@@ -120,14 +120,14 @@
     <Compile Include="Other\Exceptions\AccessDeniedException.cs" />
     <Compile Include="Other\Exceptions\DiscordException.cs" />
     <Compile Include="Guild\Guild\GuildNotFoundException.cs" />
-    <Compile Include="Reaction\Models\ReactionNotFoundException.cs" />
+    <Compile Include="Emoji\Models\EmojiNotFoundException.cs" />
     <Compile Include="RateLimit\TooManyRequestsException.cs" />
     <Compile Include="Channel\Extensions.cs" />
     <Compile Include="Gateway\Extensions.cs" />
     <Compile Include="Guild\Extensions.cs" />
     <Compile Include="Invite\Extensions.cs" />
     <Compile Include="Message\Extensions.cs" />
-    <Compile Include="Reaction\Extentions.cs" />
+    <Compile Include="Emoji\Extentions.cs" />
     <Compile Include="Relations\Extensions.cs" />
     <Compile Include="Role\Extensions.cs" />
     <Compile Include="User\Extensions.cs" />
@@ -148,7 +148,7 @@
     <Compile Include="Message\Message\MessageProperties.cs" />
     <Compile Include="RateLimit\MessageRateLimit.cs" />
     <Compile Include="RateLimit\RateLimit.cs" />
-    <Compile Include="Reaction\Models\Reaction.cs" />
+    <Compile Include="Emoji\Models\Emoji.cs" />
     <Compile Include="User\Hypesquad\Hypesquad.cs" />
     <Compile Include="User\Models\NameDiscriminator.cs" />
     <Compile Include="User\User\User.cs" />

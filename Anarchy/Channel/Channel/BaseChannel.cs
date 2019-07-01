@@ -64,7 +64,7 @@ namespace Discord
         }
 
 
-        public bool UnpinMessagE(Message message)
+        public bool UnpinMessage(Message message)
         {
             return Client.UnpinChannelMessage(Id, message.Id);
         }
