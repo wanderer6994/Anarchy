@@ -10,7 +10,9 @@ namespace Discord
             {
                 Guild.SetClient(Client);
                 Channel.SetClient(Client);
-                Creator.SetClient(Client);
+
+                if (Creator != null)
+                    Creator.SetClient(Client);
             };
         }
 

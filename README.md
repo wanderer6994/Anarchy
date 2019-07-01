@@ -1,5 +1,5 @@
 # About
-Anarchy is an opensource Discord API wrapper, that focuses on making bot programming easy.<br>
+Anarchy is an opensource Discord API wrapper that focuses on making bot programming easy.<br>
 Since the start it has been our goal to make it simple, so that people can easily modify it to their needs.<br>
 At the moment we don't have any bugtesters but me, so the wrapper will most likely contain a few bugs here and there bugs.<br>
 

@@ -20,7 +20,7 @@ namespace Discord
         public string AvatarId { get; protected set; }
 
         [JsonProperty("bot")]
-        private bool _bot;
+        private readonly bool _bot;
 
 
         public UserType Type

@@ -25,5 +25,17 @@
         {
             return instance._perms;
         }
+
+
+        public static bool operator ==(Permissions instance, int permissions)
+        {
+            return instance._perms == permissions;
+        }
+
+
+        public static bool operator !=(Permissions instance, int permissions)
+        {
+            return instance._perms != permissions;
+        }
     }
 }
