@@ -1,4 +1,4 @@
-#0.1.0.0 [STABLE]
+# 0.1.0.0 [STABLE]
 
 ### Additions
 Added GetAvatar()/GetIcon() methods, allowing you to download images from guilds n' stuff.
