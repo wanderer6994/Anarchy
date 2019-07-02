@@ -15,7 +15,7 @@ namespace test
         {
             DiscordSocketClient client = new DiscordSocketClient();
             client.OnLoggedIn += Client_OnLoggedIn;
-            client.Login("NTY1ODIwODU4NjY1NTMzNDcw.XK7_wA.W6jSxM_7diqskc3Cnadjzg8lBN0");
+            client.Login("");
 
             Thread.Sleep(-1);
         }
