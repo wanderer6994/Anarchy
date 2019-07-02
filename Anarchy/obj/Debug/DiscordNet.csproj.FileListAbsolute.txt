@@ -1,0 +1,9 @@
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Debug\Discord.Net.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Debug\Discord.Net.pdb
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\DiscordNet.csprojAssemblyReference.cache
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\DiscordNet.csproj.CoreCompileInputs.cache
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\DiscordNet.csproj.CopyComplete
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\Discord.Net.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Debug\Discord.Net.pdb

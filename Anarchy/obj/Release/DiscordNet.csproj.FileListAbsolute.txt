@@ -1,0 +1,10 @@
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Release\Discord.Net.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Release\Discord.Net.pdb
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Release\Newtonsoft.Json.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Release\websocket-sharp-with-proxy-support.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\bin\Release\Newtonsoft.Json.xml
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Release\DiscordNet.csproj.CoreCompileInputs.cache
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Release\DiscordNet.csproj.CopyComplete
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Release\Discord.Net.dll
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Release\Discord.Net.pdb
+C:\Users\ilink\source\repos\DiscordNet\DiscordNet\obj\Release\DiscordNet.csprojAssemblyReference.cache
