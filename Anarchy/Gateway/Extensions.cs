@@ -19,6 +19,7 @@ namespace Discord.Gateway
             var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify);
             req.Data.Token = client.Token;
             req.Data.Properties = client.SuperPropertiesInfo.Properties;
+
             client.Socket.Send(req);
         }
         
@@ -36,8 +37,16 @@ namespace Discord.Gateway
 
         public static void ChangeStatus(this DiscordSocketClient client, UserStatus status)
         {
-            var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.StatusChange);
+            var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.PresenceChange);
             req.Data.Status = status != UserStatus.DoNotDisturb ? status.ToString().ToLower() : "dnd";
+            client.Socket.Send(req);
+        }
+
+
+        public static void ChangeActivity(this DiscordSocketClient client, Activity activity)
+        {
+            var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.PresenceChange);
+            req.Data.Activity = activity;
             client.Socket.Send(req);
         }
 

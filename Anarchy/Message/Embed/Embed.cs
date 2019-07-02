@@ -23,7 +23,7 @@ namespace Discord
         public string Description { get; internal set; }
 
         [JsonProperty("type")]
-        private string _type;
+        private readonly string _type;
 
         [JsonProperty("color")]
         private int _color;

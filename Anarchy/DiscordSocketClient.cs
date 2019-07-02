@@ -136,8 +136,8 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_MEMBERS_CHUNK":
                             List<User> users = new List<User>();
-                            foreach (var member in payload.Deserialize<GuildMemberList>().Members)
-                                users.Add(member.User.SetClient(this));
+                            foreach (var member in payload.Deserialize<GuildMemberList>().Members.SetClientsInList(this))
+                                users.Add(member.User);
 
                             OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
                             break;

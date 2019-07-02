@@ -7,6 +7,7 @@ Added PermissionCalculator.Create(), which allows you to create EditablePermissi
 Added EmbedMaker creating and sending embeds.<br><br>
 Implemented IReadOnlyList<T> for more security.<br><br>
 Added a new Type flag in User for identying users.<br><br>
+Added activities for DiscordSocketClient.<br><br>
 
 ### Changes
 Changed 'Reaction' to 'Emoji' where it is appropriate.<br><br>

@@ -49,15 +49,15 @@ namespace Discord
         }
 
 
-        public bool BanMember(long userId, int deleteMessageDays, string reason)
+        public bool BanMember(long userId, int messageDeleteDays, string reason)
         {
-            return Client.BanGuildMember(Id, userId, deleteMessageDays, reason);
+            return Client.BanGuildMember(Id, userId, messageDeleteDays, reason);
         }
 
 
-        public bool BanMember(User user, int deleteMessageDays, string reason)
+        public bool BanMember(User user, int messageDeleteDays, string reason)
         {
-            return BanMember(user.Id, deleteMessageDays, reason);
+            return BanMember(user.Id, messageDeleteDays, reason);
         }
 
 
@@ -69,7 +69,7 @@ namespace Discord
 
         public bool UnbanMember(User user)
         {
-            return UnbanMember(user.Id);
+            return Client.UnbanGuildMember(Id, user.Id);
         }
 
 

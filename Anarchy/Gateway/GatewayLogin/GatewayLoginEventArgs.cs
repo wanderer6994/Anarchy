@@ -1,6 +1,4 @@
-﻿using Discord.Gateway;
-
-namespace Discord
+﻿namespace Discord.Gateway
 {
     public class GatewayLoginEventArgs
     {

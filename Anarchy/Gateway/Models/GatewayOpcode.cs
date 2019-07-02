@@ -5,7 +5,7 @@
         Event,
         Heartbeat,
         Identify,
-        StatusChange,
+        PresenceChange,
         VoiceStateUpdate,
         Resume = 6,
         Reconnect,

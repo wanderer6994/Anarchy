@@ -22,6 +22,7 @@ namespace Discord
         [JsonProperty("joined_at")]
         public string JoinedAt { get; private set; }
 
+
         public override string ToString()
         {
             return User.ToString();

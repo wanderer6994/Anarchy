@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\Activity.cs" />
+    <Compile Include="Activity\ActivityType.cs" />
     <Compile Include="AuditLog\Extensions.cs" />
     <Compile Include="AuditLog\Models\AuditLog.cs" />
     <Compile Include="AuditLog\Models\AuditLogActionType.cs" />
