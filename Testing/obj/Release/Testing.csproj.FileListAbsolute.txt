@@ -1,0 +1,13 @@
+C:\Users\ilink\source\repos\Anarchy\Testing\bin\Release\Testing.exe.config
+C:\Users\ilink\source\repos\Anarchy\Testing\bin\Release\Testing.exe
+C:\Users\ilink\source\repos\Anarchy\Testing\bin\Release\Testing.pdb
+C:\Users\ilink\source\repos\Anarchy\Testing\bin\Release\Anarchy.dll
+C:\Users\ilink\source\repos\Anarchy\Testing\bin\Release\Newtonsoft.Json.dll
+C:\Users\ilink\source\repos\Anarchy\Testing\bin\Release\websocket-sharp-with-proxy-support.dll
+C:\Users\ilink\source\repos\Anarchy\Testing\bin\Release\Anarchy.pdb
+C:\Users\ilink\source\repos\Anarchy\Testing\bin\Release\Newtonsoft.Json.xml
+C:\Users\ilink\source\repos\Anarchy\Testing\obj\Release\Testing.csprojAssemblyReference.cache
+C:\Users\ilink\source\repos\Anarchy\Testing\obj\Release\Testing.csproj.CoreCompileInputs.cache
+C:\Users\ilink\source\repos\Anarchy\Testing\obj\Release\Testing.csproj.CopyComplete
+C:\Users\ilink\source\repos\Anarchy\Testing\obj\Release\Testing.exe
+C:\Users\ilink\source\repos\Anarchy\Testing\obj\Release\Testing.pdb

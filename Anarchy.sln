@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anarchy", "Anarchy\Anarchy.csproj", "{18C13E5D-D4D2-4310-993C-2F2644DB8D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{518C2D92-54CC-4ED9-B56A-382C93F225DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{55A97B71-CA5F-45F1-AF81-7550798FB6D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{18C13E5D-D4D2-4310-993C-2F2644DB8D54}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18C13E5D-D4D2-4310-993C-2F2644DB8D54}.Release|x64.ActiveCfg = Release|Any CPU
 		{18C13E5D-D4D2-4310-993C-2F2644DB8D54}.Release|x64.Build.0 = Release|Any CPU
-		{518C2D92-54CC-4ED9-B56A-382C93F225DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{518C2D92-54CC-4ED9-B56A-382C93F225DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{518C2D92-54CC-4ED9-B56A-382C93F225DC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{518C2D92-54CC-4ED9-B56A-382C93F225DC}.Debug|x64.Build.0 = Debug|Any CPU
-		{518C2D92-54CC-4ED9-B56A-382C93F225DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{518C2D92-54CC-4ED9-B56A-382C93F225DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{518C2D92-54CC-4ED9-B56A-382C93F225DC}.Release|x64.ActiveCfg = Release|Any CPU
-		{518C2D92-54CC-4ED9-B56A-382C93F225DC}.Release|x64.Build.0 = Release|Any CPU
+		{55A97B71-CA5F-45F1-AF81-7550798FB6D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A97B71-CA5F-45F1-AF81-7550798FB6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A97B71-CA5F-45F1-AF81-7550798FB6D2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{55A97B71-CA5F-45F1-AF81-7550798FB6D2}.Debug|x64.Build.0 = Debug|Any CPU
+		{55A97B71-CA5F-45F1-AF81-7550798FB6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A97B71-CA5F-45F1-AF81-7550798FB6D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A97B71-CA5F-45F1-AF81-7550798FB6D2}.Release|x64.ActiveCfg = Release|Any CPU
+		{55A97B71-CA5F-45F1-AF81-7550798FB6D2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
