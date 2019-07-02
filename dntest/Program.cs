@@ -13,7 +13,6 @@ namespace dntest
     {
         static void Main()
         {
-            DiscordClient client = new DiscordClient("yyyy");
         }
     }
 }

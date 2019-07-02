@@ -30,7 +30,8 @@ namespace GuildDuplicator
     {
         static void Main(string[] args)
         {
-            DiscordClient client = new DiscordClient("your token here");
+            Console.Write("Token: ");
+            DiscordClient client = new DiscordClient(Console.ReadLine());
 
             Console.Write($"Guild id: ");
             Guild targetGuild = client.GetGuild(long.Parse(Console.ReadLine()));
@@ -77,7 +78,8 @@ namespace GuildDuplicator
 
             foreach (var channel in channels.TextChannels.Concat(channels.VoiceChannels))
             {
-                ourGuild.CreateChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null, Type = channel.Type });
+                Channel ourChannel = ourGuild.CreateChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null, Type = channel.Type });
+                ourChannel.Modify(new ChannelModProperties() { Nsfw = channel.Nsfw, Position = channel.Position, Topic = channel.Topic });
 
                 Console.WriteLine($"Duplicated {channel}");
 
@@ -100,6 +102,9 @@ namespace GuildDuplicator
                 Thread.Sleep(100);
             }
             #endregion
+
+            Console.WriteLine("Done!");
+            Console.ReadLine();
         }
     }
 }

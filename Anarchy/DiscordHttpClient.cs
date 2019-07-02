@@ -44,7 +44,9 @@ namespace Discord
             {
                 case HttpStatusCode.BadRequest:
                     throw new InvalidParametersException(_discordClient, resp.Content.ReadAsStringAsync().Result);
-                case HttpStatusCode.Forbidden | HttpStatusCode.Unauthorized:
+                case HttpStatusCode.Forbidden:
+                    throw new AccessDeniedException(_discordClient);
+                case HttpStatusCode.Unauthorized:
                     throw new AccessDeniedException(_discordClient);
                 case (HttpStatusCode)429:
                     throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
