@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Drawing;
 
 namespace Discord
 {
@@ -11,7 +12,12 @@ namespace Discord
         public string Name { get; private set; }
 
         [JsonProperty("color")]
-        public int Color { get; private set; }
+        private int _color;
+        public Color Color
+        {
+            get { return Color.FromArgb(_color); }
+            private set { _color = Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
+        }
 
         [JsonProperty("position")]
         public int Position { get; private set; }

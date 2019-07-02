@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Drawing;
 
 namespace Discord
 {
@@ -22,10 +23,15 @@ namespace Discord
 
         internal Property<int> ColorProperty = new Property<int>();
         [JsonProperty("color")]
-        public int Color
+        private int _color
         {
             get { return ColorProperty; }
             set { ColorProperty.Value = value; }
+        }
+        public Color Color
+        {
+            get { return Color.FromArgb(_color); }
+            set { _color = Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
         }
 
         internal Property<bool> SeperatedProperty = new Property<bool>();

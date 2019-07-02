@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
+using System.Linq;
 using WebSocketSharp;
 
 namespace Discord.Gateway
@@ -78,7 +79,6 @@ namespace Discord.Gateway
 
         private void SocketClosed(object sender, CloseEventArgs e)
         {
-            //idk how to resume so we just make it log in again
             if (LoggedIn)
                 this.LoginToGateway();
         }

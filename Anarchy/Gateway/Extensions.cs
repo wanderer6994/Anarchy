@@ -54,7 +54,7 @@ namespace Discord.Gateway
         public static IReadOnlyList<User> GetAllGuildMembers(this DiscordSocketClient client, long guildId)
         {
             List<User> members = new List<User>();
-            List<User> newMembers = new List<User>();
+            IReadOnlyList<User> newMembers = new List<User>();
             client.OnGuildMembersReceived += (c, args) =>
             {
                 newMembers = args.Users;

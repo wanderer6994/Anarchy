@@ -34,6 +34,12 @@ namespace Discord
         }
 
 
+        public Message SendMessage(string message, bool tts = false)
+        {
+            return Client.SendMessage(Id, message, tts);
+        }
+
+
         public IReadOnlyList<Message> GetMessages(int limit = 100, int afterId = 0)
         {
             return Client.GetChannelMessages(Id, limit, afterId);
@@ -70,7 +76,7 @@ namespace Discord
         }
 
 
-        public Invite CreateInvite(InviteProperties properties)
+        public Invite CreateInvite(InviteProperties properties = null)
         {
             return Client.CreateInvite(Id, properties);
         }

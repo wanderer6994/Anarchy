@@ -69,6 +69,7 @@
     <Compile Include="Message\Embed\EmbedAuthor.cs" />
     <Compile Include="Message\Embed\EmbedField.cs" />
     <Compile Include="Message\Embed\EmbedFooter.cs" />
+    <Compile Include="Message\Embed\EmbedMaker.cs" />
     <Compile Include="Message\Embed\EmbedVideo.cs" />
     <Compile Include="Guild\Guild\GuildEventArgs.cs" />
     <Compile Include="Guild\Guild\Member\GuildMemberList.cs" />

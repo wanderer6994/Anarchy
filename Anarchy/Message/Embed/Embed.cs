@@ -1,51 +1,60 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Discord
 {
-    //Sets SHOULD be private but we also have to be able to create them
     public class Embed
     {
         public Embed()
         {
-            Type = "rich";
+            _type = "rich";
             Fields = new List<EmbedField>();
+            Thumbnail = new EmbedImage();
+            Image = new EmbedImage();
+            Footer = new EmbedFooter();
+            Author = new EmbedAuthor();
         }
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public string Title { get; internal set; }
 
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string Description { get; internal set; }
 
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        private string _type;
 
         [JsonProperty("color")]
-        public int Color { get; set; }
+        private int _color;
+        public Color Color
+        {
+            get { return Color.FromArgb(_color); }
+            set { _color = Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
+        }
 
         [JsonProperty("url")]
         public string Url { get; set; }
 
 
         [JsonProperty("fields")]
-        public List<EmbedField> Fields { get; set; }
+        public List<EmbedField> Fields { get; internal set; }
 
-        //I really don't know how videos in embeds work, but it'd be great to find out
+        //I don't know how videos in embeds work yet
         [JsonProperty("video")]
         public EmbedVideo Video { get; private set; }
 
         [JsonProperty("thumbnail")]
-        public EmbedImage Thumbnail { get; set; }
+        public EmbedImage Thumbnail { get; internal set; }
 
         [JsonProperty("image")]
-        public EmbedImage Image { get; set; }
+        public EmbedImage Image { get; internal set; }
 
         [JsonProperty("footer")]
-        public EmbedFooter Footer { get; set; }
+        public EmbedFooter Footer { get; internal set; }
 
         [JsonProperty("author")]
-        public EmbedAuthor Author { get; set; }
+        public EmbedAuthor Author { get; internal set; }
 
 
         public override string ToString()

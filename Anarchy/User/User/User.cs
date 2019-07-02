@@ -46,6 +46,9 @@ namespace Discord
 
         public Image GetAvatar()
         {
+            if (AvatarId == null)
+                return null;
+
             var resp = new HttpClient().GetAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png").Result;
 
             if (resp.StatusCode == HttpStatusCode.NotFound)

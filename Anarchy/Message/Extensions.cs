@@ -17,6 +17,12 @@ namespace Discord
         }
 
 
+        public static Message SendMessage(this DiscordClient client, long channelId, string message, bool tts = false)
+        {
+            return client.SendMessage(channelId, new MessageProperties() { Content = message, Tts = tts });
+        }
+
+
         public static Message EditMessage(this DiscordClient client, long channelId, long messageId, string msg)
         {
             var resp = client.HttpClient.Patch($"/channels/{channelId}/messages/{messageId}", "{\"content\":\"" + msg + "\"}");

@@ -5,7 +5,7 @@ namespace Discord
     public class EmbedImage
     {
         [JsonProperty("url")]
-        public string Url { get; set; }
+        public string Url { get; internal set; }
 
         [JsonProperty("width")]
         public int Width { get; private set; }

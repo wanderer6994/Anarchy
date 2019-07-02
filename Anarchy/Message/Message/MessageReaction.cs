@@ -6,10 +6,7 @@ namespace Discord
     {
         public MessageReaction()
         {
-            OnClientUpdated += (sender, e) =>
-            {
-                Emoji.Client = Client;
-            };
+            OnClientUpdated += (sender, e) => Emoji.SetClient(Client);
         }
 
         [JsonProperty("emoji")]

@@ -4,12 +4,13 @@
 ### Additions
 Added GetAvatar()/GetIcon() methods, allowing you to download images from guilds n' stuff.<br><br>
 Added PermissionCalculator.Create(), which allows you to create EditablePermissions objects from lists of permissions.<br><br>
-Added embed support for sending messages.<br><br>
+Added EmbedMaker creating and sending embeds.<br><br>
 Implemented IReadOnlyList<T> for more security.<br><br>
 Added a new Type flag in User for identying users.<br><br>
 
 ### Changes
 Changed 'Reaction' to 'Emoji' where it is appropriate.<br><br>
+Color property in Role and Embed are now actual Color objects, and not int values.
 
 ### Bug fixes
 Added an Update() method for ClientUser.<br><br>

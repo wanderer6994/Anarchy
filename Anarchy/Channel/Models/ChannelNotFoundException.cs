@@ -11,7 +11,7 @@
 
         public override string ToString()
         {
-            return $"Id: {ChannelId}";
+            return ChannelId.ToString();
         }
     }
 }

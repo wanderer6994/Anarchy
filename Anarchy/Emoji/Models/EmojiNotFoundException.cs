@@ -14,7 +14,7 @@
 
         public override string ToString()
         {
-            return $"Guild: {GuildId} Emoji: {EmojiId}";
+            return EmojiId.ToString();
         }
     }
 }

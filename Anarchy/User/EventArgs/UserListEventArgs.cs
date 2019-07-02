@@ -5,7 +5,7 @@ namespace Discord
 {
     public class UserListEventArgs : EventArgs
     {
-        public List<User> Users { get; private set; }
+        public IReadOnlyList<User> Users { get; private set; }
 
         public UserListEventArgs(List<User> users)
         {

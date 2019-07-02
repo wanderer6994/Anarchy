@@ -2,40 +2,40 @@
 {
     public class Permissions
     {
-        protected int _perms;
+        protected int _value;
 
         public Permissions()
         {
-            _perms = 512;
+            _value = 512;
         }
 
         public Permissions(int permissions)
         {
-            _perms = permissions;
+            _value = permissions;
         }
 
 
         public bool Has(Permission permission)
         {
-            return PermissionCalculator.Has(_perms, permission);
+            return PermissionCalculator.Has(_value, permission);
         }
 
 
         public static implicit operator int(Permissions instance)
         {
-            return instance._perms;
+            return instance._value;
         }
 
 
         public static bool operator ==(Permissions instance, int permissions)
         {
-            return instance._perms == permissions;
+            return instance._value == permissions;
         }
 
 
         public static bool operator !=(Permissions instance, int permissions)
         {
-            return instance._perms != permissions;
+            return instance._value != permissions;
         }
     }
 }

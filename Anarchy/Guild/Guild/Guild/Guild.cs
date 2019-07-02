@@ -10,7 +10,6 @@ namespace Discord
             OnClientUpdated += (sender, e) =>
             {
                 Roles.SetClientsInList(Client);
-
                 Emojis.SetClientsInList(Client);
             };
         }
@@ -84,8 +83,10 @@ namespace Discord
                 properties.Name = Name;
             if (!properties.RegionProperty.Set)
                 properties.Region = Region;
+            if (!properties.IconSet)
+                properties.Icon = GetIcon();
             if (!properties.VerificationProperty.Set)
-                properties.Verification = VerificationLevel;
+                properties.VerificationLevel = VerificationLevel;
             if (!properties.NotificationsProperty.Set)
                 properties.DefaultNotifications = DefaultNotifications;
 

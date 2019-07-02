@@ -7,7 +7,7 @@ namespace Discord
     {
         public GuildMember()
         {
-            OnClientUpdated += (sender, e) => User.Client = Client;
+            OnClientUpdated += (sender, e) => User.SetClient(Client);
         }
 
         [JsonProperty("user")]

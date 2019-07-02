@@ -9,10 +9,8 @@ namespace Discord
         {
             OnClientUpdated += (sender, e) =>
             {
-                if (Reactions != null)
-                    Reactions.SetClientsInList(Client);
-
-                Author.Client = Client;
+                Reactions.SetClientsInList(Client);
+                Author.SetClient(Client);
             };
         }
 
@@ -25,17 +23,11 @@ namespace Discord
         [JsonProperty("tts")]
         public bool Tts { get; private set; }
 
-        [JsonProperty("channel_id")]
-        public long ChannelId { get; private set; }
-
-        [JsonProperty("guild_id")]
-        public long? GuildId { get; private set; }
-
         [JsonProperty("author")]
         public User Author { get; private set; }
 
-        [JsonProperty("webhook_id")]
-        public long? WebhookId { get; private set; }
+        [JsonProperty("type")]
+        public MessageType Type { get; private set; }
 
         [JsonProperty("attachments")]
         public IReadOnlyList<Attachment> Attachments { get; private set; }
@@ -47,7 +39,7 @@ namespace Discord
         public IReadOnlyList<MessageReaction> Reactions { get; private set; }
 
         [JsonProperty("mentions")]
-        public List<User> Mentions { get; private set; }
+        public IReadOnlyList<User> Mentions { get; private set; }
 
         [JsonProperty("mention_roles")]
         public IReadOnlyList<long> MentionedRoles { get; private set; }
@@ -60,9 +52,12 @@ namespace Discord
         
         [JsonProperty("pinned")]
         public bool Pinned { get; private set; }
-       
-        [JsonProperty("type")]
-        public MessageType Type { get; private set; }
+      
+        [JsonProperty("channel_id")]
+        public long ChannelId { get; private set; }
+
+        [JsonProperty("guild_id")]
+        public long? GuildId { get; private set; }
 
 
         public Message Edit(string message)

@@ -37,15 +37,15 @@ namespace Discord
         }
 
 
-        public IReadOnlyList<Ban> GetBans(long guildId)
+        public IReadOnlyList<Ban> GetBans()
         {
-            return Client.GetGuildBans(guildId);
+            return Client.GetGuildBans(Id);
         }
 
 
-        public Ban GetBan(long guildId, long userId)
+        public Ban GetBan(long userId)
         {
-            return Client.GetGuildBan(guildId, userId);
+            return Client.GetGuildBan(Id, userId);
         }
 
 
@@ -141,6 +141,9 @@ namespace Discord
 
         public Image GetIcon()
         {
+            if (IconId == null)
+                return null;
+
             var resp = new HttpClient().GetAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png").Result;
 
             if (resp.StatusCode == HttpStatusCode.NotFound)

@@ -30,17 +30,22 @@ namespace Discord
             get { return _image.ImageBase64; }
         }
 
+        internal bool IconSet { get; private set; }
         [JsonIgnore]
         public Image Icon
         {
             get { return _image.Image; }
-            set { _image.Image = value; }
+            set
+            { 
+                _image.Image = value;
+                IconSet = true;
+            }
         }
         #endregion
 
         internal Property<GuildVerificationLevel> VerificationProperty = new Property<GuildVerificationLevel>();
         [JsonProperty("verification_level")]
-        public GuildVerificationLevel Verification
+        public GuildVerificationLevel VerificationLevel
         {
             get { return VerificationProperty; }
             set { VerificationProperty.Value = value; }

@@ -10,12 +10,12 @@
 
         public void Add(Permission permission)
         {
-            _perms = PermissionCalculator.Add(_perms, permission);
+            _value = PermissionCalculator.Add(_value, permission);
         }
 
         public void Remove(Permission permission)
         {
-            _perms = PermissionCalculator.Remove(_perms, permission);
+            _value = PermissionCalculator.Remove(_value, permission);
         }
     }
 }

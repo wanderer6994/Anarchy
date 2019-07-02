@@ -9,7 +9,7 @@ namespace Discord.Webhook
     {
         public Hook()
         {
-            OnClientUpdated += (sender, e) => Creator.Client = Client;
+            OnClientUpdated += (sender, e) => Creator.SetClient(Client);
         }
 
         [JsonProperty("id")]

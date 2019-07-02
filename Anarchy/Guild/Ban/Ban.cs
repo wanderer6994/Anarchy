@@ -6,7 +6,7 @@ namespace Discord
     {
         public Ban()
         {
-            OnClientUpdated += (sender, e) => User.Client = Client;
+            OnClientUpdated += (sender, e) => User.SetClient(Client);
         }
 
         [JsonProperty("reason")]
