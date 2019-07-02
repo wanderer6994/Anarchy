@@ -98,6 +98,9 @@ private static void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs 
 }
 ```
 
+# Example projects can be found here
+https://github.com/iLinked1337/Anarchy/tree/beta-releases/Example%20projects/GuildDuplicator
+
 
 
 ### Subscribe or i'll eat ur kids
