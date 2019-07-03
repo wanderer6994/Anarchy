@@ -9,24 +9,25 @@ namespace Discord.Gateway
         {
             OnClientUpdated += (sender, e) =>
             {
-                if (User != null) User.SetClient(Client);
+                User.SetClient(Client);
                 Guilds.SetClientsInList(Client);
             };
         }
 
-        [JsonProperty("session_id")]
-        internal string SessionId { get; private set; }
-
         [JsonProperty("user")]
         public ClientUser User { get; private set; }
 
+        //if you're using a bot token only the id will be filled in. actual full guild comes in GUILD_CREATE events
         [JsonProperty("guilds")]
-        public IReadOnlyList<UnavailableGuild> Guilds { get; private set; }
+        public IReadOnlyList<Guild> Guilds { get; private set; }
+
+        [JsonProperty("relationships")]
+        public List<Relationship> Relationships { get; private set; }
 
 
         public override string ToString()
         {
-            return $"{User} ({User.Id})";
+            return User.ToString();
         }
     }
 }

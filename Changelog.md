@@ -1,3 +1,12 @@
+# 0.1.0.1
+
+Added embed support for webhooks.<br><br>
+Added support for all different channels (WIP).<br><br>
+Improved relationship functionality.
+<br><br><br>
+
+
+
 # 0.1.0.0 [STABLE]
 (Please keep in mind that these are only the major/important changes. There has been a lot more than written here)
 

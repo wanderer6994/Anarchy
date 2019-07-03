@@ -19,7 +19,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return $"{Name} ({Url})";
+            return Name;
         }
     }
 }

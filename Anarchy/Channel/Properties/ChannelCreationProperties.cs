@@ -17,7 +17,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return $"Type: {Type} Name: {Name}";
+            return Type.ToString();
         }
     }
 }

@@ -21,6 +21,12 @@
         }
 
 
+        public static implicit operator int(Permissions instance)
+        {
+            return instance._value;
+        }
+
+
         public override bool Equals(object obj)
         {
             return obj is Permissions permissions &&
@@ -31,12 +37,6 @@
         public override int GetHashCode()
         {
             return -1939223833 + _value.GetHashCode();
-        }
-
-
-        public static implicit operator int(Permissions instance)
-        {
-            return instance._value;
         }
 
 

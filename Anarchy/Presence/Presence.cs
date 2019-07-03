@@ -2,14 +2,8 @@
 
 namespace Discord.Gateway
 {
-    internal class GatewayPresence
+    internal class Presence
     {
-        public GatewayPresence()
-        {
-            Status = "online";
-            Since = 0;
-        }
-
         [JsonProperty("status")]
         public string Status { get; set; }
 

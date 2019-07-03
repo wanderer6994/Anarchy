@@ -1,60 +1,102 @@
-﻿using Newtonsoft.Json;
+﻿using Discord.Webhook;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Discord
 {
-    public class Channel : BaseChannel
+    public class Channel : Controllable
     {
-        [JsonProperty("topic")]
-        public string Topic { get; private set; }
-        
-        [JsonProperty("guild_id")]
-        public long GuildId { get; private set; }
+        [JsonProperty("id")]
+        public long Id { get; private set; }
 
-        [JsonProperty("position")]
-        public int Position { get; private set; }
+        [JsonProperty("name")]
+        public string Name { get; protected set; }
 
-        [JsonProperty("nsfw")]
-        public bool Nsfw { get; private set; }
-        
-        [JsonProperty("parent_id")]
-        public long? ParentId { get; private set; }
-
-        [JsonProperty("permission_overwrites")]
-        public IReadOnlyList<PermissionOverwrite> PermissionOverwrites { get; private set; }
+        [JsonProperty("type")]
+        public ChannelType Type { get; private set; }
 
 
-        public void Update()
+        public GuildChannel Delete()
         {
-            Channel channel = Client.GetChannel(Id);
-            Name = channel.Name;
-            Topic = channel.Topic;
-            Position = channel.Position;
-            Nsfw = channel.Nsfw;
-            ParentId = channel.ParentId;
-            PermissionOverwrites = channel.PermissionOverwrites;
+            return Client.DeleteChannel(Id);
         }
 
 
-        public Channel Modify(ChannelModProperties properties)
+        public bool TriggerTyping()
         {
-            if (!properties.NameProperty.Set)
-                properties.Name = Name;
-            if (!properties.NsfwProperty.Set)
-                properties.Nsfw = Nsfw;
-            if (!properties.PositionProperty.Set)
-                properties.Position = Position;
-            if (!properties.ParentProperty.Set)
-                properties.ParentId = ParentId;
+            return Client.TriggerTyping(Id);
+        }
 
-            Channel channel = Client.ModifyChannel(Id, properties);
-            Name = channel.Name;
-            Topic = channel.Topic;
-            Position = channel.Position;
-            Nsfw = channel.Nsfw;
-            ParentId = channel.ParentId;
-            PermissionOverwrites = channel.PermissionOverwrites;
-            return channel;
+
+        public Message SendMessage(MessageProperties properties)
+        {
+            return Client.SendMessage(Id, properties);
+        }
+
+
+        public Message SendMessage(string message, bool tts = false)
+        {
+            return Client.SendMessage(Id, message, tts);
+        }
+
+
+        public IReadOnlyList<Message> GetMessages(int limit = 100, int afterId = 0)
+        {
+            return Client.GetChannelMessages(Id, limit, afterId);
+        }
+
+
+        public IReadOnlyList<Message> GetPinnedMessages()
+        {
+            return Client.GetChannelPinnedMessages(Id);
+        }
+
+
+        public bool PinMessage(long messageId)
+        {
+            return Client.PinChannelMessage(Id, messageId);
+        }
+
+
+        public bool PinMessage(Message message)
+        {
+            return PinMessage(message.Id);
+        }
+
+
+        public bool UnpinMessage(long messageId)
+        {
+            return Client.UnpinChannelMessage(Id, messageId);
+        }
+
+
+        public bool UnpinMessage(Message message)
+        {
+            return Client.UnpinChannelMessage(Id, message.Id);
+        }
+
+
+        public Invite CreateInvite(InviteProperties properties = null)
+        {
+            return Client.CreateInvite(Id, properties);
+        }
+
+
+        public IReadOnlyList<Hook> GetWebhooks()
+        {
+            return Client.GetChannelWebhooks(Id);
+        }
+
+
+        public Hook CreateWebhook(WebhookProperties properties)
+        {
+            return Client.CreateChannelWebhook(Id, properties);
+        }
+
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

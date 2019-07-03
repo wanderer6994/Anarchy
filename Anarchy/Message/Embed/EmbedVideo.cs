@@ -16,7 +16,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return $"{Url} (W: {Width}, H: {Height})";
+            return $"W: {Width}, H: {Height}";
         }
     }
 }

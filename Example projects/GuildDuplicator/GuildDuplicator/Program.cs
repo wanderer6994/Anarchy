@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace GuildDuplicator
 {
+    //makes it easier to make sure categories get created first (which they need to)
     class OrganizedChannelList
     {
         public OrganizedChannelList(IReadOnlyList<Channel> channels)
@@ -30,20 +31,24 @@ namespace GuildDuplicator
     {
         static void Main(string[] args)
         {
+            //Create a client with the token
             Console.Write("Token: ");
             DiscordClient client = new DiscordClient(Console.ReadLine());
 
+            //find the guild
             Console.Write($"Guild id: ");
             Guild targetGuild = client.GetGuild(long.Parse(Console.ReadLine()));
 
             Console.WriteLine("Duplicating guild...");
 
+            //create the guild and modify it with settings from the target
             Guild ourGuild = client.CreateGuild(new GuildCreationProperties() { Name = targetGuild.Name, Icon = targetGuild.GetIcon(), Region = targetGuild.Region });
             ourGuild.Modify(new GuildModProperties() { VerificationLevel = targetGuild.VerificationLevel, DefaultNotifications = targetGuild.DefaultNotifications });
 
             #region delete our channels
             Console.WriteLine("Deleting default guild channels...");
 
+            //when you create a guild it automatically creates some channels, which we have to delete
             foreach (var channel in ourGuild.GetChannels())
             {
                 channel.Delete();
@@ -59,6 +64,7 @@ namespace GuildDuplicator
 
             Console.WriteLine("Duplicating categories...");
 
+            //duplicate category channels
             List<CategoryDupe> ourCategories = new List<CategoryDupe>();
             foreach (var category in channels.Categories)
             {
@@ -76,6 +82,7 @@ namespace GuildDuplicator
 
             Console.WriteLine("Duplicating channels...");
 
+            //duplicate all other channels
             foreach (var channel in channels.TextChannels.Concat(channels.VoiceChannels))
             {
                 Channel ourChannel = ourGuild.CreateChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null, Type = channel.Type });
@@ -90,9 +97,10 @@ namespace GuildDuplicator
             #region create roles
             Console.WriteLine("Duplicating roles...");
 
+            //duplicate roles
             foreach (var role in targetGuild.GetRoles())
             {
-                if (role.Name == "@everyone")
+                if (role.Name == "@everyone") //we don't wanna create another @everyone role, so we just modify ours instead
                     ourGuild.GetRoles().First(r => r.Name == "@everyone").Modify(new RoleProperties() { Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
                 else
                     ourGuild.CreateRole(new RoleProperties() { Name = role.Name, Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });

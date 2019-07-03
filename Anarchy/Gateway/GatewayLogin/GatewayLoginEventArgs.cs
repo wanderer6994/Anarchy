@@ -8,5 +8,11 @@
         {
             Login = login;
         }
+
+
+        public override string ToString()
+        {
+            return Login.ToString();
+        }
     }
 }

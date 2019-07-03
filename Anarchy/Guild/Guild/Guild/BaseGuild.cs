@@ -85,7 +85,7 @@ namespace Discord
         }
 
 
-        public IReadOnlyList<Channel> GetChannels()
+        public virtual IReadOnlyList<GuildChannel> GetChannels()
         {
             return Client.GetGuildChannels(Id);
         }
@@ -115,7 +115,7 @@ namespace Discord
         }
 
 
-        public Channel CreateChannel(ChannelCreationProperties properties)
+        public GuildChannel CreateChannel(ChannelCreationProperties properties)
         {
             return Client.CreateGuildChannel(Id, properties);
         }
@@ -155,7 +155,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return $"{Name} ({Id})";
+            return Name;
         }
     }
 }

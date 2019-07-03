@@ -12,11 +12,5 @@ namespace Discord
 
         [JsonProperty("temporary")]
         public bool Temporary { get; set; }
-
-
-        public override string ToString()
-        {
-            return $"Max age: {MaxAge} Temporary: {Temporary}";
-        }
     }
 }

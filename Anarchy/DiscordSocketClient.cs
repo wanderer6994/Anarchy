@@ -89,6 +89,8 @@ namespace Discord.Gateway
             var payload = JsonConvert.DeserializeObject<GatewayResponse>(result.Data);
             Sequence = payload.Sequence;
 
+            System.Console.WriteLine($"{payload.Opcode} | {payload.Title}");
+
             switch (payload.Opcode)
             {
                 case GatewayOpcode.Event:
@@ -98,7 +100,7 @@ namespace Discord.Gateway
                             LoggedIn = true;
                             GatewayLogin login = payload.Deserialize<GatewayLogin>().SetClient(this);
                             this.User = login.User;
-                            OnLoggedIn?.Invoke(this, new GatewayLoginEventArgs(login));
+                            OnLoggedIn?.Invoke(this, new GatewayLoginEventArgs(payload.Deserialize<GatewayLogin>().SetClient(this)));
                             break;
                         case "GUILD_CREATE":
                             OnJoinedGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
@@ -110,13 +112,13 @@ namespace Discord.Gateway
                             OnLeftGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
                             break;
                         case "CHANNEL_CREATE":
-                            OnChannelCreated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<Channel>().SetClient(this)));
+                            OnChannelCreated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
                             break;
                         case "CHANNEL_UPDATE":
-                            OnChannelUpdated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<Channel>().SetClient(this)));
+                            OnChannelUpdated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
                             break;
                         case "CHANNEL_DELETE":
-                            OnChannelDeleted?.Invoke(this, new ChannelEventArgs(payload.Deserialize<Channel>().SetClient(this)));
+                            OnChannelDeleted?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
                             break;
                         case "GUILD_ROLE_CREATE":
                             OnRoleCreated?.Invoke(this, new RoleEventArgs(payload.Deserialize<GatewayRole>().Role.SetClient(this)));
@@ -136,8 +138,8 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_MEMBERS_CHUNK":
                             List<User> users = new List<User>();
-                            foreach (var member in payload.Deserialize<GuildMemberList>().Members.SetClientsInList(this))
-                                users.Add(member.User);
+                            foreach (var member in payload.Deserialize<GuildMemberList>().Members)
+                                users.Add(member.User.SetClient(this));
 
                             OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
                             break;

@@ -11,7 +11,7 @@ namespace Discord.Gateway
         public SuperProperties Properties { get; set; }
 
         [JsonProperty("presence")]
-        public GatewayPresence Presence { get; set; }
+        public Presence Presence { get; set; }
 
         [JsonProperty("compress")]
         public bool Compress { get; set; }

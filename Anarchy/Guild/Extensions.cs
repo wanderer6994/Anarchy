@@ -106,14 +106,14 @@ namespace Discord
         }
 
 
-        public static IReadOnlyList<Channel> GetGuildChannels(this DiscordClient client, long guildId)
+        public static IReadOnlyList<GuildChannel> GetGuildChannels(this DiscordClient client, long guildId)
         {
             var resp = client.HttpClient.Get($"/guilds/{guildId}/channels");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Deserialize<IReadOnlyList<Channel>>().SetClientsInList(client);
+            return resp.Deserialize<IReadOnlyList<GuildChannel>>().SetClientsInList(client);
         }
 
 

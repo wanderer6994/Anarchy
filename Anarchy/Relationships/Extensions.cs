@@ -4,9 +4,14 @@ using System.Net;
 
 namespace Discord
 {
-    public static class RelationsExtensions
+    public static class RelationshipsExtensions
     {
-        #region friending
+        public static List<Relationship> GetRelationships(this DiscordClient client)
+        {
+            return client.HttpClient.Get($"/users/@me/relationships").Deserialize<List<Relationship>>();
+        }
+
+
         public static bool AddFriend(this DiscordClient client, string username, int discriminator)
         {
             return client.HttpClient.Post("/users/@me/relationships",
@@ -20,28 +25,9 @@ namespace Discord
         }
 
 
-        public static bool RemoveFriend(this DiscordClient client, long userId)
-        {
-            var resp = client.HttpClient.Delete($"/users/@me/relationships/{userId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new UserNotFoundException(client, userId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
-        }
-
-
-        public static bool RemoveFriend(this DiscordClient client, User user)
-        {
-            return client.RemoveFriend(user.Id);
-        }
-        #endregion
-
-
-        #region blocking
         public static bool BlockUser(this DiscordClient client, long userId)
         {
-            var resp = client.HttpClient.Put($"/users/@me/relationships/{userId}", "{\"type\": 2}");
+            var resp = client.HttpClient.Put($"/users/@me/relationships/{userId}", JsonConvert.SerializeObject(new Relationship() { Type = RelationshipType.Blocked }));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new UserNotFoundException(client, userId);
@@ -56,29 +42,34 @@ namespace Discord
         }
 
 
-        public static bool UnblockUser(this DiscordClient client, long userId)
+        //this is used for removing a friend, blocking a user, and cancelling a friend request
+        public static bool RemoveRelationship(this DiscordClient client, long userId)
         {
-            return client.RemoveFriend(userId);
+            var resp = client.HttpClient.Delete($"/users/@me/relationships/{userId}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new UserNotFoundException(client, userId);
+
+            return resp.StatusCode == HttpStatusCode.NoContent;
         }
 
 
-        public static bool UnblockUser(this DiscordClient client, User user)
+        public static bool RemoveRelationship(this DiscordClient client, User user)
         {
-            return client.UnblockUser(user.Id);
+            return client.RemoveRelationship(user.Id);
         }
-        #endregion
 
 
         #region DMs
         public static IReadOnlyList<Channel> GetClientDMs(this DiscordClient client)
         {
-            return client.HttpClient.Get($"/users/@me/channels").Deserialize<IReadOnlyList<Channel>>().SetClientsInList(client);
+            return client.HttpClient.Get($"/users/@me/channels").Deserialize<IReadOnlyList<GuildChannel>>().SetClientsInList(client);
         }
 
 
         public static Channel CreateDM(this DiscordClient client, long recipientId)
         {
-            return client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}").Deserialize<Channel>().SetClient(client);
+            return client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}").Deserialize<GuildChannel>().SetClient(client);
         }
 
         public static Channel CloseDM(this DiscordClient client, long channelId)

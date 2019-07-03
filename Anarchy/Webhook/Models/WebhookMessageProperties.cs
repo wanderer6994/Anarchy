@@ -1,9 +1,15 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Discord.Webhook
 {
-    public class WebhookMessage
+    public class WebhookMessageProperties
     {
+        public WebhookMessageProperties()
+        {
+            Embeds = new List<Embed>();
+        }
+
         [JsonProperty("username")]
         public string Username { get; set; }
 
@@ -12,5 +18,8 @@ namespace Discord.Webhook
 
         [JsonProperty("avatar_url")]
         public string Avatar { get; set; }
+
+        [JsonProperty("embeds")]
+        public List<Embed> Embeds { get; set; }
     }
 }

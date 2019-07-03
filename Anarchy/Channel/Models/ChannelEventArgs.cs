@@ -2,9 +2,9 @@
 {
     public class ChannelEventArgs
     {
-        public Channel Channel { get; private set; }
+        public GuildChannel Channel { get; private set; }
 
-        public ChannelEventArgs(Channel channel)
+        public ChannelEventArgs(GuildChannel channel)
         {
             Channel = channel;
         }

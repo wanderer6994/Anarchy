@@ -37,7 +37,7 @@ namespace Discord.Webhook
 
         public override string ToString()
         {
-            return $"Channel: {ChannelId} Name: {Name}";
+            return Name;
         }
     }
 }

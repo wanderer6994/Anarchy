@@ -1,0 +1,1 @@
+extend GuildChannel into TextChannel and VoiceChannel (possibly also Category, but idk if there's anything special about it yet).

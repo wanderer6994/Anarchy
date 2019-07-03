@@ -97,10 +97,7 @@ private static void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs 
    Task.Run(() => Users = client.GetAllGuildMembers(420));
 }
 ```
-
-# Example projects can be found here
-https://github.com/iLinked1337/Anarchy/tree/beta-releases/Example%20projects/GuildDuplicator
-
+Example projects can be found in 'Example projects'
 
 
 ### Subscribe or i'll eat ur kids

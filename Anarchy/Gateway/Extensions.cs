@@ -8,7 +8,7 @@ namespace Discord.Gateway
 {
     public static class GatewayExtensions
     {
-        private static void Send(this WebSocket socket, object json)
+        internal static void Send(this WebSocket socket, object json)
         {
             socket.Send(JsonConvert.SerializeObject(json));
         }
@@ -33,22 +33,6 @@ namespace Discord.Gateway
                 client.Socket.Send(new GatewayRequest<int?>(GatewayOpcode.Heartbeat) { Data = client.Sequence });
             }
         }
-        
-
-        public static void ChangeStatus(this DiscordSocketClient client, UserStatus status)
-        {
-            var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.PresenceChange);
-            req.Data.Status = status != UserStatus.DoNotDisturb ? status.ToString().ToLower() : "dnd";
-            client.Socket.Send(req);
-        }
-
-
-        public static void ChangeActivity(this DiscordSocketClient client, Activity activity)
-        {
-            var req = new GatewayRequest<GatewayPresence>(GatewayOpcode.PresenceChange);
-            req.Data.Activity = activity;
-            client.Socket.Send(req);
-        }
 
 
         public static void GetGuildMembers(this DiscordSocketClient client, long guildId, int limit = 100)
@@ -72,7 +56,7 @@ namespace Discord.Gateway
 
             client.GetGuildMembers(guildId, 0);
 
-            while (newMembers.Count == 1000 || newMembers.Count == 0) Thread.Sleep(10);
+            while (newMembers.Count == 1000 || newMembers.Count == 0) Thread.Sleep(15);
 
             return members;
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http;
 
 namespace Discord
 {
@@ -10,6 +9,12 @@ namespace Discord
         public ImageNotFoundException(string imageId) : base("Image not found")
         {
             ImageId = imageId;
+        }
+
+
+        public override string ToString()
+        {
+            return ImageId;
         }
     }
 }

@@ -27,11 +27,5 @@ namespace Discord
             set { _image.Image = value; }
         }
         #endregion
-
-
-        public override string ToString()
-        {
-            return $"Name: {Name} Region: {Region}";
-        }
     }
 }

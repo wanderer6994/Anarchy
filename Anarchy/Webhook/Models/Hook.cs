@@ -65,7 +65,7 @@ namespace Discord.Webhook
         }
 
 
-        public bool SendMessage(WebhookMessage message)
+        public bool SendMessage(WebhookMessageProperties message)
         {
             return Client.HttpClient.Post($"/webhooks/{Id}/{Token}", JsonConvert.SerializeObject(message)).StatusCode == HttpStatusCode.NoContent;
         }
@@ -73,7 +73,7 @@ namespace Discord.Webhook
 
         public bool SendMessage(string content)
         {
-            WebhookMessage message = new WebhookMessage
+            WebhookMessageProperties message = new WebhookMessageProperties
             {
                 Username = Name,
                 Content = content,
@@ -98,7 +98,7 @@ namespace Discord.Webhook
 
         public override string ToString()
         {
-            return $"{Id} ({Token})";
+            return Token;
         }
     }
 }

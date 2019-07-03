@@ -21,7 +21,7 @@ namespace Discord
         public PartialGuild Guild { get; private set; }
 
         [JsonProperty("channel")]
-        public PartialChannel Channel { get; private set; }
+        public Channel Channel { get; private set; }
 
         [JsonProperty("inviter")]
         public User Creator { get; private set; }

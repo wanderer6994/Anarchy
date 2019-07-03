@@ -16,7 +16,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return $"Error: {ErrorJson}";
+            return ErrorJson;
         }
     }
 }

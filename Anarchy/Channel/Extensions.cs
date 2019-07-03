@@ -7,36 +7,36 @@ namespace Discord
     public static class ChannelExtensions
     {
         #region management
-        public static Channel CreateGuildChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
+        public static GuildChannel CreateGuildChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
         {
             var resp = client.HttpClient.Post($"/guilds/{guildId}/channels", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new GuildNotFoundException(client, guildId);
 
-            return resp.Deserialize<Channel>().SetClient(client);
+            return resp.Deserialize<GuildChannel>().SetClient(client);
         }
 
 
-        public static Channel ModifyChannel(this DiscordClient client, long channelId, ChannelModProperties properties)
+        public static GuildChannel ModifyChannel(this DiscordClient client, long channelId, ChannelModProperties properties)
         {
             var resp = client.HttpClient.Patch($"/channels/{channelId}", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Deserialize<Channel>().SetClient(client);
+            return resp.Deserialize<GuildChannel>().SetClient(client);
         }
 
 
-        public static Channel DeleteChannel(this DiscordClient client, long channelId)
+        public static GuildChannel DeleteChannel(this DiscordClient client, long channelId)
         {
             var resp = client.HttpClient.Delete($"/channels/{channelId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Deserialize<Channel>().SetClient(client);
+            return resp.Deserialize<GuildChannel>().SetClient(client);
         }
         #endregion
 
@@ -100,9 +100,20 @@ namespace Discord
         #endregion
 
 
-        public static Channel LeaveGroup(this DiscordClient client, long groupId)
+        public static Group CreateGroup(this DiscordClient client, List<long> recipients)
         {
-            return client.DeleteChannel(groupId);
+            return client.HttpClient.Post($"/users/@me/channels", JsonConvert.SerializeObject(new RecipientList() { Recipients = recipients })).Deserialize<Group>().SetClient(client);
+        }
+
+
+        public static Group LeaveGroup(this DiscordClient client, long groupId)
+        {
+            var resp = client.HttpClient.Delete($"/channels/{groupId}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new ChannelNotFoundException(client, groupId);
+
+            return resp.Deserialize<Group>().SetClient(client);
         }
     }
 }

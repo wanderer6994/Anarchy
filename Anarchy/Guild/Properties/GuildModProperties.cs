@@ -58,11 +58,5 @@ namespace Discord
             get { return NotificationsProperty; }
             set { NotificationsProperty.Value = value; }
         }
-
-
-        public override string ToString()
-        {
-            return $"Name: {Name} Region: {Region}";
-        }
     }
 }
