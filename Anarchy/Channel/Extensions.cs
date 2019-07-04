@@ -6,50 +6,143 @@ namespace Discord
 {
     public static class ChannelExtensions
     {
-        #region management
-        public static GuildChannel CreateGuildChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
-        {
-            var resp = client.HttpClient.Post($"/guilds/{guildId}/channels", JsonConvert.SerializeObject(properties));
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new GuildNotFoundException(client, guildId);
-
-            return resp.Deserialize<GuildChannel>().SetClient(client);
-        }
-
-
-        public static GuildChannel ModifyChannel(this DiscordClient client, long channelId, ChannelModProperties properties)
-        {
-            var resp = client.HttpClient.Patch($"/channels/{channelId}", JsonConvert.SerializeObject(properties));
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, channelId);
-
-            return resp.Deserialize<GuildChannel>().SetClient(client);
-        }
-
-
-        public static GuildChannel DeleteChannel(this DiscordClient client, long channelId)
-        {
-            var resp = client.HttpClient.Delete($"/channels/{channelId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, channelId);
-
-            return resp.Deserialize<GuildChannel>().SetClient(client);
-        }
-        #endregion
-
-
-        public static Channel GetChannel(this DiscordClient client, long channelId)
+        private static T getChannel<T>(this DiscordClient client, long channelId) where T : Channel
         {
             var resp = client.HttpClient.Get($"/channels/{channelId}");
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
+            return resp.Deserialize<T>().SetClient(client);
+        }
+
+
+        private static T modifyChannel<T, PropertyT>(this DiscordClient client, long channelId, PropertyT properties) where PropertyT : ChannelProperties where T : Channel
+        {
+            var resp = client.HttpClient.Patch($"/channels/{channelId}", JsonConvert.SerializeObject(properties));
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new ChannelNotFoundException(client, channelId);
+
+            return resp.Deserialize<T>().SetClient(client);
+        }
+
+
+        #region guild channel
+        public static GuildChannel GetGuildChannel(this DiscordClient client, long channelId)
+        {
+            return client.getChannel<GuildChannel>(channelId);
+        }
+
+
+        public static GuildTextChannel GetGuildTextChannel(this DiscordClient client, long channelId)
+        {
+            return client.getChannel<GuildTextChannel>(channelId);
+        }
+
+
+        public static GuildVoiceChannel GetGuildVoiceChannel(this DiscordClient client, long channelId)
+        {
+            return client.getChannel<GuildVoiceChannel>(channelId);
+        }
+
+
+        private static T createGuildChannel<T>(this DiscordClient client, long guildId, ChannelCreationProperties properties) where T : GuildChannel
+        {
+            var resp = client.HttpClient.Post($"/guilds/{guildId}/channels", JsonConvert.SerializeObject(properties));
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new GuildNotFoundException(client, guildId);
+
+            return resp.Deserialize<T>().SetClient(client);
+        }
+
+
+        public static GuildChannel CreateGuildChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
+        {
+            return client.createGuildChannel<GuildChannel>(guildId, properties);
+        }
+
+
+        public static GuildTextChannel CreateGuildTextChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
+        {
+            return client.createGuildChannel<GuildTextChannel>(guildId, properties);
+        }
+
+
+        public static GuildVoiceChannel CreateGuildVoiceChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
+        {
+            return client.createGuildChannel<GuildVoiceChannel>(guildId, properties);
+        }
+
+
+        public static GuildChannel ModifyGuildChannel(this DiscordClient client, long channelId, GuildChannelProperties properties)
+        {
+            return client.modifyChannel<GuildChannel, GuildChannelProperties>(channelId, properties);
+        }
+
+
+        public static GuildTextChannel ModifyGuildTextChannel(this DiscordClient client, long channelId, GuildTextChannelProperties properties)
+        {
+            return client.modifyChannel<GuildTextChannel, GuildTextChannelProperties>(channelId, properties);
+        }
+
+
+        public static GuildVoiceChannel ModifyGuildVoiceChannel(this DiscordClient client, long channelId, GuildVoiceChannelProperties properties)
+        {
+            return client.modifyChannel<GuildVoiceChannel, GuildVoiceChannelProperties>(channelId, properties);
+        }
+        #endregion
+
+
+        #region channel
+        public static Channel GetChannel(this DiscordClient client, long channelId)
+        {
+            return client.getChannel<Channel>(channelId);
+        }
+
+
+        public static Channel ModifyChannel(this DiscordClient client, long channelId, ChannelProperties properties)
+        {
+            return client.modifyChannel<Channel, ChannelProperties>(channelId, properties);
+        }
+
+
+        public static Channel DeleteChannel(this DiscordClient client, long channelId)
+        {
+            var resp = client.HttpClient.Delete($"/channels/{channelId}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new ChannelNotFoundException(client, channelId);
+
             return resp.Deserialize<Channel>().SetClient(client);
         }
+        #endregion
+
+
+        #region group
+        public static Group GetGroup(this DiscordClient client, long groupId)
+        {
+            return client.getChannel<Group>(groupId);
+        }
+
+
+        public static Group CreateGroup(this DiscordClient client, List<long> recipients)
+        {
+            return client.HttpClient.Post($"/users/@me/channels", JsonConvert.SerializeObject(new RecipientList() { Recipients = recipients })).Deserialize<Group>().SetClient(client);
+        }
+
+
+        public static Group LeaveGroup(this DiscordClient client, long groupId)
+        {
+            var resp = client.HttpClient.Delete($"/channels/{groupId}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new ChannelNotFoundException(client, groupId);
+
+            return resp.Deserialize<Group>().SetClient(client);
+        }
+        #endregion
 
 
         #region messages
@@ -98,22 +191,5 @@ namespace Discord
             return resp.StatusCode == HttpStatusCode.NoContent;
         }
         #endregion
-
-
-        public static Group CreateGroup(this DiscordClient client, List<long> recipients)
-        {
-            return client.HttpClient.Post($"/users/@me/channels", JsonConvert.SerializeObject(new RecipientList() { Recipients = recipients })).Deserialize<Group>().SetClient(client);
-        }
-
-
-        public static Group LeaveGroup(this DiscordClient client, long groupId)
-        {
-            var resp = client.HttpClient.Delete($"/channels/{groupId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, groupId);
-
-            return resp.Deserialize<Group>().SetClient(client);
-        }
     }
 }

@@ -18,7 +18,7 @@ namespace Discord
         public string Code { get; private set; }
 
         [JsonProperty("guild")]
-        public PartialGuild Guild { get; private set; }
+        public BaseGuild Guild { get; private set; }
 
         [JsonProperty("channel")]
         public Channel Channel { get; private set; }

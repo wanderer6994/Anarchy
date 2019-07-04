@@ -50,7 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Channel\Channel\Group.cs" />
+    <Compile Include="Channel\Channel\GuildTextChannel.cs" />
+    <Compile Include="Channel\Channel\GuildVoiceChannel.cs" />
     <Compile Include="Channel\Models\RecipientList.cs" />
+    <Compile Include="Channel\Properties\GuildChannelProperties.cs" />
+    <Compile Include="Channel\Properties\GuildTextChannelProperties.cs" />
+    <Compile Include="Channel\Properties\GuildVoiceChannelProperties.cs" />
     <Compile Include="Presence\Activity\Activity.cs" />
     <Compile Include="Presence\Activity\ActivityType.cs" />
     <Compile Include="AuditLog\Extensions.cs" />
@@ -61,7 +66,7 @@
     <Compile Include="AuditLog\Models\AuditLogFilters.cs" />
     <Compile Include="Channel\Channel\Channel.cs" />
     <Compile Include="Channel\Models\ChannelEventArgs.cs" />
-    <Compile Include="Channel\Properties\ChannelModProperties.cs" />
+    <Compile Include="Channel\Properties\ChannelProperties.cs" />
     <Compile Include="Gateway\GatewayLogin\GatewayLoginEventArgs.cs" />
     <Compile Include="Guild\Ban\Ban.cs" />
     <Compile Include="Guild\Ban\BanNotFoundException.cs" />

@@ -1,44 +1,45 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Discord
 {
-    public class GuildChannel : Channel
-    {   
-        [JsonProperty("guild_id")]
-        public long GuildId { get; private set; }
+    public class GuildTextChannel : GuildChannel
+    {
+        [JsonProperty("topic")]
+        public string Topic { get; private set; }
 
-        [JsonProperty("position")]
-        public int Position { get; protected set; }
-        
-        [JsonProperty("parent_id")]
-        public long? ParentId { get; protected set; }
-
-        [JsonProperty("permission_overwrites")]
-        public IReadOnlyList<PermissionOverwrite> PermissionOverwrites { get; protected set; }
+        [JsonProperty("nsfw")]
+        public bool Nsfw { get; private set; }
 
 
         public override void Update()
         {
-            GuildChannel channel = Client.GetGuildChannel(Id);
+            GuildTextChannel channel = Client.GetGuildTextChannel(Id);
             Name = channel.Name;
+            Topic = channel.Topic;
+            Nsfw = channel.Nsfw;
             Position = channel.Position;
             ParentId = channel.ParentId;
             PermissionOverwrites = channel.PermissionOverwrites;
         }
 
 
-        public GuildChannel Modify(GuildChannelProperties properties)
+        public GuildTextChannel Modify(GuildTextChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
                 properties.Name = Name;
+            if (!properties.TopicProperty.Set)
+                properties.Topic = Topic;
+            if (!properties.NsfwProperty.Set)
+                properties.Nsfw = Nsfw;
             if (!properties.PositionProperty.Set)
                 properties.Position = Position;
             if (!properties.ParentProperty.Set)
                 properties.ParentId = ParentId;
 
-            GuildChannel channel = Client.ModifyGuildChannel(Id, properties);
+            GuildTextChannel channel = Client.ModifyGuildTextChannel(Id, properties);
             Name = channel.Name;
+            Topic = channel.Topic;
+            Nsfw = channel.Nsfw;
             Position = channel.Position;
             ParentId = channel.ParentId;
             PermissionOverwrites = channel.PermissionOverwrites;

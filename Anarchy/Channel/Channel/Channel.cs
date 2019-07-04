@@ -16,7 +16,24 @@ namespace Discord
         public ChannelType Type { get; private set; }
 
 
-        public GuildChannel Delete()
+        public virtual void Update()
+        {
+            Name = Client.GetChannel(Id).Name;
+        }
+
+
+        public Channel Modify(ChannelProperties properties)
+        {
+            if (!properties.NameProperty.Set)
+                return this;
+
+            Channel channel = Client.ModifyChannel(Id, properties);
+            Name = channel.Name;
+            return channel;
+        }
+
+
+        public Channel Delete()
         {
             return Client.DeleteChannel(Id);
         }

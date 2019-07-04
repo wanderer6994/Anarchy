@@ -115,10 +115,24 @@ namespace Discord
         }
 
 
+        #region create channel
         public GuildChannel CreateChannel(ChannelCreationProperties properties)
         {
             return Client.CreateGuildChannel(Id, properties);
         }
+
+
+        public GuildTextChannel CreateTextChannel(ChannelCreationProperties properties)
+        {
+            return Client.CreateGuildTextChannel(Id, properties);
+        }
+
+
+        public GuildVoiceChannel CreateVoiceChannel(ChannelCreationProperties properties)
+        {
+            return Client.CreateGuildVoiceChannel(Id, properties);
+        }
+        #endregion
 
 
         public Emoji CreateEmoji(EmojiCreationProperties properties)

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
+    //This does not currently have a Modify() method bcuz idk how that works yet
     public class Group : Channel
     {
         [JsonProperty("icon")]
@@ -16,6 +17,16 @@ namespace Discord
 
         [JsonProperty("recipients")]
         public List<User> Recipients { get; private set; }
+
+
+        public override void Update()
+        {
+            Group group = Client.GetGroup(Id);
+            Name = group.Name;
+            IconId = group.IconId;
+            OwnerId = group.OwnerId;
+            Recipients = group.Recipients;
+        }
 
 
         public Image GetIcon()
