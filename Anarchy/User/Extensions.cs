@@ -38,7 +38,6 @@ namespace Discord
 
         public static bool SetHypesquad(this DiscordClient client, HypesquadHouse house)
         {
-            //the request protocol is different if we don't want any hypesquad
             if (house == HypesquadHouse.None)
                 return client.HttpClient.Delete("/hypesquad/online").StatusCode == HttpStatusCode.NoContent;
 
@@ -48,11 +47,8 @@ namespace Discord
 
         public static bool ChangeSettings(this DiscordClient client, UserSettings settings)
         {
-            if (client.User != null)
-            {
-                if (settings.Email == null) settings.Email = client.User.Email;
-                if (settings.Username == null) settings.Username = client.User.Username;
-            }
+            if (settings.Email == null) settings.Email = client.User.Email;
+            if (settings.Username == null) settings.Username = client.User.Username;
 
             if (client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings)).StatusCode == HttpStatusCode.OK)
             {

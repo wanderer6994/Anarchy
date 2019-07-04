@@ -17,15 +17,43 @@ namespace Discord
         }
 
 
-        private static T modifyChannel<T, PropertyT>(this DiscordClient client, long channelId, PropertyT properties) where PropertyT : ChannelProperties where T : Channel
+        private static Treturn modifyChannel<Treturn, TProperty>(this DiscordClient client, long channelId, TProperty properties) where TProperty : ChannelProperties where Treturn : Channel
         {
             var resp = client.HttpClient.Patch($"/channels/{channelId}", JsonConvert.SerializeObject(properties));
 
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ChannelNotFoundException(client, channelId);
 
-            return resp.Deserialize<T>().SetClient(client);
+            return resp.Deserialize<Treturn>().SetClient(client);
         }
+
+
+        #region channel
+        public static Channel GetChannel(this DiscordClient client, long channelId)
+        {
+            return client.getChannel<Channel>(channelId);
+        }
+
+
+
+
+
+        public static Channel ModifyChannel(this DiscordClient client, long channelId, ChannelProperties properties)
+        {
+            return client.modifyChannel<Channel, ChannelProperties>(channelId, properties);
+        }
+
+
+        public static Channel DeleteChannel(this DiscordClient client, long channelId)
+        {
+            var resp = client.HttpClient.Delete($"/channels/{channelId}");
+
+            if (resp.StatusCode == HttpStatusCode.NotFound)
+                throw new ChannelNotFoundException(client, channelId);
+
+            return resp.Deserialize<Channel>().SetClient(client);
+        }
+        #endregion
 
 
         #region guild channel
@@ -95,31 +123,6 @@ namespace Discord
         #endregion
 
 
-        #region channel
-        public static Channel GetChannel(this DiscordClient client, long channelId)
-        {
-            return client.getChannel<Channel>(channelId);
-        }
-
-
-        public static Channel ModifyChannel(this DiscordClient client, long channelId, ChannelProperties properties)
-        {
-            return client.modifyChannel<Channel, ChannelProperties>(channelId, properties);
-        }
-
-
-        public static Channel DeleteChannel(this DiscordClient client, long channelId)
-        {
-            var resp = client.HttpClient.Delete($"/channels/{channelId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, channelId);
-
-            return resp.Deserialize<Channel>().SetClient(client);
-        }
-        #endregion
-
-
         #region group
         public static Group GetGroup(this DiscordClient client, long groupId)
         {
@@ -130,6 +133,12 @@ namespace Discord
         public static Group CreateGroup(this DiscordClient client, List<long> recipients)
         {
             return client.HttpClient.Post($"/users/@me/channels", JsonConvert.SerializeObject(new RecipientList() { Recipients = recipients })).Deserialize<Group>().SetClient(client);
+        }
+
+
+        public static Group ModifyGroup(this DiscordClient client, long groupId, GroupProperties properties)
+        {
+            return client.modifyChannel<Group, GroupProperties>(groupId, properties);
         }
 
 

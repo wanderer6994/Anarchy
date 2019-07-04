@@ -6,19 +6,13 @@ namespace Discord
     public class UserSettings
     {
         [JsonProperty("username")]
-        public string Username { get; internal set; }
+        public string Username { get; set; }
 
         [JsonProperty("discriminator")]
-        public int Discriminator { get; internal set; }
+        public int Discriminator { get; set; }
 
         [JsonProperty("email")]
         public string Email { get; set; }
-        
-        [JsonProperty("password")]
-        public string Password { get; set; }
-
-        [JsonProperty("new_password")]
-        public string NewPassword { get; set; }
 
         #region avatar
         private DiscordImage _image = new DiscordImage();
@@ -42,5 +36,11 @@ namespace Discord
             }
         }
         #endregion
+
+        [JsonProperty("password")]
+        public string Password { get; set; }
+
+        [JsonProperty("new_password")]
+        public string NewPassword { get; set; }
     }
 }

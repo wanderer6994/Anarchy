@@ -12,16 +12,10 @@ namespace Discord
         }
 
 
-        public static bool AddFriend(this DiscordClient client, string username, int discriminator)
+        public static bool SendFriendRequest(this DiscordClient client, string username, int discriminator)
         {
             return client.HttpClient.Post("/users/@me/relationships",
                                 JsonConvert.SerializeObject(new NameDiscriminator { Username = username, Discriminator = discriminator })).StatusCode == HttpStatusCode.NoContent;
-        }
-
-
-        public static bool AddFriend(this DiscordClient client, User user)
-        {
-            return client.AddFriend(user.Username, user.Discriminator);
         }
 
 
@@ -33,12 +27,6 @@ namespace Discord
                 throw new UserNotFoundException(client, userId);
 
             return resp.StatusCode == HttpStatusCode.NoContent;
-        }
-
-
-        public static bool BlockUser(this DiscordClient client, User user)
-        {
-            return client.BlockUser(user.Id);
         }
 
 
@@ -63,18 +51,13 @@ namespace Discord
         #region DMs
         public static IReadOnlyList<Channel> GetClientDMs(this DiscordClient client)
         {
-            return client.HttpClient.Get($"/users/@me/channels").Deserialize<IReadOnlyList<GuildChannel>>().SetClientsInList(client);
+            return client.HttpClient.Get($"/users/@me/channels").Deserialize<IReadOnlyList<Channel>>().SetClientsInList(client);
         }
 
 
         public static Channel CreateDM(this DiscordClient client, long recipientId)
         {
-            return client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}").Deserialize<GuildChannel>().SetClient(client);
-        }
-
-        public static Channel CloseDM(this DiscordClient client, long channelId)
-        {
-            return client.DeleteChannel(channelId);
+            return client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}").Deserialize<Channel>().SetClient(client);
         }
         #endregion
     }

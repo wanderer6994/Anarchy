@@ -44,6 +44,30 @@ namespace Discord
         }
 
 
+        public bool SendFriendRequest()
+        {
+            if (Id == Client.User.Id)
+                return false;
+
+            return Client.SendFriendRequest(Username, Discriminator);
+        }
+
+
+        public bool Block()
+        {
+            return Client.BlockUser(Id);
+        }
+
+
+        public bool RemoveRelationship()
+        {
+            if (Id == Client.User.Id)
+                return false;
+
+            return Client.RemoveRelationship(Id);
+        }
+
+
         public Image GetAvatar()
         {
             if (AvatarId == null)

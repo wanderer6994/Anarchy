@@ -2,7 +2,8 @@
 
 Added embed support for webhooks.<br><br>
 Added support for all different channels.<br><br>
-Improved relationship functionality.
+Improved relationship functionality.<br><br>
+Minor bug fixes.
 <br><br><br>
 
 

@@ -49,10 +49,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Channel\Channel\Group.cs" />
+    <Compile Include="Channel\Group\Group.cs" />
     <Compile Include="Channel\Channel\GuildTextChannel.cs" />
     <Compile Include="Channel\Channel\GuildVoiceChannel.cs" />
-    <Compile Include="Channel\Models\RecipientList.cs" />
+    <Compile Include="Channel\Group\GroupProperties.cs" />
+    <Compile Include="Channel\Group\RecipientList.cs" />
     <Compile Include="Channel\Properties\GuildChannelProperties.cs" />
     <Compile Include="Channel\Properties\GuildTextChannelProperties.cs" />
     <Compile Include="Channel\Properties\GuildVoiceChannelProperties.cs" />
