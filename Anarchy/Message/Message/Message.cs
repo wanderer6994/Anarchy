@@ -60,7 +60,7 @@ namespace Discord
         public long? GuildId { get; private set; }
 
 
-        public Message Edit(string message)
+        public void Edit(string message)
         {
             Message msg = Client.EditMessage(ChannelId, Id, message);
             Content = msg.Content;
@@ -69,13 +69,12 @@ namespace Discord
             MentionedRoles = msg.MentionedRoles;
             MentionedEveryone = msg.MentionedEveryone;
             Embeds = msg.Embeds;
-            return msg;
         }
 
 
-        public bool Delete()
+        public void Delete()
         {
-            return Client.DeleteMessage(ChannelId, Id);
+            Client.DeleteMessage(ChannelId, Id);
         }
 
 
@@ -85,15 +84,15 @@ namespace Discord
         }
 
 
-        public bool AddReaction(string reaction)
+        public void AddReaction(string reaction)
         {
-            return Client.AddMessageReaction(ChannelId, Id, reaction);
+            Client.AddMessageReaction(ChannelId, Id, reaction);
         }
 
 
-        public bool RemoveReaction(string reaction)
+        public void RemoveReaction(string reaction)
         {
-            return Client.RemoveMessageReaction(ChannelId, Id, reaction);
+            Client.RemoveMessageReaction(ChannelId, Id, reaction);
         }
 
 

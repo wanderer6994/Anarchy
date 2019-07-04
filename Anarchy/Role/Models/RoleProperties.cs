@@ -3,7 +3,6 @@ using System.Drawing;
 
 namespace Discord
 {
-    //TODO: Remove the need to instantiate Permissions from the user's side
     public class RoleProperties
     {
         internal Property<string> NameProperty = new Property<string>();
@@ -14,12 +13,19 @@ namespace Discord
             set { NameProperty.Value = value; }
         }
 
+
+        internal Property<EditablePermissions> PermissionsProperty = new Property<EditablePermissions>();
         [JsonProperty("permissions")]
         private int _permissions
         {
             get { return Permissions; }
         }
-        public EditablePermissions Permissions { get; set; }
+        public EditablePermissions Permissions
+        {
+            get { return PermissionsProperty; }
+            set { PermissionsProperty.Value = value; }
+        }
+
 
         internal Property<int> ColorProperty = new Property<int>();
         [JsonProperty("color")]
@@ -34,6 +40,7 @@ namespace Discord
             set { _color = Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
         }
 
+
         internal Property<bool> SeperatedProperty = new Property<bool>();
         [JsonProperty("hoist")]
         public bool Seperated
@@ -41,6 +48,7 @@ namespace Discord
             get { return SeperatedProperty; }
             set { SeperatedProperty.Value = value; }
         }
+
 
         internal Property<bool> MentionableProperty = new Property<bool>();
         [JsonProperty("mentionable")]

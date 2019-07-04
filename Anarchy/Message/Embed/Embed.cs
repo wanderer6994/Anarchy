@@ -22,9 +22,6 @@ namespace Discord
         [JsonProperty("description")]
         public string Description { get; internal set; }
 
-        [JsonProperty("type")]
-        private readonly string _type;
-
         [JsonProperty("color")]
         private int _color;
         public Color Color
@@ -38,7 +35,7 @@ namespace Discord
 
 
         [JsonProperty("fields")]
-        public List<EmbedField> Fields { get; internal set; }
+        public List<EmbedField> Fields { get; private set; }
 
         //I don't know how videos in embeds work yet
         [JsonProperty("video")]
@@ -55,6 +52,9 @@ namespace Discord
 
         [JsonProperty("author")]
         public EmbedAuthor Author { get; internal set; }
+
+        [JsonProperty("type")]
+        private readonly string _type;
 
 
         public override string ToString()

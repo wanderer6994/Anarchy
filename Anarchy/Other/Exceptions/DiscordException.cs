@@ -6,7 +6,7 @@ namespace Discord
     {
         public DiscordClient Client { get; private set; }
 
-        public DiscordException(DiscordClient client, string message) : base(message)
+        public DiscordException(DiscordClient client, string message = null) : base(message)
         {
             Client = client;
         }

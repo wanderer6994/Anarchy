@@ -28,14 +28,18 @@ namespace Discord
         }
 
 
-        public Group Modify(GroupProperties properties)
+        public void Modify(GroupProperties properties)
         {
+            if (!properties.NameProperty.Set)
+                properties.Name = Name;
+            if (!properties.IconSet)
+                properties.Icon = GetIcon();
+
             Group group = Client.ModifyGroup(Id, properties);
             Name = group.Name;
             IconId = group.IconId;
             OwnerId = group.OwnerId;
             Recipients = group.Recipients;
-            return group;
         }
 
 

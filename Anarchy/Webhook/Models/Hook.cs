@@ -48,7 +48,9 @@ namespace Discord.Webhook
         {
             if (properties.Name == null)
                 properties.Name = Name;
-            if (properties.ChannelId == null)
+            if (!properties.AvatarSet)
+                properties.Avatar = GetAvatar();
+            if (!properties.ChannelProperty.Set)
                 properties.ChannelId = ChannelId;
 
             Hook hook = Client.ModifyChannelWebhook(Id, properties);
@@ -59,9 +61,9 @@ namespace Discord.Webhook
         }
 
 
-        public bool Delete()
+        public void Delete()
         {
-            return Client.DeleteChannelWebhook(Id);
+            Client.DeleteChannelWebhook(Id);
         }
 
 
@@ -77,7 +79,7 @@ namespace Discord.Webhook
             {
                 Username = Name,
                 Content = content,
-                Avatar = $"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png"
+                AvatarUrl = $"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png"
             };
 
             return SendMessage(message);
@@ -88,7 +90,6 @@ namespace Discord.Webhook
         {
             var resp = new HttpClient().GetAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png").Result;
 
-            //might wanna create an exception for this specifically
             if (resp.StatusCode == HttpStatusCode.NotFound)
                 throw new ImageNotFoundException(AvatarId);
 

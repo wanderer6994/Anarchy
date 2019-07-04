@@ -38,7 +38,7 @@ namespace Discord
         public Permissions Permissions { get; private set; }
 
 
-        public Role Modify(RoleProperties properties)
+        public void Modify(RoleProperties properties)
         {
             if (!properties.NameProperty.Set)
                 properties.Name = Name;
@@ -57,13 +57,12 @@ namespace Discord
             Color = role.Color;
             Seperated = role.Seperated;
             Position = role.Position;
-            return role;
         }
 
 
-        public bool Delete()
+        public void Delete()
         {
-            return Client.DeleteGuildRole(GuildId, Id);
+            Client.DeleteGuildRole(GuildId, Id);
         }
 
 

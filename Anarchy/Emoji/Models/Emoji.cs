@@ -30,17 +30,15 @@ namespace Discord
         }
 
 
-        public Emoji Modify(string name)
+        public void Modify(string name)
         {
-            Emoji emoji = Client.ModifyGuildEmoji(GuildId, (long)Id, name);
-            Name = emoji.Name;
-            return emoji;
+            Name = Client.ModifyGuildEmoji(GuildId, (long)Id, name).Name;
         }
 
 
-        public bool Delete()
+        public void Delete()
         {
-            return Client.DeleteGuildEmoji(GuildId, (long)Id);
+            Client.DeleteGuildEmoji(GuildId, (long)Id);
         }
 
 

@@ -8,12 +8,8 @@ namespace Discord
         #region management
         public static Message SendMessage(this DiscordClient client, long channelId, MessageProperties properties)
         {
-            var resp = client.HttpClient.Post($"/channels/{channelId}/messages", JsonConvert.SerializeObject(properties));
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, channelId);
-
-            return resp.Deserialize<Message>().SetClient(client);
+            return client.HttpClient.Post($"/channels/{channelId}/messages", 
+                                JsonConvert.SerializeObject(properties)).Deserialize<Message>().SetClient(client);
         }
 
 
@@ -25,37 +21,24 @@ namespace Discord
 
         public static Message EditMessage(this DiscordClient client, long channelId, long messageId, string msg)
         {
-            var resp = client.HttpClient.Patch($"/channels/{channelId}/messages/{messageId}", "{\"content\":\"" + msg + "\"}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new MessageNotFoundException(client, messageId);
-
-            return resp.Deserialize<Message>().SetClient(client);
+            return client.HttpClient.Patch($"/channels/{channelId}/messages/{messageId}", "{\"content\":\"" + msg + "\"}")
+                                .Deserialize<Message>().SetClient(client);
         }
 
 
-        public static bool DeleteMessage(this DiscordClient client, long channelId, long messageId)
+        public static void DeleteMessage(this DiscordClient client, long channelId, long messageId)
         {
-            var resp = client.HttpClient.Delete($"/channels/{channelId}/messages/{messageId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new MessageNotFoundException(client, messageId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
+            client.HttpClient.Delete($"/channels/{channelId}/messages/{messageId}");
         }
         #endregion
 
 
-        public static bool TriggerTyping(this DiscordClient client, long channelId)
+        public static void TriggerTyping(this DiscordClient client, long channelId)
         {
             var resp = client.HttpClient.Post($"/channels/{channelId}/typing");
 
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, channelId);
-            else if (resp.Content.ReadAsStringAsync().Result.Contains("cooldown"))
+            if (resp.Content.ReadAsStringAsync().Result.Contains("cooldown"))
                 throw new TooManyRequestsException(client,  resp.Deserialize<MessageRateLimit>().Cooldown);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
         }
     }
 }

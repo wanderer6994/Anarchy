@@ -10,6 +10,8 @@ namespace Discord
             OnClientUpdated += (sender, e) => User.SetClient(Client);
         }
 
+        public long GuildId { get; internal set; }
+
         [JsonProperty("user")]
         public User User { get; private set; }
 
@@ -21,6 +23,24 @@ namespace Discord
 
         [JsonProperty("joined_at")]
         public string JoinedAt { get; private set; }
+
+
+        public bool Kick()
+        {
+            return Client.KickGuildMember(GuildId, User.Id);
+        }
+
+
+        public bool Ban(string reason = null, int deleteMessageDays = 0)
+        {
+            return Client.BanGuildMember(GuildId, User.Id, reason, deleteMessageDays);
+        }
+
+
+        public bool Unban()
+        {
+            return Client.UnbanGuildMember(GuildId, User.Id);
+        }
 
 
         public override string ToString()

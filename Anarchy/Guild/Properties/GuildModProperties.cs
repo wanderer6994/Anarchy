@@ -13,6 +13,7 @@ namespace Discord
             set { NameProperty.Value = value; }
         }
 
+
         internal Property<string> RegionProperty = new Property<string>();
         [JsonProperty("region")]
         public string Region
@@ -20,6 +21,7 @@ namespace Discord
             get { return RegionProperty; }
             set { RegionProperty.Value = value; }
         }
+
 
         #region icon
         private readonly DiscordImage _image = new DiscordImage();
@@ -43,6 +45,7 @@ namespace Discord
         }
         #endregion
 
+
         internal Property<GuildVerificationLevel> VerificationProperty = new Property<GuildVerificationLevel>();
         [JsonProperty("verification_level")]
         public GuildVerificationLevel VerificationLevel
@@ -50,6 +53,7 @@ namespace Discord
             get { return VerificationProperty; }
             set { VerificationProperty.Value = value; }
         }
+
 
         internal Property<GuildDefaultNotifications> NotificationsProperty = new Property<GuildDefaultNotifications>();
         [JsonProperty("default_message_notifications")]

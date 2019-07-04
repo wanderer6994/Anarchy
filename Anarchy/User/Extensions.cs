@@ -8,12 +8,8 @@ namespace Discord
     {
         public static User GetUser(this DiscordClient client, long userId)
         {
-            var resp = client.HttpClient.Get($"/users/{userId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new UserNotFoundException(client, userId);
-
-            return resp.Deserialize<User>().SetClient(client);
+            return client.HttpClient.Get($"/users/{userId}")
+                                .Deserialize<User>().SetClient(client);
         }
 
 
@@ -25,7 +21,7 @@ namespace Discord
             {
                 resp = client.HttpClient.Get("/users/@me");
             }
-            catch (AccessDeniedException)
+            catch
             {
                 client.User = null;
                 throw;
@@ -36,27 +32,13 @@ namespace Discord
         }
 
 
-        public static bool SetHypesquad(this DiscordClient client, HypesquadHouse house)
+        public static void SetHypesquad(this DiscordClient client, HypesquadHouse house)
         {
             if (house == HypesquadHouse.None)
-                return client.HttpClient.Delete("/hypesquad/online").StatusCode == HttpStatusCode.NoContent;
+                client.HttpClient.Delete("/hypesquad/online");
 
-            return client.HttpClient.Post("/hypesquad/online", JsonConvert.SerializeObject(new Hypesquad() { House = house })).StatusCode == HttpStatusCode.NoContent;
-        }
-
-
-        public static bool ChangeSettings(this DiscordClient client, UserSettings settings)
-        {
-            if (settings.Email == null) settings.Email = client.User.Email;
-            if (settings.Username == null) settings.Username = client.User.Username;
-
-            if (client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings)).StatusCode == HttpStatusCode.OK)
-            {
-                client.GetClientUser();
-                return true;
-            }
-            else
-                return false;
+            client.HttpClient.Post("/hypesquad/online", 
+                        JsonConvert.SerializeObject(new Hypesquad() { House = house }));
         }
     }
 }

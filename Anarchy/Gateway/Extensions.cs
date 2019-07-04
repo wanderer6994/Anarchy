@@ -24,7 +24,7 @@ namespace Discord.Gateway
         }
         
 
-        internal static async Task StartHeartbeatHandlersAsync(this DiscordSocketClient client, int interval)
+        internal static async void StartHeartbeatHandlersAsync(this DiscordSocketClient client, int interval)
         {
             while (true)
             {
@@ -44,20 +44,19 @@ namespace Discord.Gateway
         }
 
 
-        public static IReadOnlyList<User> GetAllGuildMembers(this DiscordSocketClient client, long guildId)
+        public static IReadOnlyList<GuildMember> GetAllGuildMembers(this DiscordSocketClient client, long guildId)
         {
-            List<User> members = new List<User>();
-            IReadOnlyList<User> newMembers = new List<User>();
+            List<GuildMember> members = new List<GuildMember>();
+            IReadOnlyList<GuildMember> newMembers = new List<GuildMember>();
             client.OnGuildMembersReceived += (c, args) =>
             {
-                newMembers = args.Users;
+                newMembers = args.Members;
                 members.AddRange(newMembers);
             };
 
             client.GetGuildMembers(guildId, 0);
 
             while (newMembers.Count == 1000 || newMembers.Count == 0) Thread.Sleep(15);
-
             return members;
         }
     }

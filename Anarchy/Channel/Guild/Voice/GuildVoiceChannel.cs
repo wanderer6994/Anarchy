@@ -23,7 +23,7 @@ namespace Discord
         }
 
 
-        public GuildVoiceChannel Modify(GuildVoiceChannelProperties properties)
+        public void Modify(GuildVoiceChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
                 properties.Name = Name;
@@ -43,7 +43,6 @@ namespace Discord
             PermissionOverwrites = channel.PermissionOverwrites;
             Bitrate = channel.Bitrate;
             UserLimit = channel.UserLimit;
-            return channel;
         }
     }
 }

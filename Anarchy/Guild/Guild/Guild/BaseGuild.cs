@@ -25,63 +25,9 @@ namespace Discord
         }
 
 
-        public bool KickMember(long userId)
+        public void ChangeNickname(string nickname)
         {
-            return Client.KickGuildMember(Id, userId);
-        }
-
-
-        public bool KickMember(User user)
-        {
-            return KickMember(user.Id);
-        }
-
-
-        public IReadOnlyList<Ban> GetBans()
-        {
-            return Client.GetGuildBans(Id);
-        }
-
-
-        public Ban GetBan(long userId)
-        {
-            return Client.GetGuildBan(Id, userId);
-        }
-
-
-        public bool BanMember(long userId, int messageDeleteDays, string reason)
-        {
-            return Client.BanGuildMember(Id, userId, messageDeleteDays, reason);
-        }
-
-
-        public bool BanMember(User user, int messageDeleteDays, string reason)
-        {
-            return BanMember(user.Id, messageDeleteDays, reason);
-        }
-
-
-        public bool UnbanMember(long userId)
-        {
-            return Client.UnbanGuildMember(Id, userId);
-        }
-
-
-        public bool UnbanMember(User user)
-        {
-            return Client.UnbanGuildMember(Id, user.Id);
-        }
-
-
-        public bool ChangeNickname(string nickname)
-        {
-            return Client.ChangeNickname(Id, nickname);
-        }
-
-
-        public IReadOnlyList<AuditLogEntry> GetAuditLog(AuditLogFilters filters = null)
-        {
-            return Client.GetGuildAuditLog(Id, filters);
+            Client.ChangeNickname(Id, nickname);
         }
 
 
@@ -91,31 +37,6 @@ namespace Discord
         }
 
 
-        public virtual IReadOnlyList<Emoji> GetEmojis()
-        {
-            return Client.GetGuildEmojis(Id);
-        }
-
-
-        public Emoji GetReaction(long reactionId)
-        {
-            return Client.GetGuildEmoji(Id, reactionId);
-        }
-
-
-        public virtual IReadOnlyList<Role> GetRoles()
-        {
-            return Client.GetGuildRoles(Id);
-        }
-
-
-        public IReadOnlyList<Invite> GetInvites()
-        {
-            return Client.GetGuildInvites(Id);
-        }
-
-
-        #region create channel
         public GuildChannel CreateChannel(ChannelCreationProperties properties)
         {
             return Client.CreateGuildChannel(Id, properties);
@@ -132,12 +53,29 @@ namespace Discord
         {
             return Client.CreateGuildVoiceChannel(Id, properties);
         }
-        #endregion
+
+
+        public virtual IReadOnlyList<Emoji> GetEmojis()
+        {
+            return Client.GetGuildEmojis(Id);
+        }
+
+
+        public Emoji GetEmoji(long reactionId)
+        {
+            return Client.GetGuildEmoji(Id, reactionId);
+        }
 
 
         public Emoji CreateEmoji(EmojiCreationProperties properties)
         {
             return Client.CreateGuildEmoji(Id, properties);
+        }
+
+
+        public virtual IReadOnlyList<Role> GetRoles()
+        {
+            return Client.GetGuildRoles(Id);
         }
 
 
@@ -147,9 +85,33 @@ namespace Discord
         }
 
 
+        public IReadOnlyList<Invite> GetInvites()
+        {
+            return Client.GetGuildInvites(Id);
+        }
+
+
         public IReadOnlyList<Hook> GetWebhooks()
         {
             return Client.GetGuildWebhooks(Id);
+        }
+
+
+        public IReadOnlyList<AuditLogEntry> GetAuditLog(AuditLogFilters filters = null)
+        {
+            return Client.GetGuildAuditLog(Id, filters);
+        }
+
+
+        public IReadOnlyList<Ban> GetBans()
+        {
+            return Client.GetGuildBans(Id);
+        }
+
+
+        public Ban GetBan(long userId)
+        {
+            return Client.GetGuildBan(Id, userId);
         }
 
 

@@ -19,32 +19,17 @@ namespace Discord
         }
 
 
-        public static bool BlockUser(this DiscordClient client, long userId)
+        public static void BlockUser(this DiscordClient client, long userId)
         {
-            var resp = client.HttpClient.Put($"/users/@me/relationships/{userId}", JsonConvert.SerializeObject(new Relationship() { Type = RelationshipType.Blocked }));
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new UserNotFoundException(client, userId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
+            client.HttpClient.Put($"/users/@me/relationships/{userId}", 
+                        JsonConvert.SerializeObject(new Relationship() { Type = RelationshipType.Blocked }));
         }
 
 
-        //this is used for removing a friend, blocking a user, and cancelling a friend request
-        public static bool RemoveRelationship(this DiscordClient client, long userId)
+        //this is used for removing friends, blocking users and cancelling friend requests
+        public static void RemoveRelationship(this DiscordClient client, long userId)
         {
-            var resp = client.HttpClient.Delete($"/users/@me/relationships/{userId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new UserNotFoundException(client, userId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
-        }
-
-
-        public static bool RemoveRelationship(this DiscordClient client, User user)
-        {
-            return client.RemoveRelationship(user.Id);
+            client.HttpClient.Delete($"/users/@me/relationships/{userId}");
         }
 
 

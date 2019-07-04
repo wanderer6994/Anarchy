@@ -9,13 +9,6 @@ namespace Discord
 {
     internal class DiscordHttpClient
     {
-        private class Experiments
-        {
-            [JsonProperty("fingerprint")]
-            public string Fingerprint { get; set; }
-        }
-
-
         private readonly HttpClient _httpClient;
         private readonly DiscordClient _discordClient;
 
@@ -40,17 +33,14 @@ namespace Discord
 
         private void CheckResponse(HttpResponseMessage resp)
         {
-            switch (resp.StatusCode)
-            {
-                case HttpStatusCode.BadRequest:
-                    throw new InvalidParametersException(_discordClient, resp.Content.ReadAsStringAsync().Result);
-                case HttpStatusCode.Forbidden:
-                    throw new AccessDeniedException(_discordClient);
-                case HttpStatusCode.Unauthorized:
-                    throw new AccessDeniedException(_discordClient);
-                case (HttpStatusCode)429:
-                    throw new TooManyRequestsException(_discordClient, JsonConvert.DeserializeObject<RateLimit>(resp.Content.ReadAsStringAsync().Result).RetryAfter);
-            }
+            string content = resp.Content.ReadAsStringAsync().Result;
+
+            if (resp.StatusCode == HttpStatusCode.BadRequest)
+                throw new InvalidParametersException(_discordClient, content);
+            else if (resp.StatusCode == (HttpStatusCode)429)
+                throw new TooManyRequestsException(_discordClient, content.Deserialize<RateLimit>().RetryAfter);
+            else if (resp.StatusCode > HttpStatusCode.NoContent)
+                throw new DiscordHttpErrorException(_discordClient, content);
         }
 
 

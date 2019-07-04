@@ -2,7 +2,6 @@
 
 namespace Discord
 {
-    //Currently unimplemented
     public class GuildTextChannelProperties : GuildChannelProperties
     {
         internal Property<string> TopicProperty = new Property<string>();
@@ -12,6 +11,7 @@ namespace Discord
             get { return TopicProperty; }
             set { TopicProperty.Value = value; }
         }
+
 
         internal Property<bool> NsfwProperty = new Property<bool>();
         [JsonProperty("nsfw")]

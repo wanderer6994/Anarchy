@@ -9,7 +9,6 @@ namespace Discord.Gateway
     public class DiscordSocketClient : DiscordClient
     {
         #region events
-        public delegate void UserHandler(DiscordSocketClient client, UserEventArgs args);
         public delegate void GuildHandler(DiscordSocketClient client, GuildEventArgs args);
         public delegate void ChannelHandler(DiscordSocketClient client, ChannelEventArgs args);
         public delegate void MessageHandler(DiscordSocketClient client, MessageEventArgs args);
@@ -17,14 +16,15 @@ namespace Discord.Gateway
 
         public delegate void LoggedInHandler(DiscordSocketClient client, GatewayLoginEventArgs args);
         public event LoggedInHandler OnLoggedIn;
-        public event UserHandler OnLoggedOut;
+        public delegate void LoggedOut(DiscordSocketClient client, UserEventArgs args);
+        public event LoggedOut OnLoggedOut;
 
         public event GuildHandler OnJoinedGuild;
         public event GuildHandler OnGuildUpdated;
         public event GuildHandler OnLeftGuild;
 
-        public delegate void UserListHandler(DiscordSocketClient client, UserListEventArgs args);
-        public event UserListHandler OnGuildMembersReceived;
+        public delegate void GuildMembersHandler(DiscordSocketClient client, GuildMembersEventArgs args);
+        public event GuildMembersHandler OnGuildMembersReceived;
 
         public event RoleHandler OnRoleCreated;
         public event RoleHandler OnRoleUpdated;
@@ -35,7 +35,8 @@ namespace Discord.Gateway
         
         public event MessageHandler OnMessageReceived;
         public event MessageHandler OnMessageEdited;
-        public event MessageHandler OnMessageDeleted;
+        public delegate void MessageDeletedHandler(DiscordSocketClient client, MessageDeletedEventArgs args);
+        public event MessageDeletedHandler OnMessageDeleted;
         #endregion
 
         internal WebSocket Socket { get; set; }
@@ -79,8 +80,7 @@ namespace Discord.Gateway
 
         private void SocketClosed(object sender, CloseEventArgs e)
         {
-            if (LoggedIn)
-                this.LoginToGateway();
+            if (LoggedIn) this.LoginToGateway();
         }
 
 
@@ -111,6 +111,12 @@ namespace Discord.Gateway
                         case "GUILD_DELETE":
                             OnLeftGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
                             break;
+                        case "GUILD_MEMBERS_CHUNK":
+                            GuildMemberList list = payload.Deserialize<GuildMemberList>().SetClient(this);
+                            foreach (var member in list.Members) member.GuildId = list.GuildId;
+
+                            OnGuildMembersReceived?.Invoke(this, new GuildMembersEventArgs(list.Members));
+                            break;
                         case "CHANNEL_CREATE":
                             OnChannelCreated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
                             break;
@@ -133,15 +139,7 @@ namespace Discord.Gateway
                             OnMessageEdited?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>().SetClient(this)));
                             break;
                         case "MESSAGE_DELETE":
-                            //it should be noted that evrything but the message id, channel id, and guild id will be null.
-                            OnMessageDeleted?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>().SetClient(this)));
-                            break;
-                        case "GUILD_MEMBERS_CHUNK":
-                            List<User> users = new List<User>();
-                            foreach (var member in payload.Deserialize<GuildMemberList>().Members)
-                                users.Add(member.User.SetClient(this));
-
-                            OnGuildMembersReceived?.Invoke(this, new UserListEventArgs(users));
+                            OnMessageDeleted?.Invoke(this, new MessageDeletedEventArgs(payload.Deserialize<DeletedMessage>()));
                             break;
                     }
                     break;
@@ -149,8 +147,7 @@ namespace Discord.Gateway
                     Logout();
                     break;
                 case GatewayOpcode.Connected:
-                    //keep sending heartbeats every x second so the client's socket don't get closed
-                    Task.Run(async () => await this.StartHeartbeatHandlersAsync(payload.Deserialize<GatewayHeartbeat>().Interval));
+                    this.StartHeartbeatHandlersAsync(payload.Deserialize<GatewayHeartbeat>().Interval);
 
                     this.LoginToGateway();
                     break;

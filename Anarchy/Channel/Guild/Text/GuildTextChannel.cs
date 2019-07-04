@@ -23,7 +23,7 @@ namespace Discord
         }
 
 
-        public GuildTextChannel Modify(GuildTextChannelProperties properties)
+        public void Modify(GuildTextChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
                 properties.Name = Name;
@@ -43,7 +43,6 @@ namespace Discord
             Position = channel.Position;
             ParentId = channel.ParentId;
             PermissionOverwrites = channel.PermissionOverwrites;
-            return channel;
         }
     }
 }

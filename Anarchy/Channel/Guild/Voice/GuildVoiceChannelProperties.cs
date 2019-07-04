@@ -2,7 +2,6 @@
 
 namespace Discord
 {
-    //Currently unimplemented
     public class GuildVoiceChannelProperties : GuildChannelProperties
     {
         internal Property<int> BitrateProperty = new Property<int>();
@@ -12,6 +11,7 @@ namespace Discord
             get { return BitrateProperty; }
             set { BitrateProperty.Value = value; }
         }
+
 
         internal Property<int> UserLimitProperty = new Property<int>();
         [JsonProperty("user_limit")]

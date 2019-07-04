@@ -11,46 +11,30 @@ namespace Discord
         {
             if (properties == null) properties = new InviteProperties();
 
-            var resp = client.HttpClient.Post($"/channels/{channelId}/invites", JsonConvert.SerializeObject(properties));
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ChannelNotFoundException(client, channelId);
-
-            return resp.Deserialize<Invite>().SetClient(client);
+            return client.HttpClient.Post($"/channels/{channelId}/invites", JsonConvert.SerializeObject(properties))
+                                .Deserialize<Invite>().SetClient(client);
         }
 
 
         public static Invite DeleteInvite(this DiscordClient client, string invCode)
         {
-            var resp = client.HttpClient.Delete($"/invites/{invCode}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new InvalidInviteException(client, invCode);
-
-            return resp.Deserialize<Invite>().SetClient(client);
+            return client.HttpClient.Delete($"/invites/{invCode}")
+                                .Deserialize<Invite>().SetClient(client);
         }
         #endregion
 
 
         public static Invite GetInvite(this DiscordClient client, string invCode)
         {
-            var resp = client.HttpClient.Get($"/invite/{invCode}?with_counts=true");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new InvalidInviteException(client, invCode);
-
-            return resp.Deserialize<Invite>().SetClient(client);
+            return client.HttpClient.Get($"/invite/{invCode}?with_counts=true")
+                                .Deserialize<Invite>().SetClient(client);
         }
 
 
         public static IReadOnlyList<Invite> GetGuildInvites(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.Get($"/guilds/{guildId}/invites");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new GuildNotFoundException(client, guildId);
-
-            return resp.Deserialize<IReadOnlyList<Invite>>().SetClientsInList(client);
+            return client.HttpClient.Get($"/guilds/{guildId}/invites")
+                                .Deserialize<IReadOnlyList<Invite>>().SetClientsInList(client);
         }
     }
 }

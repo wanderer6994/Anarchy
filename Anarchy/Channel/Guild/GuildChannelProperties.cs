@@ -12,6 +12,7 @@ namespace Discord
             set { ParentProperty.Value = value; }
         }
 
+
         internal Property<int> PositionProperty = new Property<int>();
         [JsonProperty("position")]
         public int Position

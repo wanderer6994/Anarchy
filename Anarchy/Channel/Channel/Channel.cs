@@ -22,14 +22,12 @@ namespace Discord
         }
 
 
-        public Channel Modify(ChannelProperties properties)
+        public void Modify(ChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
-                return this;
+                return;
 
-            Channel channel = Client.ModifyChannel(Id, properties);
-            Name = channel.Name;
-            return channel;
+            Name = Client.ModifyChannel(Id, properties).Name;
         }
 
 
@@ -39,9 +37,10 @@ namespace Discord
         }
 
 
-        public bool TriggerTyping()
+        #region message
+        public void TriggerTyping()
         {
-            return Client.TriggerTyping(Id);
+            Client.TriggerTyping(Id);
         }
 
 
@@ -69,28 +68,29 @@ namespace Discord
         }
 
 
-        public bool PinMessage(long messageId)
+        public void PinMessage(long messageId)
         {
-            return Client.PinChannelMessage(Id, messageId);
+            Client.PinChannelMessage(Id, messageId);
         }
 
 
-        public bool PinMessage(Message message)
+        public void PinMessage(Message message)
         {
-            return PinMessage(message.Id);
+            PinMessage(message.Id);
         }
 
 
-        public bool UnpinMessage(long messageId)
+        public void UnpinMessage(long messageId)
         {
-            return Client.UnpinChannelMessage(Id, messageId);
+            Client.UnpinChannelMessage(Id, messageId);
         }
 
 
-        public bool UnpinMessage(Message message)
+        public void UnpinMessage(Message message)
         {
-            return Client.UnpinChannelMessage(Id, message.Id);
+            Client.UnpinChannelMessage(Id, message.Id);
         }
+        #endregion
 
 
         public Invite CreateInvite(InviteProperties properties = null)

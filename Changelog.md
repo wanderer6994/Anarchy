@@ -1,9 +1,18 @@
-# 0.1.0.1
+# 0.1.1.0
 
+### Additions
 Added embed support for webhooks.<br><br>
 Added support for all different channels.<br><br>
+
+### Improvements
 Improved relationship functionality.<br><br>
-Minor bug fixes.
+Improved ClientUser funcionality.<br><br>
+Improved HTTP error handling.<br><br>
+
+### Bug fixes
+Fixed banning/unbanning always returning a 404.<br><br>
+Fixed a few ClientUser bugs.<br><br>
+Other minor bug fixes.
 <br><br><br>
 
 

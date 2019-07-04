@@ -53,18 +53,18 @@ namespace Discord
         }
 
 
-        public bool Block()
+        public void Block()
         {
-            return Client.BlockUser(Id);
+            Client.BlockUser(Id);
         }
 
 
-        public bool RemoveRelationship()
+        public void RemoveRelationship()
         {
             if (Id == Client.User.Id)
-                return false;
+                return;
 
-            return Client.RemoveRelationship(Id);
+            Client.RemoveRelationship(Id);
         }
 
 

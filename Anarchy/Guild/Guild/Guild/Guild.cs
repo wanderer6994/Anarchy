@@ -20,6 +20,15 @@ namespace Discord
         [JsonProperty("region")]
         public string Region { get; private set; }
 
+        [JsonProperty("vanity_url_code")]
+        public string VanityInvite { get; private set; }
+
+        [JsonProperty("verification_level")]
+        public GuildVerificationLevel VerificationLevel { get; private set; }
+
+        [JsonProperty("default_message_notifications")]
+        public GuildDefaultNotifications DefaultNotifications { get; set; }
+
         [JsonProperty("premium_tier")]
         public GuildPremiumTier PremiumTier { get; private set; }
 
@@ -49,17 +58,8 @@ namespace Discord
             }
         }
 
-        [JsonProperty("verification_level")]
-        public GuildVerificationLevel VerificationLevel { get; private set; }
-
-        [JsonProperty("default_message_notifications")]
-        public GuildDefaultNotifications DefaultNotifications { get; set; }
-
         [JsonProperty("owner_id")]
         public long? OwnerId { get; private set; }
-
-        [JsonProperty("vanity_url_code")]
-        public string VanityInvite { get; private set; }
 
 
         public void Update()
@@ -77,7 +77,7 @@ namespace Discord
         }
 
 
-        public Guild Modify(GuildModProperties properties)
+        public void Modify(GuildModProperties properties)
         {
             if (!properties.NameProperty.Set)
                 properties.Name = Name;
@@ -99,7 +99,6 @@ namespace Discord
             OwnerId = guild.OwnerId;
             Roles = guild.Roles;
             Emojis = guild.Emojis;
-            return guild;
         }
 
 

@@ -12,6 +12,7 @@ namespace Discord
             set { NameProperty.Value = value; }
         }
 
+
         public override string ToString()
         {
             return Name;

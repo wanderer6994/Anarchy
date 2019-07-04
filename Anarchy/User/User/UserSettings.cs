@@ -8,8 +8,13 @@ namespace Discord
         [JsonProperty("username")]
         public string Username { get; set; }
 
+        internal Property<int> DiscriminatorProperty = new Property<int>();
         [JsonProperty("discriminator")]
-        public int Discriminator { get; set; }
+        public int Discriminator
+        {
+            get { return DiscriminatorProperty; }
+            set { DiscriminatorProperty.Value = value; }
+        }
 
         [JsonProperty("email")]
         public string Email { get; set; }
