@@ -1,7 +1,7 @@
 # About
 Anarchy is an opensource Discord API wrapper that focuses on making bot programming easy.<br>
 Since the start it has been our goal to make it simple, so that people can easily modify it to their needs.<br>
-At the moment we don't have any bugtesters but me, so the wrapper will most likely contain a few bugs here and there bugs.<br>
+At the moment we don't have any bugtesters but me, so the wrapper will most likely contain a few bugs here and there.<br>
 
 Oh and also: if you're using a bot token make sure to prefix the token with 'Bot '.<br>
 
@@ -30,7 +30,7 @@ client.LeaveGuild(322850917248663552);
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
 Channel channel = client.GetChannel(449751593483632642);
-channel.TriggerTyping(); //This is optional, but good for when you need the cooldown of sending a channel message (if there is one)
+channel.TriggerTyping(); //This is optional
 channel.SendMessage("Hello, World");
 ```
 

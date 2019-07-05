@@ -44,12 +44,12 @@ namespace Discord
         }
 
 
-        public bool SendFriendRequest()
+        public void SendFriendRequest()
         {
             if (Id == Client.User.Id)
-                return false;
+                return;
 
-            return Client.SendFriendRequest(Username, Discriminator);
+            Client.SendFriendRequest(Username, Discriminator);
         }
 
 

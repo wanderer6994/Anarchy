@@ -10,6 +10,10 @@ namespace Discord
         [JsonProperty("nsfw")]
         public bool Nsfw { get; private set; }
 
+        //this is in seconds btw
+        [JsonProperty("rate_limit_per_user")]
+        public int RateLimit { get; private set; }
+
 
         public override void Update()
         {

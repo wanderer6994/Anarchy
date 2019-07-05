@@ -21,10 +21,16 @@ namespace GuildDuplicator
         public List<Channel> VoiceChannels { get; private set; }
     }
 
+    struct RoleDupe
+    {
+        public Role OurRole;
+        public Role TargetRole;
+    }
+
     struct CategoryDupe
     {
-        public Channel OurCategory;
-        public Channel TargetCategory;
+        public GuildChannel OurCategory;
+        public GuildChannel TargetCategory;
     }
 
     class Program
@@ -59,6 +65,33 @@ namespace GuildDuplicator
             }
             #endregion
 
+            #region create roles
+            List<RoleDupe> ourRoles = new List<RoleDupe>();
+
+            Console.WriteLine("Duplicating roles...");
+
+            //duplicate roles
+            foreach (var role in targetGuild.GetRoles())
+            {
+                RoleDupe dupe = new RoleDupe();
+                dupe.TargetRole = role;
+
+                if (role.Name == "@everyone") //we don't wanna create another @everyone role, so we just modify ours instead
+                {
+                    Role ourRole = ourGuild.GetRoles().First(r => r.Name == "@everyone");
+                    ourRole.Modify(new RoleProperties() { Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
+                    dupe.OurRole = ourRole;
+                }
+                else
+                    dupe.OurRole = ourGuild.CreateRole(new RoleProperties() { Name = role.Name, Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
+                ourRoles.Add(dupe);
+
+                Console.WriteLine($"Duplicated {role.ToString()}");
+
+                Thread.Sleep(100);
+            }
+            #endregion
+
             #region create channels
             OrganizedChannelList channels = new OrganizedChannelList(targetGuild.GetChannels());
 
@@ -66,46 +99,122 @@ namespace GuildDuplicator
 
             //duplicate category channels
             List<CategoryDupe> ourCategories = new List<CategoryDupe>();
-            foreach (var category in channels.Categories)
+            foreach (var c in channels.Categories)
             {
+                GuildChannel category;
+
+                try
+                {
+                    category = client.GetGuildChannel(c.Id);
+                }
+                catch (DiscordHttpErrorException e)
+                {
+                    //ofcourse you could make it return no matter what error, but this is better for debugging
+                    if (e.Error.Code == 50001)
+                        continue;
+                    else
+                        throw;
+                }
+
+                //create the category
+                GuildChannel ourCategory = ourGuild.CreateChannel(new ChannelCreationProperties() { Name = category.Name, Type = ChannelType.Category });
+                ourCategory.Modify(new GuildChannelProperties() { Position = category.Position });
+
+                foreach (var overwrite in category.PermissionOverwrites)
+                {
+                    if (overwrite.Type == PermissionOverwriteType.Member)
+                        continue;
+
+                    PermissionOverwrite ourOverwrite = overwrite;
+                    ourOverwrite.Id = ourRoles.First(ro => ro.TargetRole.Id == overwrite.Id).OurRole.Id;
+                    ourCategory.AddPermissionOverwrite(ourOverwrite);
+                }
+
                 CategoryDupe dupe = new CategoryDupe
                 {
                     TargetCategory = category,
-                    OurCategory = ourGuild.CreateChannel(new ChannelCreationProperties() { Name = category.Name, Type = ChannelType.Category })
+                    OurCategory = ourCategory
                 };
                 ourCategories.Add(dupe);
 
-                Console.WriteLine($"Duplicated {category}");
+                Console.WriteLine($"Duplicated {category.Name}");
 
-                Thread.Sleep(100);
+                Thread.Sleep(50);
             }
 
             Console.WriteLine("Duplicating channels...");
 
-            //duplicate all other channels
-            foreach (var channel in channels.TextChannels.Concat(channels.VoiceChannels))
+            //duplicate text channels
+            foreach (var c in channels.TextChannels)
             {
-                Channel ourChannel = ourGuild.CreateChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null, Type = channel.Type });
-                ourChannel.Modify(new ChannelModProperties() { Nsfw = channel.Nsfw, Position = channel.Position, Topic = channel.Topic });
+                TextChannel channel;
 
-                Console.WriteLine($"Duplicated {channel}");
+                try
+                {
+                    channel = client.GetTextChannel(c.Id);
+                }
+                catch (DiscordHttpErrorException e)
+                {
+                    //ofcourse you could make it return no matter what error, but this is better for debugging
+                    if (e.Error.Code == 50001)
+                        continue;
+                    else
+                        throw;
+                }
+                
+                //create text channels
+                TextChannel ourChannel = ourGuild.CreateTextChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
+                ourChannel.Modify(new TextChannelProperties() { Nsfw = channel.Nsfw, Position = channel.Position, Topic = channel.Topic });
 
-                Thread.Sleep(100);
+                foreach (var overwrite in channel.PermissionOverwrites)
+                {
+                    if (overwrite.Type == PermissionOverwriteType.Member)
+                        continue;
+
+                    PermissionOverwrite ourOverwrite = overwrite;
+                    ourOverwrite.Id = ourRoles.First(ro => ro.TargetRole.Id == overwrite.Id).OurRole.Id;
+                    ourChannel.AddPermissionOverwrite(ourOverwrite);
+                }
+
+                Console.WriteLine($"Duplicated {channel.Name}");
+
+                Thread.Sleep(50);
             }
-            #endregion
 
-            #region create roles
-            Console.WriteLine("Duplicating roles...");
-
-            //duplicate roles
-            foreach (var role in targetGuild.GetRoles())
+            //duplicate voice channels
+            foreach (var c in channels.VoiceChannels)
             {
-                if (role.Name == "@everyone") //we don't wanna create another @everyone role, so we just modify ours instead
-                    ourGuild.GetRoles().First(r => r.Name == "@everyone").Modify(new RoleProperties() { Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
-                else
-                    ourGuild.CreateRole(new RoleProperties() { Name = role.Name, Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
+                VoiceChannel channel;
 
-                Console.WriteLine($"Duplicated {role.ToString()}");
+                try
+                {
+                    channel = client.GetVoiceChannel(c.Id);
+                }
+                catch (DiscordHttpErrorException e)
+                {
+                    //ofcourse you could make it return no matter what error, but this is better for debugging
+                    if (e.Error.Code == 50001)
+                        continue;
+                    else
+                        throw;
+                }
+
+
+                //create voice channels
+                VoiceChannel ourChannel = ourGuild.CreateVoiceChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
+                ourChannel.Modify(new VoiceChannelProperties() { Bitrate = channel.Bitrate, Position = channel.Position, UserLimit = channel.UserLimit });
+
+                foreach (var overwrite in channel.PermissionOverwrites)
+                {
+                    if (overwrite.Type == PermissionOverwriteType.Member)
+                        continue;
+
+                    PermissionOverwrite ourOverwrite = overwrite;
+                    ourOverwrite.Id = ourRoles.First(ro => ro.TargetRole.Id == overwrite.Id).OurRole.Id;
+                    ourChannel.AddPermissionOverwrite(ourOverwrite);
+                }
+
+                Console.WriteLine($"Duplicated {channel.Name}");
 
                 Thread.Sleep(100);
             }

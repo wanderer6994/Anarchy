@@ -86,12 +86,14 @@ namespace Discord
 
         public static TextChannel CreateTextChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
         {
+            properties.Type = ChannelType.Text;
             return client.createGuildChannel<TextChannel>(guildId, properties);
         }
 
 
         public static VoiceChannel CreateVoiceChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
         {
+            properties.Type = ChannelType.Voice;
             return client.createGuildChannel<VoiceChannel>(guildId, properties);
         }
 

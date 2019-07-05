@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Net;
 
 namespace Discord
 {
@@ -12,10 +11,10 @@ namespace Discord
         }
 
 
-        public static bool SendFriendRequest(this DiscordClient client, string username, int discriminator)
+        public static void SendFriendRequest(this DiscordClient client, string username, int discriminator)
         {
-            return client.HttpClient.Post("/users/@me/relationships",
-                                JsonConvert.SerializeObject(new NameDiscriminator { Username = username, Discriminator = discriminator })).StatusCode == HttpStatusCode.NoContent;
+            client.HttpClient.Post("/users/@me/relationships",
+                        JsonConvert.SerializeObject(new NameDiscriminator { Username = username, Discriminator = discriminator }));
         }
 
 

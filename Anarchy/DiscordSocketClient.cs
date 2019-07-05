@@ -86,7 +86,7 @@ namespace Discord.Gateway
 
         private void SocketDataReceived(object sender, WebSocketSharp.MessageEventArgs result)
         {
-            var payload = JsonConvert.DeserializeObject<GatewayResponse>(result.Data);
+            GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
 
             System.Console.WriteLine($"{payload.Opcode} | {payload.Title}");
@@ -113,7 +113,8 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_MEMBERS_CHUNK":
                             GuildMemberList list = payload.Deserialize<GuildMemberList>().SetClient(this);
-                            foreach (var member in list.Members) member.GuildId = list.GuildId;
+                            foreach (var member in list.Members)
+                                member.GuildId = list.GuildId;
 
                             OnGuildMembersReceived?.Invoke(this, new GuildMembersEventArgs(list.Members));
                             break;
@@ -140,12 +141,6 @@ namespace Discord.Gateway
                             break;
                         case "MESSAGE_DELETE":
                             OnMessageDeleted?.Invoke(this, new MessageDeletedEventArgs(payload.Deserialize<DeletedMessage>()));
-                            break;
-                        case "MESSAGE_REACTION_ADD":
-
-                            break;
-                        case "MESSAGE_REACTION_REMOVE":
-
                             break;
                     }
                     break;

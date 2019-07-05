@@ -30,6 +30,7 @@ namespace Discord
         }
 
 
+        #region channel
         public virtual IReadOnlyList<GuildChannel> GetChannels()
         {
             return Client.GetGuildChannels(Id);
@@ -52,6 +53,7 @@ namespace Discord
         {
             return Client.CreateVoiceChannel(Id, properties);
         }
+        #endregion
 
 
         public virtual IReadOnlyList<Emoji> GetEmojis()

@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 
 namespace Discord
 {
@@ -24,7 +23,7 @@ namespace Discord
 
         public static void DeleteGuild(this DiscordClient client, long guildId)
         {
-            client.HttpClient.Post($"/guilds/{guildId}/delete");
+            client.HttpClient.Delete($"/guilds/{guildId}");
         }
 
 
