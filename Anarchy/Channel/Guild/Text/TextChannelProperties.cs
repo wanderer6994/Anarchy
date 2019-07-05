@@ -20,5 +20,14 @@ namespace Discord
             get { return NsfwProperty; }
             set { NsfwProperty.Value = value; }
         }
+
+
+        internal Property<int> SlowModeProperty = new Property<int>();
+        [JsonProperty("rate_limit_per_user")]
+        public int SlowMode
+        {
+            get { return SlowModeProperty; }
+            set { SlowModeProperty.Value = value; }
+        }
     }
 }

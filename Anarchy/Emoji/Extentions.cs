@@ -18,7 +18,7 @@ namespace Discord
         public static Emoji ModifyGuildEmoji(this DiscordClient client, long guildId, long reactionId, string name)
         {
             return client.HttpClient.Patch($"/guilds/{guildId}/emojis/{reactionId}", 
-                JsonConvert.SerializeObject(new EmojiModProperties() { Name = name })).Deserialize<Emoji>().SetClient(client);
+                JsonConvert.SerializeObject(new EmojiProperties() { Name = name })).Deserialize<Emoji>().SetClient(client);
         }
 
 

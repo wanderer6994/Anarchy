@@ -5,7 +5,6 @@ namespace Discord
 {
     public class GroupProperties : ChannelProperties
     {
-        
         private readonly DiscordImage _image = new DiscordImage();
 
         [JsonProperty("icon")]

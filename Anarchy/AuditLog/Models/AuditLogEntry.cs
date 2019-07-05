@@ -18,7 +18,7 @@ namespace Discord
         public long ChangerId { get; private set; }
 
         [JsonProperty("action_type")]
-        public AuditLogActionType ActionType { get; private set; }
+        public AuditLogActionType Type { get; private set; }
 
         [JsonProperty("reason")]
         public string Reason { get; private set; }
@@ -26,7 +26,7 @@ namespace Discord
 
         public override string ToString()
         {
-            return ActionType.ToString();
+            return Type.ToString();
         }
     }
 }

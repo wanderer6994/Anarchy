@@ -14,7 +14,7 @@ namespace Discord
         }
 
 
-        public static Guild ModifyGuild(this DiscordClient client, long guildId, GuildModProperties properties)
+        public static Guild ModifyGuild(this DiscordClient client, long guildId, GuildProperties properties)
         {
             return client.HttpClient.Patch($"/guilds/{guildId}", JsonConvert.SerializeObject(properties))
                                 .Deserialize<Guild>().SetClient(client);
@@ -35,7 +35,7 @@ namespace Discord
 
         public static IReadOnlyList<Ban> GetGuildBans(this DiscordClient client, long guildId)
         {
-            return client.HttpClient.Get($"/guilds/{guildId}/bans").Deserialize<IReadOnlyList<Ban>>();
+            return client.HttpClient.Get($"/guilds/{guildId}/bans").Deserialize<IReadOnlyList<Ban>>().SetClientsInList(client);
         }
 
 

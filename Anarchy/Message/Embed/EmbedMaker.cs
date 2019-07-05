@@ -14,6 +14,13 @@ namespace Discord
         }
 
 
+        public string TitleUrl
+        {
+            get { return _embed.TitleUrl; }
+            set { _embed.TitleUrl = value; }
+        }
+
+
         public string Description
         {
             get { return _embed.Description; }
@@ -28,27 +35,22 @@ namespace Discord
         }
 
 
-        public string Url
-        {
-            get { return _embed.Url; }
-            set { _embed.Url = value; }
-        }
-
-
-        public void AddField(string name, string content, bool inline = false)
+        public EmbedMaker AddField(string name, string content, bool inline = false)
         {
             _embed.Fields.Add(new EmbedField() { Name = name, Content = content, Inline = inline });
+
+            return this;
         }
 
 
-        public string Thumbnail
+        public string ThumbnailUrl
         {
             get { return _embed.Thumbnail.Url; }
             set { _embed.Thumbnail.Url = value; }
         }
 
 
-        public string Image
+        public string ImageUrl
         {
             get { return _embed.Image.Url; }
             set { _embed.Image.Url = value; }

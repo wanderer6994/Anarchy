@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using WebSocketSharp;
+﻿using WebSocketSharp;
 
 namespace Discord.Gateway
 {
@@ -14,10 +10,10 @@ namespace Discord.Gateway
         public delegate void MessageHandler(DiscordSocketClient client, MessageEventArgs args);
         public delegate void RoleHandler(DiscordSocketClient client, RoleEventArgs args);
 
-        public delegate void LoggedInHandler(DiscordSocketClient client, GatewayLoginEventArgs args);
-        public event LoggedInHandler OnLoggedIn;
-        public delegate void LoggedOut(DiscordSocketClient client, UserEventArgs args);
-        public event LoggedOut OnLoggedOut;
+        public delegate void LoginHandler(DiscordSocketClient client, LoginEventArgs args);
+        public event LoginHandler OnLoggedIn;
+        public delegate void LogoutHandler(DiscordSocketClient client, UserEventArgs args);
+        public event LogoutHandler OnLoggedOut;
 
         public event GuildHandler OnJoinedGuild;
         public event GuildHandler OnGuildUpdated;
@@ -54,9 +50,7 @@ namespace Discord.Gateway
         public void Login(string token)
         {
             Logout();
-
             HttpClient.UpdateFingerprint();
-
             Token = token;
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
@@ -80,7 +74,8 @@ namespace Discord.Gateway
 
         private void SocketClosed(object sender, CloseEventArgs e)
         {
-            if (LoggedIn) this.LoginToGateway();
+            if (LoggedIn)
+                this.LoginToGateway();
         }
 
 
@@ -89,7 +84,7 @@ namespace Discord.Gateway
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
 
-            System.Console.WriteLine($"{payload.Opcode} | {payload.Title}");
+            System.Console.WriteLine(payload.ToString());
 
             switch (payload.Opcode)
             {
@@ -98,9 +93,9 @@ namespace Discord.Gateway
                     {
                         case "READY":
                             LoggedIn = true;
-                            GatewayLogin login = payload.Deserialize<GatewayLogin>().SetClient(this);
+                            Login login = payload.Deserialize<Login>().SetClient(this);
                             this.User = login.User;
-                            OnLoggedIn?.Invoke(this, new GatewayLoginEventArgs(payload.Deserialize<GatewayLogin>().SetClient(this)));
+                            OnLoggedIn?.Invoke(this, new LoginEventArgs(payload.Deserialize<Login>().SetClient(this)));
                             break;
                         case "GUILD_CREATE":
                             OnJoinedGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
@@ -149,7 +144,6 @@ namespace Discord.Gateway
                     break;
                 case GatewayOpcode.Connected:
                     this.StartHeartbeatHandlersAsync(payload.Deserialize<GatewayHeartbeat>().Interval);
-
                     this.LoginToGateway();
                     break;
             }

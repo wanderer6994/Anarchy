@@ -2,6 +2,7 @@
 
 namespace Discord
 {
+    //as far as i know videos cannot be put into an embed
     public class EmbedVideo
     {
         [JsonProperty("url")]

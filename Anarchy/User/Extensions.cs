@@ -29,15 +29,5 @@ namespace Discord
             client.User = resp.Deserialize<ClientUser>().SetClient(client);
             return client.User;
         }
-
-
-        public static void SetHypesquad(this DiscordClient client, HypesquadHouse house)
-        {
-            if (house == HypesquadHouse.None)
-                client.HttpClient.Delete("/hypesquad/online");
-
-            client.HttpClient.Post("/hypesquad/online", 
-                        JsonConvert.SerializeObject(new Hypesquad() { House = house }));
-        }
     }
 }

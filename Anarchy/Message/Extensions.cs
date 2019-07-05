@@ -37,7 +37,7 @@ namespace Discord
             var resp = client.HttpClient.Post($"/channels/{channelId}/typing");
 
             if (resp.Content.ReadAsStringAsync().Result.Contains("cooldown"))
-                throw new TooManyRequestsException(client,  resp.Deserialize<MessageRateLimit>().Cooldown);
+                throw new RateLimitException(client, resp.Deserialize<MessageRateLimit>().Cooldown);
         }
     }
 }

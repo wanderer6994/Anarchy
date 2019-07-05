@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Discord.Gateway
 {
-    public class GatewayLogin : Controllable
+    public class Login : Controllable
     {
-        public GatewayLogin()
+        public Login()
         {
             OnClientUpdated += (sender, e) =>
             {

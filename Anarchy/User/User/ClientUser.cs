@@ -27,26 +27,24 @@ namespace Discord
         }
 
 
-        public bool ChangeSettings(UserSettings settings)
+        public void ChangeProfile(UserSettings settings)
         {
             if (settings.Email == null) settings.Email = Email;
             if (!settings.DiscriminatorProperty.Set)
                 settings.Discriminator = Discriminator;
             if (settings.Username == null) settings.Username = Username;
 
-            if (Client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings)).StatusCode == HttpStatusCode.OK)
-            {
-                Client.GetClientUser();
-                return true;
-            }
-            else
-                return false;
+            Client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings));
         }
 
 
         public void SetHypesquad(HypesquadHouse house)
         {
-            Client.SetHypesquad(house);
+            if (house == HypesquadHouse.None)
+                Client.HttpClient.Delete("/hypesquad/online");
+
+            Client.HttpClient.Post("/hypesquad/online",
+                        JsonConvert.SerializeObject(new Hypesquad() { House = house }));
         }
     }
 }

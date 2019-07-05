@@ -15,7 +15,7 @@ namespace Discord
         private static Treturn modifyChannel<Treturn, TProperty>(this DiscordClient client, long channelId, TProperty properties) where TProperty : ChannelProperties where Treturn : Channel
         {
             return client.HttpClient.Patch($"/channels/{channelId}", 
-                JsonConvert.SerializeObject(properties)).Deserialize<Treturn>().SetClient(client);
+                                JsonConvert.SerializeObject(properties)).Deserialize<Treturn>().SetClient(client);
         }
 
 
@@ -74,7 +74,7 @@ namespace Discord
         private static T createGuildChannel<T>(this DiscordClient client, long guildId, ChannelCreationProperties properties) where T : GuildChannel
         {
             return client.HttpClient.Post($"/guilds/{guildId}/channels", 
-                JsonConvert.SerializeObject(properties)).Deserialize<T>().SetClient(client);
+                                JsonConvert.SerializeObject(properties)).Deserialize<T>().SetClient(client);
         }
 
 
@@ -140,6 +140,18 @@ namespace Discord
         {
             return client.HttpClient.Delete($"/channels/{groupId}")
                                         .Deserialize<Group>().SetClient(client);
+        }
+
+
+        public static void AddUserToGroup(this DiscordClient client, long groupId, long userId)
+        {
+            client.HttpClient.Put($"/channels/{groupId}/recipients/{userId}");
+        }
+
+
+        public static void RemoveUserFromGroup(this DiscordClient client, long groupId, long userId)
+        {
+            client.HttpClient.Delete($"/channels/{groupId}/recipients/{userId}");
         }
         #endregion
 

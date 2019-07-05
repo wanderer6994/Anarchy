@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
+//if the server is nitro boosted you might encounter problems
 namespace GuildDuplicator
 {
     //makes it easier to make sure categories get created first (which they need to)
@@ -35,7 +36,7 @@ namespace GuildDuplicator
 
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             //Create a client with the token
             Console.Write("Token: ");
@@ -44,53 +45,11 @@ namespace GuildDuplicator
             //find the guild
             Console.Write($"Guild id: ");
             Guild targetGuild = client.GetGuild(long.Parse(Console.ReadLine()));
+            Guild ourGuild = DuplicateGuild(client, targetGuild);
 
-            Console.WriteLine("Duplicating guild...");
+            DeleteAllChannels(client, ourGuild);
 
-            //create the guild and modify it with settings from the target
-            Guild ourGuild = client.CreateGuild(new GuildCreationProperties() { Name = targetGuild.Name, Icon = targetGuild.GetIcon(), Region = targetGuild.Region });
-            ourGuild.Modify(new GuildModProperties() { VerificationLevel = targetGuild.VerificationLevel, DefaultNotifications = targetGuild.DefaultNotifications });
-
-            #region delete our channels
-            Console.WriteLine("Deleting default guild channels...");
-
-            //when you create a guild it automatically creates some channels, which we have to delete
-            foreach (var channel in ourGuild.GetChannels())
-            {
-                channel.Delete();
-
-                Console.WriteLine($"Deleted {channel.Name}");
-
-                Thread.Sleep(100);
-            }
-            #endregion
-
-            #region create roles
-            List<RoleDupe> ourRoles = new List<RoleDupe>();
-
-            Console.WriteLine("Duplicating roles...");
-
-            //duplicate roles
-            foreach (var role in targetGuild.GetRoles())
-            {
-                RoleDupe dupe = new RoleDupe();
-                dupe.TargetRole = role;
-
-                if (role.Name == "@everyone") //we don't wanna create another @everyone role, so we just modify ours instead
-                {
-                    Role ourRole = ourGuild.GetRoles().First(r => r.Name == "@everyone");
-                    ourRole.Modify(new RoleProperties() { Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
-                    dupe.OurRole = ourRole;
-                }
-                else
-                    dupe.OurRole = ourGuild.CreateRole(new RoleProperties() { Name = role.Name, Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
-                ourRoles.Add(dupe);
-
-                Console.WriteLine($"Duplicated {role.ToString()}");
-
-                Thread.Sleep(100);
-            }
-            #endregion
+            List<RoleDupe> ourRoles = DuplicateRoles(client, targetGuild, ourGuild);
 
             #region create channels
             OrganizedChannelList channels = new OrganizedChannelList(targetGuild.GetChannels());
@@ -161,10 +120,9 @@ namespace GuildDuplicator
                     else
                         throw;
                 }
-                
-                //create text channels
+
                 TextChannel ourChannel = ourGuild.CreateTextChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
-                ourChannel.Modify(new TextChannelProperties() { Nsfw = channel.Nsfw, Position = channel.Position, Topic = channel.Topic });
+                ourChannel.Modify(new TextChannelProperties() { Nsfw = channel.Nsfw, Position = channel.Position, Topic = channel.Topic, SlowMode = channel.SlowMode });
 
                 foreach (var overwrite in channel.PermissionOverwrites)
                 {
@@ -222,6 +180,65 @@ namespace GuildDuplicator
 
             Console.WriteLine("Done!");
             Console.ReadLine();
+        }
+
+
+        private static Guild DuplicateGuild(DiscordClient client, Guild guild)
+        {
+            Console.WriteLine("Duplicating guild...");
+
+            //create the guild and modify it with settings from the target
+            Guild ourGuild = client.CreateGuild(new GuildCreationProperties() { Name = guild.Name, Icon = guild.GetIcon(), Region = guild.Region });
+            ourGuild.Modify(new GuildProperties() { VerificationLevel = guild.VerificationLevel, DefaultNotifications = guild.DefaultNotifications });
+
+            return ourGuild;
+        }
+
+
+        private static void DeleteAllChannels(DiscordClient client, Guild guild)
+        {
+            Console.WriteLine("Deleting default guild channels...");
+
+            //when you create a guild it automatically creates some channels, which we have to delete
+            foreach (var channel in guild.GetChannels())
+            {
+                channel.Delete();
+
+                Console.WriteLine($"Deleted {channel}");
+
+                Thread.Sleep(100);
+            }
+        }
+
+
+        private static List<RoleDupe> DuplicateRoles(DiscordClient client, Guild targetGuild, Guild ourGuild)
+        {
+            List<RoleDupe> ourRoles = new List<RoleDupe>();
+
+            Console.WriteLine("Duplicating roles...");
+
+            //duplicate roles
+            foreach (var role in targetGuild.GetRoles())
+            {
+                RoleDupe dupe = new RoleDupe();
+                dupe.TargetRole = role;
+
+                if (role.Name == "@everyone") //we don't wanna create another @everyone role, so we just modify ours instead
+                {
+                    Role ourRole = ourGuild.GetRoles().First(r => r.Name == "@everyone");
+                    ourRole.Modify(new RoleProperties() { Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
+                    dupe.OurRole = ourRole;
+                }
+                else
+                    dupe.OurRole = ourGuild.CreateRole(new RoleProperties() { Name = role.Name, Permissions = new EditablePermissions(role.Permissions), Color = role.Color, Mentionable = role.Mentionable, Seperated = role.Seperated });
+                ourRoles.Add(dupe);
+
+                Console.WriteLine($"Duplicated {role}");
+
+                Thread.Sleep(100);
+            }
+
+            return ourRoles;
         }
     }
 }

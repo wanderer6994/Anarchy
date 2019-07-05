@@ -19,7 +19,6 @@ namespace Discord.Gateway
             var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify);
             req.Data.Token = client.Token;
             req.Data.Properties = client.SuperPropertiesInfo.Properties;
-
             client.Socket.Send(req);
         }
         
@@ -29,7 +28,6 @@ namespace Discord.Gateway
             while (true)
             {
                 await Task.Delay(interval);
-
                 client.Socket.Send(new GatewayRequest<int?>(GatewayOpcode.Heartbeat) { Data = client.Sequence });
             }
         }
@@ -56,7 +54,7 @@ namespace Discord.Gateway
 
             client.GetGuildMembers(guildId, 0);
 
-            while (newMembers.Count == 1000 || newMembers.Count == 0) Thread.Sleep(15);
+            while (newMembers.Count == 1000 || newMembers.Count == 0) Thread.Sleep(20);
             return members;
         }
     }

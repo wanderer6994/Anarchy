@@ -1,10 +1,10 @@
 ﻿namespace Discord.Gateway
 {
-    public class GatewayLoginEventArgs
+    public class LoginEventArgs
     {
-        public GatewayLogin Login { get; private set; }
+        public Login Login { get; private set; }
 
-        public GatewayLoginEventArgs(GatewayLogin login)
+        public LoginEventArgs(Login login)
         {
             Login = login;
         }

@@ -6,12 +6,12 @@ namespace Discord
     public static class InviteExtensions
     {
         #region management
-        public static Invite CreateInvite(this DiscordClient client, long channelId, InviteProperties properties = null)
+        public static PartialInvite CreateInvite(this DiscordClient client, long channelId, InviteProperties properties = null)
         {
             if (properties == null) properties = new InviteProperties();
 
             return client.HttpClient.Post($"/channels/{channelId}/invites", JsonConvert.SerializeObject(properties))
-                                .Deserialize<Invite>().SetClient(client);
+                                .Deserialize<PartialInvite>().SetClient(client);
         }
 
 

@@ -13,7 +13,9 @@ namespace Discord
         public string Content { get; set; }
 
         [JsonProperty("nonce")]
+#pragma warning disable 0414
         private readonly string _nonce;
+#pragma warning restore 0414
 
         [JsonProperty("tts")]
         public bool Tts { get; set; }

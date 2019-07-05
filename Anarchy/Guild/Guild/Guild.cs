@@ -77,7 +77,7 @@ namespace Discord
         }
 
 
-        public void Modify(GuildModProperties properties)
+        public void Modify(GuildProperties properties)
         {
             if (!properties.NameProperty.Set)
                 properties.Name = Name;

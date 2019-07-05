@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
 
@@ -8,6 +7,11 @@ namespace Discord
 {
     public class Group : Channel
     {
+        public Group()
+        {
+            OnClientUpdated += (sender, e) => Recipients.SetClientsInList(Client);
+        }
+
         [JsonProperty("icon")]
         public string IconId { get; private set; }
 
@@ -15,7 +19,7 @@ namespace Discord
         public long OwnerId { get; private set; }
 
         [JsonProperty("recipients")]
-        public List<User> Recipients { get; private set; }
+        public IReadOnlyList<User> Recipients { get; private set; }
 
 
         public override void Update()
@@ -40,6 +44,36 @@ namespace Discord
             IconId = group.IconId;
             OwnerId = group.OwnerId;
             Recipients = group.Recipients;
+        }
+
+
+        public void AddRecipient(long userId)
+        {
+            Client.AddUserToGroup(Id, userId);
+        }
+
+
+        public void AddRecipient(User user)
+        {
+            AddRecipient(user.Id);
+        }
+
+
+        public void RemoveRecipient(long userId)
+        {
+            Client.RemoveUserFromGroup(Id, userId);
+        }
+
+
+        public void RemoveRecipient(User user)
+        {
+            RemoveRecipient(user.Id);
+        }
+
+
+        public PartialInvite CreateInvite(InviteProperties properties = null)
+        {
+            return Client.CreateInvite(Id, properties);
         }
 
 

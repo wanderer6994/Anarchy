@@ -1,5 +1,4 @@
-﻿using Discord.Webhook;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Discord
@@ -91,24 +90,6 @@ namespace Discord
             Client.UnpinChannelMessage(Id, message.Id);
         }
         #endregion
-
-
-        public Invite CreateInvite(InviteProperties properties = null)
-        {
-            return Client.CreateInvite(Id, properties);
-        }
-
-
-        public IReadOnlyList<Hook> GetWebhooks()
-        {
-            return Client.GetChannelWebhooks(Id);
-        }
-
-
-        public Hook CreateWebhook(WebhookProperties properties)
-        {
-            return Client.CreateChannelWebhook(Id, properties);
-        }
 
 
         public override string ToString()

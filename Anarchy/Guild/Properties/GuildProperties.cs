@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Discord
 {
-    public class GuildModProperties
+    public class GuildProperties
     {
         internal Property<string> NameProperty = new Property<string>();
         [JsonProperty("name")]

@@ -27,24 +27,24 @@ namespace Discord.Webhook
         [JsonProperty("token")]
         public string Token { get; private set; }
 
-        [JsonProperty("guild_id")]
-        public long GuildId { get; private set; }
-
         [JsonProperty("channel_id")]
         public long ChannelId { get; private set; }
+
+        [JsonProperty("guild_id")]
+        public long GuildId { get; private set; }
 
 
         public void Update()
         {
             Hook hook = Client.GetWebhook(Id, Token);
             Name = hook.Name;
+            AvatarId = hook.AvatarId;
             Creator = hook.Creator;
             ChannelId = hook.ChannelId;
-            AvatarId = hook.AvatarId;
         }
 
 
-        public Hook Modify(WebhookProperties properties)
+        public void Modify(WebhookProperties properties)
         {
             if (properties.Name == null)
                 properties.Name = Name;
@@ -57,7 +57,6 @@ namespace Discord.Webhook
             Name = hook.Name;
             ChannelId = hook.ChannelId;
             AvatarId = hook.AvatarId;
-            return hook;
         }
 
 
@@ -67,13 +66,13 @@ namespace Discord.Webhook
         }
 
 
-        public bool SendMessage(WebhookMessageProperties message)
+        public void SendMessage(WebhookMessageProperties message)
         {
-            return Client.HttpClient.Post($"/webhooks/{Id}/{Token}", JsonConvert.SerializeObject(message)).StatusCode == HttpStatusCode.NoContent;
+            Client.HttpClient.Post($"/webhooks/{Id}/{Token}", JsonConvert.SerializeObject(message));
         }
 
 
-        public bool SendMessage(string content)
+        public void SendMessage(string content)
         {
             WebhookMessageProperties message = new WebhookMessageProperties
             {
@@ -82,7 +81,7 @@ namespace Discord.Webhook
                 AvatarUrl = $"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png"
             };
 
-            return SendMessage(message);
+            SendMessage(message);
         }
 
 

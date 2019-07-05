@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Discord.Webhook;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Discord
 {
@@ -12,7 +14,7 @@ namespace Discord
 
         //this is in seconds btw
         [JsonProperty("rate_limit_per_user")]
-        public int RateLimit { get; private set; }
+        public int SlowMode { get; private set; }
 
 
         public override void Update()
@@ -35,6 +37,8 @@ namespace Discord
                 properties.Topic = Topic;
             if (!properties.NsfwProperty.Set)
                 properties.Nsfw = Nsfw;
+            if (!properties.SlowModeProperty.Set)
+                properties.SlowMode = SlowMode;
             if (!properties.PositionProperty.Set)
                 properties.Position = Position;
             if (!properties.ParentProperty.Set)
@@ -44,9 +48,22 @@ namespace Discord
             Name = channel.Name;
             Topic = channel.Topic;
             Nsfw = channel.Nsfw;
+            SlowMode = channel.SlowMode;
             Position = channel.Position;
             ParentId = channel.ParentId;
             PermissionOverwrites = channel.PermissionOverwrites;
+        }
+
+
+        public IReadOnlyList<Hook> GetWebhooks()
+        {
+            return Client.GetChannelWebhooks(Id);
+        }
+
+
+        public Hook CreateWebhook(WebhookProperties properties)
+        {
+            return Client.CreateChannelWebhook(Id, properties);
         }
     }
 }

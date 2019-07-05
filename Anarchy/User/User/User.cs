@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Drawing;
-using System.Net;
 using System.Net.Http;
 
 namespace Discord
@@ -20,7 +19,9 @@ namespace Discord
         public string AvatarId { get; protected set; }
 
         [JsonProperty("bot")]
+#pragma warning disable 0414, 0649
         private readonly bool _bot;
+#pragma warning restore 0414, 0649
 
 
         public UserType Type
@@ -55,6 +56,9 @@ namespace Discord
 
         public void Block()
         {
+            if (Id == Client.User.Id)
+                return;
+
             Client.BlockUser(Id);
         }
 

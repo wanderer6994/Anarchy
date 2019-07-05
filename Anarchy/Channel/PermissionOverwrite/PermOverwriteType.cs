@@ -1,6 +1,6 @@
 ﻿namespace Discord
 {
-    public enum PermissionOverwriteType
+    public enum PermOverwriteType
     {
         Role,
         Member

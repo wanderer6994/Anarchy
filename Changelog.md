@@ -1,25 +1,25 @@
+(Please keep in mind that these are only the major/important changes. There have been more than written here)
+
 # 0.1.1.0
 
 ### Additions
-Added embed support for webhooks.<br><br>
-Added support for all different channels.<br><br>
-Added permission overwrite support for channels.<br><br>
+- Added embed support for webhooks.<br><br>
+- Added support for all different channels.<br><br>
+- Added permission overwrite functionality.<br><br>
+- Added PartialInvite because of missing information at some endpoints.
 
 ### Improvements
-Improved relationship functionality.<br><br>
-Improved ClientUser funcionality.<br><br>
-Improved HTTP error handling.<br><br>
+- Improved relationship functionality.<br><br>
+- Improved ClientUser funcionality.<br><br>
+- Improved HTTP error handling.<br><br>
 
 ### Bug fixes
-Fixed banning/unbanning always returning a 404.<br><br>
-Fixed a few ClientUser bugs.<br><br>
-Other minor bug fixes.
+- A bunch of minor bug fixes.
 <br><br><br>
 
 
 
 # 0.1.0.0 [STABLE]
-(Please keep in mind that these are only the major/important changes. There has been a lot more than written here)
 
 ### Additions
 Added GetAvatar()/GetIcon() methods, allowing you to download images from guilds n' stuff.<br><br>
@@ -41,7 +41,6 @@ Improved 'default properties' fix by implementing a new Property<T> class.
 
 
 # 0.1.0.0 [BETA]
-(Please keep in mind that these are only the major/important changes. There has been a lot more than written here)
 
 ### Additions
 Added a much quicker way of getting guild members (tho since it's using the gateway it only supports DiscordSocketClient).<br><br>

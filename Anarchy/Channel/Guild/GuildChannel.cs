@@ -46,6 +46,12 @@ namespace Discord
         }
 
 
+        public PartialInvite CreateInvite(InviteProperties properties = null)
+        {
+            return Client.CreateInvite(Id, properties);
+        }
+
+
         public void AddPermissionOverwrite(PermissionOverwrite overwrite)
         {
             Client.AddPermissionOverwrite(Id, overwrite);

@@ -19,7 +19,7 @@ namespace Discord.Gateway
 
         public override string ToString()
         {
-            return $"{Opcode} {Title}";
+            return Opcode.ToString() + (Title != null ? $" {Title}" : "");
         }
     }
 }

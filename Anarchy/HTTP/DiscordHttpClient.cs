@@ -38,7 +38,7 @@ namespace Discord
             if (resp.StatusCode == HttpStatusCode.BadRequest)
                 throw new InvalidParametersException(_discordClient, content);
             else if (resp.StatusCode == (HttpStatusCode)429)
-                throw new TooManyRequestsException(_discordClient, content.Deserialize<RateLimit>().RetryAfter);
+                throw new RateLimitException(_discordClient, content.Deserialize<RateLimit>().RetryAfter);
             else if (resp.StatusCode > HttpStatusCode.NoContent)
                 throw new DiscordHttpErrorException(_discordClient, content);
         }

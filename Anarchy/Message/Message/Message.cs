@@ -62,6 +62,9 @@ namespace Discord
 
         public void Edit(string message)
         {
+            if (Type != MessageType.Default)
+                return;
+
             Message msg = Client.EditMessage(ChannelId, Id, message);
             Content = msg.Content;
             Pinned = msg.Pinned;

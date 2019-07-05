@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class EmojiModProperties
+    public class EmojiProperties
     {
         [JsonProperty("name")]
         public string Name { get; set; }

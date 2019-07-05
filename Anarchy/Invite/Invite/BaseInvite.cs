@@ -2,9 +2,9 @@
 
 namespace Discord
 {
-    public class Invite : Controllable
+    public class BaseInvite : Controllable
     {
-        public Invite()
+        public BaseInvite()
         {
             OnClientUpdated += (sender, e) =>
             {
@@ -37,12 +37,6 @@ namespace Discord
 
         [JsonProperty("max_uses")]
         public int MaxUses { get; private set; }
-
-        [JsonProperty("approximate_presence_count")]
-        public int OnlineMembers { get; private set; }
-
-        [JsonProperty("approximate_member_count")]
-        public int TotalMembers { get; private set; }
 
 
         public Invite Delete()

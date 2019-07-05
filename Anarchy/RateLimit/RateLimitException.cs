@@ -1,10 +1,10 @@
 ﻿namespace Discord
 {
-    public class TooManyRequestsException : DiscordException
+    public class RateLimitException : DiscordException
     {
         public int RetryAfter { get; private set; }
 
-        public TooManyRequestsException(DiscordClient client, int retryAfter) : base(client, "Too many requests are being sent")
+        public RateLimitException(DiscordClient client, int retryAfter) : base(client, "Too many requests are being sent")
         {
             RetryAfter = retryAfter;
         }

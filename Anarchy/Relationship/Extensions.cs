@@ -5,9 +5,10 @@ namespace Discord
 {
     public static class RelationshipsExtensions
     {
-        public static List<Relationship> GetRelationships(this DiscordClient client)
+        public static IReadOnlyList<Relationship> GetRelationships(this DiscordClient client)
         {
-            return client.HttpClient.Get($"/users/@me/relationships").Deserialize<List<Relationship>>();
+            return client.HttpClient.Get($"/users/@me/relationships")
+                                .Deserialize<IReadOnlyList<Relationship>>().SetClientsInList(client);
         }
 
 
@@ -35,13 +36,13 @@ namespace Discord
         #region DMs
         public static IReadOnlyList<Channel> GetClientDMs(this DiscordClient client)
         {
-            return client.HttpClient.Get($"/users/@me/channels").Deserialize<IReadOnlyList<Channel>>().SetClientsInList(client);
+            return client.HttpClient.Get($"/users/@me/channels").Deserialize<IReadOnlyList<Group>>().SetClientsInList(client);
         }
 
 
         public static Channel CreateDM(this DiscordClient client, long recipientId)
         {
-            return client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}").Deserialize<Channel>().SetClient(client);
+            return client.HttpClient.Post("/users/@me/channels", "{\"recipient_id\":\"" + recipientId + "\"}").Deserialize<Group>().SetClient(client);
         }
         #endregion
     }

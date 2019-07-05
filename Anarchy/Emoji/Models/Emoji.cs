@@ -10,7 +10,7 @@ namespace Discord
         }
 
         [JsonProperty("id")]
-        public long? Id { get; private set; }
+        public long Id { get; private set; }
 
         [JsonProperty("name")]
         public string Name { get; private set; }
@@ -26,19 +26,19 @@ namespace Discord
 
         public void Update()
         {
-            Name = Client.GetGuildEmoji(GuildId, (long)Id).Name;
+            Name = Client.GetGuildEmoji(GuildId, Id).Name;
         }
 
 
         public void Modify(string name)
         {
-            Name = Client.ModifyGuildEmoji(GuildId, (long)Id, name).Name;
+            Name = Client.ModifyGuildEmoji(GuildId, Id, name).Name;
         }
 
 
         public void Delete()
         {
-            Client.DeleteGuildEmoji(GuildId, (long)Id);
+            Client.DeleteGuildEmoji(GuildId, Id);
         }
 
 
