@@ -3,6 +3,7 @@
 ### Additions
 Added embed support for webhooks.<br><br>
 Added support for all different channels.<br><br>
+Added permission overwrite support for channels.<br><br>
 
 ### Improvements
 Improved relationship functionality.<br><br>

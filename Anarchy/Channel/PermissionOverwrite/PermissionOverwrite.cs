@@ -1,0 +1,60 @@
+﻿using Newtonsoft.Json;
+
+namespace Discord
+{
+    public class PermissionOverwrite
+    {
+        public PermissionOverwrite()
+        {
+            Allow = new EditablePermissions(0);
+            Deny = new EditablePermissions(0);
+        }
+
+        [JsonProperty("id")]
+        public long Id { get; set; }
+
+        [JsonProperty("type")]
+        private string _type;
+        public PermissionOverwriteType Type
+        {
+            get
+            {
+                PermissionOverwriteType type;
+                if (_type == "role")
+                    type = PermissionOverwriteType.Role;
+                else
+                    type = PermissionOverwriteType.Member;
+                return type;
+            }
+            set
+            {
+                _type = value.ToString().ToLower();
+            }
+        }
+
+
+        [JsonProperty("deny")]
+        private int _deny
+        {
+            get { return Deny; }
+            set { Deny = new EditablePermissions(value); }
+        }
+        [JsonIgnore]
+        public EditablePermissions Deny { get; set; }
+
+        [JsonProperty("allow")]
+        private int _allow
+        {
+            get { return Allow; }
+            set { Allow = new EditablePermissions(value); }
+        }
+        [JsonIgnore]
+        public EditablePermissions Allow { get; set; }
+
+
+        public override string ToString()
+        {
+            return Type.ToString();
+        }
+    }
+}

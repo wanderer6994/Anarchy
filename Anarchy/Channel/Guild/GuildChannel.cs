@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Discord
 {
@@ -42,6 +43,32 @@ namespace Discord
             Position = channel.Position;
             ParentId = channel.ParentId;
             PermissionOverwrites = channel.PermissionOverwrites;
+        }
+
+
+        public void AddPermissionOverwrite(PermissionOverwrite overwrite)
+        {
+            Client.AddPermissionOverwrite(Id, overwrite);
+            List<PermissionOverwrite> existing = PermissionOverwrites.Where(pe => pe.Id == overwrite.Id).ToList();
+            var temp = PermissionOverwrites.ToList();
+            if (existing.Count() > 0)
+                temp[temp.IndexOf(existing[0])] = overwrite;
+            else
+                temp.Add(overwrite);
+            PermissionOverwrites = temp;
+        }
+
+        public void RemovePermissionOverwrite(long id)
+        {
+            Client.RemovePermissionOverwrite(Id, id);
+
+            try
+            {
+                List<PermissionOverwrite> temp = (List<PermissionOverwrite>)PermissionOverwrites;
+                temp.Remove(PermissionOverwrites.First(pe => pe.Id == id));
+                PermissionOverwrites = temp;
+            }
+            catch { }
         }
     }
 }

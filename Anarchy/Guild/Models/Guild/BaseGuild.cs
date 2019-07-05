@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Net;
 using System.Net.Http;
 
 namespace Discord
@@ -19,9 +18,9 @@ namespace Discord
         public string IconId { get; protected set; }
 
 
-        public bool Delete()
+        public void Delete()
         {
-            return Client.DeleteGuild(Id);
+            Client.DeleteGuild(Id);
         }
 
 
@@ -43,15 +42,15 @@ namespace Discord
         }
 
 
-        public GuildTextChannel CreateTextChannel(ChannelCreationProperties properties)
+        public TextChannel CreateTextChannel(ChannelCreationProperties properties)
         {
-            return Client.CreateGuildTextChannel(Id, properties);
+            return Client.CreateTextChannel(Id, properties);
         }
 
 
-        public GuildVoiceChannel CreateVoiceChannel(ChannelCreationProperties properties)
+        public VoiceChannel CreateVoiceChannel(ChannelCreationProperties properties)
         {
-            return Client.CreateGuildVoiceChannel(Id, properties);
+            return Client.CreateVoiceChannel(Id, properties);
         }
 
 
@@ -120,12 +119,8 @@ namespace Discord
             if (IconId == null)
                 return null;
 
-            var resp = new HttpClient().GetAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png").Result;
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ImageNotFoundException(IconId);
-
-            return (Bitmap)new ImageConverter().ConvertFrom(resp.Content.ReadAsByteArrayAsync().Result);
+            return (Bitmap)new ImageConverter().ConvertFrom(new HttpClient().GetAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png")
+                                                                                .Result.Content.ReadAsByteArrayAsync().Result);
         }
 
 

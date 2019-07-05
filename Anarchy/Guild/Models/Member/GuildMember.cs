@@ -25,21 +25,21 @@ namespace Discord
         public string JoinedAt { get; private set; }
 
 
-        public bool Kick()
+        public void Kick()
         {
-            return Client.KickGuildMember(GuildId, User.Id);
+            Client.KickGuildMember(GuildId, User.Id);
         }
 
 
-        public bool Ban(string reason = null, int deleteMessageDays = 0)
+        public void Ban(string reason = null, int deleteMessageDays = 0)
         {
-            return Client.BanGuildMember(GuildId, User.Id, reason, deleteMessageDays);
+            Client.BanGuildMember(GuildId, User.Id, reason, deleteMessageDays);
         }
 
 
-        public bool Unban()
+        public void Unban()
         {
-            return Client.UnbanGuildMember(GuildId, User.Id);
+            Client.UnbanGuildMember(GuildId, User.Id);
         }
 
 

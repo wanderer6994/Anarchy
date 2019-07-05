@@ -141,6 +141,12 @@ namespace Discord.Gateway
                         case "MESSAGE_DELETE":
                             OnMessageDeleted?.Invoke(this, new MessageDeletedEventArgs(payload.Deserialize<DeletedMessage>()));
                             break;
+                        case "MESSAGE_REACTION_ADD":
+
+                            break;
+                        case "MESSAGE_REACTION_REMOVE":
+
+                            break;
                     }
                     break;
                 case GatewayOpcode.InvalidSession:

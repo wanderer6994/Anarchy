@@ -88,12 +88,11 @@ namespace Discord.Webhook
 
         public Image GetAvatar()
         {
-            var resp = new HttpClient().GetAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png").Result;
+            if (AvatarId == null)
+                return null;
 
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ImageNotFoundException(AvatarId);
-
-            return (Bitmap)new ImageConverter().ConvertFrom(resp.Content.ReadAsByteArrayAsync().Result);
+            return (Bitmap)new ImageConverter().ConvertFrom(new HttpClient().GetAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png")
+                                                                    .Result.Content.ReadAsByteArrayAsync().Result);
         }
 
 

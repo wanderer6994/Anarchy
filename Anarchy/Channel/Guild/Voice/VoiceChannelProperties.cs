@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class GuildVoiceChannelProperties : GuildChannelProperties
+    public class VoiceChannelProperties : GuildChannelProperties
     {
         internal Property<int> BitrateProperty = new Property<int>();
         [JsonProperty("bitrate")]

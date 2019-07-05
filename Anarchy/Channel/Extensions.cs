@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Net;
 
 namespace Discord
 {
@@ -38,6 +37,18 @@ namespace Discord
             return client.HttpClient.Delete($"/channels/{channelId}")
                 .Deserialize<Channel>().SetClient(client);
         }
+
+
+        public static void AddPermissionOverwrite(this DiscordClient client, long channelId, PermissionOverwrite overwrite)
+        {
+            client.HttpClient.Put($"/channels/{channelId}/permissions/{overwrite.Id}", JsonConvert.SerializeObject(overwrite));
+        }
+
+
+        public static void RemovePermissionOverwrite(this DiscordClient client, long channelId, long id)
+        {
+            client.HttpClient.Delete($"/channels/{channelId}/permissions/{id}");
+        }
         #endregion
 
 
@@ -48,15 +59,15 @@ namespace Discord
         }
 
 
-        public static GuildTextChannel GetGuildTextChannel(this DiscordClient client, long channelId)
+        public static TextChannel GetTextChannel(this DiscordClient client, long channelId)
         {
-            return client.getChannel<GuildTextChannel>(channelId);
+            return client.getChannel<TextChannel>(channelId);
         }
 
 
-        public static GuildVoiceChannel GetGuildVoiceChannel(this DiscordClient client, long channelId)
+        public static VoiceChannel GetVoiceChannel(this DiscordClient client, long channelId)
         {
-            return client.getChannel<GuildVoiceChannel>(channelId);
+            return client.getChannel<VoiceChannel>(channelId);
         }
 
 
@@ -73,15 +84,15 @@ namespace Discord
         }
 
 
-        public static GuildTextChannel CreateGuildTextChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
+        public static TextChannel CreateTextChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
         {
-            return client.createGuildChannel<GuildTextChannel>(guildId, properties);
+            return client.createGuildChannel<TextChannel>(guildId, properties);
         }
 
 
-        public static GuildVoiceChannel CreateGuildVoiceChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
+        public static VoiceChannel CreateVoiceChannel(this DiscordClient client, long guildId, ChannelCreationProperties properties)
         {
-            return client.createGuildChannel<GuildVoiceChannel>(guildId, properties);
+            return client.createGuildChannel<VoiceChannel>(guildId, properties);
         }
 
 
@@ -91,15 +102,15 @@ namespace Discord
         }
 
 
-        public static GuildTextChannel ModifyGuildTextChannel(this DiscordClient client, long channelId, GuildTextChannelProperties properties)
+        public static TextChannel ModifyTextChannel(this DiscordClient client, long channelId, TextChannelProperties properties)
         {
-            return client.modifyChannel<GuildTextChannel, GuildTextChannelProperties>(channelId, properties);
+            return client.modifyChannel<TextChannel, TextChannelProperties>(channelId, properties);
         }
 
 
-        public static GuildVoiceChannel ModifyGuildVoiceChannel(this DiscordClient client, long channelId, GuildVoiceChannelProperties properties)
+        public static VoiceChannel ModifyVoiceChannel(this DiscordClient client, long channelId, VoiceChannelProperties properties)
         {
-            return client.modifyChannel<GuildVoiceChannel, GuildVoiceChannelProperties>(channelId, properties);
+            return client.modifyChannel<VoiceChannel, VoiceChannelProperties>(channelId, properties);
         }
         #endregion
 

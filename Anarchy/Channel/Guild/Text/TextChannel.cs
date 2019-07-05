@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class GuildTextChannel : GuildChannel
+    public class TextChannel : GuildChannel
     {
         [JsonProperty("topic")]
         public string Topic { get; private set; }
@@ -13,7 +13,7 @@ namespace Discord
 
         public override void Update()
         {
-            GuildTextChannel channel = Client.GetGuildTextChannel(Id);
+            TextChannel channel = Client.GetTextChannel(Id);
             Name = channel.Name;
             Topic = channel.Topic;
             Nsfw = channel.Nsfw;
@@ -23,7 +23,7 @@ namespace Discord
         }
 
 
-        public void Modify(GuildTextChannelProperties properties)
+        public void Modify(TextChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
                 properties.Name = Name;
@@ -36,7 +36,7 @@ namespace Discord
             if (!properties.ParentProperty.Set)
                 properties.ParentId = ParentId;
 
-            GuildTextChannel channel = Client.ModifyGuildTextChannel(Id, properties);
+            TextChannel channel = Client.ModifyTextChannel(Id, properties);
             Name = channel.Name;
             Topic = channel.Topic;
             Nsfw = channel.Nsfw;

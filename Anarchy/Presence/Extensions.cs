@@ -5,7 +5,7 @@
         public static void ChangeStatus(this DiscordSocketClient client, UserStatus status)
         {
             var req = new GatewayRequest<Presence>(GatewayOpcode.PresenceChange);
-            req.Data.Status = status != UserStatus.DoNotDisturb ? status.ToString().ToLower() : "dnd";
+            req.Data.Status = status;
             client.Socket.Send(req);
         }
 

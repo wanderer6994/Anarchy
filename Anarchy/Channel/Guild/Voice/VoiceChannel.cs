@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class GuildVoiceChannel : GuildChannel
+    public class VoiceChannel : GuildChannel
     {
         [JsonProperty("bitrate")]
         public int Bitrate { get; private set; }
@@ -13,7 +13,7 @@ namespace Discord
 
         public override void Update()
         {
-            GuildVoiceChannel channel = Client.GetGuildVoiceChannel(Id);
+            VoiceChannel channel = Client.GetVoiceChannel(Id);
             Name = channel.Name;
             Bitrate = channel.Bitrate;
             UserLimit = channel.UserLimit;
@@ -23,7 +23,7 @@ namespace Discord
         }
 
 
-        public void Modify(GuildVoiceChannelProperties properties)
+        public void Modify(VoiceChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
                 properties.Name = Name;
@@ -36,7 +36,7 @@ namespace Discord
             if (!properties.UserLimitProperty.Set)
                 properties.UserLimit = UserLimit;
 
-            GuildVoiceChannel channel = Client.ModifyGuildVoiceChannel(Id, properties);
+            VoiceChannel channel = Client.ModifyVoiceChannel(Id, properties);
             Name = channel.Name;
             Position = channel.Position;
             ParentId = channel.ParentId;

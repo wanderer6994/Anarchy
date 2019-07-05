@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
-    public class SuperPropertiesInfo
+    public class SPInformation
     {
         internal delegate void UpdatedHandler(object sender, SPUpdatedEventArgs args);
         internal event UpdatedHandler OnPropertiesUpdated;

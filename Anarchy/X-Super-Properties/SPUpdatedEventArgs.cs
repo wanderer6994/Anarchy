@@ -4,9 +4,9 @@ namespace Discord
 {
     public class SPUpdatedEventArgs : EventArgs
     {
-        public SuperPropertiesInfo Properties { get; private set; }
+        public SPInformation Properties { get; private set; }
 
-        public SPUpdatedEventArgs(SuperPropertiesInfo properties)
+        public SPUpdatedEventArgs(SPInformation properties)
         {
             Properties = properties;
         }

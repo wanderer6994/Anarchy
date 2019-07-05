@@ -10,81 +10,52 @@ namespace Discord
         #region management
         public static Guild CreateGuild(this DiscordClient client, GuildCreationProperties properties)
         {
-            var resp = client.HttpClient.Post("/guilds", JsonConvert.SerializeObject(properties));
-
-            return resp.Deserialize<Guild>().SetClient(client);
+            return client.HttpClient.Post("/guilds", JsonConvert.SerializeObject(properties))
+                                .Deserialize<Guild>().SetClient(client);
         }
 
 
         public static Guild ModifyGuild(this DiscordClient client, long guildId, GuildModProperties properties)
         {
-            var resp = client.HttpClient.Patch($"/guilds/{guildId}", JsonConvert.SerializeObject(properties));
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new GuildNotFoundException(client, guildId);
-
-            return resp.Deserialize<Guild>().SetClient(client);
+            return client.HttpClient.Patch($"/guilds/{guildId}", JsonConvert.SerializeObject(properties))
+                                .Deserialize<Guild>().SetClient(client);
         }
 
 
-        public static bool DeleteGuild(this DiscordClient client, long guildId)
+        public static void DeleteGuild(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.Post($"/guilds/{guildId}/delete");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new GuildNotFoundException(client, guildId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
+            client.HttpClient.Post($"/guilds/{guildId}/delete");
         }
 
 
-        public static bool KickGuildMember(this DiscordClient client, long guildId, long userId)
+        public static void KickGuildMember(this DiscordClient client, long guildId, long userId)
         {
-            var resp = client.HttpClient.Delete($"/guilds/{guildId}/members/{userId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new UserNotFoundException(client, userId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
+            client.HttpClient.Delete($"/guilds/{guildId}/members/{userId}");
         }
 
 
         public static IReadOnlyList<Ban> GetGuildBans(this DiscordClient client, long guildId)
         {
-            var resp = client.HttpClient.Get($"/guilds/{guildId}/bans");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new GuildNotFoundException(client, guildId);
-
-            return resp.Deserialize<IReadOnlyList<Ban>>().SetClientsInList(client);
+            return client.HttpClient.Get($"/guilds/{guildId}/bans").Deserialize<IReadOnlyList<Ban>>();
         }
 
 
         public static Ban GetGuildBan(this DiscordClient client, long guildId, long userId)
         {
-            var resp = client.HttpClient.Get($"/guilds/{guildId}/bans/{userId}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new BanNotFoundException(client, guildId);
-
-            return resp.Deserialize<Ban>().SetClient(client);
+            return client.HttpClient.Get($"/guilds/{guildId}/bans/{userId}")
+                                .Deserialize<Ban>().SetClient(client);
         }
 
 
-        public static bool BanGuildMember(this DiscordClient client, long guildId, long userId, string reason = null, int deleteMessageDays = 0)
+        public static void BanGuildMember(this DiscordClient client, long guildId, long userId, string reason = null, int deleteMessageDays = 0)
         {
-            var resp = client.HttpClient.Put($"/guilds/{guildId}/bans/{userId}?delete-message-days={deleteMessageDays}&reason={reason}");
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new UserNotFoundException(client, userId);
-
-            return resp.StatusCode == HttpStatusCode.NoContent;
+            client.HttpClient.Put($"/guilds/{guildId}/bans/{userId}?delete-message-days={deleteMessageDays}&reason={reason}");
         }
 
 
-        public static bool UnbanGuildMember(this DiscordClient client, long guildId, long userId)
+        public static void UnbanGuildMember(this DiscordClient client, long guildId, long userId)
         {
-            return client.HttpClient.Delete($"/guilds/{guildId}/bans/{userId}").StatusCode == HttpStatusCode.NoContent;
+            client.HttpClient.Delete($"/guilds/{guildId}/bans/{userId}");
         }
         #endregion
 

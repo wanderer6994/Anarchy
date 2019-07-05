@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class GuildTextChannelProperties : GuildChannelProperties
+    public class TextChannelProperties : GuildChannelProperties
     {
         internal Property<string> TopicProperty = new Property<string>();
         [JsonProperty("topic")]

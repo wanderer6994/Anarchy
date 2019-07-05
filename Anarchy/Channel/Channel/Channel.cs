@@ -37,7 +37,7 @@ namespace Discord
         }
 
 
-        #region message
+        #region messages
         public void TriggerTyping()
         {
             Client.TriggerTyping(Id);

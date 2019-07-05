@@ -48,12 +48,8 @@ namespace Discord
             if (IconId == null)
                 return null;
 
-            var resp = new HttpClient().GetAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png").Result;
-
-            if (resp.StatusCode == HttpStatusCode.NotFound)
-                throw new ImageNotFoundException(IconId);
-
-            return (Bitmap)new ImageConverter().ConvertFrom(resp.Content.ReadAsByteArrayAsync().Result);
+            return (Bitmap)new ImageConverter().ConvertFrom(new HttpClient().GetAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png")
+                                                                    .Result.Content.ReadAsByteArrayAsync().Result);
         }
     }
 }
