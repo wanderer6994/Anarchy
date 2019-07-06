@@ -40,7 +40,7 @@ namespace Discord
             else if (resp.StatusCode == (HttpStatusCode)429)
                 throw new RateLimitException(_discordClient, content.Deserialize<RateLimit>().RetryAfter);
             else if (resp.StatusCode > HttpStatusCode.NoContent)
-                throw new DiscordHttpErrorException(_discordClient, content);
+                throw new DiscordHttpException(_discordClient, content);
         }
 
 

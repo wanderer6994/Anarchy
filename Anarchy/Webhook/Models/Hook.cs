@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
 
@@ -7,17 +6,12 @@ namespace Discord.Webhook
 {
     public class Hook : Controllable
     {
-        public Hook()
-        {
-            OnClientUpdated += (sender, e) => Creator.SetClient(Client);
-        }
-
         [JsonProperty("id")]
         public long Id { get; private set; }
 
         [JsonProperty("name")]
         public string Name { get; private set; }
-        
+
         [JsonProperty("avatar")]
         public string AvatarId { get; private set; }
 
@@ -32,6 +26,11 @@ namespace Discord.Webhook
 
         [JsonProperty("guild_id")]
         public long GuildId { get; private set; }
+
+        public Hook()
+        {
+            OnClientUpdated += (sender, e) => Creator.SetClient(Client);
+        }
 
 
         public void Update()
@@ -55,8 +54,8 @@ namespace Discord.Webhook
 
             Hook hook = Client.ModifyChannelWebhook(Id, properties);
             Name = hook.Name;
-            ChannelId = hook.ChannelId;
             AvatarId = hook.AvatarId;
+            ChannelId = hook.ChannelId;
         }
 
 

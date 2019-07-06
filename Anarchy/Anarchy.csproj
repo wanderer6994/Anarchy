@@ -60,7 +60,7 @@
     <Compile Include="Channel\Guild\Voice\VoiceChannelProperties.cs" />
     <Compile Include="Channel\PermissionOverwrite\PermOverwriteType.cs" />
     <Compile Include="Guild\Member\GuildMembersEventArgs.cs" />
-    <Compile Include="HTTP\DiscordHttpErrorException.cs" />
+    <Compile Include="HTTP\DiscordHttpException.cs" />
     <Compile Include="HTTP\Experiments.cs" />
     <Compile Include="HTTP\DiscordHttpError.cs" />
     <Compile Include="Invite\Invite\BaseInvite.cs" />
@@ -84,11 +84,11 @@
     <Compile Include="Guild\Guild\BaseGuild.cs" />
     <Compile Include="Guild\Guild\PartialGuild.cs" />
     <Compile Include="Guild\Guild\SocketGuild.cs" />
-    <Compile Include="Message\Embed\EmbedAuthor.cs" />
-    <Compile Include="Message\Embed\EmbedField.cs" />
-    <Compile Include="Message\Embed\EmbedFooter.cs" />
+    <Compile Include="Message\Embed\Author.cs" />
+    <Compile Include="Message\Embed\Field.cs" />
+    <Compile Include="Message\Embed\Footer.cs" />
     <Compile Include="Message\Embed\EmbedMaker.cs" />
-    <Compile Include="Message\Embed\EmbedVideo.cs" />
+    <Compile Include="Message\Embed\Video.cs" />
     <Compile Include="Guild\Models\GuildEventArgs.cs" />
     <Compile Include="Guild\Member\GuildMemberList.cs" />
     <Compile Include="Gateway\Models\GatewayOpcode.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Guild\Guild\Guild.cs" />
     <Compile Include="Message\Message\Attachment.cs" />
     <Compile Include="Message\Embed\Embed.cs" />
-    <Compile Include="Message\Embed\EmbedImage.cs" />
+    <Compile Include="Message\Embed\Image.cs" />
     <Compile Include="Other\Image\DiscordImage.cs" />
     <Compile Include="DiscordClient.cs" />
     <Compile Include="DiscordSocketClient.cs" />
