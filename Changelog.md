@@ -1,5 +1,12 @@
 (Please keep in mind that these are only the major/important changes. There have been more than written here)
 
+# 0.1.1.1
+- Added enum for DiscordHttpError's 'Code' property (DiscordError)
+- Added more gateway events (such as OnUserBanned and OnEmojisUpdated)
+- Minor reorganizations.
+
+
+
 # 0.1.1.0
 
 ### Additions

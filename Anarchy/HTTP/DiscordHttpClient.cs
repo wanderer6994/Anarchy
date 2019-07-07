@@ -36,7 +36,16 @@ namespace Discord
             string content = resp.Content.ReadAsStringAsync().Result;
 
             if (resp.StatusCode == HttpStatusCode.BadRequest)
-                throw new InvalidParametersException(_discordClient, content);
+            {
+                try
+                {
+                    throw new DiscordHttpException(_discordClient, content);
+                }
+                catch (JsonReaderException)
+                {
+                    throw new InvalidParametersException(_discordClient, content);
+                }
+            }
             else if (resp.StatusCode == (HttpStatusCode)429)
                 throw new RateLimitException(_discordClient, content.Deserialize<RateLimit>().RetryAfter);
             else if (resp.StatusCode > HttpStatusCode.NoContent)

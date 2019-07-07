@@ -8,7 +8,9 @@ namespace Discord.Gateway
         public delegate void GuildHandler(DiscordSocketClient client, GuildEventArgs args);
         public delegate void ChannelHandler(DiscordSocketClient client, ChannelEventArgs args);
         public delegate void MessageHandler(DiscordSocketClient client, MessageEventArgs args);
+        public delegate void ReactionHandler(DiscordSocketClient client, ReactionEventArgs args);
         public delegate void RoleHandler(DiscordSocketClient client, RoleEventArgs args);
+        public delegate void BanUpdateHandler(DiscordSocketClient client, BanUpdateEventArgs args);
 
         public delegate void LoginHandler(DiscordSocketClient client, LoginEventArgs args);
         public event LoginHandler OnLoggedIn;
@@ -22,17 +24,29 @@ namespace Discord.Gateway
         public delegate void GuildMembersHandler(DiscordSocketClient client, GuildMembersEventArgs args);
         public event GuildMembersHandler OnGuildMembersReceived;
 
+        public delegate void PresenceUpdateHandler(DiscordSocketClient client, PresenceUpdatedEventArgs args);
+        public event PresenceUpdateHandler OnUserPresenceUpdated;
+
         public event RoleHandler OnRoleCreated;
         public event RoleHandler OnRoleUpdated;
 
         public event ChannelHandler OnChannelCreated;
         public event ChannelHandler OnChannelUpdated;
         public event ChannelHandler OnChannelDeleted;
-        
+
+        public delegate void EmojisUpdatedHandler(DiscordSocketClient client, EmojisUpdatedEventArgs args);
+        public event EmojisUpdatedHandler OnEmojisUpdated;
+
         public event MessageHandler OnMessageReceived;
         public event MessageHandler OnMessageEdited;
         public delegate void MessageDeletedHandler(DiscordSocketClient client, MessageDeletedEventArgs args);
         public event MessageDeletedHandler OnMessageDeleted;
+
+        public event ReactionHandler OnMessageReactionAdded;
+        public event ReactionHandler OnMessageReactionRemoved;
+
+        public event BanUpdateHandler OnUserBanned;
+        public event BanUpdateHandler OnUserUnbanned;
         #endregion
 
         internal WebSocket Socket { get; set; }
@@ -84,6 +98,8 @@ namespace Discord.Gateway
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
 
+            System.Console.WriteLine(payload.ToString());
+
             switch (payload.Opcode)
             {
                 case GatewayOpcode.Event:
@@ -111,6 +127,9 @@ namespace Discord.Gateway
 
                             OnGuildMembersReceived?.Invoke(this, new GuildMembersEventArgs(list.Members));
                             break;
+                        case "PRESENCE_UPDATE":
+                            OnUserPresenceUpdated?.Invoke(this, new PresenceUpdatedEventArgs(payload.Deserialize<PresenceUpdate>()));
+                            break;
                         case "CHANNEL_CREATE":
                             OnChannelCreated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
                             break;
@@ -126,6 +145,9 @@ namespace Discord.Gateway
                         case "GUILD_ROLE_UPDATE":
                             OnRoleUpdated?.Invoke(this, new RoleEventArgs(payload.Deserialize<GatewayRole>().Role.SetClient(this)));
                             break;
+                        case "GUILD_EMOJIS_UPDATE":
+                            OnEmojisUpdated?.Invoke(this, new EmojisUpdatedEventArgs(payload.Deserialize<EmojiContainer>().SetClient(this)));
+                            break;
                         case "MESSAGE_CREATE":
                             OnMessageReceived?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>().SetClient(this)));
                             break;
@@ -134,6 +156,18 @@ namespace Discord.Gateway
                             break;
                         case "MESSAGE_DELETE":
                             OnMessageDeleted?.Invoke(this, new MessageDeletedEventArgs(payload.Deserialize<DeletedMessage>()));
+                            break;
+                        case "MESSAGE_REACTION_ADD":
+                            OnMessageReactionAdded?.Invoke(this, new ReactionEventArgs(payload.Deserialize<MessageReactionUpdate>().SetClient(this)));
+                            break;
+                        case "MESSAGE_REACTION_REMOVE":
+                            OnMessageReactionRemoved?.Invoke(this, new ReactionEventArgs(payload.Deserialize<MessageReactionUpdate>().SetClient(this)));
+                            break;
+                        case "GUILD_BAN_ADD":
+                            OnUserBanned?.Invoke(this, new BanUpdateEventArgs(payload.Deserialize<BanContainer>().SetClient(this)));
+                            break;
+                        case "GUILD_BAN_REMOVE":
+                            OnUserUnbanned?.Invoke(this, new BanUpdateEventArgs(payload.Deserialize<BanContainer>().SetClient(this)));
                             break;
                     }
                     break;
