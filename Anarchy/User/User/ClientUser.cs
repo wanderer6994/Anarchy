@@ -29,12 +29,21 @@ namespace Discord
 
         public void ChangeProfile(UserSettings settings)
         {
-            if (settings.Email == null) settings.Email = Email;
+            if (settings.Email == null)
+                settings.Email = Email;
             if (!settings.DiscriminatorProperty.Set)
                 settings.Discriminator = Discriminator;
-            if (settings.Username == null) settings.Username = Username;
+            if (settings.Username == null)
+                settings.Username = Username;
 
-            Client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings));
+            ClientUser user = Client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings)).Deserialize<ClientUser>();
+            Email = user.Email;
+            EmailVerified = user.EmailVerified;
+            Username = user.Username;
+            Discriminator = user.Discriminator;
+            TwoFactorAuth = user.TwoFactorAuth;
+            Language = user.Language;
+            Nitro = user.Nitro;
         }
 
 
@@ -44,7 +53,7 @@ namespace Discord
                 Client.HttpClient.Delete("/hypesquad/online");
 
             Client.HttpClient.Post("/hypesquad/online",
-                        JsonConvert.SerializeObject(new Hypesquad() { House = house }));
+                        JsonConvert.SerializeObject(new HypesquadContainer() { House = house }));
         }
     }
 }

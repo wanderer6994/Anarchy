@@ -6,10 +6,10 @@ using System.Net.Http;
 
 namespace Discord
 {
-    public class BaseGuild : Controllable
+    public abstract class BaseGuild : Controllable
     {
         [JsonProperty("id")]
-        public long Id { get; private set; }
+        public ulong Id { get; private set; }
 
         [JsonProperty("name")]
         public string Name { get; protected set; }
@@ -21,6 +21,12 @@ namespace Discord
         public void Delete()
         {
             Client.DeleteGuild(Id);
+        }
+
+
+        public void Leave()
+        {
+            Client.LeaveGuild(Id);
         }
 
 
@@ -62,7 +68,7 @@ namespace Discord
         }
 
 
-        public Emoji GetEmoji(long reactionId)
+        public Emoji GetEmoji(ulong reactionId)
         {
             return Client.GetGuildEmoji(Id, reactionId);
         }
@@ -110,7 +116,7 @@ namespace Discord
         }
 
 
-        public Ban GetBan(long userId)
+        public Ban GetBan(ulong userId)
         {
             return Client.GetGuildBan(Id, userId);
         }

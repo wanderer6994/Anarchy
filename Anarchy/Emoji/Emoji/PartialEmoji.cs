@@ -5,7 +5,7 @@ namespace Discord
     public class PartialEmoji : Controllable
     {
         [JsonProperty("id")]
-        public long? Id { get; private set; }
+        public ulong? Id { get; private set; }
 
         [JsonProperty("name")]
         public string Name { get; private set; }
@@ -13,7 +13,7 @@ namespace Discord
         [JsonProperty("animated")]
         public bool Animated { get; private set; }
 
-        public long GuildId { get; internal set; }
+        public ulong GuildId { get; internal set; }
 
 
         public void Update()
@@ -21,7 +21,7 @@ namespace Discord
             if (Id == null)
                 return;
 
-            Name = Client.GetGuildEmoji(GuildId, (long)Id).Name;
+            Name = Client.GetGuildEmoji(GuildId, (ulong)Id).Name;
         }
 
 
@@ -30,7 +30,7 @@ namespace Discord
             if (Id == null)
                 return;
 
-            Name = Client.ModifyGuildEmoji(GuildId, (long)Id, name).Name;
+            Name = Client.ModifyGuildEmoji(GuildId, (ulong)Id, name).Name;
         }
 
 
@@ -39,7 +39,7 @@ namespace Discord
             if (Id == null)
                 return;
 
-            Client.DeleteGuildEmoji(GuildId, (long)Id);
+            Client.DeleteGuildEmoji(GuildId, (ulong)Id);
         }
 
 

@@ -14,7 +14,7 @@ namespace Discord.Gateway
         public object Data { get; private set; }
 
         [JsonProperty("s")]
-        public int? Sequence { get; private set; }
+        public uint? Sequence { get; private set; }
 
 
         public override string ToString()

@@ -4,7 +4,7 @@ namespace Discord
 {
     public static class AuditLogExtensions
     {
-        public static IReadOnlyList<AuditLogEntry> GetGuildAuditLog(this DiscordClient client, long guildId, AuditLogFilters filters = null)
+        public static IReadOnlyList<AuditLogEntry> GetGuildAuditLog(this DiscordClient client, ulong guildId, AuditLogFilters filters = null)
         {
             if (filters == null)
                 filters = new AuditLogFilters();

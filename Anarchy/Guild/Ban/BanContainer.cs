@@ -10,7 +10,7 @@ namespace Discord.Gateway
         }
 
         [JsonProperty("guild_id")]
-        public long GuildId { get; private set; }
+        public ulong GuildId { get; private set; }
 
         [JsonProperty("user")]
         public User User { get; private set; }

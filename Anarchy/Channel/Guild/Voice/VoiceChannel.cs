@@ -5,10 +5,10 @@ namespace Discord
     public class VoiceChannel : GuildChannel
     {
         [JsonProperty("bitrate")]
-        public int Bitrate { get; private set; }
+        public uint Bitrate { get; private set; }
 
         [JsonProperty("user_limit")]
-        public int UserLimit { get; private set; }
+        public uint UserLimit { get; private set; }
 
 
         public override void Update()

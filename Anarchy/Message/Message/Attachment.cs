@@ -5,7 +5,7 @@ namespace Discord
     public class Attachment
     {
         [JsonProperty("id")]
-        public long Id { get; private set; }
+        public ulong Id { get; private set; }
 
         [JsonProperty("url")]
         public string Url { get; private set; }
@@ -14,7 +14,7 @@ namespace Discord
         public string ProxyUrl { get; private set; }
 
         [JsonProperty("size")]
-        public int FileSize { get; private set; }
+        public uint FileSize { get; private set; }
 
 
         public override string ToString()

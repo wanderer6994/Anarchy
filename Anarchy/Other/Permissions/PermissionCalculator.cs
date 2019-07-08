@@ -9,31 +9,31 @@ namespace Discord
         //also if anyone knows how i'd loop through a 'someenumthing | someotherenumthing' tell me
         public static EditablePermissions Create(List<Permission> perms)
         {
-            int permissions = 512;
+            uint permissions = 512;
             perms = perms.Distinct().ToList();
             perms.ForEach(perm => permissions = Add(permissions, perm));
             return new EditablePermissions(permissions);
         }
 
-        public static int Add(int permissions, Permission permission)
+        public static uint Add(uint permissions, Permission permission)
         {
             if (!Has(permissions, permission))
-                permissions |= (int)permission;
+                permissions |= (uint)permission;
 
             return permissions;
         }
 
-        public static int Remove(int permissions, Permission permission)
+        public static uint Remove(uint permissions, Permission permission)
         {
             if (Has(permissions, permission))
-                permissions ^= (int)permission;
+                permissions ^= (uint)permission;
 
             return permissions;
         }
 
-        public static bool Has(int permissions, Permission permission)
+        public static bool Has(uint permissions, Permission permission)
         {
-            return (permissions & (int)permission) == (int)permission;
+            return (permissions & (uint)permission) == (uint)permission;
         }
     }
 }

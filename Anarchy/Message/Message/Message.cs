@@ -15,7 +15,7 @@ namespace Discord
         }
 
         [JsonProperty("id")]
-        public long Id { get; private set; }
+        public ulong Id { get; private set; }
 
         [JsonProperty("content")]
         public string Content { get; private set; }
@@ -42,7 +42,7 @@ namespace Discord
         public IReadOnlyList<User> Mentions { get; private set; }
 
         [JsonProperty("mention_roles")]
-        public IReadOnlyList<long> MentionedRoles { get; private set; }
+        public IReadOnlyList<ulong> MentionedRoles { get; private set; }
 
         [JsonProperty("mention_everyone")]
         public bool MentionedEveryone { get; private set; }
@@ -54,10 +54,7 @@ namespace Discord
         public bool Pinned { get; private set; }
       
         [JsonProperty("channel_id")]
-        public long ChannelId { get; private set; }
-
-        [JsonProperty("guild_id")]
-        public long? GuildId { get; private set; }
+        public ulong ChannelId { get; private set; }
 
 
         public void Edit(string message)
@@ -81,7 +78,7 @@ namespace Discord
         }
 
 
-        public IReadOnlyList<User> GetReactions(string reaction, int limit = 25, int afterId = 0)
+        public IReadOnlyList<User> GetReactions(string reaction, uint limit = 25, ulong afterId = 0)
         {
             return Client.GetMessageReactions(ChannelId, Id, reaction, limit, afterId);
         }

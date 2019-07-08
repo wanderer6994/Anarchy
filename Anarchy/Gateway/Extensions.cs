@@ -23,26 +23,26 @@ namespace Discord.Gateway
         }
         
 
-        internal static async void StartHeartbeatHandlersAsync(this DiscordSocketClient client, int interval)
+        internal static async void StartHeartbeatHandlersAsync(this DiscordSocketClient client, uint interval)
         {
             while (true)
             {
-                await Task.Delay(interval);
-                client.Socket.Send(new GatewayRequest<int?>(GatewayOpcode.Heartbeat) { Data = client.Sequence });
+                await Task.Delay((int)interval);
+                client.Socket.Send(new GatewayRequest<uint?>(GatewayOpcode.Heartbeat) { Data = client.Sequence });
             }
         }
 
 
-        public static void GetGuildMembers(this DiscordSocketClient client, long guildId, int limit = 100)
+        public static void GetGuildMembers(this DiscordSocketClient client, ulong guildId, uint limit = 100)
         {
-            var req = new GatewayRequest<GatewayMembers>(GatewayOpcode.RequestGuildMembers);
+            var req = new GatewayRequest<GatewayMemberQuery>(GatewayOpcode.RequestGuildMembers);
             req.Data.GuildId = guildId;
             req.Data.Limit = limit;
             client.Socket.Send(req);
         }
 
 
-        public static IReadOnlyList<GuildMember> GetAllGuildMembers(this DiscordSocketClient client, long guildId)
+        public static IReadOnlyList<GuildMember> GetAllGuildMembers(this DiscordSocketClient client, ulong guildId)
         {
             List<GuildMember> members = new List<GuildMember>();
             IReadOnlyList<GuildMember> newMembers = new List<GuildMember>();

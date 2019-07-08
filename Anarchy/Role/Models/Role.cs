@@ -6,23 +6,23 @@ namespace Discord
     public class Role : Controllable
     {
         [JsonProperty("id")]
-        public long Id { get; private set; }
+        public ulong Id { get; private set; }
 
         [JsonProperty("name")]
         public string Name { get; private set; }
 
         [JsonProperty("color")]
-        private int _color;
+        private uint _color;
         public Color Color
         {
-            get { return Color.FromArgb(_color); }
-            private set { _color = Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
+            get { return Color.FromArgb((int)_color); }
+            private set { _color = (uint)Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
         }
 
         [JsonProperty("position")]
         public int Position { get; private set; }
 
-        public long GuildId { get; internal set; }
+        public ulong GuildId { get; internal set; }
 
         [JsonProperty("hoist")]
         public bool Seperated { get; private set; }
@@ -31,7 +31,7 @@ namespace Discord
         public bool Mentionable { get; private set; }
 
         [JsonProperty("permissions")]
-        private int _permissions
+        private uint _permissions
         {
             set { Permissions = new Permissions(value); }
         }

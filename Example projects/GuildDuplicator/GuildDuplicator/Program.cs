@@ -66,10 +66,10 @@ namespace GuildDuplicator
                 {
                     category = client.GetGuildChannel(c.Id);
                 }
-                catch (DiscordHttpErrorException e)
+                catch (DiscordHttpException e)
                 {
                     //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Error.Code == 50001)
+                    if (e.Error.Code == DiscordError.MissingAccess)
                         continue;
                     else
                         throw;
@@ -81,7 +81,7 @@ namespace GuildDuplicator
 
                 foreach (var overwrite in category.PermissionOverwrites)
                 {
-                    if (overwrite.Type == PermissionOverwriteType.Member)
+                    if (overwrite.Type == PermOverwriteType.Member)
                         continue;
 
                     PermissionOverwrite ourOverwrite = overwrite;
@@ -112,10 +112,10 @@ namespace GuildDuplicator
                 {
                     channel = client.GetTextChannel(c.Id);
                 }
-                catch (DiscordHttpErrorException e)
+                catch (DiscordHttpException e)
                 {
                     //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Error.Code == 50001)
+                    if (e.Error.Code == DiscordError.MissingAccess)
                         continue;
                     else
                         throw;
@@ -126,7 +126,7 @@ namespace GuildDuplicator
 
                 foreach (var overwrite in channel.PermissionOverwrites)
                 {
-                    if (overwrite.Type == PermissionOverwriteType.Member)
+                    if (overwrite.Type == PermOverwriteType.Member)
                         continue;
 
                     PermissionOverwrite ourOverwrite = overwrite;
@@ -148,10 +148,10 @@ namespace GuildDuplicator
                 {
                     channel = client.GetVoiceChannel(c.Id);
                 }
-                catch (DiscordHttpErrorException e)
+                catch (DiscordHttpException e)
                 {
                     //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Error.Code == 50001)
+                    if (e.Error.Code == DiscordError.MissingAccess)
                         continue;
                     else
                         throw;
@@ -164,7 +164,7 @@ namespace GuildDuplicator
 
                 foreach (var overwrite in channel.PermissionOverwrites)
                 {
-                    if (overwrite.Type == PermissionOverwriteType.Member)
+                    if (overwrite.Type == PermOverwriteType.Member)
                         continue;
 
                     PermissionOverwrite ourOverwrite = overwrite;

@@ -16,11 +16,11 @@ namespace Discord
         public long MessageId { get; private set; }
 
         [JsonProperty("channel_id")]
-        public long ChannelId { get; private set; }
+        public ulong ChannelId { get; private set; }
 
-        private long _guildId;
+        private ulong _guildId;
         [JsonProperty("guild_id")]
-        public long GuildId
+        public ulong GuildId
         {
             get { return _guildId; }
             set
@@ -32,7 +32,7 @@ namespace Discord
         }
 
         [JsonProperty("user_id")]
-        public long UserId { get; private set; }
+        public ulong UserId { get; private set; }
 
 
         public override string ToString()

@@ -13,7 +13,7 @@ namespace Discord
         public Emoji Emoji { get; private set; }
 
         [JsonProperty("count")]
-        public int Count { get; private set; }
+        public uint Count { get; private set; }
 
         [JsonProperty("me")]
         public bool ClientHasReacted { get; private set; }

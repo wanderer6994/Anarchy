@@ -6,7 +6,7 @@ namespace Discord
     public class Channel : Controllable
     {
         [JsonProperty("id")]
-        public long Id { get; private set; }
+        public ulong Id { get; private set; }
 
         [JsonProperty("name")]
         public string Name { get; protected set; }
@@ -55,7 +55,7 @@ namespace Discord
         }
 
 
-        public IReadOnlyList<Message> GetMessages(int limit = 100, int afterId = 0)
+        public IReadOnlyList<Message> GetMessages(uint limit = 100, uint afterId = 0)
         {
             return Client.GetChannelMessages(Id, limit, afterId);
         }
@@ -67,7 +67,7 @@ namespace Discord
         }
 
 
-        public void PinMessage(long messageId)
+        public void PinMessage(ulong messageId)
         {
             Client.PinChannelMessage(Id, messageId);
         }
@@ -79,7 +79,7 @@ namespace Discord
         }
 
 
-        public void UnpinMessage(long messageId)
+        public void UnpinMessage(ulong messageId)
         {
             Client.UnpinChannelMessage(Id, messageId);
         }

@@ -59,7 +59,7 @@ namespace Discord
         }
 
         [JsonProperty("owner_id")]
-        public long? OwnerId { get; private set; }
+        public ulong OwnerId { get; private set; }
 
 
         public void Update()

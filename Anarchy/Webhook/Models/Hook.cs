@@ -7,7 +7,7 @@ namespace Discord.Webhook
     public class Hook : Controllable
     {
         [JsonProperty("id")]
-        public long Id { get; private set; }
+        public ulong Id { get; private set; }
 
         [JsonProperty("name")]
         public string Name { get; private set; }
@@ -22,10 +22,10 @@ namespace Discord.Webhook
         public string Token { get; private set; }
 
         [JsonProperty("channel_id")]
-        public long ChannelId { get; private set; }
+        public ulong ChannelId { get; private set; }
 
         [JsonProperty("guild_id")]
-        public long GuildId { get; private set; }
+        public ulong GuildId { get; private set; }
 
         public Hook()
         {

@@ -35,9 +35,9 @@ namespace Discord.Webhook
         #endregion
 
 
-        internal Property<long> ChannelProperty = new Property<long>();
+        internal Property<ulong> ChannelProperty = new Property<ulong>();
         [JsonProperty("channel_id")]
-        public long ChannelId
+        public ulong ChannelId
         {
             get { return ChannelProperty; }
             set { ChannelProperty.Value = value; }

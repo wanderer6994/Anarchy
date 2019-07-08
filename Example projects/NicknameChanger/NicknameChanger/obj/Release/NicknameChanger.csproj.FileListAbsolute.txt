@@ -5,7 +5,6 @@ C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameCha
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Release\Newtonsoft.Json.dll
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Release\websocket-sharp-with-proxy-support.dll
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Release\Anarchy.pdb
-C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Release\Newtonsoft.Json.xml
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\obj\Release\NicknameChanger.csproj.CoreCompileInputs.cache
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\obj\Release\NicknameChanger.csproj.CopyComplete
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\obj\Release\NicknameChanger.exe

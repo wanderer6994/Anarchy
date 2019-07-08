@@ -5,7 +5,7 @@ namespace Discord.Gateway
     internal class GatewayHeartbeat
     {
         [JsonProperty("heartbeat_interval")]
-        public int Interval { get; set; }
+        public uint Interval { get; private set; }
 
 
         public override string ToString()

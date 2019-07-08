@@ -5,7 +5,7 @@
         public EditablePermissions() : base()
         { }
 
-        public EditablePermissions(int permissions) : base(permissions)
+        public EditablePermissions(uint permissions) : base(permissions)
         { }
 
         public void Add(Permission permission)

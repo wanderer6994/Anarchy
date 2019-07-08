@@ -8,10 +8,10 @@ namespace Discord
         public string Url { get; internal set; }
 
         [JsonProperty("width")]
-        public int Width { get; private set; }
+        public uint Width { get; private set; }
 
         [JsonProperty("height")]
-        public int Height { get; private set; }
+        public uint Height { get; private set; }
 
 
         public override string ToString()

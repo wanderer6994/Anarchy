@@ -10,9 +10,10 @@
         }
 
 
-        public static void SetActivity(this DiscordSocketClient client, Activity activity)
+        public static void SetActivity(this DiscordSocketClient client, Activity activity, uint since = 0)
         {
             var req = new GatewayRequest<Presence>(GatewayOpcode.PresenceChange);
+            req.Data.Since = since;
             req.Data.Activity = activity;
             client.Socket.Send(req);
         }

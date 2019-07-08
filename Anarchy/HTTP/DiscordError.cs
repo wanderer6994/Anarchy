@@ -26,6 +26,8 @@
         MaximumReactions = 30010,
         MaximumGuildChannels = 30013,
         Unauthorized = 40001,
+        AccountUnverified,
+        InvalidInvite = 40007,
         MissingAccess = 50001,
         InvalidAccountType,
         CannotExecuteInDM,
@@ -43,13 +45,11 @@
         NoteTooLong,
         InvalidBulkDeleteAmount,
         CannotPinMessageInOtherChannel = 50019,
-        InvalidInvite,
         CannotExecuteOnSysMessage = 50025,
         InvalidOAuthAccessToken = 50034,
         InvalidFormBody,
         InvalidAPIVersion = 50041,
         ReactionBlocked = 90001,
         ResourceOverloaded = 130000
-
     }
 }

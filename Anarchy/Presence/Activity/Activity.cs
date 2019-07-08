@@ -19,6 +19,9 @@ namespace Discord.Gateway
         [JsonProperty("state")]
         public string State { get; set; }
 
+        [JsonProperty("assets")]
+        public ActivityAssets Assets { get; set; }
+
         public override string ToString()
         {
             return Type.ToString();

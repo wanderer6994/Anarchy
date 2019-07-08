@@ -6,16 +6,16 @@ namespace Discord
     public class AuditLogEntry
     {
         [JsonProperty("id")]
-        public long Id { get; private set; }
+        public ulong Id { get; private set; }
 
         [JsonProperty("target_id")]
-        public long? TargetId { get; private set; }
+        public ulong? TargetId { get; private set; }
 
         [JsonProperty("changes")]
         public List<AuditLogChange> Changes { get; private set; }
 
         [JsonProperty("user_id")]
-        public long ChangerId { get; private set; }
+        public ulong ChangerId { get; private set; }
 
         [JsonProperty("action_type")]
         public AuditLogActionType Type { get; private set; }

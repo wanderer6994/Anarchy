@@ -14,7 +14,7 @@ namespace Discord
         public bool Large { get; private set; }
 
         [JsonProperty("member_count")]
-        public int MemberCount { get; private set; }
+        public uint MemberCount { get; private set; }
 
         [JsonProperty("channels")]
         public IReadOnlyList<GuildChannel> Channels { get; private set; }

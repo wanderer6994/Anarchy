@@ -16,7 +16,7 @@ namespace Discord
 
         internal Property<EditablePermissions> PermissionsProperty = new Property<EditablePermissions>();
         [JsonProperty("permissions")]
-        private int _permissions
+        private uint _permissions
         {
             get { return Permissions; }
         }
@@ -27,17 +27,17 @@ namespace Discord
         }
 
 
-        internal Property<int> ColorProperty = new Property<int>();
+        internal Property<uint> ColorProperty = new Property<uint>();
         [JsonProperty("color")]
-        private int _color
+        private uint _color
         {
             get { return ColorProperty; }
             set { ColorProperty.Value = value; }
         }
         public Color Color
         {
-            get { return Color.FromArgb(_color); }
-            set { _color = Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
+            get { return Color.FromArgb((int)_color); }
+            set { _color = (uint)Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
         }
 
 

@@ -38,7 +38,7 @@ namespace Discord.Gateway
         public Activity Activity { get; set; }
 
         [JsonProperty("since")]
-        public int Since { get; set; }
+        public uint Since { get; set; }
 
         [JsonProperty("afk")]
         public bool Afk { get; set; }

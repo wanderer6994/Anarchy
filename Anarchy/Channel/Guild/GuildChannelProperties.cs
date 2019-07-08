@@ -4,18 +4,18 @@ namespace Discord
 {
     public class GuildChannelProperties : ChannelProperties
     {
-        internal Property<long?> ParentProperty = new Property<long?>();
+        internal Property<ulong?> ParentProperty = new Property<ulong?>();
         [JsonProperty("parent_id")]
-        public long? ParentId
+        public ulong? ParentId
         {
             get { return ParentProperty; }
             set { ParentProperty.Value = value; }
         }
 
 
-        internal Property<int> PositionProperty = new Property<int>();
+        internal Property<uint> PositionProperty = new Property<uint>();
         [JsonProperty("position")]
-        public int Position
+        public uint Position
         {
             get { return PositionProperty; }
             set { PositionProperty.Value = value; }

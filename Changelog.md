@@ -1,5 +1,21 @@
 (Please keep in mind that these are only the major/important changes. There have been more than written here)
 
+# 0.1.2.0
+
+### Additions
+- Added more user-account based values in DiscordError.
+
+### Improvements
+- Changed PartialGuild to fit in invite responses.
+- Improved GuildId populating.
+- Changed many int and long property types to restrict them from being negative.
+- Updated GuildDuplicator to match newest version.
+
+### Bug fixes
+- Minor bug fixes.
+
+
+
 # 0.1.1.1
 - Added enum for DiscordHttpError's 'Code' property (DiscordError)
 - Added more gateway events (such as OnUserBanned and OnEmojisUpdated)

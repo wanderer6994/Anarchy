@@ -2,21 +2,21 @@
 
 namespace Discord.Gateway
 {
-    internal class GatewayMembers
+    internal class GatewayMemberQuery
     {
-        public GatewayMembers()
+        public GatewayMemberQuery()
         {
             Query = "";
         }
 
         [JsonProperty("guild_id")]
-        public long GuildId { get; set; }
+        public ulong GuildId { get; set; }
 
         [JsonProperty("query")]
         public string Query { get; set; }
 
         [JsonProperty("limit")]
-        public int Limit { get; set; }
+        public uint Limit { get; set; }
 
 
         public override string ToString()

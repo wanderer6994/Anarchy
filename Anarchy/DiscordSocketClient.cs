@@ -50,7 +50,7 @@ namespace Discord.Gateway
         #endregion
 
         internal WebSocket Socket { get; set; }
-        internal int? Sequence { get; set; }
+        internal uint? Sequence { get; set; }
         public bool LoggedIn { get; private set; }
 
 
@@ -122,9 +122,6 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_MEMBERS_CHUNK":
                             GuildMemberList list = payload.Deserialize<GuildMemberList>().SetClient(this);
-                            foreach (var member in list.Members)
-                                member.GuildId = list.GuildId;
-
                             OnGuildMembersReceived?.Invoke(this, new GuildMembersEventArgs(list.Members));
                             break;
                         case "PRESENCE_UPDATE":
@@ -140,10 +137,10 @@ namespace Discord.Gateway
                             OnChannelDeleted?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
                             break;
                         case "GUILD_ROLE_CREATE":
-                            OnRoleCreated?.Invoke(this, new RoleEventArgs(payload.Deserialize<GatewayRole>().Role.SetClient(this)));
+                            OnRoleCreated?.Invoke(this, new RoleEventArgs(payload.Deserialize<RoleContainer>().Role.SetClient(this)));
                             break;
                         case "GUILD_ROLE_UPDATE":
-                            OnRoleUpdated?.Invoke(this, new RoleEventArgs(payload.Deserialize<GatewayRole>().Role.SetClient(this)));
+                            OnRoleUpdated?.Invoke(this, new RoleEventArgs(payload.Deserialize<RoleContainer>().Role.SetClient(this)));
                             break;
                         case "GUILD_EMOJIS_UPDATE":
                             OnEmojisUpdated?.Invoke(this, new EmojisUpdatedEventArgs(payload.Deserialize<EmojiContainer>().SetClient(this)));

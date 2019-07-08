@@ -7,13 +7,13 @@ namespace Discord
     public class GuildChannel : Channel
     {   
         [JsonProperty("guild_id")]
-        public long GuildId { get; private set; }
+        public ulong GuildId { get; private set; }
 
         [JsonProperty("position")]
-        public int Position { get; protected set; }
+        public uint Position { get; protected set; }
         
         [JsonProperty("parent_id")]
-        public long? ParentId { get; protected set; }
+        public ulong? ParentId { get; protected set; }
 
         [JsonProperty("permission_overwrites")]
         public IReadOnlyList<PermissionOverwrite> PermissionOverwrites { get; protected set; }
@@ -64,7 +64,7 @@ namespace Discord
             PermissionOverwrites = temp;
         }
 
-        public void RemovePermissionOverwrite(long id)
+        public void RemovePermissionOverwrite(ulong id)
         {
             Client.RemovePermissionOverwrite(Id, id);
 

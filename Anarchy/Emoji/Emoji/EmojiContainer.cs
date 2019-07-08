@@ -10,8 +10,19 @@ namespace Discord.Gateway
             OnClientUpdated += (sender, e) => Emojis.SetClientsInList(Client);
         }
 
+        private ulong _guildId;
         [JsonProperty("guild_id")]
-        public long GuildId { get; private set; }
+        public ulong GuildId
+        {
+            get { return _guildId; }
+            set
+            {
+                _guildId = value;
+
+                foreach (var emoji in Emojis)
+                    emoji.GuildId = _guildId;
+            }
+        }
 
         [JsonProperty("emojis")]
         public List<Emoji> Emojis { get; private set; }

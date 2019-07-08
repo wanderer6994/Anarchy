@@ -25,11 +25,11 @@ namespace Discord
         public string Description { get; internal set; }
 
         [JsonProperty("color")]
-        private int _color;
+        private uint _color;
         public Color Color
         {
-            get { return Color.FromArgb(_color); }
-            set { _color = Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
+            get { return Color.FromArgb((int)_color); }
+            set { _color = (uint)Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
         }
 
 

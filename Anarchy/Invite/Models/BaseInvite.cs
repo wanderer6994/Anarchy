@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class BaseInvite : Controllable
+    public abstract class BaseInvite : Controllable
     {
         public BaseInvite()
         {
@@ -10,7 +10,7 @@ namespace Discord
             {
                 Guild.SetClient(Client);
                 Channel.SetClient(Client);
-                Creator.SetClient(Client);
+                Inviter.SetClient(Client);
             };
         }
 
@@ -18,13 +18,13 @@ namespace Discord
         public string Code { get; private set; }
 
         [JsonProperty("guild")]
-        public BaseGuild Guild { get; private set; }
+        public PartialGuild Guild { get; private set; }
 
         [JsonProperty("channel")]
         public Channel Channel { get; private set; }
 
         [JsonProperty("inviter")]
-        public User Creator { get; private set; }
+        public User Inviter { get; private set; }
 
         [JsonProperty("temporary")]
         public bool Temporary { get; private set; }
@@ -33,10 +33,16 @@ namespace Discord
         public string CreatedAt { get; private set; }
 
         [JsonProperty("uses")]
-        public int Uses { get; private set; }
+        public uint Uses { get; private set; }
 
         [JsonProperty("max_uses")]
-        public int MaxUses { get; private set; }
+        public uint MaxUses { get; private set; }
+
+
+        public PartialInvite Join()
+        {
+            return Guild == null ? Client.JoinGroup(Code) : Client.JoinGuild(Code);
+        }
 
 
         public Invite Delete()

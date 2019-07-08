@@ -16,7 +16,7 @@ namespace Discord
         public string IconId { get; private set; }
 
         [JsonProperty("owner_id")]
-        public long OwnerId { get; private set; }
+        public ulong OwnerId { get; private set; }
 
         [JsonProperty("recipients")]
         public IReadOnlyList<User> Recipients { get; private set; }
@@ -47,7 +47,13 @@ namespace Discord
         }
 
 
-        public void AddRecipient(long userId)
+        public void Leave()
+        {
+            Client.LeaveGroup(Id);
+        }
+
+
+        public void AddRecipient(ulong userId)
         {
             Client.AddUserToGroup(Id, userId);
         }
@@ -59,7 +65,7 @@ namespace Discord
         }
 
 
-        public void RemoveRecipient(long userId)
+        public void RemoveRecipient(ulong userId)
         {
             Client.RemoveUserFromGroup(Id, userId);
         }

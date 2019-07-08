@@ -9,7 +9,7 @@ namespace Discord
         public string Name { get; set; }
 
         [JsonProperty("parent_id")]
-        public long? ParentId { get; set; }
+        public ulong? ParentId { get; set; }
 
         [JsonProperty("type")]
         public ChannelType Type { get; set; }

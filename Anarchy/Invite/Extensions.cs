@@ -6,7 +6,7 @@ namespace Discord
     public static class InviteExtensions
     {
         #region management
-        public static PartialInvite CreateInvite(this DiscordClient client, long channelId, InviteProperties properties = null)
+        public static PartialInvite CreateInvite(this DiscordClient client, ulong channelId, InviteProperties properties = null)
         {
             if (properties == null) properties = new InviteProperties();
 
@@ -30,7 +30,7 @@ namespace Discord
         }
 
 
-        public static IReadOnlyList<Invite> GetGuildInvites(this DiscordClient client, long guildId)
+        public static IReadOnlyList<Invite> GetGuildInvites(this DiscordClient client, ulong guildId)
         {
             return client.HttpClient.Get($"/guilds/{guildId}/invites")
                                 .Deserialize<IReadOnlyList<Invite>>().SetClientsInList(client);

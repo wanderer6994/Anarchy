@@ -8,9 +8,9 @@ namespace Discord
         [JsonProperty("username")]
         public string Username { get; set; }
 
-        internal Property<int> DiscriminatorProperty = new Property<int>();
+        internal Property<uint> DiscriminatorProperty = new Property<uint>();
         [JsonProperty("discriminator")]
-        public int Discriminator
+        public uint Discriminator
         {
             get { return DiscriminatorProperty; }
             set { DiscriminatorProperty.Value = value; }

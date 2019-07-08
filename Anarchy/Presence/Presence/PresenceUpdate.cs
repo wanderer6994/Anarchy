@@ -1,18 +1,24 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Discord.Gateway
 {
     public class PresenceUpdate
     {
         [JsonProperty("user")]
-        public IdContainer User { get; private set; }
+        private readonly JObject _user;
+        public ulong UserId
+        {
+            get { return ulong.Parse(_user.GetValue("id").ToString()); }
+        }
+
 
         [JsonProperty("nick")]
         public string Nickname { get; private set; }
 
         [JsonProperty("roles")]
-        public List<long> Roles { get; private set; }
+        public IReadOnlyList<ulong> Roles { get; private set; }
 
         [JsonProperty("game")]
         public Activity Activity { get; private set; }
@@ -51,16 +57,13 @@ namespace Discord.Gateway
 
         public bool InGuild
         {
-            get
-            {
-                return GuildId == 0;
-            }
+            get { return GuildId == 0; }
         }
 
 
         public override string ToString()
         {
-            return User.ToString();
+            return UserId.ToString();
         }
     }
 }

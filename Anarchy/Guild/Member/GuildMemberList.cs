@@ -10,8 +10,19 @@ namespace Discord.Gateway
             OnClientUpdated += (sender, e) => Members.SetClientsInList(Client);
         }
 
+        private ulong _guildId;
         [JsonProperty("guild_id")]
-        public long GuildId { get; private set; }
+        public ulong GuildId
+        {
+            get { return _guildId; }
+            set
+            {
+                _guildId = value;
+
+                foreach (var member in Members)
+                    member.GuildId = _guildId;
+            }
+        }
 
         [JsonProperty("members")]
         public IReadOnlyList<GuildMember> Members { get; private set; }

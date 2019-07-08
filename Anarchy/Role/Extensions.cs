@@ -6,7 +6,7 @@ namespace Discord
     public static class RoleExtensions
     {
         #region management
-        public static Role CreateGuildRole(this DiscordClient client, long guildId, RoleProperties properties = null)
+        public static Role CreateGuildRole(this DiscordClient client, ulong guildId, RoleProperties properties = null)
         {
             Role role = client.HttpClient.Post($"/guilds/{guildId}/roles")
                                     .Deserialize<Role>().SetClient(client);
@@ -16,7 +16,7 @@ namespace Discord
         }
 
 
-        public static Role ModifyGuildRole(this DiscordClient client, long guildId, long roleId, RoleProperties properties)
+        public static Role ModifyGuildRole(this DiscordClient client, ulong guildId, ulong roleId, RoleProperties properties)
         {
             Role changed = client.HttpClient.Patch($"/guilds/{guildId}/roles/{roleId}", 
                                         JsonConvert.SerializeObject(properties)).Deserialize<Role>().SetClient(client);
@@ -25,14 +25,14 @@ namespace Discord
         }
 
 
-        public static void DeleteGuildRole(this DiscordClient client, long guildId, long roleId)
+        public static void DeleteGuildRole(this DiscordClient client, ulong guildId, ulong roleId)
         {
             client.HttpClient.Delete($"/guilds/{guildId}/roles/{roleId}");
         }
         #endregion
 
 
-        public static IReadOnlyList<Role> GetGuildRoles(this DiscordClient client, long guildId)
+        public static IReadOnlyList<Role> GetGuildRoles(this DiscordClient client, ulong guildId)
         {
             IReadOnlyList<Role> roles = client.HttpClient.Get($"/guilds/{guildId}/roles")
                                                     .Deserialize<IReadOnlyList<Role>>().SetClientsInList(client);

@@ -22,8 +22,8 @@ socketClient.Login("your token here"); //This is passed to the Token property, m
 ## Joining/leaving a server
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
-client.JoinGuild("fortnite"); //We're just gonna use Fortnite as an example
-client.LeaveGuild(322850917248663552);
+PartialInvite invite = client.JoinGuild("fortnite"); //We're just gonna use Fortnite as an example
+client.LeaveGuild(invite.Guild.Id);
 ```
 
 ## Sending a message
@@ -58,7 +58,7 @@ static void Main(string[] args)
    Thread.Sleep(-1);
 }
 
-private static void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs args)
+private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
 {
    Console.WriteLine($"Logged into {args.User}");
 }

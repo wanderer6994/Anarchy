@@ -2,14 +2,14 @@
 {
     public class Permissions
     {
-        protected int _value;
+        protected uint _value;
 
         public Permissions()
         {
             _value = 512;
         }
 
-        public Permissions(int permissions)
+        public Permissions(uint permissions)
         {
             _value = permissions;
         }
@@ -21,7 +21,7 @@
         }
 
 
-        public static implicit operator int(Permissions instance)
+        public static implicit operator uint(Permissions instance)
         {
             return instance._value;
         }

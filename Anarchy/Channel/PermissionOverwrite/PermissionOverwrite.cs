@@ -11,7 +11,7 @@ namespace Discord
         }
 
         [JsonProperty("id")]
-        public long Id { get; set; }
+        public ulong Id { get; set; }
 
         [JsonProperty("type")]
         private string _type;
@@ -34,7 +34,7 @@ namespace Discord
 
 
         [JsonProperty("deny")]
-        private int _deny
+        private uint _deny
         {
             get { return Deny; }
             set { Deny = new EditablePermissions(value); }
@@ -43,7 +43,7 @@ namespace Discord
         public EditablePermissions Deny { get; set; }
 
         [JsonProperty("allow")]
-        private int _allow
+        private uint _allow
         {
             get { return Allow; }
             set { Allow = new EditablePermissions(value); }
