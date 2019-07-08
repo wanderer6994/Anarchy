@@ -45,7 +45,7 @@ namespace Discord
         }
 
 
-        public Invite Delete()
+        public PartialInvite Delete()
         {
             return Client.DeleteInvite(Code);
         }

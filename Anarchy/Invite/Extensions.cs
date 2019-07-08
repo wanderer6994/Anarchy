@@ -15,10 +15,10 @@ namespace Discord
         }
 
 
-        public static Invite DeleteInvite(this DiscordClient client, string invCode)
+        public static PartialInvite DeleteInvite(this DiscordClient client, string invCode)
         {
             return client.HttpClient.Delete($"/invites/{invCode}")
-                                .Deserialize<Invite>().SetClient(client);
+                                .Deserialize<PartialInvite>().SetClient(client);
         }
         #endregion
 

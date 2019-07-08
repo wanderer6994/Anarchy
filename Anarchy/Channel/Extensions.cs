@@ -37,18 +37,6 @@ namespace Discord
             return client.HttpClient.Delete($"/channels/{channelId}")
                 .Deserialize<Channel>().SetClient(client);
         }
-
-
-        public static void AddPermissionOverwrite(this DiscordClient client, ulong channelId, PermissionOverwrite overwrite)
-        {
-            client.HttpClient.Put($"/channels/{channelId}/permissions/{overwrite.Id}", JsonConvert.SerializeObject(overwrite));
-        }
-
-
-        public static void RemovePermissionOverwrite(this DiscordClient client, ulong channelId, ulong id)
-        {
-            client.HttpClient.Delete($"/channels/{channelId}/permissions/{id}");
-        }
         #endregion
 
 
@@ -113,6 +101,18 @@ namespace Discord
         public static VoiceChannel ModifyVoiceChannel(this DiscordClient client, ulong channelId, VoiceChannelProperties properties)
         {
             return client.modifyChannel<VoiceChannel, VoiceChannelProperties>(channelId, properties);
+        }
+
+
+        public static void AddPermissionOverwrite(this DiscordClient client, ulong channelId, PermissionOverwrite overwrite)
+        {
+            client.HttpClient.Put($"/channels/{channelId}/permissions/{overwrite.Id}", JsonConvert.SerializeObject(overwrite));
+        }
+
+
+        public static void RemovePermissionOverwrite(this DiscordClient client, ulong channelId, ulong id)
+        {
+            client.HttpClient.Delete($"/channels/{channelId}/permissions/{id}");
         }
         #endregion
 

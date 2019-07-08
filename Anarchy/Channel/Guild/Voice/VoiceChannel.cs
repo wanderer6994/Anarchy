@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace Discord
 {
@@ -44,5 +46,54 @@ namespace Discord
             Bitrate = channel.Bitrate;
             UserLimit = channel.UserLimit;
         }
+
+        
+        //this is ONLY a temporary solution
+        #region messages
+        [Obsolete("This type of channel does not support messages", true)]
+        public new void TriggerTyping()
+        {
+        }
+
+
+        [Obsolete("This type of channel does not support messages", true)]
+        public new Message SendMessage(MessageProperties properties)
+        { return null; }
+
+
+        [Obsolete("This type of channel does not support messages", true)]
+        public new Message SendMessage(string message, bool tts = false)
+        { return null; }
+
+
+        [Obsolete("This type of channel does not support messages", true)]
+        public new IReadOnlyList<Message> GetMessages(uint limit = 100, uint afterId = 0)
+        { return null; }
+
+
+        [Obsolete("This type of channel does not support messages", true)]
+        public new IReadOnlyList<Message> GetPinnedMessages()
+        { return null; }
+
+
+        [Obsolete("This type of channel does not support messages", true)]
+        public new void PinMessage(ulong messageId)
+        { }
+
+
+        [Obsolete("This type of channel does not support messages", true)]
+        public new void PinMessage(Message message)
+        { }
+
+
+        [Obsolete("This type of channel does not support messages", true)]
+        public new void UnpinMessage(ulong messageId)
+        { }
+
+
+        [Obsolete("This type of channel does not support messages", true)]
+        public new void UnpinMessage(Message message)
+        { }
+        #endregion
     }
 }

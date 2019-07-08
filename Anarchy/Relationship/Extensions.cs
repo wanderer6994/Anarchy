@@ -26,7 +26,6 @@ namespace Discord
         }
 
 
-        //this is used for removing friends, blocking users and cancelling friend requests
         public static void RemoveRelationship(this DiscordClient client, ulong userId)
         {
             client.HttpClient.Delete($"/users/@me/relationships/{userId}");

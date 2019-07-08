@@ -5,7 +5,7 @@ namespace Discord.Gateway
     public class EmojisUpdatedEventArgs
     {
         public ulong GuildId { get; private set; }
-        public List<Emoji> Emojis { get; private set; }
+        public IReadOnlyList<Emoji> Emojis { get; private set; }
 
         internal EmojisUpdatedEventArgs(EmojiContainer emojis)
         {

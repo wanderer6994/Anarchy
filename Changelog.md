@@ -3,6 +3,7 @@
 # 0.1.2.0
 
 ### Additions
+- Added a temporary solution to the 'messages in voice channels' problem.
 - Added more user-account based values in DiscordError.
 
 ### Improvements

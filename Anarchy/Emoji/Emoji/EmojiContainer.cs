@@ -25,6 +25,6 @@ namespace Discord.Gateway
         }
 
         [JsonProperty("emojis")]
-        public List<Emoji> Emojis { get; private set; }
+        public IReadOnlyList<Emoji> Emojis { get; private set; }
     }
 }
