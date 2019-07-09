@@ -16,6 +16,7 @@ namespace Discord.Gateway
             }
         }
 
+
         [JsonProperty("role")]
         public Role Role { get; private set; }
 

@@ -13,6 +13,7 @@ namespace Discord
         [JsonProperty("id")]
         public ulong Id { get; set; }
 
+
         [JsonProperty("type")]
         private string _type;
         public PermOverwriteType Type
@@ -41,6 +42,7 @@ namespace Discord
         }
         [JsonIgnore]
         public EditablePermissions Deny { get; set; }
+
 
         [JsonProperty("allow")]
         private uint _allow

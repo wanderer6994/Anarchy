@@ -7,12 +7,16 @@ namespace Discord
         [JsonProperty("id")]
         public ulong? Id { get; private set; }
 
+
         [JsonProperty("name")]
         public string Name { get; private set; }
+
 
         [JsonProperty("animated")]
         public bool Animated { get; private set; }
 
+
+        //this will currently not be set if received in a Message
         public ulong GuildId { get; internal set; }
 
 

@@ -8,6 +8,7 @@ namespace Discord
         [JsonProperty("username")]
         public string Username { get; set; }
 
+
         internal Property<uint> DiscriminatorProperty = new Property<uint>();
         [JsonProperty("discriminator")]
         public uint Discriminator
@@ -16,8 +17,10 @@ namespace Discord
             set { DiscriminatorProperty.Value = value; }
         }
 
+
         [JsonProperty("email")]
         public string Email { get; set; }
+
 
         #region avatar
         private DiscordImage _image = new DiscordImage();
@@ -42,8 +45,10 @@ namespace Discord
         }
         #endregion
 
+
         [JsonProperty("password")]
         public string Password { get; set; }
+
 
         [JsonProperty("new_password")]
         public string NewPassword { get; set; }

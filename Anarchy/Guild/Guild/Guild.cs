@@ -14,23 +14,30 @@ namespace Discord
             };
         }
 
+
         [JsonProperty("description")]
         public string Description { get; private set; }
+
 
         [JsonProperty("region")]
         public string Region { get; private set; }
 
+
         [JsonProperty("vanity_url_code")]
         public string VanityInvite { get; private set; }
+
 
         [JsonProperty("verification_level")]
         public GuildVerificationLevel VerificationLevel { get; private set; }
 
+
         [JsonProperty("default_message_notifications")]
         public GuildDefaultNotifications DefaultNotifications { get; set; }
 
+
         [JsonProperty("premium_tier")]
         public GuildPremiumTier PremiumTier { get; private set; }
+
 
         private IReadOnlyList<Role> _roles;
         [JsonProperty("roles")]
@@ -45,6 +52,7 @@ namespace Discord
             }
         }
 
+
         private IReadOnlyList<Emoji> _emojis;
         [JsonProperty("emojis")]
         public IReadOnlyList<Emoji> Emojis
@@ -57,6 +65,7 @@ namespace Discord
                 _emojis = value;
             }
         }
+
 
         [JsonProperty("owner_id")]
         public ulong OwnerId { get; private set; }

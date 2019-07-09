@@ -9,8 +9,10 @@ namespace Discord.Gateway
             OnClientUpdated += (sender, e) => User.SetClient(Client);
         }
 
+
         [JsonProperty("guild_id")]
         public ulong GuildId { get; private set; }
+
 
         [JsonProperty("user")]
         public User User { get; private set; }

@@ -11,8 +11,10 @@ namespace Discord.Gateway
             Opcode = opcode;
         }
 
+
         [JsonProperty("op")]
         public GatewayOpcode Opcode { get; set; }
+
 
         [JsonProperty("d")]
         public T Data { get; set; }

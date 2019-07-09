@@ -16,6 +16,7 @@
             }
         }
 
+
         public static implicit operator T(Property<T> instance)
         {
             return instance.Value;

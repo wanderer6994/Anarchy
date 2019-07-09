@@ -98,8 +98,6 @@ namespace Discord.Gateway
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
 
-            System.Console.WriteLine(payload.ToString());
-
             switch (payload.Opcode)
             {
                 case GatewayOpcode.Event:
@@ -121,8 +119,7 @@ namespace Discord.Gateway
                             OnLeftGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
                             break;
                         case "GUILD_MEMBERS_CHUNK":
-                            GuildMemberList list = payload.Deserialize<GuildMemberList>().SetClient(this);
-                            OnGuildMembersReceived?.Invoke(this, new GuildMembersEventArgs(list.Members));
+                            OnGuildMembersReceived?.Invoke(this, new GuildMembersEventArgs(payload.Deserialize<GuildMemberList>().Members.SetClientsInList(this)));
                             break;
                         case "PRESENCE_UPDATE":
                             OnUserPresenceUpdated?.Invoke(this, new PresenceUpdatedEventArgs(payload.Deserialize<PresenceUpdate>()));

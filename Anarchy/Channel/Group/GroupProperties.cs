@@ -13,6 +13,7 @@ namespace Discord
             get { return _image.ImageBase64; }
         }
 
+
         internal bool IconSet { get; private set; }
         [JsonIgnore]
         public Image Icon

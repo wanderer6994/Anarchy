@@ -7,6 +7,7 @@ namespace Discord
         [JsonProperty("approximate_presence_count")]
         public uint OnlineMembers { get; private set; }
 
+
         [JsonProperty("approximate_member_count")]
         public uint TotalMembers { get; private set; }
 

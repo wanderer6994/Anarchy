@@ -8,8 +8,10 @@ namespace Discord
         [JsonProperty("id")]
         public ulong Id { get; private set; }
 
+
         [JsonProperty("name")]
         public string Name { get; protected set; }
+
 
         [JsonProperty("type")]
         public ChannelType Type { get; private set; }

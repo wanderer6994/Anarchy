@@ -11,10 +11,12 @@ namespace Discord
             return JsonConvert.DeserializeObject<T>(content);
         }
 
+
         public static T Deserialize<T>(this HttpResponseMessage httpResponse)
         {
             return httpResponse.Content.ReadAsStringAsync().Result.Deserialize<T>();
         }
+
 
         public static T Deserialize<T>(this GatewayResponse response)
         {

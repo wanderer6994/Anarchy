@@ -15,14 +15,18 @@ namespace Discord
             Author = new EmbedAuthor();
         }
 
+
         [JsonProperty("title")]
         public string Title { get; internal set; }
+
 
         [JsonProperty("url")]
         public string TitleUrl { get; set; }
 
+
         [JsonProperty("description")]
         public string Description { get; internal set; }
+
 
         [JsonProperty("color")]
         private uint _color;
@@ -34,22 +38,28 @@ namespace Discord
 
 
         [JsonProperty("fields")]
-        public List<EmbedField> Fields { get; private set; }
+        public IReadOnlyList<EmbedField> Fields { get; internal set; }
+
 
         [JsonProperty("video")]
         public EmbedVideo Video { get; private set; }
 
+
         [JsonProperty("thumbnail")]
         public EmbedImage Thumbnail { get; private set; }
+
 
         [JsonProperty("image")]
         public EmbedImage Image { get; private set; }
 
+
         [JsonProperty("footer")]
         public EmbedFooter Footer { get; private set; }
 
+
         [JsonProperty("author")]
         public EmbedAuthor Author { get; private set; }
+
 
         public override string ToString()
         {

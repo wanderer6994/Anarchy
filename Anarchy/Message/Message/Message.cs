@@ -14,45 +14,59 @@ namespace Discord
             };
         }
 
+
         [JsonProperty("id")]
         public ulong Id { get; private set; }
+
 
         [JsonProperty("content")]
         public string Content { get; private set; }
 
+
         [JsonProperty("tts")]
         public bool Tts { get; private set; }
+
 
         [JsonProperty("author")]
         public User Author { get; private set; }
 
+
         [JsonProperty("type")]
         public MessageType Type { get; private set; }
+
 
         [JsonProperty("attachments")]
         public IReadOnlyList<Attachment> Attachments { get; private set; }
 
+
         [JsonProperty("embeds")]
         public IReadOnlyList<Embed> Embeds { get; private set; }
+
 
         [JsonProperty("reactions")]
         public IReadOnlyList<MessageReaction> Reactions { get; private set; }
 
+
         [JsonProperty("mentions")]
         public IReadOnlyList<User> Mentions { get; private set; }
+
 
         [JsonProperty("mention_roles")]
         public IReadOnlyList<ulong> MentionedRoles { get; private set; }
 
+
         [JsonProperty("mention_everyone")]
         public bool MentionedEveryone { get; private set; }
+
 
         [JsonProperty("timestamp")]
         public string Timestamp { get; private set; }
         
+
         [JsonProperty("pinned")]
         public bool Pinned { get; private set; }
       
+
         [JsonProperty("channel_id")]
         public ulong ChannelId { get; private set; }
 

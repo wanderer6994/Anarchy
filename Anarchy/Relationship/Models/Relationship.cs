@@ -7,6 +7,7 @@ namespace Discord
         [JsonProperty("user")]
         public User User { get; private set; }
 
+
         [JsonProperty("type")]
         public RelationshipType Type { get; internal set; }
 

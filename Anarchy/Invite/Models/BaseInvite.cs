@@ -14,26 +14,34 @@ namespace Discord
             };
         }
 
+
         [JsonProperty("code")]
         public string Code { get; private set; }
+
 
         [JsonProperty("guild")]
         public PartialGuild Guild { get; private set; }
 
+
         [JsonProperty("channel")]
         public Channel Channel { get; private set; }
+
 
         [JsonProperty("inviter")]
         public User Inviter { get; private set; }
 
+
         [JsonProperty("temporary")]
         public bool Temporary { get; private set; }
+
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; private set; }
 
+
         [JsonProperty("uses")]
         public uint Uses { get; private set; }
+
 
         [JsonProperty("max_uses")]
         public uint MaxUses { get; private set; }

@@ -14,17 +14,22 @@ namespace Discord.Gateway
         }
 
 
+
         [JsonProperty("nick")]
         public string Nickname { get; private set; }
+
 
         [JsonProperty("roles")]
         public IReadOnlyList<ulong> Roles { get; private set; }
 
+
         [JsonProperty("game")]
         public Activity Activity { get; private set; }
 
+
         [JsonProperty("guild_id")]
         public long GuildId { get; private set; }
+
 
         [JsonProperty("status")]
         private string _status;
@@ -54,6 +59,7 @@ namespace Discord.Gateway
                 _status = value != UserStatus.DoNotDisturb ? value.ToString().ToLower() : "dnd";
             }
         }
+
 
         public bool InGuild
         {

@@ -9,23 +9,30 @@ namespace Discord.Webhook
         [JsonProperty("id")]
         public ulong Id { get; private set; }
 
+
         [JsonProperty("name")]
         public string Name { get; private set; }
+
 
         [JsonProperty("avatar")]
         public string AvatarId { get; private set; }
 
+
         [JsonProperty("user")]
         public User Creator { get; private set; }
+
 
         [JsonProperty("token")]
         public string Token { get; private set; }
 
+
         [JsonProperty("channel_id")]
         public ulong ChannelId { get; private set; }
 
+
         [JsonProperty("guild_id")]
         public ulong GuildId { get; private set; }
+
 
         public Hook()
         {

@@ -1,4 +1,4 @@
-(Please keep in mind that these are only the major/important changes. There have been more than written here)
+(Please keep in mind that these are only the major/important changes. There have been way more than written here)
 
 # 0.1.2.0
 

@@ -8,8 +8,10 @@ namespace Discord
         [JsonProperty("url")]
         public string Url { get; private set; }
 
+
         [JsonProperty("width")]
         public uint Width { get; private set; }
+
 
         [JsonProperty("height")]
         public uint Height { get; private set; }

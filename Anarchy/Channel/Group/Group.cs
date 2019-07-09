@@ -12,11 +12,14 @@ namespace Discord
             OnClientUpdated += (sender, e) => Recipients.SetClientsInList(Client);
         }
 
+
         [JsonProperty("icon")]
         public string IconId { get; private set; }
 
+
         [JsonProperty("owner_id")]
         public ulong OwnerId { get; private set; }
+
 
         [JsonProperty("recipients")]
         public IReadOnlyList<User> Recipients { get; private set; }

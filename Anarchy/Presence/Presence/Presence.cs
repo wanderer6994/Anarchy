@@ -7,6 +7,7 @@ namespace Discord.Gateway
         [JsonProperty("status")]
         private string _status;
 
+
         public UserStatus Status
         {
             get
@@ -34,11 +35,14 @@ namespace Discord.Gateway
             }
         }
 
+
         [JsonProperty("game")]
         public Activity Activity { get; set; }
 
+
         [JsonProperty("since")]
         public uint Since { get; set; }
+
 
         [JsonProperty("afk")]
         public bool Afk { get; set; }

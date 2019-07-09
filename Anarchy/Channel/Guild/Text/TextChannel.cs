@@ -9,8 +9,10 @@ namespace Discord
         [JsonProperty("topic")]
         public string Topic { get; private set; }
 
+
         [JsonProperty("nsfw")]
         public bool Nsfw { get; private set; }
+
 
         //this is in seconds btw
         [JsonProperty("rate_limit_per_user")]

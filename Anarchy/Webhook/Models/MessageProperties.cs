@@ -10,14 +10,18 @@ namespace Discord.Webhook
             Embeds = new List<Embed>();
         }
 
+
         [JsonProperty("username")]
         public string Username { get; set; }
+
 
         [JsonProperty("content")]
         public string Content { get; set; }
 
+
         [JsonProperty("avatar_url")]
         public string AvatarUrl { get; set; }
+
 
         [JsonProperty("embeds")]
         public List<Embed> Embeds { get; set; }

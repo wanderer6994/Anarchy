@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace Discord
 {
@@ -37,7 +39,9 @@ namespace Discord
 
         public EmbedMaker AddField(string name, string content, bool inline = false)
         {
-            _embed.Fields.Add(new EmbedField() { Name = name, Content = content, Inline = inline });
+            List<EmbedField> fields = _embed.Fields.ToList();
+            fields.Add(new EmbedField() { Name = name, Content = content, Inline = inline });
+            _embed.Fields = fields;
 
             return this;
         }

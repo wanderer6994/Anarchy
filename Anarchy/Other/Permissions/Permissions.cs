@@ -9,6 +9,7 @@
             _value = 512;
         }
 
+
         public Permissions(uint permissions)
         {
             _value = permissions;

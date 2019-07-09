@@ -9,14 +9,18 @@ namespace Discord
         [JsonProperty("id")]
         public ulong Id { get; private set; }
 
+
         [JsonProperty("username")]
         public string Username { get; protected set; }
+
 
         [JsonProperty("discriminator")]
         public uint Discriminator { get; protected set; }
 
+
         [JsonProperty("avatar")]
         public string AvatarId { get; protected set; }
+
 
         [JsonProperty("bot")]
 #pragma warning disable 0414, 0649

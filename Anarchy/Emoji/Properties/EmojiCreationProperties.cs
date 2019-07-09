@@ -8,6 +8,7 @@ namespace Discord
         [JsonProperty("name")]
         public string Name { get; set; }
 
+
         #region image
         private readonly DiscordImage _image = new DiscordImage();
 

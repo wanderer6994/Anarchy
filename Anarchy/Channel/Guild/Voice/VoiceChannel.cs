@@ -9,6 +9,7 @@ namespace Discord
         [JsonProperty("bitrate")]
         public uint Bitrate { get; private set; }
 
+
         [JsonProperty("user_limit")]
         public uint UserLimit { get; private set; }
 

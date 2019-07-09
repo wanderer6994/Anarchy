@@ -9,11 +9,14 @@ namespace Discord
         [JsonProperty("guild_id")]
         public ulong GuildId { get; private set; }
 
+
         [JsonProperty("position")]
         public uint Position { get; protected set; }
         
+
         [JsonProperty("parent_id")]
         public ulong? ParentId { get; protected set; }
+
 
         [JsonProperty("permission_overwrites")]
         public IReadOnlyList<PermissionOverwrite> PermissionOverwrites { get; protected set; }

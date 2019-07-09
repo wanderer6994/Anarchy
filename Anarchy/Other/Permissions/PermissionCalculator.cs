@@ -5,8 +5,7 @@ namespace Discord
 {
     public static class PermissionCalculator
     {
-        //no point in making one for Permissions cuz you can't even input to that
-        //also if anyone knows how i'd loop through a 'someenumthing | someotherenumthing' tell me
+        //if anyone knows how i'd loop through a 'someenumthing | someotherenumthing' tell me
         public static EditablePermissions Create(List<Permission> perms)
         {
             uint permissions = 512;
@@ -14,6 +13,7 @@ namespace Discord
             perms.ForEach(perm => permissions = Add(permissions, perm));
             return new EditablePermissions(permissions);
         }
+
 
         public static uint Add(uint permissions, Permission permission)
         {
@@ -23,6 +23,7 @@ namespace Discord
             return permissions;
         }
 
+
         public static uint Remove(uint permissions, Permission permission)
         {
             if (Has(permissions, permission))
@@ -30,6 +31,7 @@ namespace Discord
 
             return permissions;
         }
+
 
         public static bool Has(uint permissions, Permission permission)
         {

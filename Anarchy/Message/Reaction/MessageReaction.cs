@@ -9,11 +9,14 @@ namespace Discord
             OnClientUpdated += (sender, e) => Emoji.SetClient(Client);
         }
 
+
         [JsonProperty("emoji")]
         public Emoji Emoji { get; private set; }
 
+
         [JsonProperty("count")]
         public uint Count { get; private set; }
+
 
         [JsonProperty("me")]
         public bool ClientHasReacted { get; private set; }

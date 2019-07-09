@@ -9,6 +9,7 @@ namespace Discord
             OnClientUpdated += (sender, e) => Creator.SetClient(Client);
         }
 
+
         [JsonProperty("user")]
         public User Creator { get; private set; }
     }

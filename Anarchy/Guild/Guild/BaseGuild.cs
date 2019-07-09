@@ -11,8 +11,10 @@ namespace Discord
         [JsonProperty("id")]
         public ulong Id { get; private set; }
 
+
         [JsonProperty("name")]
         public string Name { get; protected set; }
+
 
         [JsonProperty("icon")]
         public string IconId { get; protected set; }

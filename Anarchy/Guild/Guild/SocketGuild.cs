@@ -10,14 +10,18 @@ namespace Discord
             OnClientUpdated += (sender, e) => Channels.SetClientsInList(Client);
         }
 
+
         [JsonProperty("large")]
         public bool Large { get; private set; }
+
 
         [JsonProperty("member_count")]
         public uint MemberCount { get; private set; }
 
+
         [JsonProperty("channels")]
         public IReadOnlyList<GuildChannel> Channels { get; private set; }
+
 
         [JsonProperty("joined_at")]
         public string CreatedAt { get; private set; }

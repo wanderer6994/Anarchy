@@ -8,8 +8,10 @@ namespace Discord
         [JsonProperty("id")]
         public ulong Id { get; private set; }
 
+
         [JsonProperty("name")]
         public string Name { get; private set; }
+
 
         [JsonProperty("color")]
         private uint _color;
@@ -19,16 +21,21 @@ namespace Discord
             private set { _color = (uint)Color.FromArgb(0, value.R, value.G, value.B).ToArgb(); }
         }
 
+
         [JsonProperty("position")]
         public int Position { get; private set; }
 
+
         public ulong GuildId { get; internal set; }
+
 
         [JsonProperty("hoist")]
         public bool Seperated { get; private set; }
 
+
         [JsonProperty("mentionable")]
         public bool Mentionable { get; private set; }
+
 
         [JsonProperty("permissions")]
         private uint _permissions
