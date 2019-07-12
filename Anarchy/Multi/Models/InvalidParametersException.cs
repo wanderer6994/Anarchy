@@ -7,7 +7,7 @@ namespace Discord
         public string ErrorJson { get; private set; }
         public dynamic ErrorJsonObject { get; private set; }
 
-        public InvalidParametersException(DiscordClient client, string errorJson) : base(client, "Invalid parameters were passed")
+        public InvalidParametersException(DiscordClient client, string errorJson) : base(client, errorJson)
         {
             ErrorJson = errorJson;
             ErrorJsonObject = JsonConvert.DeserializeObject<dynamic>(ErrorJson);

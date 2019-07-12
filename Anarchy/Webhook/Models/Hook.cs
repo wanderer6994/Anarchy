@@ -40,6 +40,9 @@ namespace Discord.Webhook
         }
 
 
+        /// <summary>
+        /// Updates the webhook's info
+        /// </summary>
         public void Update()
         {
             Hook hook = Client.GetWebhook(Id, Token);
@@ -50,6 +53,10 @@ namespace Discord.Webhook
         }
 
 
+        /// <summary>
+        /// Modifies the webhook
+        /// </summary>
+        /// <param name="properties">Options for modifying the webhook</param>
         public void Modify(WebhookProperties properties)
         {
             if (properties.Name == null)
@@ -66,31 +73,35 @@ namespace Discord.Webhook
         }
 
 
+        /// <summary>
+        /// Deletes the webhook
+        /// </summary>
         public void Delete()
         {
             Client.DeleteChannelWebhook(Id);
         }
 
 
-        public void SendMessage(WebhookMessageProperties message)
+        /// <summary>
+        /// Sends a message through the webhook
+        /// </summary>
+        /// <param name="message">The message to send</param>
+        public void SendMessage(string content, Embed embed = null, WebhookProfile profile = null)
         {
-            Client.HttpClient.Post($"/webhooks/{Id}/{Token}", JsonConvert.SerializeObject(message));
+            if (profile == null)
+                profile = new WebhookProfile();
+            if (profile.Name == null)
+                profile.Name = Name;
+
+            Client.HttpClient.Post($"/webhooks/{Id}/{Token}",
+                        JsonConvert.SerializeObject(new WebhookMessageProperties() { Content = content, Embed = embed, Name = profile.Name, AvatarUrl = profile.AvatarUrl }));
         }
 
 
-        public void SendMessage(string content)
-        {
-            WebhookMessageProperties message = new WebhookMessageProperties
-            {
-                Username = Name,
-                Content = content,
-                AvatarUrl = $"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png"
-            };
-
-            SendMessage(message);
-        }
-
-
+        /// <summary>
+        /// Gets the webhook's avatar
+        /// </summary>
+        /// <returns>The avatar (returns null if AvatarId is null)</returns>
         public Image GetAvatar()
         {
             if (AvatarId == null)

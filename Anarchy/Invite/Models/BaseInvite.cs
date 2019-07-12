@@ -53,6 +53,10 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Deletes the invite
+        /// </summary>
+        /// <returns></returns>
         public PartialInvite Delete()
         {
             return Client.DeleteInvite(Code);

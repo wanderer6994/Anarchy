@@ -19,7 +19,6 @@ namespace Discord.Gateway
             set
             {
                 _guildId = value;
-
                 foreach (var member in Members)
                     member.GuildId = _guildId;
             }

@@ -16,15 +16,15 @@ namespace Discord
 
         [JsonProperty("type")]
         private string _type;
-        public PermOverwriteType Type
+        public PermissionOverwriteType Type
         {
             get
             {
-                PermOverwriteType type;
+                PermissionOverwriteType type;
                 if (_type == "role")
-                    type = PermOverwriteType.Role;
+                    type = PermissionOverwriteType.Role;
                 else
-                    type = PermOverwriteType.Member;
+                    type = PermissionOverwriteType.Member;
                 return type;
             }
             set

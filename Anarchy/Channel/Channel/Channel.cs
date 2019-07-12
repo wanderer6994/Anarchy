@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Discord
 {
+    /// <summary>
+    /// Represents a universal channel object. This is not specific to any sort of channel
+    /// </summary>
     public class Channel : Controllable
     {
         [JsonProperty("id")]
@@ -17,12 +19,19 @@ namespace Discord
         public ChannelType Type { get; private set; }
 
 
+        /// <summary>
+        /// Updates the channel's info
+        /// </summary>
         public virtual void Update()
         {
             Name = Client.GetChannel(Id).Name;
         }
 
 
+        /// <summary>
+        /// Modifies the channel
+        /// </summary>
+        /// <param name="properties">Options for modifying the channel</param>
         public void Modify(ChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
@@ -32,66 +41,14 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Deletes the channel
+        /// </summary>
+        /// <returns>The deleted <see cref="Channel"/></returns>
         public Channel Delete()
         {
             return Client.DeleteChannel(Id);
         }
-
-
-        #region messages
-        public void TriggerTyping()
-        {
-            Client.TriggerTyping(Id);
-        }
-
-
-        public Message SendMessage(MessageProperties properties)
-        {
-            return Client.SendMessage(Id, properties);
-        }
-
-
-        public Message SendMessage(string message, bool tts = false)
-        {
-            return Client.SendMessage(Id, message, tts);
-        }
-
-
-        public IReadOnlyList<Message> GetMessages(uint limit = 100, uint afterId = 0)
-        {
-            return Client.GetChannelMessages(Id, limit, afterId);
-        }
-
-
-        public IReadOnlyList<Message> GetPinnedMessages()
-        {
-            return Client.GetChannelPinnedMessages(Id);
-        }
-
-
-        public void PinMessage(ulong messageId)
-        {
-            Client.PinChannelMessage(Id, messageId);
-        }
-
-
-        public void PinMessage(Message message)
-        {
-            PinMessage(message.Id);
-        }
-
-
-        public void UnpinMessage(ulong messageId)
-        {
-            Client.UnpinChannelMessage(Id, messageId);
-        }
-
-
-        public void UnpinMessage(Message message)
-        {
-            Client.UnpinChannelMessage(Id, message.Id);
-        }
-        #endregion
 
 
         public override string ToString()

@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for creating a <see cref="Guild"/>
+    /// </summary>
     public class GuildCreationProperties
     {
         [JsonProperty("name")]

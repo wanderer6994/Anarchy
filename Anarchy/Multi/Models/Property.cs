@@ -1,6 +1,7 @@
 ﻿namespace Discord
 {
-    public class Property<T>
+    /// <typeparam name="T">Type of property</typeparam>
+    internal class Property<T>
     {
         public bool Set { get; private set; }
 

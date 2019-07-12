@@ -20,117 +20,183 @@ namespace Discord
         public string IconId { get; protected set; }
 
 
+        /// <summary>
+        /// Deletes the guild
+        /// </summary>
         public void Delete()
         {
             Client.DeleteGuild(Id);
         }
 
 
+        /// <summary>
+        /// Leaves the guild
+        /// </summary>
         public void Leave()
         {
             Client.LeaveGuild(Id);
         }
 
 
+        /// <summary>
+        /// Changes the account's nickname in the server
+        /// </summary>
+        /// <param name="nickname">New nickname</param>
         public void ChangeNickname(string nickname)
         {
             Client.ChangeNickname(Id, nickname);
         }
 
 
-        #region channel
+        /// <summary>
+        /// Gets the guild's channels
+        /// </summary>
         public virtual IReadOnlyList<GuildChannel> GetChannels()
         {
             return Client.GetGuildChannels(Id);
         }
 
 
+        /// <summary>
+        /// Creates a channel
+        /// </summary>
+        /// <param name="properties">Options for creating the channel</param>
+        /// <returns>The created channel</returns>
         public GuildChannel CreateChannel(ChannelCreationProperties properties)
         {
             return Client.CreateGuildChannel(Id, properties);
         }
 
 
+        /// <summary>
+        /// Creates a text channel
+        /// </summary>
+        /// <param name="properties">Options for creating the channel</param>
+        /// <returns>The created channel</returns>
         public TextChannel CreateTextChannel(ChannelCreationProperties properties)
         {
             return Client.CreateTextChannel(Id, properties);
         }
 
 
+        /// <summary>
+        /// Creates a voice channel
+        /// </summary>
+        /// <param name="properties">Options for creating the channel</param>
+        /// <returns>The created channel</returns>
         public VoiceChannel CreateVoiceChannel(ChannelCreationProperties properties)
         {
             return Client.CreateVoiceChannel(Id, properties);
         }
-        #endregion
 
 
+        /// <summary>
+        /// Gets the guild's emojis
+        /// </summary>
         public virtual IReadOnlyList<Emoji> GetEmojis()
         {
             return Client.GetGuildEmojis(Id);
         }
 
 
-        public Emoji GetEmoji(ulong reactionId)
+        /// <summary>
+        /// Gets an emoji in the guild
+        /// </summary>
+        /// <param name="emojiId">ID of the emoji</param>
+        public Emoji GetEmoji(ulong emojiId)
         {
-            return Client.GetGuildEmoji(Id, reactionId);
+            return Client.GetGuildEmoji(Id, emojiId);
         }
 
 
+        /// <summary>
+        /// Creates an emoji
+        /// </summary>
+        /// <param name="properties">Options for creating the emoji</param>
         public Emoji CreateEmoji(EmojiCreationProperties properties)
         {
             return Client.CreateGuildEmoji(Id, properties);
         }
 
 
+        /// <summary>
+        /// Gets the guild's roles
+        /// </summary>
         public virtual IReadOnlyList<Role> GetRoles()
         {
             return Client.GetGuildRoles(Id);
         }
 
 
+        /// <summary>
+        /// Creates a role
+        /// </summary>
+        /// <param name="properties">Options for modifying the role after creating it</param>
+        /// <returns>The created role</returns>
         public Role CreateRole(RoleProperties properties = null)
         {
             return Client.CreateGuildRole(Id, properties);
         }
 
 
+        /// <summary>
+        /// Gets an invite
+        /// </summary>
         public IReadOnlyList<Invite> GetInvites()
         {
             return Client.GetGuildInvites(Id);
         }
 
 
-        public IReadOnlyList<Hook> GetWebhooks()
+        /// <summary>
+        /// Gets the guild's webhooks
+        /// </summary>
+        public IReadOnlyList<Webhook.Hook> GetWebhooks()
         {
             return Client.GetGuildWebhooks(Id);
         }
 
 
+        /// <summary>
+        /// Gets the guild's audit log
+        /// </summary>
+        /// <param name="filters"></param>
         public IReadOnlyList<AuditLogEntry> GetAuditLog(AuditLogFilters filters = null)
         {
             return Client.GetGuildAuditLog(Id, filters);
         }
 
 
+        /// <summary>
+        /// Gets the guild's banned users
+        /// </summary>
         public IReadOnlyList<Ban> GetBans()
         {
             return Client.GetGuildBans(Id);
         }
 
 
+        /// <summary>
+        /// Gets a banned member
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
         public Ban GetBan(ulong userId)
         {
             return Client.GetGuildBan(Id, userId);
         }
 
 
+        /// <summary>
+        /// Gets the guild's icon
+        /// </summary>
+        /// <returns>The guild's icon (returns null if IconId is null)</returns>
         public Image GetIcon()
         {
             if (IconId == null)
                 return null;
 
-            return (Bitmap)new ImageConverter().ConvertFrom(new HttpClient().GetAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png")
-                                                                                .Result.Content.ReadAsByteArrayAsync().Result);
+            return (Bitmap)new ImageConverter()
+                        .ConvertFrom(new HttpClient().GetByteArrayAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png").Result);
         }
 
 

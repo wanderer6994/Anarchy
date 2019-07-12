@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Discord
 {
+    /// <summary>
+    /// Represents a <see cref="Channel"/> specific to any guild channel
+    /// </summary>
     public class GuildChannel : Channel
     {   
         [JsonProperty("guild_id")]
@@ -22,6 +25,9 @@ namespace Discord
         public IReadOnlyList<PermissionOverwrite> PermissionOverwrites { get; protected set; }
 
 
+        /// <summary>
+        /// Updates the channel
+        /// </summary>
         public override void Update()
         {
             GuildChannel channel = Client.GetGuildChannel(Id);
@@ -32,6 +38,10 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Modifies the channel
+        /// </summary>
+        /// <param name="properties">Options for modifying the channel</param>
         public void Modify(GuildChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
@@ -49,35 +59,47 @@ namespace Discord
         }
 
 
-        public PartialInvite CreateInvite(InviteProperties properties = null)
-        {
-            return Client.CreateInvite(Id, properties);
-        }
-
-
+        /// <summary>
+        /// Adds/edits a permission overwrite to a channel
+        /// </summary>
+        /// <param name="overwrite">The permission overwrite to add/edit</param>
         public void AddPermissionOverwrite(PermissionOverwrite overwrite)
         {
             Client.AddPermissionOverwrite(Id, overwrite);
-            List<PermissionOverwrite> existing = PermissionOverwrites.Where(pe => pe.Id == overwrite.Id).ToList();
-            var temp = PermissionOverwrites.ToList();
-            if (existing.Count() > 0)
-                temp[temp.IndexOf(existing[0])] = overwrite;
+            List<PermissionOverwrite> overwrites = PermissionOverwrites.ToList();
+            if (overwrites.Where(pe => pe.Id == overwrite.Id).Count() > 0)
+                overwrites[overwrites.IndexOf(overwrites.First(pe => pe.Id == overwrite.Id))] = overwrite;
             else
-                temp.Add(overwrite);
-            PermissionOverwrites = temp;
+                overwrites.Add(overwrite);
+            PermissionOverwrites = overwrites;
         }
 
+
+        /// <summary>
+        /// Removes a permission overwrite from a channel
+        /// </summary>
+        /// <param name="id">ID of the role or member affected by the overwrite</param>
         public void RemovePermissionOverwrite(ulong id)
         {
             Client.RemovePermissionOverwrite(Id, id);
 
             try
             {
-                List<PermissionOverwrite> temp = (List<PermissionOverwrite>)PermissionOverwrites;
-                temp.Remove(PermissionOverwrites.First(pe => pe.Id == id));
-                PermissionOverwrites = temp;
+                List<PermissionOverwrite> overwrites = PermissionOverwrites.ToList();
+                overwrites.Remove(PermissionOverwrites.First(pe => pe.Id == id));
+                PermissionOverwrites = overwrites;
             }
             catch { }
+        }
+
+
+        /// <summary>
+        /// Removes a permission overwrite from a channel
+        /// </summary>
+        /// <param name="overwrite">The overwrite to delete</param>
+        public void RemovePermissionOverwrite(PermissionOverwrite overwrite)
+        {
+            RemovePermissionOverwrite(overwrite.Id);
         }
     }
 }

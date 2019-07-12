@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -7,7 +8,9 @@ namespace Discord.Gateway
     public class PresenceUpdate
     {
         [JsonProperty("user")]
+#pragma warning disable CS0649
         private readonly JObject _user;
+#pragma warning restore CS0659
         public ulong UserId
         {
             get { return ulong.Parse(_user.GetValue("id").ToString()); }
@@ -37,22 +40,7 @@ namespace Discord.Gateway
         {
             get
             {
-                UserStatus status = UserStatus.Offline;
-
-                switch (_status)
-                {
-                    case "online":
-                        status = UserStatus.Online;
-                        break;
-                    case "idle":
-                        status = UserStatus.Idle;
-                        break;
-                    case "dnd":
-                        status = UserStatus.DoNotDisturb;
-                        break;
-                }
-
-                return status;
+                return (UserStatus)Enum.Parse(typeof(UserStatus), _status, true);
             }
             set
             {
@@ -61,7 +49,7 @@ namespace Discord.Gateway
         }
 
 
-        public bool InGuild
+        public bool FromGuild
         {
             get { return GuildId == 0; }
         }

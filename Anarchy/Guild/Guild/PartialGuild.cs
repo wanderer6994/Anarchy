@@ -28,7 +28,10 @@ namespace Discord
         public Permissions Permissions { get; private set; }
 
 
-        public Guild GetGuild()
+        /// <summary>
+        /// Gets the full guild (<see cref="Guild"/>)
+        /// </summary>
+        public Guild GetFullGuild()
         {
             return Client.GetGuild(Id);
         }

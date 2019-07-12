@@ -14,6 +14,9 @@ namespace Discord.Gateway
         }
 
 
+        /// <summary>
+        /// Logs intot he gateway
+        /// </summary>
         internal static void LoginToGateway(this DiscordSocketClient client)
         {
             var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify);
@@ -21,8 +24,12 @@ namespace Discord.Gateway
             req.Data.Properties = client.SuperPropertiesInfo.Properties;
             client.Socket.Send(req);
         }
-        
 
+
+        /// <summary>
+        /// Starts a process that will continuously send heartbeats every <paramref name="interval"/> milliseconds
+        /// </summary>
+        /// <param name="interval">Amount of time (in milliseconds) to wait between sending heartbeats</param>
         internal static async void StartHeartbeatHandlersAsync(this DiscordSocketClient client, uint interval)
         {
             while (true)
@@ -33,6 +40,11 @@ namespace Discord.Gateway
         }
 
 
+        /// <summary>
+        /// Requests a member chunk from a guild
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        /// <param name="limit">Max amount of members to receive (set to 0 for all)</param>
         public static void GetGuildMembers(this DiscordSocketClient client, ulong guildId, uint limit = 100)
         {
             var req = new GatewayRequest<GatewayMemberQuery>(GatewayOpcode.RequestGuildMembers);
@@ -42,6 +54,10 @@ namespace Discord.Gateway
         }
 
 
+        /// <summary>
+        /// Gets all memebers in a guild
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
         public static IReadOnlyList<GuildMember> GetAllGuildMembers(this DiscordSocketClient client, ulong guildId)
         {
             List<GuildMember> members = new List<GuildMember>();

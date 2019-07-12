@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for modifying a <see cref="Group"/>
+    /// </summary>
     public class GroupProperties : ChannelProperties
     {
         private readonly DiscordImage _image = new DiscordImage();

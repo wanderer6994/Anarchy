@@ -45,6 +45,10 @@ namespace Discord
         public Permissions Permissions { get; private set; }
 
 
+        /// <summary>
+        /// Modifies the role
+        /// </summary>
+        /// <param name="properties">Options for modifying the role</param>
         public void Modify(RoleProperties properties)
         {
             if (!properties.NameProperty.Set)
@@ -67,6 +71,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Deletes the role
+        /// </summary>
         public void Delete()
         {
             Client.DeleteGuildRole(GuildId, Id);

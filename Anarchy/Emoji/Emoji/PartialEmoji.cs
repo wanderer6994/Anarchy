@@ -9,41 +9,22 @@ namespace Discord
 
 
         [JsonProperty("name")]
-        public string Name { get; private set; }
+        public string Name { get; protected set; }
 
 
         [JsonProperty("animated")]
         public bool Animated { get; private set; }
 
 
-        //this will currently not be set if received in a Message
-        public ulong GuildId { get; internal set; }
-
-
-        public void Update()
+        public bool IsCustom
         {
-            if (Id == null)
-                return;
-
-            Name = Client.GetGuildEmoji(GuildId, (ulong)Id).Name;
+            get { return Id != null; }
         }
 
 
-        public void Modify(string name)
+        public string GetMessegable()
         {
-            if (Id == null)
-                return;
-
-            Name = Client.ModifyGuildEmoji(GuildId, (ulong)Id, name).Name;
-        }
-
-
-        public void Delete()
-        {
-            if (Id == null)
-                return;
-
-            Client.DeleteGuildEmoji(GuildId, (ulong)Id);
+            return IsCustom ? $"<:{Name}:{Id}>" : Name;
         }
 
 

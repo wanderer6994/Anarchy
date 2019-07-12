@@ -2,7 +2,9 @@
 
 namespace Discord
 {
-
+    /// <summary>
+    /// Options for creating a <see cref="Channel"/>
+    /// </summary>
     public class ChannelCreationProperties
     {
         [JsonProperty("name")]

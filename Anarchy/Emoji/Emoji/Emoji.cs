@@ -12,5 +12,36 @@ namespace Discord
 
         [JsonProperty("user")]
         public User Creator { get; private set; }
+
+
+        public ulong GuildId { get; internal set; }
+
+
+        /// <summary>
+        /// Updates the emoji's info
+        /// </summary>
+        public void Update()
+        {
+            Name = Client.GetGuildEmoji(GuildId, (ulong)Id).Name;
+        }
+
+
+        /// <summary>
+        /// Modifies the emoji
+        /// </summary>
+        /// <param name="name">New name</param>
+        public void Modify(string name)
+        {
+            Name = Client.ModifyGuildEmoji(GuildId, (ulong)Id, name).Name;
+        }
+
+
+        /// <summary>
+        /// Deletes the emoji
+        /// </summary>
+        public void Delete()
+        {
+            Client.DeleteGuildEmoji(GuildId, (ulong)Id);
+        }
     }
 }

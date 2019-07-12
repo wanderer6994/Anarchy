@@ -12,11 +12,11 @@ Oh and also: if you're using a bot token make sure to prefix the token with 'Bot
 ```csharp
 // The DiscordClient is the most basic client there is. The gateway is NOT available for this client
 DiscordClient client = new DiscordClient();
-client.Token = "your token here" //Tokens are evaluated whenever they are put in here. It'll trigger an AccessDeniedException if it's invalid
+client.Token = "your token here" //Tokens are evaluated whenever they are put in here. It'll trigger a DiscordHttpException if it's invalid
 
 // Same as DiscordClient, but it has gateway support (to use this you need to include Discord.Gateway)
 DiscordSocketClient socketClient = new DiscordSocketClient();
-socketClient.Login("your token here"); //This is passed to the Token property, meaning that an AccessDeniedException will also be triggered here if the token is invalid 
+socketClient.Login("your token here"); //This is passed to the Token property, meaning that a DiscordHttpException will also be triggered here if the token is invalid 
 ```
 
 ## Joining/leaving a server
@@ -79,7 +79,7 @@ private static void Client_OnLeftGuild(DiscordSocketClient client, GuildEventArg
 }
 ```
 
-## Downloading all members in a server
+## Downloading members in a server
 ```csharp
 private static List<User> Users = new List<User>();
 
@@ -97,6 +97,30 @@ private static void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs 
    Task.Run(() => Users = client.GetAllGuildMembers(420));
 }
 ```
+
+## Sending embeds
+```csharp
+DiscordClient client = new DiscordClient("your token here");
+
+Channel channel = client.GetChannel(420);
+
+//you can also set a bunch of images. i just haven't done that here
+EmbedMaker embed = new EmbedMaker();
+embed.Title = "this is an embed";
+embed.TitleUrl = "https://github.com/iLinked1337/Anarchy";
+embed.Description = "sent from Anarchy";
+embed.Color = Color.FromArgb(0, 104, 204);
+embed.AddField("Anarchy", "is a Discord API wrapper");
+embed.Footer.Text = "Made by iLinked";
+embed.Author.Name = "iLinked";
+embed.Author.Url = "https://youtube.com/iLinked";
+
+
+channel.SendMessage(new MessageProperties() { Content = "hey look it's an embed!", Embed = embed });
+```
+
+
+
 Example projects can be found in 'Example projects'
 
 

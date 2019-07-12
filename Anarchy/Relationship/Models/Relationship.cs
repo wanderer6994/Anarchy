@@ -4,6 +4,11 @@ namespace Discord
 {
     public class Relationship : Controllable
     {
+        public Relationship()
+        {
+            OnClientUpdated += (sender, e) => User.SetClient(Client);
+        }
+
         [JsonProperty("user")]
         public User User { get; private set; }
 

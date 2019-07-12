@@ -2,18 +2,14 @@
 
 namespace Discord.Gateway
 {
-    internal class RoleContainer
+    internal class RoleContainer : Controllable
     {
         private ulong _guildId;
         [JsonProperty("guild_id")]
         public ulong GuildId
         {
             get { return _guildId; }
-            set
-            {
-                _guildId = value;
-                Role.GuildId = _guildId;
-            }
+            set { Role.GuildId = _guildId = value; }
         }
 
 

@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System.Net;
 
 namespace Discord
 {
+    /// <summary>
+    /// Account user
+    /// </summary>
     public class ClientUser : User
     {
         [JsonProperty("email")]
@@ -25,12 +27,19 @@ namespace Discord
         public NitroType Nitro { get; private set; }
 
 
+        /// <summary>
+        /// Updates the user's info
+        /// </summary>
         public override void Update()
         {
             Client.GetClientUser();
         }
 
 
+        /// <summary>
+        /// Changes the user's profile
+        /// </summary>
+        /// <param name="settings">Options for changing the profile</param>
         public void ChangeProfile(UserSettings settings)
         {
             if (settings.Email == null)
@@ -56,8 +65,7 @@ namespace Discord
             if (house == HypesquadHouse.None)
                 Client.HttpClient.Delete("/hypesquad/online");
 
-            Client.HttpClient.Post("/hypesquad/online",
-                        JsonConvert.SerializeObject(new HypesquadContainer() { House = house }));
+            Client.HttpClient.Post("/hypesquad/online", $"{{\"house_id\":{(int)house}}}");
         }
     }
 }

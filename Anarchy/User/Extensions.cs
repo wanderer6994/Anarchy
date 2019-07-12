@@ -2,6 +2,10 @@
 {
     public static class UserExtensions
     {
+        /// <summary>
+        /// Gets a user
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
         public static User GetUser(this DiscordClient client, ulong userId)
         {
             return client.HttpClient.Get($"/users/{userId}")
@@ -9,6 +13,9 @@
         }
 
 
+        /// <summary>
+        /// Gets the account's user
+        /// </summary>
         public static ClientUser GetClientUser(this DiscordClient client)
         {
             try

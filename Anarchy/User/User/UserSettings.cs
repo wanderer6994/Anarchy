@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for changing the account's profile
+    /// </summary>
     public class UserSettings
     {
         [JsonProperty("username")]

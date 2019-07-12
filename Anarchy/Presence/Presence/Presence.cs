@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Discord.Gateway
 {
@@ -6,33 +7,10 @@ namespace Discord.Gateway
     {
         [JsonProperty("status")]
         private string _status;
-
-
         public UserStatus Status
         {
-            get
-            {
-                UserStatus status = UserStatus.Offline;
-
-                switch (_status)
-                {
-                    case "online":
-                        status = UserStatus.Online;
-                        break;
-                    case "idle":
-                        status = UserStatus.Idle;
-                        break;
-                    case "dnd":
-                        status = UserStatus.DoNotDisturb;
-                        break;
-                }
-
-                return status;
-            }
-            set
-            {
-                _status = value != UserStatus.DoNotDisturb ? value.ToString().ToLower() : "dnd";
-            }
+            get { return (UserStatus)Enum.Parse(typeof(UserStatus), _status, true); }
+            set { _status = value != UserStatus.DoNotDisturb ? value.ToString().ToLower() : "dnd"; }
         }
 
 

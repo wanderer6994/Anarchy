@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for modifying a <see cref="Guild"/>
+    /// </summary>
     public class GuildProperties
     {
         internal Property<string> NameProperty = new Property<string>();

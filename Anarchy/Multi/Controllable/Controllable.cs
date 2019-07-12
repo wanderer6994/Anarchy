@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Controllable
+    public abstract class Controllable
     {
         protected event EventHandler OnClientUpdated;
 

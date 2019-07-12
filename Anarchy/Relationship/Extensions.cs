@@ -5,6 +5,9 @@ namespace Discord
 {
     public static class RelationshipsExtensions
     {
+        /// <summary>
+        /// Gets the account's relationships (friends, blocked etc.)
+        /// </summary>
         public static IReadOnlyList<Relationship> GetClientRelationships(this DiscordClient client)
         {
             return client.HttpClient.Get($"/users/@me/relationships")
@@ -12,6 +15,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Sends a friend request to a user
+        /// </summary>
         public static void SendFriendRequest(this DiscordClient client, string username, uint discriminator)
         {
             client.HttpClient.Post("/users/@me/relationships", 
@@ -19,6 +25,10 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Blocks a user
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
         public static void BlockUser(this DiscordClient client, ulong userId)
         {
             client.HttpClient.Put($"/users/@me/relationships/{userId}", 
@@ -26,25 +36,36 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Gets a user's profile
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
+        public static Profile GetProfile(this DiscordClient client, ulong userId)
+        {
+            return client.HttpClient.Get($"/users/{userId}/profile")
+                                .Deserialize<Profile>().SetClient(client);
+        }
+
+
+        /// <summary>
+        /// Gets the mutual friends between our user and the other user
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
+        /// <returns></returns>
+        public static IReadOnlyList<User> GetMutualFriends(this DiscordClient client, long userId)
+        {
+            return client.HttpClient.Get($"/users/{userId}/relationships")
+                                .Deserialize<IReadOnlyList<User>>().SetClientsInList(client);
+        } 
+
+
+        /// <summary>
+        /// Removes any relationship (unfriending, unblocking etc.)
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
         public static void RemoveRelationship(this DiscordClient client, ulong userId)
         {
             client.HttpClient.Delete($"/users/@me/relationships/{userId}");
         }
-
-
-        #region DMs
-        public static IReadOnlyList<Channel> GetClientDMs(this DiscordClient client)
-        {
-            return client.HttpClient.Get($"/users/@me/channels")
-                                .Deserialize<IReadOnlyList<Group>>().SetClientsInList(client);
-        }
-
-
-        public static Channel CreateDM(this DiscordClient client, ulong recipientId)
-        {
-            return client.HttpClient.Post("/users/@me/channels", $"{{\"recipient_id\":\"{recipientId}\"}}")
-                                .Deserialize<Group>().SetClient(client);
-        }
-        #endregion
     }
 }

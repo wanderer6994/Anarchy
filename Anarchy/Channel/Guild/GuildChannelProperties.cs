@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for modifying a <see cref="GuildChannel"/>
+    /// </summary>
     public class GuildChannelProperties : ChannelProperties
     {
         internal Property<ulong?> ParentProperty = new Property<ulong?>();

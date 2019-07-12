@@ -2,6 +2,9 @@
 
 namespace Discord.Gateway
 {
+    /// <summary>
+    /// A request sent to the gateway
+    /// </summary>
     /// <typeparam name="T">Type of data</typeparam>
     internal class GatewayRequest<T> where T : new()
     {

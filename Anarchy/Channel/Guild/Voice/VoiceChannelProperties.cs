@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for modifying a <see cref="VoiceChannel"/>
+    /// </summary>
     public class VoiceChannelProperties : GuildChannelProperties
     {
         internal Property<uint> BitrateProperty = new Property<uint>();

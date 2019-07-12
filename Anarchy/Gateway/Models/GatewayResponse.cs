@@ -2,6 +2,9 @@
 
 namespace Discord.Gateway
 {
+    /// <summary>
+    /// A response from the gateway
+    /// </summary>
     internal class GatewayResponse
     {
         [JsonProperty("op")]

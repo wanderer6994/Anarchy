@@ -1,15 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Discord
 {
     public class Message : Controllable
     {
+#pragma warning disable CS0649
         public Message()
         {
+            Reactions = new List<MessageReaction>();
+
             OnClientUpdated += (sender, e) =>
             {
                 Reactions.SetClientsInList(Client);
+                Mentions.SetClientsInList(Client);
                 Author.SetClient(Client);
             };
         }
@@ -31,16 +37,21 @@ namespace Discord
         public User Author { get; private set; }
 
 
-        [JsonProperty("type")]
-        public MessageType Type { get; private set; }
-
-
         [JsonProperty("attachments")]
-        public IReadOnlyList<Attachment> Attachments { get; private set; }
+        private readonly IReadOnlyList<Attachment> _attachments;
+        public Attachment Attachment
+        {
+            get { return _attachments == null || _attachments.Count == 0 ? null : _attachments[0]; }
+        }
 
 
         [JsonProperty("embeds")]
-        public IReadOnlyList<Embed> Embeds { get; private set; }
+        private IReadOnlyList<Embed> _embeds;
+        public Embed Embed
+        {
+            get { return _embeds == null || _embeds.Count == 0 ? null : _embeds[0]; }
+            private set { _embeds = new List<Embed>() { value }; }
+        }
 
 
         [JsonProperty("reactions")]
@@ -60,8 +71,12 @@ namespace Discord
 
 
         [JsonProperty("timestamp")]
-        public string Timestamp { get; private set; }
-        
+        private readonly string _timestamp;
+        public DateTime Timestamp
+        {
+            get { return DiscordTimestamp.FromString(_timestamp); }
+        }
+
 
         [JsonProperty("pinned")]
         public bool Pinned { get; private set; }
@@ -71,6 +86,21 @@ namespace Discord
         public ulong ChannelId { get; private set; }
 
 
+        /// <summary>
+        /// This will only be set if the message is received through the gateway
+        /// </summary>
+        [JsonProperty("guild_id")]
+        public ulong? GuildId { get; private set; }
+
+
+        [JsonProperty("type")]
+        public MessageType Type { get; private set; }
+
+
+        /// <summary>
+        /// Edits the message
+        /// </summary>
+        /// <param name="message">The new contents of the message</param>
         public void Edit(string message)
         {
             if (Type != MessageType.Default)
@@ -82,31 +112,64 @@ namespace Discord
             Mentions = msg.Mentions;
             MentionedRoles = msg.MentionedRoles;
             MentionedEveryone = msg.MentionedEveryone;
-            Embeds = msg.Embeds;
+            Embed = msg.Embed;
         }
 
 
+        /// <summary>
+        /// Deletes the message
+        /// </summary>
         public void Delete()
         {
             Client.DeleteMessage(ChannelId, Id);
         }
 
 
+        /// <summary>
+        /// Gets instances of a reaction to a message
+        /// </summary>
+        /// <param name="reaction">The reaction</param>
+        /// <param name="limit">Max amount of reactions to receive</param>
+        /// <param name="afterId">The reaction ID to offset from</param>
         public IReadOnlyList<User> GetReactions(string reaction, uint limit = 25, ulong afterId = 0)
         {
             return Client.GetMessageReactions(ChannelId, Id, reaction, limit, afterId);
         }
 
 
+        /// <summary>
+        /// Adds a reaction to the message
+        /// </summary>
         public void AddReaction(string reaction)
         {
             Client.AddMessageReaction(ChannelId, Id, reaction);
         }
 
 
+        /// <summary>
+        /// Adds a reaction to the message
+        /// </summary>
+        public void AddReaction(PartialEmoji emoji)
+        {
+            AddReaction(emoji.GetMessegable());
+        }
+
+
+        /// <summary>
+        /// Removes a reaction from the message
+        /// </summary>
         public void RemoveReaction(string reaction)
         {
             Client.RemoveMessageReaction(ChannelId, Id, reaction);
+        }
+
+
+        /// <summary>
+        /// Removes a reaction from the message
+        /// </summary>
+        public void RemoveReaction(PartialEmoji emoji)
+        {
+            AddReaction(emoji.GetMessegable());
         }
 
 
@@ -114,5 +177,6 @@ namespace Discord
         {
             return Author.ToString();
         }
+#pragma warning restore CS0649
     }
 }

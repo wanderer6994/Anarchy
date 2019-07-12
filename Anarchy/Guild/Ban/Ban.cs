@@ -18,6 +18,18 @@ namespace Discord
         public User User { get; private set; }
 
 
+        public ulong GuildId { get; internal set; }
+
+
+        /// <summary>
+        /// Unbans the user
+        /// </summary>
+        public void Unban()
+        {
+            Client.UnbanGuildMember(GuildId, User.Id);
+        }
+
+
         public override string ToString()
         {
             return User.ToString();

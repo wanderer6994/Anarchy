@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Discord.Gateway
 {
+    /// <summary>
+    /// A successful gateway login
+    /// </summary>
     public class Login : Controllable
     {
         public Login()
@@ -26,6 +29,10 @@ namespace Discord.Gateway
 
         [JsonProperty("relationships")]
         public List<Relationship> Relationships { get; private set; }
+
+
+        [JsonProperty("private_channels")]
+        public List<Channel> PrivateChannels { get; private set; }
 
 
         public override string ToString()

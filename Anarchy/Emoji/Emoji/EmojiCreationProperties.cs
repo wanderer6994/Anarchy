@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for creating a <see cref="Emoji"/>
+    /// </summary>
     public class EmojiCreationProperties
     {
         [JsonProperty("name")]

@@ -3,6 +3,9 @@ using System.Drawing;
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for modifying a role
+    /// </summary>
     public class RoleProperties
     {
         internal Property<string> NameProperty = new Property<string>();

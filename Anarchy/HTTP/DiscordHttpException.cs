@@ -2,11 +2,13 @@
 {
     public class DiscordHttpException : DiscordException
     {
-        public DiscordHttpError Error { get; private set; }
+        public DiscordError Code { get; private set; }
+        public string ErrorMessage { get; private set; }
 
-        public DiscordHttpException(DiscordClient client, string errorJson) : base(client)
+        internal DiscordHttpException(DiscordClient client, DiscordHttpError error) : base(client, $"{(int)error.Code} {error.Message}")
         {
-            Error = errorJson.Deserialize<DiscordHttpError>();
+            Code = error.Code;
+            ErrorMessage = error.Message;
         }
     }
 }

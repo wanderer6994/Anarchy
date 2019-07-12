@@ -2,6 +2,9 @@
 
 namespace Discord
 {
+    /// <summary>
+    /// Options for modifying a <see cref="TextChannel"/>
+    /// </summary>
     public class TextChannelProperties : GuildChannelProperties
     {
         internal Property<string> TopicProperty = new Property<string>();

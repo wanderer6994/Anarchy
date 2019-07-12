@@ -40,6 +40,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Updates the user's info
+        /// </summary>
         public virtual void Update()
         {
             User user = Client.GetUser(Id);
@@ -49,6 +52,18 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Gets the user's profile
+        /// </summary>
+        public Profile GetProfile()
+        {
+            return Client.GetProfile(Id);
+        }
+
+
+        /// <summary>
+        /// Sends a friend request to the user
+        /// </summary>
         public void SendFriendRequest()
         {
             if (Id == Client.User.Id)
@@ -58,6 +73,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Blocks the user
+        /// </summary>
         public void Block()
         {
             if (Id == Client.User.Id)
@@ -67,6 +85,9 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Removes any relationship (unfriending, unblocking etc.)
+        /// </summary>
         public void RemoveRelationship()
         {
             if (Id == Client.User.Id)
@@ -76,13 +97,17 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Gets the user's avatar
+        /// </summary>
+        /// <returns>The avatar (returns null if AvatarId is null)</returns>
         public Image GetAvatar()
         {
             if (AvatarId == null)
                 return null;
 
-            return (Bitmap)new ImageConverter().ConvertFrom(new HttpClient().GetAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png")
-                                                                    .Result.Content.ReadAsByteArrayAsync().Result);
+            return (Bitmap)new ImageConverter()
+                        .ConvertFrom(new HttpClient().GetByteArrayAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png").Result);
         }
 
 

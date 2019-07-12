@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Discord
 {
+    /// <summary>
+    /// Used to make <see cref="Embed"/>s
+    /// </summary>
     public class EmbedMaker
     {
         private Embed _embed { get; set; }

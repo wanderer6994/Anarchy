@@ -2,9 +2,10 @@ C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Anarchy.dll
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Anarchy.pdb
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Newtonsoft.Json.dll
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\websocket-sharp-with-proxy-support.dll
-C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Newtonsoft.Json.xml
-C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csprojAssemblyReference.cache
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csproj.CoreCompileInputs.cache
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csproj.CopyComplete
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.dll
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.pdb
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Newtonsoft.Json.Schema.dll
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Newtonsoft.Json.Schema.xml
+C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csprojAssemblyReference.cache

@@ -1,8 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
-namespace Discord
+namespace Discord.Gateway
 {
+    /// <summary>
+    /// A <see cref="Guild"/> with extra information (currently only available through a <see cref="Login"/>)
+    /// </summary>
     public class SocketGuild : Guild
     {
         public SocketGuild()
@@ -24,13 +28,21 @@ namespace Discord
 
 
         [JsonProperty("joined_at")]
-        public string CreatedAt { get; private set; }
+#pragma warning disable CS0649
+        private readonly string _joinedAt;
+#pragma warning restore CS0659
+        public DateTime JoinedAt
+        {
+            get { return DiscordTimestamp.FromString(_joinedAt); }
+        }
 
 
+        /// <summary>
+        /// Gets the guild's channels
+        /// </summary>
         public override IReadOnlyList<GuildChannel> GetChannels()
         {
-            Channels = base.GetChannels();
-            return Channels;
+            return Channels = base.GetChannels();
         }
     }
 }

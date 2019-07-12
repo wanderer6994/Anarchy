@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace Discord
 {
+    /// <summary>
+    /// Discord client that only supports HTTP
+    /// </summary>
     public class DiscordClient
     {
         internal DiscordHttpClient HttpClient { get; private set; }

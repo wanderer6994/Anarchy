@@ -11,7 +11,7 @@ namespace Discord
 
 
         [JsonProperty("emoji")]
-        public Emoji Emoji { get; private set; }
+        public PartialEmoji Emoji { get; private set; }
 
 
         [JsonProperty("count")]

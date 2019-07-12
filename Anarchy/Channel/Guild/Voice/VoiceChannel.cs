@@ -1,9 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
 namespace Discord
 {
+    /// <summary>
+    /// Represents a <see cref="Channel"/> specific to guild voice channels
+    /// </summary>
     public class VoiceChannel : GuildChannel
     {
         [JsonProperty("bitrate")]
@@ -14,6 +15,9 @@ namespace Discord
         public uint UserLimit { get; private set; }
 
 
+        /// <summary>
+        /// Updates the channel's info
+        /// </summary>
         public override void Update()
         {
             VoiceChannel channel = Client.GetVoiceChannel(Id);
@@ -26,6 +30,10 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Modifies the channel
+        /// </summary>
+        /// <param name="properties">Options for modifying the channel</param>
         public void Modify(VoiceChannelProperties properties)
         {
             if (!properties.NameProperty.Set)
@@ -48,53 +56,15 @@ namespace Discord
             UserLimit = channel.UserLimit;
         }
 
-        
-        //this is ONLY a temporary solution
-        #region messages
-        [Obsolete("This type of channel does not support messages", true)]
-        public new void TriggerTyping()
+
+        /// <summary>
+        /// Creates an invite
+        /// </summary>
+        /// <param name="properties">Options for creating the invite</param>
+        /// <returns></returns>
+        public PartialInvite CreateInvite(InviteProperties properties = null)
         {
+            return Client.CreateInvite(Id, properties);
         }
-
-
-        [Obsolete("This type of channel does not support messages", true)]
-        public new Message SendMessage(MessageProperties properties)
-        { return null; }
-
-
-        [Obsolete("This type of channel does not support messages", true)]
-        public new Message SendMessage(string message, bool tts = false)
-        { return null; }
-
-
-        [Obsolete("This type of channel does not support messages", true)]
-        public new IReadOnlyList<Message> GetMessages(uint limit = 100, uint afterId = 0)
-        { return null; }
-
-
-        [Obsolete("This type of channel does not support messages", true)]
-        public new IReadOnlyList<Message> GetPinnedMessages()
-        { return null; }
-
-
-        [Obsolete("This type of channel does not support messages", true)]
-        public new void PinMessage(ulong messageId)
-        { }
-
-
-        [Obsolete("This type of channel does not support messages", true)]
-        public new void PinMessage(Message message)
-        { }
-
-
-        [Obsolete("This type of channel does not support messages", true)]
-        public new void UnpinMessage(ulong messageId)
-        { }
-
-
-        [Obsolete("This type of channel does not support messages", true)]
-        public new void UnpinMessage(Message message)
-        { }
-        #endregion
     }
 }

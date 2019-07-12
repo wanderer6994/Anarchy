@@ -22,17 +22,8 @@ namespace Discord
         public ulong ChannelId { get; private set; }
 
 
-        private ulong _guildId;
         [JsonProperty("guild_id")]
-        public ulong GuildId
-        {
-            get { return _guildId; }
-            set
-            {
-                _guildId = value;
-                Emoji.GuildId = _guildId;
-            }
-        }
+        public ulong GuildId { get; private set; }
 
 
         [JsonProperty("user_id")]

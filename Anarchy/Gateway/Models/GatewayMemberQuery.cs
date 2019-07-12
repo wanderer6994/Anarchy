@@ -2,6 +2,9 @@
 
 namespace Discord.Gateway
 {
+    /// <summary>
+    /// Query for getting a list of guild members
+    /// </summary>
     internal class GatewayMemberQuery
     {
         public GatewayMemberQuery()

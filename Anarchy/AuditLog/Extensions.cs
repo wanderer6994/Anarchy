@@ -4,6 +4,11 @@ namespace Discord
 {
     public static class AuditLogExtensions
     {
+        /// <summary>
+        /// Gets the audit log for the specified guild
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        /// <returns>A <see cref="IReadOnlyList{AuditLogEntry}"/></returns>
         public static IReadOnlyList<AuditLogEntry> GetGuildAuditLog(this DiscordClient client, ulong guildId, AuditLogFilters filters = null)
         {
             if (filters == null)

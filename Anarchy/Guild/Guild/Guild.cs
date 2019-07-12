@@ -71,6 +71,9 @@ namespace Discord
         public ulong OwnerId { get; private set; }
 
 
+        /// <summary>
+        /// Updates the guild's info
+        /// </summary>
         public void Update()
         {
             Guild guild = Client.GetGuild(Id);
@@ -86,6 +89,10 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Modifies the guild
+        /// </summary>
+        /// <param name="properties">Options for modifying the guild</param>
         public void Modify(GuildProperties properties)
         {
             if (!properties.NameProperty.Set)
@@ -111,17 +118,21 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Gets the guild's roles
+        /// </summary>
         public override IReadOnlyList<Role> GetRoles()
         {
-            Roles = base.GetRoles();
-            return Roles;
+            return Roles = base.GetRoles();
         }
 
 
+        /// <summary>
+        /// Gets the guild's emojis
+        /// </summary>
         public override IReadOnlyList<Emoji> GetEmojis()
         {
-            Emojis = base.GetEmojis();
-            return Emojis;
+            return Emojis = base.GetEmojis();
         }
     }
 }

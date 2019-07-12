@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class DiscordHttpError
+    internal class DiscordHttpError
     {
         [JsonProperty("code")]
         public DiscordError Code { get; private set; }

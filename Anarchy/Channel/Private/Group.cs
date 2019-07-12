@@ -1,18 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Net.Http;
 using Newtonsoft.Json;
 
 namespace Discord
 {
-    public class Group : Channel
+    /// <summary>
+    /// Represents a <see cref="Channel"/> specific to groups
+    /// </summary>
+    public class Group : DMChannel
     {
-        public Group()
-        {
-            OnClientUpdated += (sender, e) => Recipients.SetClientsInList(Client);
-        }
-
-
         [JsonProperty("icon")]
         public string IconId { get; private set; }
 
@@ -21,10 +17,9 @@ namespace Discord
         public ulong OwnerId { get; private set; }
 
 
-        [JsonProperty("recipients")]
-        public IReadOnlyList<User> Recipients { get; private set; }
-
-
+        /// <summary>
+        /// Updates the group's info
+        /// </summary>
         public override void Update()
         {
             Group group = Client.GetGroup(Id);
@@ -35,6 +30,10 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Modifies the group
+        /// </summary>
+        /// <param name="properties">Options for modifying the group</param>
         public void Modify(GroupProperties properties)
         {
             if (!properties.NameProperty.Set)
@@ -50,49 +49,65 @@ namespace Discord
         }
 
 
-        public void Leave()
-        {
-            Client.LeaveGroup(Id);
-        }
-
-
+        /// <summary>
+        /// Adds a recipient to the group
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
         public void AddRecipient(ulong userId)
         {
             Client.AddUserToGroup(Id, userId);
         }
 
 
+        /// <summary>
+        /// Adds a recipient to the group
+        /// </summary>
         public void AddRecipient(User user)
         {
             AddRecipient(user.Id);
         }
 
 
+        /// <summary>
+        /// Removes a user from the group
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
         public void RemoveRecipient(ulong userId)
         {
             Client.RemoveUserFromGroup(Id, userId);
         }
 
 
+        /// <summary>
+        /// Removes a user from the group
+        /// </summary>
         public void RemoveRecipient(User user)
         {
             RemoveRecipient(user.Id);
         }
 
 
+        /// <summary>
+        /// Creates an invite
+        /// </summary>
+        /// <param name="properties">Options for creating the invite</param>
         public PartialInvite CreateInvite(InviteProperties properties = null)
         {
             return Client.CreateInvite(Id, properties);
         }
 
 
+        /// <summary>
+        /// Gets the group's icon
+        /// </summary>
+        /// <returns>The icon (null if IconId is null)</returns>
         public Image GetIcon()
         {
             if (IconId == null)
                 return null;
 
-            return (Bitmap)new ImageConverter().ConvertFrom(new HttpClient().GetAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png")
-                                                                    .Result.Content.ReadAsByteArrayAsync().Result);
+            return (Bitmap)new ImageConverter()
+                        .ConvertFrom(new HttpClient().GetByteArrayAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png").Result);
         }
     }
 }

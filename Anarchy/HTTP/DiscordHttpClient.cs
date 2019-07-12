@@ -3,7 +3,9 @@ using System.Text;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Linq;
 
 namespace Discord
 {
@@ -31,35 +33,41 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Checks an HTTP response for errors
+        /// </summary>
         private void CheckResponse(HttpResponseMessage resp)
         {
-            string content = resp.Content.ReadAsStringAsync().Result;
+            if (resp.StatusCode <= HttpStatusCode.NoContent)
+                return;
+
+            if (resp.StatusCode == (HttpStatusCode)429)
+                throw new RateLimitException(_discordClient, resp.Deserialize<RateLimit>().RetryAfter);
 
             if (resp.StatusCode == HttpStatusCode.BadRequest)
             {
-                try
-                {
-                    throw new DiscordHttpException(_discordClient, content);
-                }
-                catch (JsonReaderException)
-                {
-                    throw new InvalidParametersException(_discordClient, content);
-                }
+                JSchema schema = new JSchemaGenerator().Generate(typeof(DiscordHttpError));
+                if (!resp.Deserialize<JObject>().IsValid(schema))
+                    throw new InvalidParametersException(_discordClient, resp.Content.ReadAsStringAsync().Result);
             }
-            else if (resp.StatusCode == (HttpStatusCode)429)
-                throw new RateLimitException(_discordClient, content.Deserialize<RateLimit>().RetryAfter);
-            else if (resp.StatusCode > HttpStatusCode.NoContent)
-                throw new DiscordHttpException(_discordClient, content);
+
+            throw new DiscordHttpException(_discordClient, resp.Deserialize<DiscordHttpError>());
         }
 
 
-        public HttpResponseMessage Send(HttpMethod method, string endpoint, string content = null)
+        /// <summary>
+        /// Sends an HTTP request and checks for errors
+        /// </summary>
+        /// <param name="method">HTTP method to use</param>
+        /// <param name="endpoint">API endpoint (fx. /users/@me)</param>
+        /// <param name="json">JSON content</param>
+        private HttpResponseMessage Send(HttpMethod method, string endpoint, string json = null)
         {
             HttpRequestMessage msg = new HttpRequestMessage
             {
                 Method = method,
                 RequestUri = new Uri("https://discordapp.com/api/v6" + endpoint),
-                Content = content != null ? new StringContent(content, Encoding.UTF8, "application/json") : null
+                Content = json != null ? new StringContent(json, Encoding.UTF8, "application/json") : null
             };
 
             var resp = _httpClient.SendAsync(msg).Result;
