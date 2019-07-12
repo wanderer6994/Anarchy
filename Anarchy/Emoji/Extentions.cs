@@ -12,7 +12,7 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the emoji</param>
         /// <returns>The created <see cref="Emoji"/></returns>
-        public static Emoji CreateGuildEmoji(this DiscordClient client, ulong guildId, EmojiCreationProperties properties)
+        public static Emoji CreateGuildEmoji(this DiscordClient client, ulong guildId, EmojiProperties properties)
         {
             Emoji emoji = client.HttpClient.Post($"/guilds/{guildId}/emojis", 
                             JsonConvert.SerializeObject(properties)).Deserialize<Emoji>().SetClient(client);

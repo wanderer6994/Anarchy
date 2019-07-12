@@ -113,7 +113,7 @@ namespace Discord
         /// Creates an emoji
         /// </summary>
         /// <param name="properties">Options for creating the emoji</param>
-        public Emoji CreateEmoji(EmojiCreationProperties properties)
+        public Emoji CreateEmoji(EmojiProperties properties)
         {
             return Client.CreateGuildEmoji(Id, properties);
         }

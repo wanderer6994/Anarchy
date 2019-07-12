@@ -140,7 +140,7 @@
     <Compile Include="Multi\Image\DiscordImage.cs" />
     <Compile Include="DiscordClient.cs" />
     <Compile Include="DiscordSocketClient.cs" />
-    <Compile Include="Emoji\Emoji\EmojiCreationProperties.cs" />
+    <Compile Include="Emoji\Emoji\EmojiProperties.cs" />
     <Compile Include="Webhook\Extensions.cs" />
     <Compile Include="Webhook\Models\WebhookProfile.cs" />
     <Compile Include="Webhook\Models\WebhookProperties.cs" />

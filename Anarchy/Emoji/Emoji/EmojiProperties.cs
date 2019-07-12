@@ -6,7 +6,7 @@ namespace Discord
     /// <summary>
     /// Options for creating a <see cref="Emoji"/>
     /// </summary>
-    public class EmojiCreationProperties
+    public class EmojiProperties
     {
         [JsonProperty("name")]
         public string Name { get; set; }

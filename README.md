@@ -1,7 +1,6 @@
 # About
 Anarchy is an opensource Discord API wrapper that focuses on making bot programming easy.<br>
 Since the start it has been our goal to make it simple, so that people can easily modify it to their needs.<br>
-At the moment we don't have any bugtesters but me, so the wrapper will most likely contain a few bugs here and there.<br>
 
 Oh and also: if you're using a bot token make sure to prefix the token with 'Bot '.<br>
 
@@ -22,14 +21,14 @@ socketClient.Login("your token here"); //This is passed to the Token property, m
 ## Joining/leaving a server
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
-PartialInvite invite = client.JoinGuild("fortnite"); //We're just gonna use Fortnite as an example
+PartialInvite invite = client.JoinGuild("fortnite");
 client.LeaveGuild(invite.Guild.Id);
 ```
 
 ## Sending a message
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
-Channel channel = client.GetChannel(449751593483632642);
+TextChannel channel = client.GetTextChannel(420);
 channel.TriggerTyping(); //This is optional
 channel.SendMessage("Hello, World");
 ```
@@ -38,9 +37,8 @@ channel.SendMessage("Hello, World");
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
 
-// Often when creating a new thing in the server it has a properties object that has some settings
 Guild newGuild = client.CreateGuild(new GuildCreationProperties() { Name = "cool stuff", Icon = Image.FromFile("icon.png"), Region = "eu-central" });
-Channel newChannel = newGuild.CreateChannel(new ChannelProperties() { Name = "my new channel", Type = ChannelType.Text });
+GuildChannel newChannel = newGuild.CreateChannel(new ChannelCreationProperties() { Name = "my new channel" });
 ```
 
 ## Using gateway events
@@ -118,8 +116,6 @@ embed.Author.Url = "https://youtube.com/iLinked";
 
 channel.SendMessage(new MessageProperties() { Content = "hey look it's an embed!", Embed = embed });
 ```
-
-
 
 Example projects can be found in 'Example projects'
 

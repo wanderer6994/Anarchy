@@ -105,8 +105,6 @@ namespace Discord.Gateway
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
 
-            System.Console.WriteLine(payload.ToString());
-
             switch (payload.Opcode)
             {
                 case GatewayOpcode.Event:

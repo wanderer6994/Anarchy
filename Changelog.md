@@ -21,7 +21,7 @@
 - Other minor bug fixes.
 
 ### Removels
-Removed MessageProperties overload for SendMessage(), making it look nicer (you have to change ur bot).
+- Removed MessageProperties overload for SendMessage(), making it look nicer (you might have to change ur bot).
 <br><br><br>
 
 
