@@ -14,7 +14,7 @@ namespace NicknameChanger
 
             //get guild
             Console.Write("Guild id: ");
-            Guild guild = client.GetGuild(long.Parse(Console.ReadLine()));
+            Guild guild = client.GetGuild(ulong.Parse(Console.ReadLine()));
 
             Console.Write("Full nickname: ");
             string nickname = Console.ReadLine();

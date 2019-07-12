@@ -44,7 +44,7 @@ namespace GuildDuplicator
 
             //find the guild
             Console.Write($"Guild id: ");
-            Guild targetGuild = client.GetGuild(long.Parse(Console.ReadLine()));
+            Guild targetGuild = client.GetGuild(ulong.Parse(Console.ReadLine()));
             Guild ourGuild = DuplicateGuild(client, targetGuild);
 
             DeleteAllChannels(client, ourGuild);
@@ -69,7 +69,7 @@ namespace GuildDuplicator
                 catch (DiscordHttpException e)
                 {
                     //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Error.Code == DiscordError.MissingAccess)
+                    if (e.Code == DiscordError.MissingAccess)
                         continue;
                     else
                         throw;
@@ -81,7 +81,7 @@ namespace GuildDuplicator
 
                 foreach (var overwrite in category.PermissionOverwrites)
                 {
-                    if (overwrite.Type == PermOverwriteType.Member)
+                    if (overwrite.Type == PermissionOverwriteType.Member)
                         continue;
 
                     PermissionOverwrite ourOverwrite = overwrite;
@@ -115,18 +115,18 @@ namespace GuildDuplicator
                 catch (DiscordHttpException e)
                 {
                     //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Error.Code == DiscordError.MissingAccess)
+                    if (e.Code == DiscordError.MissingAccess)
                         continue;
                     else
                         throw;
                 }
 
-                TextChannel ourChannel = ourGuild.CreateTextChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
+                TextChannel ourChannel = ourGuild.CreateTextChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (ulong?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
                 ourChannel.Modify(new TextChannelProperties() { Nsfw = channel.Nsfw, Position = channel.Position, Topic = channel.Topic, SlowMode = channel.SlowMode });
 
                 foreach (var overwrite in channel.PermissionOverwrites)
                 {
-                    if (overwrite.Type == PermOverwriteType.Member)
+                    if (overwrite.Type == PermissionOverwriteType.Member)
                         continue;
 
                     PermissionOverwrite ourOverwrite = overwrite;
@@ -151,7 +151,7 @@ namespace GuildDuplicator
                 catch (DiscordHttpException e)
                 {
                     //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Error.Code == DiscordError.MissingAccess)
+                    if (e.Code == DiscordError.MissingAccess)
                         continue;
                     else
                         throw;
@@ -159,12 +159,12 @@ namespace GuildDuplicator
 
 
                 //create voice channels
-                VoiceChannel ourChannel = ourGuild.CreateVoiceChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (long?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
+                VoiceChannel ourChannel = ourGuild.CreateVoiceChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (ulong?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
                 ourChannel.Modify(new VoiceChannelProperties() { Bitrate = channel.Bitrate, Position = channel.Position, UserLimit = channel.UserLimit });
 
                 foreach (var overwrite in channel.PermissionOverwrites)
                 {
-                    if (overwrite.Type == PermOverwriteType.Member)
+                    if (overwrite.Type == PermissionOverwriteType.Member)
                         continue;
 
                     PermissionOverwrite ourOverwrite = overwrite;
