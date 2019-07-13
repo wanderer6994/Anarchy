@@ -9,7 +9,13 @@ namespace Discord.Gateway
         private string _status;
         public UserStatus Status
         {
-            get { return (UserStatus)Enum.Parse(typeof(UserStatus), _status, true); }
+            get
+            {
+                if (_status == "dnd")
+                    return UserStatus.DoNotDisturb;
+                else
+                    return (UserStatus)Enum.Parse(typeof(UserStatus), _status, true);
+            }
             set { _status = value != UserStatus.DoNotDisturb ? value.ToString().ToLower() : "dnd"; }
         }
 
