@@ -1,7 +1,9 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
 # 0.3.0.1
+- Added 'Watching' to ActivityType.
 - Minor bug fixes.
+
 
 
 # 0.3.0.0

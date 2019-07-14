@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 namespace Discord
 {
     /// <summary>
-    /// Used for easily converting <see cref="System.Drawing.Image"/>s to Discord's own Base64 format
+    /// Used for easily converting <see cref="System.Drawing.Image"/>s to Discord's own Base64 type format
     /// </summary>
     public class DiscordImage
     {

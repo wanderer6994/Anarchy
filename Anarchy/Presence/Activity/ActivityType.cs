@@ -4,6 +4,7 @@
     {
         Game,
         Streaming,
-        Listening
+        Listening,
+        Watching
     }
 }

@@ -178,7 +178,6 @@
     <Compile Include="Guild\Member\GuildMember.cs" />
     <Compile Include="Message\Message\Message.cs" />
     <Compile Include="Message\Message\MessageProperties.cs" />
-    <Compile Include="RateLimit\MessageRateLimit.cs" />
     <Compile Include="RateLimit\RateLimit.cs" />
     <Compile Include="Emoji\Emoji\Emoji.cs" />
     <Compile Include="User\User\User.cs" />

@@ -7,6 +7,7 @@ namespace Discord.Gateway
     {
         [JsonProperty("status")]
         private string _status;
+        [JsonIgnore]
         public UserStatus Status
         {
             get

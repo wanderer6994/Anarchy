@@ -1,6 +1,6 @@
 # About
 Anarchy is an opensource Discord API wrapper that focuses on making bot programming easy.<br>
-Since the start it has been our goal to make it simple, so that people can easily modify it to their needs.<br>
+Since the start it has been our goal to make it simple yet effective, so that people can easily modify it to their needs, and not have huge performance losses.<br>
 
 Oh and also: if you're using a bot token make sure to prefix the token with 'Bot '.<br>
 
@@ -21,6 +21,7 @@ socketClient.Login("your token here"); //This is passed to the Token property, m
 ## Joining/leaving a server
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
+
 PartialInvite invite = client.JoinGuild("fortnite");
 client.LeaveGuild(invite.Guild.Id);
 ```
@@ -28,6 +29,7 @@ client.LeaveGuild(invite.Guild.Id);
 ## Sending a message
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
+
 TextChannel channel = client.GetTextChannel(420);
 channel.TriggerTyping(); //This is optional
 channel.SendMessage("Hello, World");
@@ -79,8 +81,6 @@ private static void Client_OnLeftGuild(DiscordSocketClient client, GuildEventArg
 
 ## Downloading members in a server
 ```csharp
-private static List<User> Users = new List<User>();
-
 static void Main()
 {
    // DiscordClient can also be used to do this, but it is incredibly slow compared to the gateway method
@@ -89,10 +89,17 @@ static void Main()
    client.Login("your token here");
 }
 
-private static void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs args)
+private static async void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs args)
 {
-   // Not running this async will result in a permenant freeze of the gateway
-   Task.Run(() => Users = client.GetAllGuildMembers(420));
+   Task.Run(() =>
+   {
+       IReadOnlyList<User> users = client.GetAllGuildMembers(420);
+       foreach (var user in users)
+       {
+           // will print username#discriminator
+           Console.Writeline(user.ToString());
+       }
+   });
 }
 ```
 
@@ -112,7 +119,6 @@ embed.AddField("Anarchy", "is a Discord API wrapper");
 embed.Footer.Text = "Made by iLinked";
 embed.Author.Name = "iLinked";
 embed.Author.Url = "https://youtube.com/iLinked";
-
 
 channel.SendMessage(new MessageProperties() { Content = "hey look it's an embed!", Embed = embed });
 ```
