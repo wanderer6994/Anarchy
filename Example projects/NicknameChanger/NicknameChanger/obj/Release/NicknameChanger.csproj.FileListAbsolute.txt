@@ -9,4 +9,6 @@ C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameCha
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\obj\Release\NicknameChanger.csproj.CopyComplete
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\obj\Release\NicknameChanger.exe
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\obj\Release\NicknameChanger.pdb
+C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Release\Newtonsoft.Json.Schema.dll
+C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Release\Newtonsoft.Json.Schema.xml
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\obj\Release\NicknameChanger.csprojAssemblyReference.cache
