@@ -26,7 +26,9 @@ namespace Discord.Gateway
 
 
         [JsonProperty("since")]
-        public uint Since { get; set; }
+#pragma warning disable CS0169
+        private readonly long _since;
+#pragma warning restore CS0169
 
 
         [JsonProperty("afk")]

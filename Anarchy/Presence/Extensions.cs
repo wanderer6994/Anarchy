@@ -1,4 +1,6 @@
-﻿namespace Discord.Gateway
+﻿using System;
+
+namespace Discord.Gateway
 {
     public static class PresenceExtensions
     {
@@ -17,12 +19,12 @@
         /// <summary>
         /// Sets the client's activity
         /// </summary>
-        /// <param name="since">When the client started doing this activity (unix time)</param>
-        public static void SetActivity(this DiscordSocketClient client, Activity activity, uint since = 0)
+        /// <param name="since">How long the client has been playing for</param>
+        public static void SetActivity(this DiscordSocketClient client, Activity activity, uint? since = null)
         {
             var req = new GatewayRequest<Presence>(GatewayOpcode.PresenceChange);
-            req.Data.Since = since;
             req.Data.Activity = activity;
+            req.Data.Activity.Since = since;
             client.Socket.Send(req);
         }
     }

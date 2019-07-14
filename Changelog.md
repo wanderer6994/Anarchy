@@ -2,6 +2,7 @@
 
 # 0.3.0.1
 - Added 'Watching' to ActivityType.
+- Fixed 'since' parameter in SetActivity().
 - Minor bug fixes.
 
 

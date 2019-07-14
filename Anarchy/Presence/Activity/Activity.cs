@@ -4,6 +4,12 @@ namespace Discord.Gateway
 {
     public class Activity
     {
+        public Activity()
+        {
+            _timestamps = new ActivityTimestamps();
+        }
+
+
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -22,6 +28,15 @@ namespace Discord.Gateway
 
         [JsonProperty("state")]
         public string State { get; set; }
+
+
+        [JsonProperty("timestamps")]
+        private ActivityTimestamps _timestamps;
+        public uint? Since
+        {
+            get { return _timestamps.Start; }
+            set { _timestamps.Start = value; }
+        }
 
 
         [JsonProperty("assets")]
