@@ -47,9 +47,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="websocket-sharp-with-proxy-support, Version=1.0.2.28248, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\websocket-sharp-with-proxy-support.dll</HintPath>
+    <Reference Include="WebsocketSharp">
+      <HintPath>bin\Release\WebsocketSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +60,7 @@
     <Compile Include="Channel\Guild\GuildChannelProperties.cs" />
     <Compile Include="Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="Channel\Guild\Voice\VoiceChannelProperties.cs" />
-    <Compile Include="Channel\PermissionOverwrite\PermissionOverwriteType.cs" />
+    <Compile Include="Channel\PermissionOverwrite\Type.cs" />
     <Compile Include="Channel\Private\DMChannel.cs" />
     <Compile Include="Emoji\Emoji\EmojiContainer.cs" />
     <Compile Include="Emoji\Emoji\EmojisUpdatedEventArgs.cs" />
@@ -78,14 +77,14 @@
     <Compile Include="Invite\Models\BaseInvite.cs" />
     <Compile Include="Invite\Models\PartialInvite.cs" />
     <Compile Include="Message\Deleted\DeletedMessage.cs" />
-    <Compile Include="Message\Deleted\MessageDeletedEventArgs.cs" />
+    <Compile Include="Message\Deleted\EventArgs.cs" />
     <Compile Include="Message\Reaction\Update.cs" />
     <Compile Include="Message\Reaction\ReactionEventArgs.cs" />
     <Compile Include="Multi\Models\DiscordTimestamp.cs" />
     <Compile Include="Presence\Activity\Activity.cs" />
-    <Compile Include="Presence\Activity\ActivityAssets.cs" />
-    <Compile Include="Presence\Activity\ActivityTimestamps.cs" />
-    <Compile Include="Presence\Activity\ActivityType.cs" />
+    <Compile Include="Presence\Activity\Assets.cs" />
+    <Compile Include="Presence\Activity\Timestamps.cs" />
+    <Compile Include="Presence\Activity\Type.cs" />
     <Compile Include="AuditLog\Extensions.cs" />
     <Compile Include="AuditLog\Models\AuditLog.cs" />
     <Compile Include="AuditLog\Models\ActionType.cs" />
@@ -107,13 +106,13 @@
     <Compile Include="Message\Embed\Video.cs" />
     <Compile Include="Guild\Models\GuildEventArgs.cs" />
     <Compile Include="Guild\Member\GuildMemberList.cs" />
-    <Compile Include="Gateway\Models\GatewayOpcode.cs" />
+    <Compile Include="Gateway\Models\Opcode.cs" />
     <Compile Include="User\ConnectedAccount\AccountType.cs" />
     <Compile Include="User\ConnectedAccount\ConnectedAccount.cs" />
     <Compile Include="User\Profile\MutualGuild.cs" />
     <Compile Include="User\Profile\Profile.cs" />
     <Compile Include="Role\Models\RoleContainer.cs" />
-    <Compile Include="Gateway\Models\GatewayMemberQuery.cs" />
+    <Compile Include="Gateway\Models\MemberQuery.cs" />
     <Compile Include="Guild\Models\GuildDefaultNotifications.cs" />
     <Compile Include="Guild\Properties\GuildProperties.cs" />
     <Compile Include="Message\Reaction\MessageReaction.cs" />
@@ -170,10 +169,10 @@
     <Compile Include="Channel\Guild\GuildChannel.cs" />
     <Compile Include="Channel\Channel\Properties\ChannelCreationProperties.cs" />
     <Compile Include="Invite\Models\InviteProperties.cs" />
-    <Compile Include="Gateway\Models\GatewayIdentification.cs" />
+    <Compile Include="Gateway\Models\Identification.cs" />
     <Compile Include="Presence\Presence\Presence.cs" />
-    <Compile Include="Gateway\Models\GatewayRequest.cs" />
-    <Compile Include="Gateway\Models\GatewayResponse.cs" />
+    <Compile Include="Gateway\Models\Request.cs" />
+    <Compile Include="Gateway\Models\Response.cs" />
     <Compile Include="Guild\Properties\GuildCreationProperties.cs" />
     <Compile Include="Invite\Models\Invite.cs" />
     <Compile Include="Guild\Member\GuildMember.cs" />

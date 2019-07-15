@@ -2,7 +2,7 @@
 Anarchy is an opensource Discord API wrapper that focuses on making bot programming easy.<br>
 Since the start it has been our goal to make it simple yet effective, so that people can easily modify it to their needs, and not have huge performance losses.<br>
 
-Oh and also: if you're using a bot token make sure to prefix the token with 'Bot '.<br>
+Oh and also: if you're using a bot token make sure to prefix the token with 'Bot '.<br><br>
 
 
 # Examples

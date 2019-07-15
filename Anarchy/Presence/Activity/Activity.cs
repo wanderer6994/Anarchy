@@ -6,7 +6,9 @@ namespace Discord.Gateway
     {
         public Activity()
         {
+            Type = ActivityType.Game;
             _timestamps = new ActivityTimestamps();
+            Assets = new ActivityAssets();
         }
 
 

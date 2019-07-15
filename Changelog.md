@@ -1,5 +1,10 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.4.0.0
+
+
+
+
 # 0.3.0.1
 - Added 'Watching' to ActivityType.
 - Fixed 'since' parameter in SetActivity().
