@@ -82,7 +82,6 @@
     <Compile Include="Message\Reaction\ReactionEventArgs.cs" />
     <Compile Include="Multi\Models\DiscordTimestamp.cs" />
     <Compile Include="Presence\Activity\Activity.cs" />
-    <Compile Include="Presence\Activity\Assets.cs" />
     <Compile Include="Presence\Activity\Timestamps.cs" />
     <Compile Include="Presence\Activity\Type.cs" />
     <Compile Include="AuditLog\Extensions.cs" />

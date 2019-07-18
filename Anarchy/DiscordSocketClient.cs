@@ -70,14 +70,31 @@ namespace Discord.Gateway
 
         public void Login(string token)
         {
-            Logout();
             HttpClient.UpdateFingerprint();
             Token = token;
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
             Socket.OnMessage += SocketDataReceived;
-            Socket.OnClose += SocketClosed;
             Socket.Connect();
+        }
+
+
+        private void logout(bool resume)
+        {
+            if (LoggedIn)
+            {
+                LoggedIn = false;
+                Socket.Close();
+
+                if (resume)
+                {
+                    System.Console.WriteLine("Resuming");
+
+                    Login(Token);
+                }
+                else
+                    OnLoggedOut?.Invoke(this, new UserEventArgs(User));
+            }
         }
 
 
@@ -93,18 +110,13 @@ namespace Discord.Gateway
         }
 
 
-        private void SocketClosed(object sender, CloseEventArgs e)
-        {
-            if (LoggedIn)
-                this.LoginToGateway();
-        }
-
-
         private void SocketDataReceived(object sender, WebSocketSharp.MessageEventArgs result)
         {
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
 
+            System.Console.WriteLine(payload);
+            
             switch (payload.Opcode)
             {
                 case GatewayOpcode.Event:
@@ -176,7 +188,7 @@ namespace Discord.Gateway
                     }
                     break;
                 case GatewayOpcode.InvalidSession:
-                    Logout();
+                    logout(LoggedIn);
                     break;
                 case GatewayOpcode.Connected:
                     this.StartHeartbeatHandlersAsync(payload.Deserialize<JObject>().GetValue("heartbeat_interval").ToObject<uint>());

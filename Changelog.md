@@ -2,6 +2,16 @@
 
 # 0.4.0.0
 
+### Additions
+- Added support for changing the nickname of other guild members.
+
+### Improvements
+- Changed 'Ballance' to 'Balance' in HypesquadHouse (oops a typo).
+- Removed ActivitiyAssets because of them being unusable.
+
+### Bug fixes
+- Fixed DiscordSocketClient never resuming connections (WIP).
+- Other minor bug fixes.
 
 
 

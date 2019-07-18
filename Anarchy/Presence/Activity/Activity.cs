@@ -8,7 +8,6 @@ namespace Discord.Gateway
         {
             Type = ActivityType.Game;
             _timestamps = new ActivityTimestamps();
-            Assets = new ActivityAssets();
         }
 
 
@@ -34,15 +33,11 @@ namespace Discord.Gateway
 
         [JsonProperty("timestamps")]
         private ActivityTimestamps _timestamps;
-        public uint? Since
+        internal uint? Since
         {
             get { return _timestamps.Start; }
             set { _timestamps.Start = value; }
         }
-
-
-        [JsonProperty("assets")]
-        public ActivityAssets Assets { get; set; }
 
 
         public override string ToString()

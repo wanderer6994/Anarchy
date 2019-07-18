@@ -213,13 +213,25 @@ namespace Discord
 
 
         /// <summary>
-        /// Changes the account's nickname in a guild
+        /// Changes the client's nickname in a guild
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
         /// <param name="nickname">New nickname</param>
-        public static void ChangeNickname(this DiscordClient client, ulong guildId, string nickname)
+        public static void ChangeClientNickname(this DiscordClient client, ulong guildId, string nickname)
         {
-            client.HttpClient.Patch($"/guilds/{guildId}/members/@me/nick", "{\"nick\":\"" + nickname + "\"}");
+            client.HttpClient.Patch($"/guilds/{guildId}/members/@me/nick", $"{{\"nick\":\"{nickname}\"}}");
+        }
+
+
+        /// <summary>
+        /// Changes a user's nickname in a guild
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        /// <param name="userId">ID of the user</param>
+        /// <param name="nickname">New nickname</param>
+        public static void ChangeNickname(this DiscordClient client, ulong guildId, ulong userId, string nickname)
+        {
+            client.HttpClient.Patch($"/guilds/{guildId}/members/{userId}", $"{{\"nick\":\"{nickname}\"}}");
         }
     }
 }

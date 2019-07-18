@@ -47,6 +47,7 @@ namespace Discord
         public uint MaxUses { get; private set; }
 
 
+        //this seems not to be working
         public PartialInvite Join()
         {
             return Guild == null ? Client.JoinGroup(Code) : Client.JoinGuild(Code);

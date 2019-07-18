@@ -39,12 +39,12 @@ namespace Discord
 
 
         /// <summary>
-        /// Changes the account's nickname in the server
+        /// Changes the client's nickname for this guild
         /// </summary>
         /// <param name="nickname">New nickname</param>
-        public void ChangeNickname(string nickname)
+        public void ChangeClientNickname(string nickname)
         {
-            Client.ChangeNickname(Id, nickname);
+            Client.ChangeClientNickname(Id, nickname);
         }
 
 

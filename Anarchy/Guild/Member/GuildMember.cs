@@ -45,6 +45,16 @@ namespace Discord
 
 
         /// <summary>
+        /// Changes the member's nickname for this guild
+        /// </summary>
+        /// <param name="nickname">New nickname</param>
+        public void ChangeNickname(string nickname)
+        {
+            Client.ChangeNickname(GuildId, User.Id, nickname);
+        }
+
+
+        /// <summary>
         /// Kicks the member from the guild
         /// </summary>
         public void Kick()

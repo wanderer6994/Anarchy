@@ -5,6 +5,6 @@
         None,
         Bravery,
         Brilliance,
-        Ballance
+        Balance
     }
 }
