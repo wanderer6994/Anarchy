@@ -26,6 +26,16 @@ namespace Discord.Gateway
         }
 
 
+        internal static void Resume(this DiscordSocketClient client)
+        {
+            var req = new GatewayRequest<GatewayResume>(GatewayOpcode.Resume);
+            req.Data.Token = client.Token;
+            req.Data.SessionId = client.SessionId;
+            req.Data.Sequence = client.Sequence;
+            client.Socket.Send(req);
+        }
+
+
         /// <summary>
         /// Starts a process that will continuously send heartbeats every <paramref name="interval"/> milliseconds
         /// </summary>

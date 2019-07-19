@@ -58,6 +58,7 @@ namespace Discord.Gateway
 
         internal WebSocket Socket { get; set; }
         internal uint? Sequence { get; set; }
+        internal string SessionId { get; set; }
         public bool LoggedIn { get; private set; }
 
 
@@ -75,26 +76,14 @@ namespace Discord.Gateway
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
             Socket.OnMessage += SocketDataReceived;
+            Socket.OnClose += Socket_OnClose;
             Socket.Connect();
         }
 
-
-        private void logout(bool resume)
+        private void Socket_OnClose(object sender, CloseEventArgs e)
         {
-            if (LoggedIn)
-            {
-                LoggedIn = false;
-                Socket.Close();
-
-                if (resume)
-                {
-                    System.Console.WriteLine("Resuming");
-
-                    Login(Token);
-                }
-                else
-                    OnLoggedOut?.Invoke(this, new UserEventArgs(User));
-            }
+            if (LoggedIn && SessionId != null)
+                Login(Token);
         }
 
 
@@ -102,6 +91,7 @@ namespace Discord.Gateway
         {
             if (LoggedIn)
             {
+                SessionId = null;
                 LoggedIn = false;
                 Socket.Close();
 
@@ -126,6 +116,7 @@ namespace Discord.Gateway
                             LoggedIn = true;
                             Login login = payload.Deserialize<Login>().SetClient(this);
                             this.User = login.User;
+                            SessionId = login.SessionId;
                             OnLoggedIn?.Invoke(this, new LoginEventArgs(login));
                             break;
                         case "GUILD_CREATE":
@@ -188,11 +179,16 @@ namespace Discord.Gateway
                     }
                     break;
                 case GatewayOpcode.InvalidSession:
-                    logout(LoggedIn);
+                    System.Console.Title = "triggered";
+
+                    Logout();
                     break;
                 case GatewayOpcode.Connected:
                     this.StartHeartbeatHandlersAsync(payload.Deserialize<JObject>().GetValue("heartbeat_interval").ToObject<uint>());
-                    this.LoginToGateway();
+                    if (SessionId != null)
+                        this.Resume();
+                    else
+                        this.LoginToGateway();
                     break;
             }
         }
