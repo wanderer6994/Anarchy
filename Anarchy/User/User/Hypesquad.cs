@@ -1,6 +1,6 @@
 ﻿namespace Discord
 {
-    public enum HypesquadHouse
+    public enum Hypesquad
     {
         None,
         Bravery,

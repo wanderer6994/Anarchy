@@ -4,10 +4,13 @@
 
 ### Additions
 - Added support for changing the nickname of other guild members.
+- Added more user-related DiscordErrors.
 
 ### Improvements
 - Changed 'Ballance' to 'Balance' in HypesquadHouse (oops a typo).
 - Removed ActivitiyAssets because of them being unusable.
+- Changed 'HypesquadHouse' to 'Hypesquad' for the sake of simplicity.
+- the 'Client' (in GetClientGuilds, GetClientRelationships etc.) has also been removed for the sake of simplicity.
 
 ### Bug fixes
 - Fixed DiscordSocketClient never resuming connections (WIP).

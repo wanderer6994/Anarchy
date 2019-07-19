@@ -60,9 +60,9 @@ namespace Discord
         }
 
 
-        public void SetHypesquad(HypesquadHouse house)
+        public void SetHypesquad(Hypesquad house)
         {
-            if (house == HypesquadHouse.None)
+            if (house == Hypesquad.None)
                 Client.HttpClient.Delete("/hypesquad/online");
 
             Client.HttpClient.Post("/hypesquad/online", $"{{\"house_id\":{(int)house}}}");

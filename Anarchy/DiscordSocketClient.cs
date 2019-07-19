@@ -82,7 +82,7 @@ namespace Discord.Gateway
 
         private void Socket_OnClose(object sender, CloseEventArgs e)
         {
-            if (LoggedIn && SessionId != null)
+            if (LoggedIn)
                 Login(Token);
         }
 
@@ -116,7 +116,7 @@ namespace Discord.Gateway
                             LoggedIn = true;
                             Login login = payload.Deserialize<Login>().SetClient(this);
                             this.User = login.User;
-                            SessionId = login.SessionId;
+                            this.SessionId = login.SessionId;
                             OnLoggedIn?.Invoke(this, new LoginEventArgs(login));
                             break;
                         case "GUILD_CREATE":
@@ -179,13 +179,11 @@ namespace Discord.Gateway
                     }
                     break;
                 case GatewayOpcode.InvalidSession:
-                    System.Console.Title = "triggered";
-
                     Logout();
                     break;
                 case GatewayOpcode.Connected:
                     this.StartHeartbeatHandlersAsync(payload.Deserialize<JObject>().GetValue("heartbeat_interval").ToObject<uint>());
-                    if (SessionId != null)
+                    if (LoggedIn)
                         this.Resume();
                     else
                         this.LoginToGateway();

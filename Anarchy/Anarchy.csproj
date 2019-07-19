@@ -150,7 +150,7 @@
     <Compile Include="Multi\JsonExtensions.cs" />
     <Compile Include="Channel\Channel\ChannelType.cs" />
     <Compile Include="Guild\Models\GuildVerificationLevel.cs" />
-    <Compile Include="User\User\HypesquadHouse.cs" />
+    <Compile Include="User\User\Hypesquad.cs" />
     <Compile Include="User\User\NitroType.cs" />
     <Compile Include="User\User\Status.cs" />
     <Compile Include="Multi\Models\DiscordException.cs" />
@@ -181,7 +181,7 @@
     <Compile Include="RateLimit\RateLimit.cs" />
     <Compile Include="Emoji\Emoji\Emoji.cs" />
     <Compile Include="User\User\User.cs" />
-    <Compile Include="User\User\UserSettings.cs" />
+    <Compile Include="User\User\Settings.cs" />
     <Compile Include="X-Super-Properties\SPUpdatedEventArgs.cs" />
     <Compile Include="X-Super-Properties\SuperProperties.cs" />
     <Compile Include="Webhook\Models\Hook.cs" />

@@ -49,6 +49,7 @@
         InvalidOAuthAccessToken = 50034,
         InvalidFormBody,
         InvalidAPIVersion = 50041,
+        InvalidRecipient = 80004,
         ReactionBlocked = 90001,
         ResourceOverloaded = 130000
     }

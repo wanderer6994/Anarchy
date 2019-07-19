@@ -8,7 +8,7 @@ namespace Discord
         /// <summary>
         /// Gets the account's relationships (friends, blocked etc.)
         /// </summary>
-        public static IReadOnlyList<Relationship> GetClientRelationships(this DiscordClient client)
+        public static IReadOnlyList<Relationship> GetRelationships(this DiscordClient client)
         {
             return client.HttpClient.Get($"/users/@me/relationships")
                                 .Deserialize<IReadOnlyList<Relationship>>().SetClientsInList(client);
