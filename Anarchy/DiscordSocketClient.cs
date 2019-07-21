@@ -105,7 +105,7 @@ namespace Discord.Gateway
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
 
-            System.Console.WriteLine(payload);
+            System.Console.WriteLine($"[{System.DateTime.Now}] {payload}");
             
             switch (payload.Opcode)
             {
