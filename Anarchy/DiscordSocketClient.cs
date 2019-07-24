@@ -71,7 +71,6 @@ namespace Discord.Gateway
 
         public void Login(string token)
         {
-            HttpClient.UpdateFingerprint();
             Token = token;
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
@@ -85,7 +84,6 @@ namespace Discord.Gateway
             if (LoggedIn)
                 Login(Token);
         }
-
 
         public void Logout()
         {
@@ -184,7 +182,11 @@ namespace Discord.Gateway
                 case GatewayOpcode.Connected:
                     this.StartHeartbeatHandlersAsync(payload.Deserialize<JObject>().GetValue("heartbeat_interval").ToObject<uint>());
                     if (LoggedIn)
+                    {
+                        System.Console.Title = "resuming";
+
                         this.Resume();
+                    }
                     else
                         this.LoginToGateway();
                     break;
