@@ -28,7 +28,7 @@ namespace NicknameChanger
                 if (currentNick == nickname)
                     currentNick = "";
                 currentNick += nickname[currentNick.Length];
-                guild.ChangeNickname(currentNick);
+                guild.ChangeClientNickname(currentNick);
 
                 Thread.Sleep(1000);
             }

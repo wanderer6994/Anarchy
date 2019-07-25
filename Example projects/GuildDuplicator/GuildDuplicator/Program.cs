@@ -10,16 +10,16 @@ namespace GuildDuplicator
     //makes it easier to make sure categories get created first (which they need to)
     class OrganizedChannelList
     {
-        public OrganizedChannelList(IReadOnlyList<Channel> channels)
+        public OrganizedChannelList(IReadOnlyList<GuildChannel> channels)
         {
             Categories = channels.Where(channel => channel.Type == ChannelType.Category).ToList();
             TextChannels = channels.Where(channel => channel.Type == ChannelType.Text).ToList();
             VoiceChannels = channels.Where(channel => channel.Type == ChannelType.Voice).ToList();
         }
 
-        public List<Channel> Categories { get; private set; }
-        public List<Channel> TextChannels { get; private set; }
-        public List<Channel> VoiceChannels { get; private set; }
+        public List<GuildChannel> Categories { get; private set; }
+        public List<GuildChannel> TextChannels { get; private set; }
+        public List<GuildChannel> VoiceChannels { get; private set; }
     }
 
     struct RoleDupe
@@ -46,12 +46,44 @@ namespace GuildDuplicator
             Console.Write($"Guild id: ");
             Guild targetGuild = client.GetGuild(ulong.Parse(Console.ReadLine()));
             Guild ourGuild = DuplicateGuild(client, targetGuild);
-
             DeleteAllChannels(client, ourGuild);
+            DuplicateChannels(client, targetGuild, ourGuild, DuplicateRoles(client, targetGuild, ourGuild));
 
-            List<RoleDupe> ourRoles = DuplicateRoles(client, targetGuild, ourGuild);
+            Console.WriteLine("Done!");
+            Console.ReadLine();
+        }
 
-            #region create channels
+
+        private static Guild DuplicateGuild(DiscordClient client, Guild guild)
+        {
+            Console.WriteLine("Duplicating guild...");
+
+            //create the guild and modify it with settings from the target
+            Guild ourGuild = client.CreateGuild(new GuildCreationProperties() { Name = guild.Name, Icon = guild.GetIcon(), Region = guild.Region });
+            ourGuild.Modify(new GuildProperties() { VerificationLevel = guild.VerificationLevel, DefaultNotifications = guild.DefaultNotifications });
+
+            return ourGuild;
+        }
+
+
+        private static void DeleteAllChannels(DiscordClient client, Guild guild)
+        {
+            Console.WriteLine("Deleting default guild channels...");
+
+            //when you create a guild it automatically creates some channels, which we have to delete
+            foreach (var channel in guild.GetChannels())
+            {
+                channel.Delete();
+
+                Console.WriteLine($"Deleted {channel}");
+
+                Thread.Sleep(100);
+            }
+        }
+
+
+        private static void DuplicateChannels(DiscordClient client, Guild targetGuild, Guild ourGuild, List<RoleDupe> ourRoles)
+        {
             OrganizedChannelList channels = new OrganizedChannelList(targetGuild.GetChannels());
 
             Console.WriteLine("Duplicating categories...");
@@ -173,38 +205,6 @@ namespace GuildDuplicator
                 }
 
                 Console.WriteLine($"Duplicated {channel.Name}");
-
-                Thread.Sleep(100);
-            }
-            #endregion
-
-            Console.WriteLine("Done!");
-            Console.ReadLine();
-        }
-
-
-        private static Guild DuplicateGuild(DiscordClient client, Guild guild)
-        {
-            Console.WriteLine("Duplicating guild...");
-
-            //create the guild and modify it with settings from the target
-            Guild ourGuild = client.CreateGuild(new GuildCreationProperties() { Name = guild.Name, Icon = guild.GetIcon(), Region = guild.Region });
-            ourGuild.Modify(new GuildProperties() { VerificationLevel = guild.VerificationLevel, DefaultNotifications = guild.DefaultNotifications });
-
-            return ourGuild;
-        }
-
-
-        private static void DeleteAllChannels(DiscordClient client, Guild guild)
-        {
-            Console.WriteLine("Deleting default guild channels...");
-
-            //when you create a guild it automatically creates some channels, which we have to delete
-            foreach (var channel in guild.GetChannels())
-            {
-                channel.Delete();
-
-                Console.WriteLine($"Deleted {channel}");
 
                 Thread.Sleep(100);
             }

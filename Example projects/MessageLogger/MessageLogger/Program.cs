@@ -10,8 +10,8 @@ namespace MessageLogger
         static void Main(string[] args)
         {
             DiscordSocketClient client = new DiscordSocketClient();
-            client.OnLoggedIn += Client_OnLoggedIn;
-            client.OnMessageReceived += Client_OnMessageReceived;
+            client.OnLoggedIn += OnLoggedIn;
+            client.OnMessageReceived += OnMessageReceived;
 
             Console.Write("Token: ");
             client.Login(Console.ReadLine());
@@ -19,14 +19,16 @@ namespace MessageLogger
             Thread.Sleep(-1);
         }
 
-        private static void Client_OnMessageReceived(DiscordSocketClient client, MessageEventArgs args)
-        {
-            Console.WriteLine($"[{args.Message.ChannelId}/{args.Message.Author.Username}#{args.Message.Author.Discriminator}] {args.Message.Content}");
-        }
 
-        private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
+        private static void OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
         {
             Console.WriteLine($"Logged into {args.Login.User}");
+        }
+
+
+        private static void OnMessageReceived(DiscordSocketClient client, MessageEventArgs args)
+        {
+            Console.WriteLine($"[{args.Message.ChannelId}/{args.Message.Author}] {args.Message.Content}");
         }
     }
 }
