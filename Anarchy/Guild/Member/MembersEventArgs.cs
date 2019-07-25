@@ -7,7 +7,7 @@ namespace Discord
     {
         public IReadOnlyList<GuildMember> Members { get; private set; }
 
-        public GuildMembersEventArgs(IReadOnlyList<GuildMember> members)
+        internal GuildMembersEventArgs(IReadOnlyList<GuildMember> members)
         {
             Members = members;
         }

@@ -49,6 +49,16 @@ namespace Discord
         #endregion
 
 
+        internal Property<ulong> OwnerProperty = new Property<ulong>();
+        [JsonProperty("owner_id")]
+        public ulong OwnerId
+        {
+            get { return OwnerProperty; }
+            set { OwnerProperty.Value = value; }
+        }
+
+
+
         internal Property<GuildVerificationLevel> VerificationProperty = new Property<GuildVerificationLevel>();
         [JsonProperty("verification_level")]
         public GuildVerificationLevel VerificationLevel

@@ -4,7 +4,7 @@
     {
         public PresenceUpdate Presence { get; private set; }
 
-        public PresenceUpdatedEventArgs(PresenceUpdate presence)
+        internal PresenceUpdatedEventArgs(PresenceUpdate presence)
         {
             Presence = presence;
         }

@@ -66,11 +66,15 @@
     <Compile Include="Emoji\Emoji\EmojisUpdatedEventArgs.cs" />
     <Compile Include="Emoji\Emoji\PartialEmoji.cs" />
     <Compile Include="Gateway\Models\Resume.cs" />
+    <Compile Include="Voice\VoiceExtensions.cs" />
+    <Compile Include="Voice\VoiceStateUpdate.cs" />
     <Compile Include="Guild\Ban\BanUpdateEventArgs.cs" />
     <Compile Include="Guild\Ban\BanContainer.cs" />
     <Compile Include="Guild\Guild\PartialGuild.cs" />
     <Compile Include="Guild\Member\GuildMemberEventArgs.cs" />
+    <Compile Include="Guild\Member\GuildMemberUpdate.cs" />
     <Compile Include="Guild\Member\MembersEventArgs.cs" />
+    <Compile Include="Guild\Member\PartialGuildMember.cs" />
     <Compile Include="HTTP\DiscordError.cs" />
     <Compile Include="HTTP\DiscordHttpException.cs" />
     <Compile Include="HTTP\Experiments.cs" />
@@ -122,7 +126,7 @@
     <Compile Include="Multi\Models\Property.cs" />
     <Compile Include="Presence\Extensions.cs" />
     <Compile Include="Presence\Presence\PresenceUpdate.cs" />
-    <Compile Include="Presence\Presence\PresenceUpdatedEventArgs.cs" />
+    <Compile Include="Presence\Presence\UpdatedEventArgs.cs" />
     <Compile Include="Relationship\Models\Relationship.cs" />
     <Compile Include="Relationship\Models\RelationshipType.cs" />
     <Compile Include="User\User\Type.cs" />

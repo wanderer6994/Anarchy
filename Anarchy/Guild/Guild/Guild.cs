@@ -101,6 +101,8 @@ namespace Discord
                 properties.Region = Region;
             if (!properties.IconSet)
                 properties.Icon = GetIcon();
+            if (!properties.OwnerProperty.Set)
+                properties.OwnerId = OwnerId;
             if (!properties.VerificationProperty.Set)
                 properties.VerificationLevel = VerificationLevel;
             if (!properties.NotificationsProperty.Set)

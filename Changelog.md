@@ -3,17 +3,20 @@
 # 0.4.0.0
 
 ### Additions
+- Added gateway events for users joining and leaving guilds.
 - Added support for changing the nickname of other guild members.
 - Added more user-related DiscordErrors.
+- Added some groundlaying voice functionality.
 
 ### Improvements
-- Changed 'Ballance' to 'Balance' in HypesquadHouse (oops a typo).
+- Added more information to the Author object in Message.
+- Fixed the client logging out whenever a password is being set.
 - Removed ActivitiyAssets because of them being unusable.
 - Changed 'HypesquadHouse' to 'Hypesquad' for the sake of simplicity.
-- the 'Client' (in GetClientGuilds, GetClientRelationships etc.) has also been removed for the sake of simplicity.
+- The 'Client' (in GetClientGuilds, GetClientRelationships etc.) has also been removed for the sake of simplicity.
 
 ### Bug fixes
-- Fixed DiscordSocketClient never resuming connections (WIP).
+- Fixed DiscordSocketClient failing to resume connections.
 - Other minor bug fixes.
 
 

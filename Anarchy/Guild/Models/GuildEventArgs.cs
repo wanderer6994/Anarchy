@@ -4,7 +4,7 @@
     {
         public Guild Guild { get; private set; }
 
-        public GuildEventArgs(Guild guild)
+        internal GuildEventArgs(Guild guild)
         {
             Guild = guild;
         }

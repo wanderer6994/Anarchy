@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    public class GuildMember : Controllable
+    public class GuildMember : PartialGuildMember
     {
         public GuildMember()
         {
@@ -17,31 +17,25 @@ namespace Discord
 
 
         [JsonProperty("user")]
-        public User User { get; private set; }
+        public User User { get; internal set; }
 
 
-        [JsonProperty("nick")]
-        public string Nickname { get; private set; }
-
-
-        [JsonProperty("roles")]
-        public IReadOnlyList<ulong> Roles { get; private set; }
-
-
-        [JsonProperty("joined_at")]
-#pragma warning disable CS0649
-        private readonly string _joinedAt;
-        public DateTime? JoinedAt
+        internal static GuildMember FromInformation(User user, ulong guildId, PartialGuildMember partialMember = null)
         {
-            get
-            {
-                if (_joinedAt == null)
-                    return null;
+            GuildMember member = new GuildMember().SetClient(user.Client);
+            member.GuildId = guildId;
+            member.User = user;
 
-                return DiscordTimestamp.FromString(_joinedAt);
+            if (partialMember != null)
+            {
+                member.Nickname = partialMember.Nickname;
+                member.Roles = partialMember.Roles;
+                member.JoinedAt = partialMember.JoinedAt;
             }
+
+
+            return member;
         }
-#pragma warning restore CS0649
 
 
         /// <summary>

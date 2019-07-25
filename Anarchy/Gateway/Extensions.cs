@@ -32,9 +32,6 @@ namespace Discord.Gateway
             req.Data.Token = client.Token;
             req.Data.SessionId = client.SessionId;
             req.Data.Sequence = client.Sequence;
-
-            System.Console.WriteLine(JsonConvert.SerializeObject(req));
-
             client.Socket.Send(req);
         }
 

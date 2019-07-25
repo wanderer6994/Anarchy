@@ -4,7 +4,7 @@
     {
         public User User { get; private set; }
 
-        public UserEventArgs(User user)
+        internal UserEventArgs(User user)
         {
             User = user;
         }

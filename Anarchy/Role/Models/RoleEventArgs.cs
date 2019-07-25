@@ -4,7 +4,7 @@
     {
         public Role Role { get; private set; }
 
-        public RoleEventArgs(Role role)
+        internal RoleEventArgs(Role role)
         {
             Role = role;
         }

@@ -34,6 +34,7 @@ namespace Discord
             get { return _image.ImageBase64; }
         }
 
+
         [JsonIgnore]
         public Image Avatar
         {

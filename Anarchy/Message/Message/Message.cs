@@ -16,7 +16,6 @@ namespace Discord
             {
                 Reactions.SetClientsInList(Client);
                 Mentions.SetClientsInList(Client);
-                Author.SetClient(Client);
             };
         }
 
@@ -34,7 +33,20 @@ namespace Discord
 
 
         [JsonProperty("author")]
-        public User Author { get; private set; }
+        private User _authorUser;
+
+
+        [JsonProperty("member")]
+        private PartialGuildMember _authorMember;
+
+
+        public GuildMember Author
+        {
+            get
+            {
+                return GuildMember.FromInformation(_authorUser, GuildId.Value, _authorMember);
+            }
+        }
 
 
         [JsonProperty("attachments")]

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Threading;
 using WebSocketSharp;
 
 namespace Discord.Gateway
@@ -10,6 +11,7 @@ namespace Discord.Gateway
     {
         #region events
         public delegate void GuildHandler(DiscordSocketClient client, GuildEventArgs args);
+        public delegate void GuildMemberUpdateHandler(DiscordSocketClient client, GuildMemberEventArgs args);
         public delegate void ChannelHandler(DiscordSocketClient client, ChannelEventArgs args);
         public delegate void MessageHandler(DiscordSocketClient client, MessageEventArgs args);
         public delegate void ReactionHandler(DiscordSocketClient client, ReactionEventArgs args);
@@ -24,6 +26,9 @@ namespace Discord.Gateway
         public event GuildHandler OnJoinedGuild;
         public event GuildHandler OnGuildUpdated;
         public event GuildHandler OnLeftGuild;
+
+        public event GuildMemberUpdateHandler OnUserJoinedGuild;
+        public event GuildMemberUpdateHandler OnUserLeftGuild;
 
         public delegate void GuildMemberHandler(DiscordSocketClient client, GuildMemberEventArgs args);
         public event GuildMemberHandler OnGuildMemberUpdated;
@@ -77,12 +82,29 @@ namespace Discord.Gateway
             Socket.OnMessage += SocketDataReceived;
             Socket.OnClose += Socket_OnClose;
             Socket.Connect();
+
+            if (LoggedIn)
+                this.Resume();
         }
 
         private void Socket_OnClose(object sender, CloseEventArgs e)
         {
             if (LoggedIn)
-                Login(Token);
+            {
+                while (true)
+                {
+                    try
+                    {
+                        Login(Token);
+
+                        return;
+                    }
+                    catch
+                    {
+                        Thread.Sleep(80);
+                    }
+                }
+            }
         }
 
         public void Logout()
@@ -125,6 +147,12 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_DELETE":
                             OnLeftGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));
+                            break;
+                        case "GUILD_MEMBER_ADD":
+                            OnUserJoinedGuild?.Invoke(this, new GuildMemberEventArgs(payload.Deserialize<GuildMemberUpdate>().SetClient(this).Member));
+                            break;
+                        case "GUILD_MEMBER_REMOVE":
+                            OnUserLeftGuild?.Invoke(this, new GuildMemberEventArgs(payload.Deserialize<GuildMemberUpdate>().SetClient(this).Member));
                             break;
                         case "GUILD_MEMBER_UPDATE":
                             OnGuildMemberUpdated?.Invoke(this, new GuildMemberEventArgs(payload.Deserialize<GuildMember>().SetClient(this)));
@@ -181,13 +209,8 @@ namespace Discord.Gateway
                     break;
                 case GatewayOpcode.Connected:
                     this.StartHeartbeatHandlersAsync(payload.Deserialize<JObject>().GetValue("heartbeat_interval").ToObject<uint>());
-                    if (LoggedIn)
-                    {
-                        System.Console.Title = "resuming";
 
-                        this.Resume();
-                    }
-                    else
+                    if (!LoggedIn)
                         this.LoginToGateway();
                     break;
             }

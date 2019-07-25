@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Discord
+﻿namespace Discord
 {
     public class RateLimitException : DiscordException
     {
         public uint RetryAfter { get; private set; }
 
-        public RateLimitException(DiscordClient client, uint retryAfter) : base(client, $"Please wait {retryAfter} milliseconds")
+        internal RateLimitException(DiscordClient client, uint retryAfter) : base(client, $"Please wait {retryAfter} milliseconds")
         {
             RetryAfter = retryAfter;
         }

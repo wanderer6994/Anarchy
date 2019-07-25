@@ -7,7 +7,7 @@ namespace Discord
     {
         public IReadOnlyList<User> Users { get; private set; }
 
-        public UserListEventArgs(List<User> users)
+        internal UserListEventArgs(List<User> users)
         {
             Users = users;
         }

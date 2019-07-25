@@ -6,7 +6,7 @@ namespace Discord.Gateway
     {
         public GuildMember Member { get; private set; }
 
-        public GuildMemberEventArgs(GuildMember member)
+        internal GuildMemberEventArgs(GuildMember member)
         {
             Member = member;
         }

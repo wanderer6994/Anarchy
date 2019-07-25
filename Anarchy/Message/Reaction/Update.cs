@@ -15,7 +15,7 @@ namespace Discord
 
 
         [JsonProperty("message_id")]
-        public long MessageId { get; private set; }
+        public ulong MessageId { get; private set; }
 
 
         [JsonProperty("channel_id")]

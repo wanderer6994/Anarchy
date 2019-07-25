@@ -4,7 +4,7 @@
     {
         public MessageReactionUpdate Reaction { get; private set; }
 
-        public ReactionEventArgs(MessageReactionUpdate reaction)
+        internal ReactionEventArgs(MessageReactionUpdate reaction)
         {
             Reaction = reaction;
         }

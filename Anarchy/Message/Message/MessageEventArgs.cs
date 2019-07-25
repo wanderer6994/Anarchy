@@ -6,7 +6,7 @@ namespace Discord
     {
         public Message Message { get; private set; }
 
-        public MessageEventArgs(Message msg)
+        internal MessageEventArgs(Message msg)
         {
             Message = msg;
         }

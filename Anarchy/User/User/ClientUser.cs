@@ -7,6 +7,10 @@ namespace Discord
     /// </summary>
     public class ClientUser : User
     {
+        [JsonProperty("token")]
+        public string Token { get; private set; }
+
+
         [JsonProperty("email")]
         public string Email { get; private set; }
 
@@ -57,6 +61,9 @@ namespace Discord
             TwoFactorAuth = user.TwoFactorAuth;
             Language = user.Language;
             Nitro = user.Nitro;
+
+            if (user.Token != null)
+                Client.Token = user.Token;
         }
 
 

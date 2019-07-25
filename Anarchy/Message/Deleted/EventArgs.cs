@@ -6,7 +6,7 @@ namespace Discord
     {
         public DeletedMessage DeletedMessage { get; private set; }
 
-        public MessageDeletedEventArgs(DeletedMessage msg)
+        internal MessageDeletedEventArgs(DeletedMessage msg)
         {
             DeletedMessage = msg;
         }

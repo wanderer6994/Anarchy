@@ -23,5 +23,15 @@ namespace Discord
                                 int.Parse(time[2].Split('.')[0]),
                                 int.Parse(time[3]));
         }
+
+
+        /// <summary>
+        /// Converts <see cref="DateTime"/>s to Discord timestamps
+        /// </summary>
+        /// <returns>The converted string</returns>
+        public static string ToString(DateTime time)
+        {
+            return $"{time.Year}-{time.Month}-{time.Day}T{time.Hour}:{time.Minute}:{time.Second}:{time.Millisecond}";
+        }
     }
 }
