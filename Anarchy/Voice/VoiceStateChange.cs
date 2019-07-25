@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Discord.Gateway
 {
-    public class VoiceStateUpdate
+    internal class VoiceStateChange
     {
         [JsonProperty("guild_id")]
         public ulong GuildId { get; set; }

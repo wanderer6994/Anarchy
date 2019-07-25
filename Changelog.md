@@ -5,8 +5,9 @@
 ### Additions
 - Added gateway events for users joining and leaving guilds.
 - Added support for changing the nickname of other guild members.
-- Added more user-related DiscordErrors.
 - Added some groundlaying voice functionality.
+- Added more user-related DiscordErrors.
+- Added support for deleting accounts.
 
 ### Improvements
 - Added more information to the Author object in Message.
@@ -16,7 +17,7 @@
 - The 'Client' (in GetClientGuilds, GetClientRelationships etc.) has also been removed for the sake of simplicity.
 
 ### Bug fixes
-- Fixed DiscordSocketClient failing to resume connections.
+- DiscordSocketClient is now able to resume dropped connections.
 - Other minor bug fixes.
 
 

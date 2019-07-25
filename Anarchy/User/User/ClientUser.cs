@@ -67,6 +67,19 @@ namespace Discord
         }
 
 
+        /// <summary>
+        /// Deletes the account
+        /// </summary>
+        /// <param name="password">Password of the account</param>
+        public void Delete(string password)
+        {
+            Client.HttpClient.Post("/users/@me/delete", $"{{\"password\":\"{password}\"}}");
+        }
+
+
+        /// <summary>
+        /// Sets the account's hypesquad
+        /// </summary>
         public void SetHypesquad(Hypesquad house)
         {
             if (house == Hypesquad.None)

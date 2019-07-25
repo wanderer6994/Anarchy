@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Discord.Gateway;
 
 namespace Discord
 {
@@ -54,6 +55,20 @@ namespace Discord
             PermissionOverwrites = channel.PermissionOverwrites;
             Bitrate = channel.Bitrate;
             UserLimit = channel.UserLimit;
+        }
+
+
+        public void Join(bool muted = false, bool deafened = false)
+        {
+            if (Client.GetType() == typeof(DiscordSocketClient))
+                ((DiscordSocketClient)Client).JoinVoiceChannel(GuildId, Id, muted, deafened);
+        }
+
+
+        public void Leave()
+        {
+            if (Client.GetType() == typeof(DiscordSocketClient))
+                ((DiscordSocketClient)Client).LeaveVoiceChannel(GuildId);
         }
 
 

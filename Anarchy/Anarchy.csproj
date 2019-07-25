@@ -66,8 +66,8 @@
     <Compile Include="Emoji\Emoji\EmojisUpdatedEventArgs.cs" />
     <Compile Include="Emoji\Emoji\PartialEmoji.cs" />
     <Compile Include="Gateway\Models\Resume.cs" />
-    <Compile Include="Voice\VoiceExtensions.cs" />
-    <Compile Include="Voice\VoiceStateUpdate.cs" />
+    <Compile Include="Voice\Extensions.cs" />
+    <Compile Include="Voice\VoiceStateChange.cs" />
     <Compile Include="Guild\Ban\BanUpdateEventArgs.cs" />
     <Compile Include="Guild\Ban\BanContainer.cs" />
     <Compile Include="Guild\Guild\PartialGuild.cs" />
