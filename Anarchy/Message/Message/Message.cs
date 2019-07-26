@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Discord
@@ -33,18 +32,25 @@ namespace Discord
 
 
         [JsonProperty("author")]
-        private User _authorUser;
+        private readonly User _authorUser;
 
 
         [JsonProperty("member")]
-        private PartialGuildMember _authorMember;
+        private readonly PartialGuildMember _authorMember;
 
 
         public GuildMember Author
         {
             get
             {
-                return GuildMember.FromInformation(_authorUser, GuildId.Value, _authorMember);
+                GuildMember member = new GuildMember() { GuildId = GuildId == null ? 0 : GuildId.Value, User = _authorUser }
+                                            .SetClient(Client);
+                if (_authorMember != null)
+                {
+                    member.Nickname = _authorMember.Nickname;
+                    member.JoinedAt = _authorMember.JoinedAt;
+                }
+                return member;
             }
         }
 

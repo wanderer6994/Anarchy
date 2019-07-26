@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
 namespace Discord
 {
@@ -26,24 +24,6 @@ namespace Discord
         
         [JsonProperty("deaf")]
         public bool Deafened { get; private set; }
-
-
-        internal static GuildMember FromInformation(User user, ulong guildId, PartialGuildMember partialMember = null)
-        {
-            GuildMember member = new GuildMember().SetClient(user.Client);
-            member.GuildId = guildId;
-            member.User = user;
-
-            if (partialMember != null)
-            {
-                member.Nickname = partialMember.Nickname;
-                member.Roles = partialMember.Roles;
-                member.JoinedAt = partialMember.JoinedAt;
-            }
-
-
-            return member;
-        }
 
 
         public void Modify(GuildMemberProperties properties)
