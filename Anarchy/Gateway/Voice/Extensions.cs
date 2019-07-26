@@ -30,7 +30,7 @@ namespace Discord
             req.Data.ChannelId = channelId;
             req.Data.Muted = muted;
             req.Data.Deafened = deafened;
-            client.Socket.Send(JsonConvert.SerializeObject(req));
+            client.Socket.Send(req);
         }
 
 
