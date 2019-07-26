@@ -77,6 +77,12 @@ namespace Discord
         }
 
 
+        public void Disable(string password)
+        {
+            Client.HttpClient.Post("/users/@me/disable", $"{{\"password\":\"{password}\"}}");
+        }
+
+
         /// <summary>
         /// Sets the account's hypesquad
         /// </summary>

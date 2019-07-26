@@ -63,7 +63,7 @@
     <Compile Include="Channel\PermissionOverwrite\Type.cs" />
     <Compile Include="Channel\Private\DMChannel.cs" />
     <Compile Include="Emoji\Emoji\EmojiContainer.cs" />
-    <Compile Include="Emoji\Emoji\EmojisUpdatedEventArgs.cs" />
+    <Compile Include="Emoji\Emoji\UpdatedEventArgs.cs" />
     <Compile Include="Emoji\Emoji\PartialEmoji.cs" />
     <Compile Include="Gateway\Models\Resume.cs" />
     <Compile Include="GuildMember\Extensions.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Voice\Extensions.cs" />
     <Compile Include="Voice\Models\VoiceState.cs" />
     <Compile Include="Voice\Models\VoiceStateChange.cs" />
-    <Compile Include="Guild\Ban\BanUpdateEventArgs.cs" />
+    <Compile Include="Guild\Ban\UpdateEventArgs.cs" />
     <Compile Include="Guild\Ban\BanContainer.cs" />
     <Compile Include="Guild\Guild\PartialGuild.cs" />
     <Compile Include="GuildMember\EventArgs\GuildMemberEventArgs.cs" />
@@ -122,7 +122,7 @@
     <Compile Include="User\Profile\Profile.cs" />
     <Compile Include="Role\Models\RoleContainer.cs" />
     <Compile Include="Gateway\Models\MemberQuery.cs" />
-    <Compile Include="Guild\Models\GuildDefaultNotifications.cs" />
+    <Compile Include="Guild\Models\DefaultNotifications.cs" />
     <Compile Include="Guild\Properties\GuildProperties.cs" />
     <Compile Include="Message\Reaction\MessageReaction.cs" />
     <Compile Include="Message\Message\MessageType.cs" />
@@ -177,7 +177,7 @@
     <Compile Include="Message\Message\MessageEventArgs.cs" />
     <Compile Include="Gateway\Login\Login.cs" />
     <Compile Include="Channel\Guild\GuildChannel.cs" />
-    <Compile Include="Channel\Channel\Properties\ChannelCreationProperties.cs" />
+    <Compile Include="Channel\Channel\Properties\CreationProperties.cs" />
     <Compile Include="Invite\Models\InviteProperties.cs" />
     <Compile Include="Gateway\Models\Identification.cs" />
     <Compile Include="Presence\Presence\Presence.cs" />

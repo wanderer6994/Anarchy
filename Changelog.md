@@ -6,14 +6,12 @@
 - Added more gateway eventsx.
 - Added support for changing the nickname of other guild members.
 - Added some groundlaying voice functionality.
-- Added support for deleting accounts.
-- Added support for bulk deleting messages.
 - Added support for modifying guild members further than their nickname.
+- Added support for deleting and disabling accounts.
 - Added more user-related DiscordErrors.
 
 ### Improvements
-- Modified Properties models to not be dependent on the containing object's info, making them 100% secure.
-- Added more information to the Author object in Message.
+- Modified Properties models to not be dependant on the containing model's info, making them 100% secure.
 - Fixed the client logging out whenever a password is being set.
 - Removed ActivitiyAssets because of them being unusable.
 - Changed 'HypesquadHouse' to 'Hypesquad' for the sake of simplicity.
