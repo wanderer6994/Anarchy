@@ -29,7 +29,7 @@ namespace Discord.Webhook
         [JsonProperty("avatar")]
         private string _avatar
         {
-            get { return _image.ImageBase64; }
+            get { return _image.Base64; }
         }
 
         public bool AvatarSet { get; private set; }

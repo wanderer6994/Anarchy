@@ -16,6 +16,12 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeName()
+        {
+            return NameProperty.Set;
+        }
+
+
         public override string ToString()
         {
             return Name;

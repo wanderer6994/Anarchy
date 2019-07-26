@@ -68,8 +68,11 @@
     <Compile Include="Gateway\Models\Resume.cs" />
     <Compile Include="GuildMember\Extensions.cs" />
     <Compile Include="GuildMember\Models\GuildMemberProperties.cs" />
+    <Compile Include="Channel\UserTyping\UserTyping.cs" />
+    <Compile Include="Channel\UserTyping\UserTypingEventArgs.cs" />
     <Compile Include="Voice\Extensions.cs" />
-    <Compile Include="Voice\VoiceStateChange.cs" />
+    <Compile Include="Voice\Models\VoiceState.cs" />
+    <Compile Include="Voice\Models\VoiceStateChange.cs" />
     <Compile Include="Guild\Ban\BanUpdateEventArgs.cs" />
     <Compile Include="Guild\Ban\BanContainer.cs" />
     <Compile Include="Guild\Guild\PartialGuild.cs" />
@@ -147,6 +150,7 @@
     <Compile Include="DiscordClient.cs" />
     <Compile Include="DiscordSocketClient.cs" />
     <Compile Include="Emoji\Emoji\EmojiProperties.cs" />
+    <Compile Include="Voice\Models\VoiceStateEventArgs.cs" />
     <Compile Include="Webhook\Extensions.cs" />
     <Compile Include="Webhook\Models\WebhookProfile.cs" />
     <Compile Include="Webhook\Models\WebhookProperties.cs" />

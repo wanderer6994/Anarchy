@@ -1,9 +1,9 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
-# 0.4.0.0
+# 0.6.0.0
 
 ### Additions
-- Added gateway events for users joining and leaving guilds.
+- Added more gateway eventsx.
 - Added support for changing the nickname of other guild members.
 - Added some groundlaying voice functionality.
 - Added support for deleting accounts.

@@ -29,6 +29,7 @@
         AccountUnverified,
         InvalidInvite = 40007,
         AccountOwnsGuilds = 40011,
+        NotConnectedToVoice = 40032,
         MissingAccess = 50001,
         InvalidAccountType,
         CannotExecuteInDM,

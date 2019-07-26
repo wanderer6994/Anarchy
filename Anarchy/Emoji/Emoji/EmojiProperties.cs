@@ -16,10 +16,12 @@ namespace Discord
         private readonly DiscordImage _image = new DiscordImage();
 
         [JsonProperty("image")]
+#pragma warning disable IDE1006, IDE0051
         private string _img
         {
-            get { return _image.ImageBase64; }
+            get { return _image; }
         }
+#pragma warning restore IDE1006, IDE0051
 
         [JsonIgnore]
         public Image Image

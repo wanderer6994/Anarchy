@@ -25,10 +25,12 @@ namespace Discord
 
         internal Property<EditablePermissions> PermissionsProperty = new Property<EditablePermissions>();
         [JsonProperty("permissions")]
+#pragma warning disable IDE1006, IDE0051
         private uint _permissions
         {
             get { return Permissions; }
         }
+#pragma warning restore IDE1006, IDE0051
         public EditablePermissions Permissions
         {
             get { return PermissionsProperty; }
@@ -44,11 +46,13 @@ namespace Discord
 
         internal Property<uint> ColorProperty = new Property<uint>();
         [JsonProperty("color")]
+#pragma warning disable IDE1006, IDE0051
         private uint _color
         {
             get { return ColorProperty; }
             set { ColorProperty.Value = value; }
         }
+#pragma warning restore IDE1006, IDE0051
         public Color Color
         {
             get { return Color.FromArgb((int)_color); }

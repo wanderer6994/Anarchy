@@ -9,7 +9,7 @@ namespace Discord
     /// </summary>
     public class DiscordImage
     {
-        public string ImageBase64 { get; private set; }
+        public string Base64 { get; private set; }
 
         private Image _image;
         public Image Image
@@ -18,7 +18,7 @@ namespace Discord
             set
             {
                 if (value == null)
-                    ImageBase64 = null;
+                    Base64 = null;
                 else
                 {
                     ImageType type;
@@ -31,11 +31,17 @@ namespace Discord
                         type = ImageType.Gif;
                     else return;
 
-                    ImageBase64 = $"data:image/{type.ToString().ToLower()};base64," + 
+                    Base64 = $"data:image/{type.ToString().ToLower()};base64," + 
                             Convert.ToBase64String((byte[])new ImageConverter().ConvertTo(value, typeof(byte[])));
                     _image = value;
                 }
             }
+        }
+
+
+        public static implicit operator string(DiscordImage instance)
+        {
+            return instance.Base64;
         }
     }
 }

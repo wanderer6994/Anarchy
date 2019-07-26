@@ -54,13 +54,15 @@ namespace Discord
 
 
         #region avatar
-        private DiscordImage _image = new DiscordImage();
+        private readonly DiscordImage _image = new DiscordImage();
 
         [JsonProperty("avatar")]
+#pragma warning disable IDE1006, IDE0051
         private string _avatar
         {
-            get { return _image.ImageBase64; }
+            get { return _image; }
         }
+#pragma warning restore IDE1006, IDE0051
 
 
         internal bool AvatarSet { get; private set; }

@@ -13,6 +13,7 @@ namespace Discord.Gateway
         public delegate void GuildHandler(DiscordSocketClient client, GuildEventArgs args);
         public delegate void GuildMemberUpdateHandler(DiscordSocketClient client, GuildMemberEventArgs args);
         public delegate void ChannelHandler(DiscordSocketClient client, ChannelEventArgs args);
+        public delegate void VoiceStateHandler(DiscordSocketClient client, VoiceStateEventArgs args);
         public delegate void MessageHandler(DiscordSocketClient client, MessageEventArgs args);
         public delegate void ReactionHandler(DiscordSocketClient client, ReactionEventArgs args);
         public delegate void RoleHandler(DiscordSocketClient client, RoleEventArgs args);
@@ -45,8 +46,14 @@ namespace Discord.Gateway
         public event ChannelHandler OnChannelUpdated;
         public event ChannelHandler OnChannelDeleted;
 
+        public event VoiceStateHandler OnUserJoinedVoiceChannel;
+        public event VoiceStateHandler OnUserLeftVoiceChannel;
+
         public delegate void EmojisUpdatedHandler(DiscordSocketClient client, EmojisUpdatedEventArgs args);
         public event EmojisUpdatedHandler OnEmojisUpdated;
+
+        public delegate void UserTypingHandler(DiscordSocketClient client, UserTypingEventArgs args);
+        public event UserTypingHandler OnUserTyping;
 
         public event MessageHandler OnMessageReceived;
         public event MessageHandler OnMessageEdited;
@@ -171,6 +178,14 @@ namespace Discord.Gateway
                         case "CHANNEL_DELETE":
                             OnChannelDeleted?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
                             break;
+                        case "VOICE_STATE_UPDATE":
+                            VoiceState state = payload.Deserialize<VoiceState>().SetClient(this);
+
+                            if (state.ChannelId != null)
+                                OnUserJoinedVoiceChannel?.Invoke(this, new VoiceStateEventArgs(state));
+                            else
+                                OnUserLeftVoiceChannel?.Invoke(this, new VoiceStateEventArgs(state));
+                            break;
                         case "GUILD_ROLE_CREATE":
                             OnRoleCreated?.Invoke(this, new RoleEventArgs(payload.Deserialize<RoleContainer>().Role.SetClient(this)));
                             break;
@@ -179,6 +194,9 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_EMOJIS_UPDATE":
                             OnEmojisUpdated?.Invoke(this, new EmojisUpdatedEventArgs(payload.Deserialize<EmojiContainer>().SetClient(this)));
+                            break;
+                        case "TYPING_START":
+                            OnUserTyping?.Invoke(this, new UserTypingEventArgs(payload.Deserialize<UserTyping>()));
                             break;
                         case "MESSAGE_CREATE":
                             OnMessageReceived?.Invoke(this, new MessageEventArgs(payload.Deserialize<Message>().SetClient(this)));
