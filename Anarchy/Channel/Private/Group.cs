@@ -36,11 +36,6 @@ namespace Discord
         /// <param name="properties">Options for modifying the group</param>
         public void Modify(GroupProperties properties)
         {
-            if (!properties.NameProperty.Set)
-                properties.Name = Name;
-            if (!properties.IconSet)
-                properties.Icon = GetIcon();
-
             Group group = Client.ModifyGroup(Id, properties);
             Name = group.Name;
             IconId = group.IconId;

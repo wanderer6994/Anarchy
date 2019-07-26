@@ -6,10 +6,13 @@
 - Added gateway events for users joining and leaving guilds.
 - Added support for changing the nickname of other guild members.
 - Added some groundlaying voice functionality.
-- Added more user-related DiscordErrors.
 - Added support for deleting accounts.
+- Added support for bulk deleting messages.
+- Added support for modifying guild members further than their nickname.
+- Added more user-related DiscordErrors.
 
 ### Improvements
+- Modified Properties models to not be dependent on the containing object's info, making them 100% secure.
 - Added more information to the Author object in Message.
 - Fixed the client logging out whenever a password is being set.
 - Removed ActivitiyAssets because of them being unusable.

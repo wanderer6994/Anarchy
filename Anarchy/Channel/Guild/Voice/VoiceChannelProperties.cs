@@ -16,12 +16,24 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeBitrate()
+        {
+            return BitrateProperty.Set;
+        }
+
+
         internal Property<uint> UserLimitProperty = new Property<uint>();
         [JsonProperty("user_limit")]
         public uint UserLimit
         {
             get { return UserLimitProperty; }
             set { UserLimitProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeUserLimit()
+        {
+            return UserLimitProperty.Set;
         }
     }
 }

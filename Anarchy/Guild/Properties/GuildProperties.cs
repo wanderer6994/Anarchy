@@ -17,12 +17,24 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeName()
+        {
+            return NameProperty.Set;
+        }
+
+
         internal Property<string> RegionProperty = new Property<string>();
         [JsonProperty("region")]
         public string Region
         {
             get { return RegionProperty; }
             set { RegionProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeRegion()
+        {
+            return RegionProperty.Set;
         }
 
 
@@ -46,7 +58,13 @@ namespace Discord
                 IconSet = true;
             }
         }
-        #endregion
+
+
+        public bool ShouldSerializeIcon()
+        {
+            return IconSet;
+        }
+        #endregion 
 
 
         internal Property<ulong> OwnerProperty = new Property<ulong>();
@@ -57,6 +75,11 @@ namespace Discord
             set { OwnerProperty.Value = value; }
         }
 
+        
+        public bool ShouldSerializeOwnerId()
+        {
+            return OwnerProperty.Set;
+        }
 
 
         internal Property<GuildVerificationLevel> VerificationProperty = new Property<GuildVerificationLevel>();

@@ -51,17 +51,6 @@ namespace Discord
         /// <param name="properties">Options for modifying the role</param>
         public void Modify(RoleProperties properties)
         {
-            if (!properties.NameProperty.Set)
-                properties.Name = Name;
-            if (!properties.ColorProperty.Set)
-                properties.Color = Color;
-            if (!properties.SeperatedProperty.Set)
-                properties.Seperated = Seperated;
-            if (!properties.MentionableProperty.Set)
-                properties.Mentionable = Mentionable;
-            if (properties.Permissions == null)
-                properties.Permissions = new EditablePermissions(Permissions);
-
             Role role = Client.ModifyGuildRole(GuildId, Id, properties);
             Name = role.Name;
             Permissions = role.Permissions;

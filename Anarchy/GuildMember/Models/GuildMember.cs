@@ -20,6 +20,14 @@ namespace Discord
         public User User { get; internal set; }
 
 
+        [JsonProperty("mute")]
+        public bool Muted { get; private set; }
+
+        
+        [JsonProperty("deaf")]
+        public bool Deafened { get; private set; }
+
+
         internal static GuildMember FromInformation(User user, ulong guildId, PartialGuildMember partialMember = null)
         {
             GuildMember member = new GuildMember().SetClient(user.Client);
@@ -38,6 +46,12 @@ namespace Discord
         }
 
 
+        public void Modify(GuildMemberProperties properties)
+        {
+            Client.ModifyGuildMember(GuildId, User.Id, properties);
+        }
+
+
         /// <summary>
         /// Changes the member's nickname for this guild
         /// </summary>
@@ -45,6 +59,17 @@ namespace Discord
         public void ChangeNickname(string nickname)
         {
             Client.ChangeNickname(GuildId, User.Id, nickname);
+        }
+
+
+        /// <summary>
+        /// Changes a user's voice state in the specified guild
+        /// </summary>
+        /// <param name="muted">Whether the member should be muted or not (null for 'don't change')</param>
+        /// <param name="deafened">Whether the member should be deafened or not (null for 'don't change')</param>
+        public void ChangeVoiceState(bool? muted = null, bool? deafened = null)
+        {
+            Client.ChangeGuildMemberVoiceState(GuildId, User.Id, muted, deafened);
         }
 
 

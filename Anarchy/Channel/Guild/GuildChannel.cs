@@ -44,13 +44,6 @@ namespace Discord
         /// <param name="properties">Options for modifying the channel</param>
         public void Modify(GuildChannelProperties properties)
         {
-            if (!properties.NameProperty.Set)
-                properties.Name = Name;
-            if (!properties.PositionProperty.Set)
-                properties.Position = Position;
-            if (!properties.ParentProperty.Set)
-                properties.ParentId = ParentId;
-
             GuildChannel channel = Client.ModifyGuildChannel(Id, properties);
             Name = channel.Name;
             Position = channel.Position;

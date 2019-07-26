@@ -16,6 +16,12 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeTopic()
+        {
+            return TopicProperty.Set;
+        }
+
+
         internal Property<bool> NsfwProperty = new Property<bool>();
         [JsonProperty("nsfw")]
         public bool Nsfw
@@ -25,12 +31,24 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeNsfw()
+        {
+            return NsfwProperty.Set;
+        }
+
+
         internal Property<int> SlowModeProperty = new Property<int>();
         [JsonProperty("rate_limit_per_user")]
         public int SlowMode
         {
             get { return SlowModeProperty; }
             set { SlowModeProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeSlowMode()
+        {
+            return SlowModeProperty.Set;
         }
     }
 }

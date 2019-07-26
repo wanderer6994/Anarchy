@@ -28,5 +28,11 @@ namespace Discord
                 IconSet = true;
             }
         }
+
+
+        public bool ShouldSerialize_icon()
+        {
+            return IconSet;
+        }
     }
 }

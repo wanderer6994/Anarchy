@@ -8,8 +8,19 @@ namespace Discord.Webhook
     /// </summary>
     public class WebhookProperties
     {
+        internal Property<string> NameProperty = new Property<string>();
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return NameProperty; }
+            set { NameProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeName()
+        {
+            return NameProperty.Set;
+        }
 
 
         #region avatar
@@ -35,6 +46,12 @@ namespace Discord.Webhook
                 AvatarSet = true;
             }
         }
+
+
+        public bool ShouldSeriaize_avatar()
+        {
+            return AvatarSet;
+        }
         #endregion
 
 
@@ -44,6 +61,12 @@ namespace Discord.Webhook
         {
             get { return ChannelProperty; }
             set { ChannelProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeChannelId()
+        {
+            return ChannelProperty.Set;
         }
 
 

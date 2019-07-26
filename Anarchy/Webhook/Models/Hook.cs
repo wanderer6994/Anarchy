@@ -59,13 +59,6 @@ namespace Discord.Webhook
         /// <param name="properties">Options for modifying the webhook</param>
         public void Modify(WebhookProperties properties)
         {
-            if (properties.Name == null)
-                properties.Name = Name;
-            if (!properties.AvatarSet)
-                properties.Avatar = GetAvatar();
-            if (!properties.ChannelProperty.Set)
-                properties.ChannelId = ChannelId;
-
             Hook hook = Client.ModifyChannelWebhook(Id, properties);
             Name = hook.Name;
             AvatarId = hook.AvatarId;

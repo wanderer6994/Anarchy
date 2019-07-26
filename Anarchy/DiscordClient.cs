@@ -15,10 +15,12 @@ namespace Discord
         {
             get
             {
+#pragma warning disable IDE0018
                 IEnumerable<string> values;
+#pragma warning restore IDE0018
                 HttpClient.Headers.TryGetValues("Authorization", out values);
-                if (values.ToList().Count > 0)
-                    return values.ToList()[0];
+                if (values.Count() > 0)
+                    return values.ElementAt(0);
                 else return null;
             }
             set

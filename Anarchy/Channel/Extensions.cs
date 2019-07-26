@@ -338,54 +338,6 @@ namespace Discord
             return client.deleteChannel<DMChannel>(channelId);
         }
         #endregion
-
-
-        #region messages
-        /// <summary>
-        /// Gets a list of messages in a channel
-        /// </summary>
-        /// <param name="channelId">ID of the channel</param>
-        /// <param name="limit">The max amount of messages to return</param>
-        /// <param name="afterId">The ID to offset from</param>
-        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId, uint limit = 100, ulong afterId = 0)
-        {
-            return client.HttpClient.Get($"/channels/{channelId}/messages?limit={limit}{(afterId != 0 ? $"&after={afterId}" : "")}")
-                                .Deserialize<IReadOnlyList<Message>>().SetClientsInList(client);
-        }
-
-
-        /// <summary>
-        /// Gets a channel's pinned messages
-        /// </summary>
-        /// <param name="channelId">ID of the channel</param>
-        public static IReadOnlyList<Message> GetChannelPinnedMessages(this DiscordClient client, ulong channelId)
-        {
-            return client.HttpClient.Get($"/channels/{channelId}/pins")
-                                .Deserialize<IReadOnlyList<Message>>().SetClientsInList(client);
-        }
-
-
-        /// <summary>
-        /// Pins a message to a channel
-        /// </summary>
-        /// <param name="channelId">ID of the channel</param>
-        /// <param name="messageId">ID of the message</param>
-        public static void PinChannelMessage(this DiscordClient client, ulong channelId, ulong messageId)
-        {
-            client.HttpClient.Put($"/channels/{channelId}/pins/{messageId}");
-        }
-
-
-        /// <summary>
-        /// Unpins a message from a channel
-        /// </summary>
-        /// <param name="channelId">ID of the channel</param>
-        /// <param name="messageId">ID of the message</param>
-        public static void UnpinChannelMessage(this DiscordClient client, ulong channelId, ulong messageId)
-        {
-            client.HttpClient.Delete($"/channels/{channelId}/pins/{messageId}");
-        }
-        #endregion
 #pragma warning restore IDE1006
     }
 }

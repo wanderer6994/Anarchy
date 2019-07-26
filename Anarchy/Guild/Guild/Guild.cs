@@ -95,19 +95,6 @@ namespace Discord
         /// <param name="properties">Options for modifying the guild</param>
         public void Modify(GuildProperties properties)
         {
-            if (!properties.NameProperty.Set)
-                properties.Name = Name;
-            if (!properties.RegionProperty.Set)
-                properties.Region = Region;
-            if (!properties.IconSet)
-                properties.Icon = GetIcon();
-            if (!properties.OwnerProperty.Set)
-                properties.OwnerId = OwnerId;
-            if (!properties.VerificationProperty.Set)
-                properties.VerificationLevel = VerificationLevel;
-            if (!properties.NotificationsProperty.Set)
-                properties.DefaultNotifications = DefaultNotifications;
-
             Guild guild = Client.ModifyGuild(Id, properties);
             Name = guild.Name;
             Region = guild.Region;

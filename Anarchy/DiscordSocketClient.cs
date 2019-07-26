@@ -107,6 +107,7 @@ namespace Discord.Gateway
             }
         }
 
+
         public void Logout()
         {
             if (LoggedIn)
@@ -124,9 +125,7 @@ namespace Discord.Gateway
         {
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
-
-            System.Console.WriteLine($"[{System.DateTime.Now}] {payload}");
-            
+    
             switch (payload.Opcode)
             {
                 case GatewayOpcode.Event:

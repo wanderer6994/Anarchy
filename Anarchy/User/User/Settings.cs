@@ -8,8 +8,19 @@ namespace Discord
     /// </summary>
     public class UserSettings
     {
+        internal Property<string> NameProperty = new Property<string>();
         [JsonProperty("username")]
-        public string Username { get; set; }
+        public string Username
+        {
+            get { return NameProperty; }
+            set { NameProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeUsername()
+        {
+            return NameProperty.Set;
+        }
 
 
         internal Property<uint> DiscriminatorProperty = new Property<uint>();
@@ -21,8 +32,25 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeDiscriminator()
+        {
+            return DiscriminatorProperty.Set;
+        }
+
+
+        internal Property<string> EmailProperty = new Property<string>();
         [JsonProperty("email")]
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return EmailProperty; }
+            set { EmailProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeEmail()
+        {
+            return EmailProperty.Set;
+        }
 
 
         #region avatar
@@ -35,17 +63,23 @@ namespace Discord
         }
 
 
+        internal bool AvatarSet { get; private set; }
         [JsonIgnore]
         public Image Avatar
         {
-            get
-            {
-                return _image.Image;
-            }
+            get { return _image.Image; }
             set
             {
                 _image.Image = value;
+
+                AvatarSet = true;
             }
+        }
+
+
+        public bool ShouldSerialize_avatar()
+        {
+            return AvatarSet;
         }
         #endregion
 

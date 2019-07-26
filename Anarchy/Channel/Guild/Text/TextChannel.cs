@@ -47,19 +47,6 @@ namespace Discord
         /// <param name="properties">Options for modifying the channel</param>
         public void Modify(TextChannelProperties properties)
         {
-            if (!properties.NameProperty.Set)
-                properties.Name = Name;
-            if (!properties.TopicProperty.Set)
-                properties.Topic = Topic;
-            if (!properties.NsfwProperty.Set)
-                properties.Nsfw = Nsfw;
-            if (!properties.SlowModeProperty.Set)
-                properties.SlowMode = SlowMode;
-            if (!properties.PositionProperty.Set)
-                properties.Position = Position;
-            if (!properties.ParentProperty.Set)
-                properties.ParentId = ParentId;
-
             TextChannel channel = Client.ModifyTextChannel(Id, properties);
             Name = channel.Name;
             Topic = channel.Topic;
@@ -101,6 +88,16 @@ namespace Discord
         public IReadOnlyList<Message> GetMessages(uint limit = 100, uint afterId = 0)
         {
             return Client.GetChannelMessages(Id, limit, afterId);
+        }
+
+
+        /// <summary>
+        /// Bulk deletes messages (this is a bot only endpoint)
+        /// </summary>
+        /// <param name="messages">IDs of the messages</param>
+        public void DeleteMessages(List<ulong> messages)
+        {
+            Client.DeleteChannelMessages(Id, messages);
         }
 
 

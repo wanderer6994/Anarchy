@@ -17,6 +17,12 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeName()
+        {
+            return NameProperty.Set;
+        }
+
+
         internal Property<EditablePermissions> PermissionsProperty = new Property<EditablePermissions>();
         [JsonProperty("permissions")]
         private uint _permissions
@@ -27,6 +33,12 @@ namespace Discord
         {
             get { return PermissionsProperty; }
             set { PermissionsProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerialize_permissions()
+        {
+            return PermissionsProperty.Set;
         }
 
 
@@ -44,6 +56,12 @@ namespace Discord
         }
 
 
+        public bool ShouldSerialize_color()
+        {
+            return ColorProperty.Set;
+        }
+
+
         internal Property<bool> SeperatedProperty = new Property<bool>();
         [JsonProperty("hoist")]
         public bool Seperated
@@ -53,12 +71,24 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeSeperated()
+        {
+            return SeperatedProperty.Set;
+        }
+
+
         internal Property<bool> MentionableProperty = new Property<bool>();
         [JsonProperty("mentionable")]
         public bool Mentionable
         {
             get { return MentionableProperty; }
             set { MentionableProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeMentionable()
+        {
+            return MentionableProperty.Set;
         }
 
 

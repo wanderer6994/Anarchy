@@ -16,12 +16,24 @@ namespace Discord
         }
 
 
+        public bool ShouldSerializeParentId()
+        {
+            return ParentProperty.Set;
+        }
+
+
         internal Property<uint> PositionProperty = new Property<uint>();
         [JsonProperty("position")]
         public uint Position
         {
             get { return PositionProperty; }
             set { PositionProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializePosition()
+        {
+            return PositionProperty.Set;
         }
     }
 }
