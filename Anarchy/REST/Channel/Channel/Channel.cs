@@ -51,6 +51,15 @@ namespace Discord
         }
 
 
+        public static implicit operator ChannelCreationProperties(Channel instance)
+        {
+            var properties = new ChannelCreationProperties();
+            properties.Name = instance.Name;
+            properties.Type = instance.Type;
+            return properties;
+        }
+
+
         public override string ToString()
         {
             return Name;

@@ -26,11 +26,18 @@ namespace Discord
         public bool Deafened { get; private set; }
 
 
-        public void Modify(GuildMemberProperties properties)
+        /// <summary>
+        /// Updates the member's information
+        /// </summary>
+        public void Update()
         {
-            Client.ModifyGuildMember(GuildId, User.Id, properties);
+            GuildMember member = Client.GetGuildMember(GuildId, User.Id);
+            User = member.User;
+            Nickname = member.Nickname;
+            Roles = member.Roles;
+            Muted = member.Muted;
+            Deafened = member.Deafened;
         }
-
 
         /// <summary>
         /// Changes the member's nickname for this guild
@@ -51,6 +58,45 @@ namespace Discord
         {
             Client.ChangeGuildMemberVoiceState(GuildId, User.Id, muted, deafened);
         }
+
+
+        /// <summary>
+        /// Adds a role to the guild member
+        /// </summary>
+        /// <param name="roleId">ID of the role</param>
+        public void AddRole(ulong roleId)
+        {
+            Client.AddRoleToUser(GuildId, roleId, User.Id);
+        }
+
+
+        /// <summary>
+        /// Adds a role to the guild member
+        /// </summary>
+        public void AddRole(Role role)
+        {
+            AddRole(role.Id);
+        }
+
+
+        /// <summary>
+        /// Removes a role from the guild member
+        /// </summary>
+        /// <param name="roleId">ID of the role</param>
+        public void RemoveRole(ulong roleId)
+        {
+            Client.RemoveRoleFromUser(GuildId, roleId, User.Id);
+        }
+
+
+        /// <summary>
+        /// Removes a role from the guild member
+        /// </summary>
+        public void RemoveRole(Role role)
+        {
+            RemoveRole(role.Id);
+        }
+
 
 
         /// <summary>

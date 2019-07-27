@@ -21,17 +21,17 @@ namespace Discord
                     Base64 = null;
                 else
                 {
-                    ImageType type;
+                    string type;
 
                     if (ImageFormat.Jpeg.Equals(value.RawFormat))
-                        type = ImageType.Jpeg;
+                        type = "jpeg";
                     else if (ImageFormat.Png.Equals(value.RawFormat))
-                        type = ImageType.Png;
+                        type = "png";
                     else if (ImageFormat.Gif.Equals(value.RawFormat))
-                        type = ImageType.Gif;
+                        type = "gif";
                     else return;
 
-                    Base64 = $"data:image/{type.ToString().ToLower()};base64," + 
+                    Base64 = $"data:image/{type};base64," + 
                             Convert.ToBase64String((byte[])new ImageConverter().ConvertTo(value, typeof(byte[])));
                     _image = value;
                 }

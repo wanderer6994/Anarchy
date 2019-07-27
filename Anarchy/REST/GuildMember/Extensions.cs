@@ -54,13 +54,7 @@ namespace Discord
         }
 
 
-        /// <summary>
-        /// Modifies the guild member with the passed properties
-        /// </summary>
-        /// <param name="guildId">ID of the guild</param>
-        /// <param name="userId">ID of the member</param>
-        /// <param name="properties">Modification options</param>
-        public static void ModifyGuildMember(this DiscordClient client, ulong guildId, ulong userId, GuildMemberProperties properties)
+        internal static void ModifyGuildMember(this DiscordClient client, ulong guildId, ulong userId, GuildMemberProperties properties)
         {
             client.HttpClient.Patch($"/guilds/{guildId}/members/{userId}", JsonConvert.SerializeObject(properties));
         }

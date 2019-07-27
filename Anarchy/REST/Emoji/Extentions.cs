@@ -61,7 +61,7 @@ namespace Discord
 
 
         /// <summary>
-        /// Modifies an emoji
+        /// Gets an emoji
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
         /// <param name="emojiId">ID of the emoji</param>
@@ -71,21 +71,6 @@ namespace Discord
                                         .Deserialize<Emoji>().SetClient(client);
             reaction.GuildId = guildId;
             return reaction;
-        }
-
-
-        /// <summary>
-        /// Gets a message's reactions
-        /// </summary>
-        /// <param name="channelId">ID of the channel</param>
-        /// <param name="messageId">ID of the message</param>
-        /// <param name="reaction">The reaction</param>
-        /// <param name="limit">Max amount of reactions to receive</param>
-        /// <param name="afterId">Reaction ID to offset from</param>
-        public static IReadOnlyList<User> GetMessageReactions(this DiscordClient client, ulong channelId, ulong messageId, string reaction, uint limit = 25, ulong afterId = 0)
-        {
-            return client.HttpClient.Get($"/channels/{channelId}/messages/{messageId}/reactions/{reaction}?limit={limit}&after={afterId}")
-                                .Deserialize<IReadOnlyList<User>>().SetClientsInList(client);
         }
 
 

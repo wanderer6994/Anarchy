@@ -54,12 +54,13 @@
   <ItemGroup>
     <Compile Include="Gateway\Auth\Extensions.cs" />
     <Compile Include="Gateway\GuildMember\Extensions.cs" />
+    <Compile Include="REST\Channel\Guild\Guild\CreationProperties.cs" />
     <Compile Include="REST\Channel\Private\Group.cs" />
     <Compile Include="REST\Channel\Guild\Text\TextChannel.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannel.cs" />
     <Compile Include="REST\Channel\Private\GroupProperties.cs" />
     <Compile Include="REST\Channel\Private\RecipientList.cs" />
-    <Compile Include="REST\Channel\Guild\GuildChannelProperties.cs" />
+    <Compile Include="REST\Channel\Guild\Guild\GuildChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannelProperties.cs" />
     <Compile Include="REST\Channel\PermissionOverwrite\Type.cs" />
@@ -128,8 +129,8 @@
     <Compile Include="REST\Guild\Properties\GuildProperties.cs" />
     <Compile Include="REST\Message\Reaction\MessageReaction.cs" />
     <Compile Include="REST\Message\Message\MessageType.cs" />
-    <Compile Include="Multi\Permissions\EditablePermissions.cs" />
-    <Compile Include="Multi\Permissions\Permissions.cs" />
+    <Compile Include="REST\Permissions\EditablePermissions.cs" />
+    <Compile Include="REST\Permissions\Permissions.cs" />
     <Compile Include="Multi\Models\Property.cs" />
     <Compile Include="Gateway\Presence\Extensions.cs" />
     <Compile Include="Gateway\Presence\Presence\PresenceUpdate.cs" />
@@ -148,7 +149,7 @@
     <Compile Include="REST\Message\Message\Attachment.cs" />
     <Compile Include="REST\Message\Embed\Embed.cs" />
     <Compile Include="REST\Message\Embed\Image.cs" />
-    <Compile Include="Multi\Image\DiscordImage.cs" />
+    <Compile Include="Multi\Models\DiscordImage.cs" />
     <Compile Include="DiscordClient.cs" />
     <Compile Include="DiscordSocketClient.cs" />
     <Compile Include="REST\Emoji\Emoji\EmojiProperties.cs" />
@@ -156,7 +157,6 @@
     <Compile Include="REST\Webhook\Extensions.cs" />
     <Compile Include="REST\Webhook\Models\WebhookProfile.cs" />
     <Compile Include="REST\Webhook\Models\WebhookProperties.cs" />
-    <Compile Include="Multi\Image\ImageType.cs" />
     <Compile Include="Multi\Controllable\Controllable.cs" />
     <Compile Include="Multi\Controllable\Extensions.cs" />
     <Compile Include="Multi\JsonExtensions.cs" />
@@ -178,7 +178,7 @@
     <Compile Include="REST\User\Extensions.cs" />
     <Compile Include="REST\Message\Message\MessageEventArgs.cs" />
     <Compile Include="Gateway\Auth\Models\Login.cs" />
-    <Compile Include="REST\Channel\Guild\GuildChannel.cs" />
+    <Compile Include="REST\Channel\Guild\Guild\GuildChannel.cs" />
     <Compile Include="REST\Channel\Channel\Properties\CreationProperties.cs" />
     <Compile Include="REST\Invite\Models\InviteProperties.cs" />
     <Compile Include="Gateway\Auth\Models\Identification.cs" />
@@ -201,9 +201,9 @@
     <Compile Include="Multi\Models\InvalidParametersException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="X-Super-Properties\SPInformation.cs" />
-    <Compile Include="Multi\Permissions\PermissionCalculator.cs" />
+    <Compile Include="REST\Permissions\PermissionCalculator.cs" />
     <Compile Include="REST\Channel\PermissionOverwrite\PermissionOverwrite.cs" />
-    <Compile Include="Multi\Permissions\Permission.cs" />
+    <Compile Include="REST\Permissions\Permission.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

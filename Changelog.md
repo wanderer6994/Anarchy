@@ -11,7 +11,7 @@
 - Added more user-related DiscordErrors.
 
 ### Improvements
-- Modified Properties models to not be dependant on the containing model's info, making them 100% secure.
+- Modified many models to not be dependant on the containing model's info, making them a lot more secure.
 - Fixed the client logging out whenever a password is being set.
 - Removed ActivitiyAssets because of them being unusable.
 - There have also been a lot of name changes to methods and models (sorry, i'll try to keep those low from now on).

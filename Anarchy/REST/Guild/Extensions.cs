@@ -131,17 +131,6 @@ namespace Discord
 
 
         /// <summary>
-        /// Gets a guild's channels
-        /// </summary>
-        /// <param name="guildId">ID of the guild</param>
-        public static IReadOnlyList<GuildChannel> GetGuildChannels(this DiscordClient client, ulong guildId)
-        {
-            return client.HttpClient.Get($"/guilds/{guildId}/channels")
-                                .Deserialize<IReadOnlyList<GuildChannel>>().SetClientsInList(client);
-        }
-
-
-        /// <summary>
         /// Joins a guild
         /// </summary>
         /// <returns>The invite used to join the guild</returns>

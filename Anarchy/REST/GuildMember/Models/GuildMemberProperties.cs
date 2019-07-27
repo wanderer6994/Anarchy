@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Discord
 {
-    //Some properties might not have been set here. i haven't found any so far tho /shrug
+    //Some properties aren't here yet
     public class GuildMemberProperties
     {
         internal Property<string> NickProperty = new Property<string>();
@@ -17,6 +18,21 @@ namespace Discord
         public bool ShouldSerializeNickname()
         {
             return NickProperty.Set;
+        }
+
+
+        internal Property<List<ulong>> RoleProperty = new Property<List<ulong>>();
+        [JsonProperty("roles")]
+        public List<ulong> Roles
+        {
+            get { return RoleProperty; }
+            set { RoleProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeRoles()
+        {
+            return RoleProperty.Set;
         }
 
 

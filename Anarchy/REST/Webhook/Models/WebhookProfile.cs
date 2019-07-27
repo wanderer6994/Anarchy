@@ -1,14 +1,20 @@
-﻿using Newtonsoft.Json;
-
-namespace Discord.Webhook
+﻿namespace Discord.Webhook
 {
     public class WebhookProfile
     {
-        [JsonProperty("username")]
-        public string Name { get; set; }
+        internal Property<string> NameProperty = new Property<string>();
+        public string Username
+        {
+            get { return NameProperty; }
+            set { NameProperty.Value = value; }
+        }
 
 
-        [JsonProperty("avatar_url")]
-        public string AvatarUrl { get; set; }
+        internal Property<string> AvatarProperty = new Property<string>();
+        public string AvatarUrl
+        {
+            get { return AvatarProperty; }
+            set { AvatarProperty.Value = value; }
+        }
     }
 }

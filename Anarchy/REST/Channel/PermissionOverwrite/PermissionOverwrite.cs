@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Discord
 {
@@ -20,12 +21,7 @@ namespace Discord
         {
             get
             {
-                PermissionOverwriteType type;
-                if (_type == "role")
-                    type = PermissionOverwriteType.Role;
-                else
-                    type = PermissionOverwriteType.Member;
-                return type;
+                return (PermissionOverwriteType)Enum.Parse(typeof(PermissionOverwriteType), _type, true);
             }
             set
             {

@@ -70,6 +70,17 @@ namespace Discord
 
         #region guild channel
         /// <summary>
+        /// Gets a guild's channels
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        public static IReadOnlyList<GuildChannel> GetGuildChannels(this DiscordClient client, ulong guildId)
+        {
+            return client.HttpClient.Get($"/guilds/{guildId}/channels")
+                                .Deserialize<IReadOnlyList<GuildChannel>>().SetClientsInList(client);
+        }
+
+
+        /// <summary>
         /// Gets a guild channel
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
@@ -112,7 +123,7 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created <see cref="GuildChannel"/></returns>
-        public static GuildChannel CreateGuildChannel(this DiscordClient client, ulong guildId, ChannelCreationProperties properties)
+        public static GuildChannel CreateGuildChannel(this DiscordClient client, ulong guildId, GuildChannelCreationProperties properties)
         {
             return client.createGuildChannel<GuildChannel>(guildId, properties);
         }
@@ -124,7 +135,7 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created <see cref="TextChannel"/></returns>
-        public static TextChannel CreateTextChannel(this DiscordClient client, ulong guildId, ChannelCreationProperties properties)
+        public static TextChannel CreateTextChannel(this DiscordClient client, ulong guildId, GuildChannelCreationProperties properties)
         {
             properties.Type = ChannelType.Text;
             return client.createGuildChannel<TextChannel>(guildId, properties);
@@ -137,7 +148,7 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created <see cref="VoiceChannel"/></returns>
-        public static VoiceChannel CreateVoiceChannel(this DiscordClient client, ulong guildId, ChannelCreationProperties properties)
+        public static VoiceChannel CreateVoiceChannel(this DiscordClient client, ulong guildId, GuildChannelCreationProperties properties)
         {
             properties.Type = ChannelType.Voice;
             return client.createGuildChannel<VoiceChannel>(guildId, properties);
@@ -298,11 +309,11 @@ namespace Discord
         /// <summary>
         /// Gets the account's private channels
         /// </summary>
-        /// <returns>A <see cref="IReadOnlyList{Channel}"/> containing the client's private channels</returns>
-        public static IReadOnlyList<Channel> GetPrivateChannels(this DiscordClient client)
+        /// <returns>A <see cref="IReadOnlyList{DMChannel}"/> containing the client's private channels</returns>
+        public static IReadOnlyList<DMChannel> GetPrivateChannels(this DiscordClient client)
         {
             return client.HttpClient.Get($"/users/@me/channels")
-                                .Deserialize<IReadOnlyList<Channel>>().SetClientsInList(client);
+                                .Deserialize<IReadOnlyList<DMChannel>>().SetClientsInList(client);
         }
 
 

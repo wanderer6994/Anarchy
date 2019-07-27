@@ -52,6 +52,30 @@ namespace Discord
 
 
         /// <summary>
+        /// Adds a role to a guild member
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        /// <param name="roleId">ID of the role</param>
+        /// <param name="userId">ID of the guild member</param>
+        public static void AddRoleToUser(this DiscordClient client, ulong guildId, ulong roleId, ulong userId)
+        {
+            client.HttpClient.Put($"/guilds/{guildId}/members/{userId}/roles/{roleId}");
+        }
+
+
+        /// <summary>
+        /// Removes a role from a guild member
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        /// <param name="roleId">ID of the role</param>
+        /// <param name="userId">ID of the guild member</param>
+        public static void RemoveRoleFromUser(this DiscordClient client, ulong guildId, ulong roleId, ulong userId)
+        {
+            client.HttpClient.Delete($"/guilds/{guildId}/members/{userId}/roles/{roleId}");
+        }
+
+
+        /// <summary>
         /// Gets a guild's roles
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
@@ -59,7 +83,8 @@ namespace Discord
         {
             IReadOnlyList<Role> roles = client.HttpClient.Get($"/guilds/{guildId}/roles")
                                                     .Deserialize<IReadOnlyList<Role>>().SetClientsInList(client);
-            foreach (var role in roles) role.GuildId = guildId;
+            foreach (var role in roles)
+                role.GuildId = guildId;
             return roles;
         }
     }

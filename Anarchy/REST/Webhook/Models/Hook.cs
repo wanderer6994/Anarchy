@@ -79,15 +79,22 @@ namespace Discord.Webhook
         /// Sends a message through the webhook
         /// </summary>
         /// <param name="message">The message to send</param>
+        /// <param name="embed">Embed to include in the message</param>
+        /// <param name="profile">Custom Username and Avatar url (both are optional)</param>
         public void SendMessage(string content, Embed embed = null, WebhookProfile profile = null)
         {
-            if (profile == null)
-                profile = new WebhookProfile();
-            if (profile.Name == null)
-                profile.Name = Name;
+            var properties = new WebhookMessageProperties() { Content = content, Embed = embed };
+
+            if (profile != null)
+            {
+                if (profile.NameProperty.Set)
+                    properties.Username = profile.Username;
+                if (profile.AvatarProperty.Set)
+                    properties.AvatarUrl = profile.AvatarUrl;
+            }
 
             Client.HttpClient.Post($"/webhooks/{Id}/{Token}",
-                        JsonConvert.SerializeObject(new WebhookMessageProperties() { Content = content, Embed = embed, Name = profile.Name, AvatarUrl = profile.AvatarUrl }));
+                        JsonConvert.SerializeObject(properties));
         }
 
 
