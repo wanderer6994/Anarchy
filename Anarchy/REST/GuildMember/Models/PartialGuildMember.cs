@@ -30,8 +30,8 @@ namespace Discord
             {
                 if (value == null)
                     _joinedAt = null;
-
-                _joinedAt = DiscordTimestamp.ToString(value.Value);
+                else
+                    _joinedAt = DiscordTimestamp.ToString(value.Value);
             }
         }
 #pragma warning restore CS0649

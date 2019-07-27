@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Discord
 {
@@ -57,6 +58,28 @@ namespace Discord
         public void ChangeVoiceState(bool? muted = null, bool? deafened = null)
         {
             Client.ChangeGuildMemberVoiceState(GuildId, User.Id, muted, deafened);
+        }
+
+
+        /// <summary>
+        /// Sets the member's roles
+        /// </summary>
+        public void SetRoles(List<ulong> roles)
+        {
+            Client.SetGuildMemberRoles(GuildId, User.Id, roles);
+        }
+
+
+        /// <summary>
+        /// Sets the member's roles
+        /// </summary>
+        public void SetRoles(List<Role> roles)
+        {
+            List<ulong> ids = new List<ulong>();
+            foreach (var role in roles)
+                ids.Add(role.Id);
+
+            SetRoles(ids);
         }
 
 

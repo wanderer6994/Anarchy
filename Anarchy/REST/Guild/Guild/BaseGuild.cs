@@ -62,7 +62,7 @@ namespace Discord
         /// </summary>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created channel</returns>
-        public GuildChannel CreateChannel(ChannelCreationProperties properties)
+        public GuildChannel CreateChannel(GuildChannelCreationProperties properties)
         {
             return Client.CreateGuildChannel(Id, properties);
         }
@@ -73,7 +73,7 @@ namespace Discord
         /// </summary>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created channel</returns>
-        public TextChannel CreateTextChannel(ChannelCreationProperties properties)
+        public TextChannel CreateTextChannel(GuildChannelCreationProperties properties)
         {
             return Client.CreateTextChannel(Id, properties);
         }
@@ -84,7 +84,7 @@ namespace Discord
         /// </summary>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created channel</returns>
-        public VoiceChannel CreateVoiceChannel(ChannelCreationProperties properties)
+        public VoiceChannel CreateVoiceChannel(GuildChannelCreationProperties properties)
         {
             return Client.CreateVoiceChannel(Id, properties);
         }

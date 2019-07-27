@@ -169,15 +169,6 @@ namespace Discord.Gateway
                         case "PRESENCE_UPDATE":
                             OnUserPresenceUpdated?.Invoke(this, new PresenceUpdatedEventArgs(payload.Deserialize<PresenceUpdate>()));
                             break;
-                        case "CHANNEL_CREATE":
-                            OnChannelCreated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
-                            break;
-                        case "CHANNEL_UPDATE":
-                            OnChannelUpdated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
-                            break;
-                        case "CHANNEL_DELETE":
-                            OnChannelDeleted?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
-                            break;
                         case "VOICE_STATE_UPDATE":
                             VoiceState state = payload.Deserialize<VoiceState>().SetClient(this);
 
@@ -194,6 +185,15 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_EMOJIS_UPDATE":
                             OnEmojisUpdated?.Invoke(this, new EmojisUpdatedEventArgs(payload.Deserialize<EmojiContainer>().SetClient(this)));
+                            break;
+                        case "CHANNEL_CREATE":
+                            OnChannelCreated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
+                            break;
+                        case "CHANNEL_UPDATE":
+                            OnChannelUpdated?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
+                            break;
+                        case "CHANNEL_DELETE":
+                            OnChannelDeleted?.Invoke(this, new ChannelEventArgs(payload.Deserialize<GuildChannel>().SetClient(this)));
                             break;
                         case "TYPING_START":
                             OnUserTyping?.Invoke(this, new UserTypingEventArgs(payload.Deserialize<UserTyping>()));

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Discord.Gateway
 {
@@ -13,7 +9,7 @@ namespace Discord.Gateway
         /// Requests a member chunk from a guild
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
-        /// <param name="limit">Max amount of members to receive (set to 0 for all)</param>
+        /// <param name="limit">Max amount of members to receive (<see cref="MemberAmount"/> might help)</param>
         public static void GetGuildMembers(this DiscordSocketClient client, ulong guildId, uint limit = 100)
         {
             var req = new GatewayRequest<GatewayMemberQuery>(GatewayOpcode.RequestGuildMembers);
@@ -33,13 +29,16 @@ namespace Discord.Gateway
             IReadOnlyList<GuildMember> newMembers = new List<GuildMember>();
             client.OnGuildMembersReceived += (c, args) =>
             {
-                newMembers = args.Members;
-                members.AddRange(newMembers);
+                if (args.Members[0].GuildId == guildId)
+                {
+                    newMembers = args.Members;
+                    members.AddRange(newMembers);
+                }
             };
 
-            client.GetGuildMembers(guildId, 0);
+            client.GetGuildMembers(guildId, MemberAmount.All);
 
-            while (newMembers.Count == 1000 || newMembers.Count == 0) Thread.Sleep(20);
+            while (newMembers.Count == MemberAmount.Max || newMembers.Count == 0) Thread.Sleep(20);
             return members;
         }
     }

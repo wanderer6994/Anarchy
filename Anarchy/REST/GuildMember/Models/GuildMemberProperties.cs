@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    //Some properties aren't here yet
     public class GuildMemberProperties
     {
         internal Property<string> NickProperty = new Property<string>();

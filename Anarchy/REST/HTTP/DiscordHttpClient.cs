@@ -29,7 +29,7 @@ namespace Discord
         public void UpdateFingerprint()
         {
             Headers.Remove("X-Fingerprint");
-            Headers.Add("X-Fingerprint", Get("/experiments").Deserialize<Experiments>().Fingerprint);
+            Headers.Add("X-Fingerprint", Get("/experiments").Deserialize<JObject>().GetValue("fingerprint").ToString());
         }
 
 

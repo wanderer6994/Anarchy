@@ -52,6 +52,17 @@ namespace Discord
 
 
         /// <summary>
+        /// Sets a guild member's roles
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        /// <param name="userId">ID of the user</param>
+        public static void SetGuildMemberRoles(this DiscordClient client, ulong guildId, ulong userId, List<ulong> roles)
+        {
+            client.ModifyGuildMember(guildId, userId, new GuildMemberProperties() { Roles = roles });
+        }
+
+
+        /// <summary>
         /// Adds a role to a guild member
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
