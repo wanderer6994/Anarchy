@@ -9,7 +9,7 @@ namespace Discord
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
         /// <returns>A <see cref="IReadOnlyList{AuditLogEntry}"/></returns>
-        public static IReadOnlyList<AuditLogEntry> GetGuildAuditLog(this DiscordClient client, ulong guildId, AuditLogFilters filters = null)
+        public static IReadOnlyList<AuditLogEntry> GetAuditLog(this DiscordClient client, ulong guildId, AuditLogFilters filters = null)
         {
             if (filters == null)
                 filters = new AuditLogFilters();

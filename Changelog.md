@@ -14,8 +14,7 @@
 - Modified Properties models to not be dependant on the containing model's info, making them 100% secure.
 - Fixed the client logging out whenever a password is being set.
 - Removed ActivitiyAssets because of them being unusable.
-- Changed 'HypesquadHouse' to 'Hypesquad' for the sake of simplicity.
-- The 'Client' (in GetClientGuilds, GetClientRelationships etc.) has also been removed for the sake of simplicity.
+- There have also been a lot of name changes to methods and models (sorry, i'll try to keep those low from now on).
 
 ### Bug fixes
 - DiscordSocketClient is now able to resume dropped connections.

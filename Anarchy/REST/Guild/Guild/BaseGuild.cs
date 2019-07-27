@@ -163,7 +163,7 @@ namespace Discord
         /// <param name="filters"></param>
         public IReadOnlyList<AuditLogEntry> GetAuditLog(AuditLogFilters filters = null)
         {
-            return Client.GetGuildAuditLog(Id, filters);
+            return Client.GetAuditLog(Id, filters);
         }
 
 

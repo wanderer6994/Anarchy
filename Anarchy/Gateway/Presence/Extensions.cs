@@ -8,7 +8,7 @@ namespace Discord.Gateway
         /// Changes the client's status (online, idle, dnd or invisible)
         /// </summary>
         /// <param name="status">The new status</param>
-        public static void ChangeStatus(this DiscordSocketClient client, UserStatus status)
+        public static void SetStatus(this DiscordSocketClient client, UserStatus status)
         {
             var req = new GatewayRequest<Presence>(GatewayOpcode.PresenceChange);
             req.Data.Status = status;

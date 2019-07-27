@@ -47,7 +47,7 @@ namespace Discord.Webhook
 
 
         /// <summary>
-        /// Gets a webhook
+        /// Gets a webhook (if <paramref name="token"/> is set the client does not have to be authenticated)
         /// </summary>
         /// <param name="webhookId">ID of the webhook</param>
         /// <param name="token">The webhooks's token</param>

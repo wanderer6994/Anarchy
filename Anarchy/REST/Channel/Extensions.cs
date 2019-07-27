@@ -299,7 +299,7 @@ namespace Discord
         /// Gets the account's private channels
         /// </summary>
         /// <returns>A <see cref="IReadOnlyList{Channel}"/> containing the client's private channels</returns>
-        public static IReadOnlyList<Channel> GetClientDMs(this DiscordClient client)
+        public static IReadOnlyList<Channel> GetPrivateChannels(this DiscordClient client)
         {
             return client.HttpClient.Get($"/users/@me/channels")
                                 .Deserialize<IReadOnlyList<Channel>>().SetClientsInList(client);
