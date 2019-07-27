@@ -45,6 +45,7 @@ namespace GuildDuplicator
             //find the guild
             Console.Write($"Guild id: ");
             Guild targetGuild = client.GetGuild(ulong.Parse(Console.ReadLine()));
+
             Guild ourGuild = DuplicateGuild(client, targetGuild);
             DeleteAllChannels(client, ourGuild);
             DuplicateChannels(client, targetGuild, ourGuild, DuplicateRoles(client, targetGuild, ourGuild));
@@ -74,10 +75,8 @@ namespace GuildDuplicator
             foreach (var channel in guild.GetChannels())
             {
                 channel.Delete();
-
                 Console.WriteLine($"Deleted {channel}");
-
-                Thread.Sleep(100);
+                Thread.Sleep(50);
             }
         }
 
@@ -206,7 +205,7 @@ namespace GuildDuplicator
 
                 Console.WriteLine($"Duplicated {channel.Name}");
 
-                Thread.Sleep(100);
+                Thread.Sleep(50);
             }
         }
 
@@ -235,7 +234,7 @@ namespace GuildDuplicator
 
                 Console.WriteLine($"Duplicated {role}");
 
-                Thread.Sleep(100);
+                Thread.Sleep(50);
             }
 
             return ourRoles;

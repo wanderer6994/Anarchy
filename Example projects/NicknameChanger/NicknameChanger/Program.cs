@@ -25,12 +25,14 @@ namespace NicknameChanger
             string currentNick = "";
             while (true)
             {
-                if (currentNick == nickname)
-                    currentNick = "";
-                currentNick += nickname[currentNick.Length];
-                guild.ChangeClientNickname(currentNick);
+                for (int i = 0; i < nickname.Length; i++)
+                {
+                    currentNick += nickname[i];
+                    guild.ChangeClientNickname(currentNick);
+                    Thread.Sleep(1000);
+                }
 
-                Thread.Sleep(1000);
+                currentNick = "";
             }
         }
     }

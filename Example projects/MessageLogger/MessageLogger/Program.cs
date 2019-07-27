@@ -22,7 +22,7 @@ namespace MessageLogger
 
         private static void OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
         {
-            Console.WriteLine($"Logged into {args.Login.User}");
+            Console.WriteLine($"Logged into {args.User}");
         }
 
 
