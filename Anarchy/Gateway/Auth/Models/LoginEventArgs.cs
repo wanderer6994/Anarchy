@@ -1,18 +1,27 @@
-﻿namespace Discord.Gateway
+﻿using System.Collections.Generic;
+
+namespace Discord.Gateway
 {
     public class LoginEventArgs
     {
-        public Login Login { get; private set; }
+        public ClientUser User { get; private set; }
+        public IReadOnlyList<SocketGuild> Guilds { get; private set; }
+        public IReadOnlyList<Channel> PrivateChannels { get; private set; }
+        public IReadOnlyList<Relationship> Relationships { get; private set; }
 
-        public LoginEventArgs(Login login)
+
+        internal LoginEventArgs(Login login)
         {
-            Login = login;
+            User = login.User;
+            Guilds = login.Guilds;
+            PrivateChannels = login.PrivateChannels;
+            Relationships = login.Relationships;
         }
 
 
         public override string ToString()
         {
-            return Login.ToString();
+            return User.ToString();
         }
     }
 }

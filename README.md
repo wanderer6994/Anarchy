@@ -2,7 +2,7 @@
 Anarchy is an opensource Discord API wrapper that focuses on making bot programming easy.<br>
 Since the start it has been our goal to make it simple yet effective, so that people can easily modify it to their needs, and not have huge performance losses.<br>
 
-Oh and also: if you're using a bot token make sure to prefix the token with 'Bot '.<br><br>
+Oh and currently: if you're using a bot token make sure to prefix the token with 'Bot '.<br><br>
 
 
 # Examples
@@ -15,7 +15,7 @@ client.Token = "your token here" //Tokens are evaluated whenever they are put in
 
 // Same as DiscordClient, but it has gateway support (to use this you need to include Discord.Gateway)
 DiscordSocketClient socketClient = new DiscordSocketClient();
-socketClient.Login("your token here"); //This is passed to the Token property, meaning that a DiscordHttpException will also be triggered here if the token is invalid 
+socketClient.Login("your token here"); //This is passed to the Token property (for validation reasons) and then sent to the Gateway 
 ```
 
 ## Joining/leaving a server
@@ -30,7 +30,7 @@ client.LeaveGuild(invite.Guild.Id);
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
 
-TextChannel channel = client.GetTextChannel(420);
+TextChannel channel = client.GetTextChannel(420); //this is ONLY guild text channels, if you wanna get a DM use GetDMChannel(), if you want a group use GetGroup()
 channel.TriggerTyping(); //This is optional
 channel.SendMessage("Hello, World");
 ```
@@ -45,7 +45,7 @@ GuildChannel newChannel = newGuild.CreateChannel(new ChannelCreationProperties()
 
 ## Using gateway events
 ```csharp
-static void Main(string[] args)
+static void Main()
 {
    // There are obviously more gateway events, i just picked a few
    DiscordSocketClient client = new DiscordSocketClient();
@@ -87,6 +87,8 @@ static void Main()
    DiscordSocketClient client = new DiscordSocketClient();
    client.OnLoggedIn += Client_OnLoggedIn;
    client.Login("your token here");
+   
+   Thread.Sleep(-1);
 }
 
 private static async void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs args)
@@ -107,9 +109,9 @@ private static async void Client_OnLoggedIn(DiscordSocketClient client, UserEven
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
 
-Channel channel = client.GetChannel(420);
+TextChannel channel = client.GetTextChannel(420);
 
-//you can also set a bunch of images. i just haven't done that here
+//you can also set a bunch of images. im lazy
 EmbedMaker embed = new EmbedMaker();
 embed.Title = "this is an embed";
 embed.TitleUrl = "https://github.com/iLinked1337/Anarchy";
@@ -120,10 +122,10 @@ embed.Footer.Text = "Made by iLinked";
 embed.Author.Name = "iLinked";
 embed.Author.Url = "https://youtube.com/iLinked";
 
-channel.SendMessage(new MessageProperties() { Content = "hey look it's an embed!", Embed = embed });
+channel.SendMessage("hey look it's an embed!", false, embed });
 ```
 
-Example projects can be found in 'Example projects'
+Example projects can be found in 'Example projects'.
 
 
 ### Subscribe or i'll eat ur kids
