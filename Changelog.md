@@ -3,15 +3,15 @@
 # 0.6.0.0
 
 ### Additions
-- Added more gateway eventsx.
-- Added support for changing the nickname of other guild members.
-- Added some groundlaying voice functionality.
+- Added more gateway events.
+- Added some groundlaying voice functionality (more coming soon :)).
 - Added support for modifying guild members further than their nickname.
 - Added support for deleting and disabling accounts.
 - Added more user-related DiscordErrors.
 
 ### Improvements
 - Modified many models to not be dependant on the containing model's info, making them a lot more secure.
+- User == and != comparisons are now compared by Id, making it much more reliable (more models will work like that soon).
 - Fixed the client logging out whenever a password is being set.
 - Removed ActivitiyAssets because of them being unusable.
 - There have also been a lot of name changes to methods and models (sorry, i'll try to keep those low from now on).

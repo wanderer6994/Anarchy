@@ -18,10 +18,10 @@ namespace Discord
 #pragma warning disable IDE0018
                 IEnumerable<string> values;
 #pragma warning restore IDE0018
-                HttpClient.Headers.TryGetValues("Authorization", out values);
-                if (values.Count() > 0)
+                if (!HttpClient.Headers.TryGetValues("Authorization", out values))
+                    return null;
+                else
                     return values.ElementAt(0);
-                else return null;
             }
             set
             {

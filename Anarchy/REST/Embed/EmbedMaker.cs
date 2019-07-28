@@ -9,7 +9,9 @@ namespace Discord
     /// </summary>
     public class EmbedMaker
     {
+#pragma warning disable IDE1006
         private Embed _embed { get; set; }
+#pragma warning restore IDE1006
 
 
         public string Title
@@ -43,7 +45,7 @@ namespace Discord
         public EmbedMaker AddField(string name, string content, bool inline = false)
         {
             List<EmbedField> fields = _embed.Fields.ToList();
-            fields.Add(new EmbedField() { Name = name, Content = content, Inline = inline });
+            fields.Add(new EmbedField(name, content, inline));
             _embed.Fields = fields;
 
             return this;

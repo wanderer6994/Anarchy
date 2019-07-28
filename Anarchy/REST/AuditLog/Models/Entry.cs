@@ -29,6 +29,18 @@ namespace Discord
         public string Reason { get; private set; }
 
 
+        public static bool operator==(AuditLogEntry instance, AuditLogEntry other)
+        {
+            return instance.Id == other.Id;
+        }
+
+
+        public static bool operator!=(AuditLogEntry instance, AuditLogEntry other)
+        {
+            return instance.Id != other.Id;
+        }
+
+
         public override string ToString()
         {
             return Type.ToString();

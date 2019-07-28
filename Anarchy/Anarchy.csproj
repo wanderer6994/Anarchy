@@ -77,7 +77,7 @@
     <Compile Include="REST\GuildMember\Extensions.cs" />
     <Compile Include="REST\GuildMember\Models\GuildMemberProperties.cs" />
     <Compile Include="REST\Message\UserTyping\UserTyping.cs" />
-    <Compile Include="REST\Message\UserTyping\UserTypingEventArgs.cs" />
+    <Compile Include="REST\Message\UserTyping\EventArgs.cs" />
     <Compile Include="Gateway\Voice\Extensions.cs" />
     <Compile Include="Gateway\Voice\Models\VoiceState.cs" />
     <Compile Include="Gateway\Voice\Models\VoiceStateChange.cs" />

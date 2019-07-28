@@ -1,8 +1,9 @@
 # About
 Anarchy is an opensource Discord API wrapper that focuses on making bot programming easy.<br>
-Since the start it has been our goal to make it simple yet effective, so that people can easily modify it to their needs, and not have huge performance losses.<br>
+iLinked (https://youtube.com/iLinked) is in charge of this project, and has written the wrapper from scratch.
+Kade ()
 
-Oh and currently: if you're using a bot token make sure to prefix the token with 'Bot '.<br><br>
+Oh and also: if you're using a bot token make sure to prefix the token with 'Bot '.<br><br>
 
 
 # Examples
@@ -26,13 +27,33 @@ PartialInvite invite = client.JoinGuild("fortnite");
 client.LeaveGuild(invite.Guild.Id);
 ```
 
-## Sending a message
+## Sending messages
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
 
 TextChannel channel = client.GetTextChannel(420); //this is ONLY guild text channels, if you wanna get a DM use GetDMChannel(), if you want a group use GetGroup()
 channel.TriggerTyping(); //This is optional
 channel.SendMessage("Hello, World");
+```
+
+## Sending embeds
+```csharp
+DiscordClient client = new DiscordClient("your token here");
+
+TextChannel channel = client.GetTextChannel(420);
+
+//you can also set a bunch of images. im lazy
+EmbedMaker embed = new EmbedMaker();
+embed.Title = "this is an embed";
+embed.TitleUrl = "https://github.com/iLinked1337/Anarchy";
+embed.Description = "sent from Anarchy";
+embed.Color = Color.FromArgb(0, 104, 204);
+embed.AddField("Anarchy", "is a Discord API wrapper");
+embed.Footer.Text = "Made by iLinked";
+embed.Author.Name = "iLinked";
+embed.Author.Url = "https://youtube.com/iLinked";
+
+channel.SendMessage("hey look it's an embed!", false, embed });
 ```
 
 ## Creating guilds and channels
@@ -47,7 +68,7 @@ GuildChannel newChannel = newGuild.CreateChannel(new ChannelCreationProperties()
 ```csharp
 static void Main()
 {
-   // There are obviously more gateway events, i just picked a few
+   // There are obviously a lot more gateway events, i just picked a few
    DiscordSocketClient client = new DiscordSocketClient();
    client.OnLoggedIn += Client_OnLoggedIn;
    client.OnLoggedOut += Client_OnLoggedOut;
@@ -79,11 +100,10 @@ private static void Client_OnLeftGuild(DiscordSocketClient client, GuildEventArg
 }
 ```
 
-## Downloading members in a server
+## Voice channels (NEW)
 ```csharp
 static void Main()
 {
-   // DiscordClient can also be used to do this, but it is incredibly slow compared to the gateway method
    DiscordSocketClient client = new DiscordSocketClient();
    client.OnLoggedIn += Client_OnLoggedIn;
    client.Login("your token here");
@@ -91,42 +111,15 @@ static void Main()
    Thread.Sleep(-1);
 }
 
-private static async void Client_OnLoggedIn(DiscordSocketClient client, UserEventArgs args)
+private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
 {
-   Task.Run(() =>
-   {
-       IReadOnlyList<User> users = client.GetAllGuildMembers(420);
-       foreach (var user in users)
-       {
-           // will print username#discriminator
-           Console.Writeline(user.ToString());
-       }
-   });
+   VoiceChannel channel = client.GetVoiceChannel(420);
+   channel.Join(false, true); //deafened
+   channel.Leave();
 }
-```
-
-## Sending embeds
-```csharp
-DiscordClient client = new DiscordClient("your token here");
-
-TextChannel channel = client.GetTextChannel(420);
-
-//you can also set a bunch of images. im lazy
-EmbedMaker embed = new EmbedMaker();
-embed.Title = "this is an embed";
-embed.TitleUrl = "https://github.com/iLinked1337/Anarchy";
-embed.Description = "sent from Anarchy";
-embed.Color = Color.FromArgb(0, 104, 204);
-embed.AddField("Anarchy", "is a Discord API wrapper");
-embed.Footer.Text = "Made by iLinked";
-embed.Author.Name = "iLinked";
-embed.Author.Url = "https://youtube.com/iLinked";
-
-channel.SendMessage("hey look it's an embed!", false, embed });
 ```
 
 Example projects can be found in 'Example projects'.
 
 
-### Subscribe or i'll eat ur kids
-https://youtube.com/iLinked
+sourced by platin api

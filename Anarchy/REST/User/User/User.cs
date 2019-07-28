@@ -4,7 +4,9 @@ using System.Net.Http;
 
 namespace Discord
 {
+#pragma warning disable CS0660, CS0661
     public class User : Controllable
+#pragma warning restore CS0660, CS0661
     {
         [JsonProperty("id")]
         public ulong Id { get; private set; }
@@ -108,6 +110,18 @@ namespace Discord
 
             return (Bitmap)new ImageConverter()
                         .ConvertFrom(new HttpClient().GetByteArrayAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png").Result);
+        }
+
+
+        public static bool operator==(User instance, User other)
+        {
+            return instance.Id == other.Id;
+        }
+
+
+        public static bool operator!=(User instance, User other)
+        {
+            return instance.Id != other.Id;
         }
 
 
