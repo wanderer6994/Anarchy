@@ -23,10 +23,7 @@ namespace Discord
             {
                 return (PermissionOverwriteType)Enum.Parse(typeof(PermissionOverwriteType), _type, true);
             }
-            set
-            {
-                _type = value.ToString().ToLower();
-            }
+            set { _type = value.ToString().ToLower(); }
         }
 
 

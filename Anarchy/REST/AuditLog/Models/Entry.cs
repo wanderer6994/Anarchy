@@ -14,7 +14,7 @@ namespace Discord
 
 
         [JsonProperty("changes")]
-        public List<AuditLogChange> Changes { get; private set; }
+        public IReadOnlyList<AuditLogChange> Changes { get; private set; }
 
 
         [JsonProperty("user_id")]
@@ -27,18 +27,6 @@ namespace Discord
 
         [JsonProperty("reason")]
         public string Reason { get; private set; }
-
-
-        public static bool operator==(AuditLogEntry instance, AuditLogEntry other)
-        {
-            return instance.Id == other.Id;
-        }
-
-
-        public static bool operator!=(AuditLogEntry instance, AuditLogEntry other)
-        {
-            return instance.Id != other.Id;
-        }
 
 
         public override string ToString()

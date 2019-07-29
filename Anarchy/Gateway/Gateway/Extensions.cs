@@ -4,7 +4,7 @@ using WebSocketSharp;
 
 namespace Discord.Gateway
 {
-    public static class GatewayExtensions
+    internal static class GatewayExtensions
     {
         internal static void Send(this WebSocket socket, object json)
         {

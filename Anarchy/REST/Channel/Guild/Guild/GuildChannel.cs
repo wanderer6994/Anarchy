@@ -98,10 +98,12 @@ namespace Discord
 
         public static implicit operator GuildChannelCreationProperties(GuildChannel instance)
         {
-            var properties = new GuildChannelCreationProperties();
-            properties.Name = instance.Name;
-            properties.Type = instance.Type;
-            properties.ParentId = instance.ParentId;
+            var properties = new GuildChannelCreationProperties
+            {
+                Name = instance.Name,
+                Type = instance.Type,
+                ParentId = instance.ParentId
+            };
             return properties;
         }
     }

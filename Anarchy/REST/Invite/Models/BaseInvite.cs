@@ -62,7 +62,7 @@ namespace Discord
         {
             return Client.DeleteInvite(Code);
         }
-
+        
 
         public override string ToString()
         {

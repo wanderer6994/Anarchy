@@ -6,8 +6,14 @@ namespace Discord.Gateway
     {
         public Activity()
         {
-            Type = ActivityType.Game;
             _timestamps = new ActivityTimestamps();
+        }
+
+
+        public Activity(string name, ActivityType type) : this()
+        {
+            Name = name;
+            Type = type;
         }
 
 

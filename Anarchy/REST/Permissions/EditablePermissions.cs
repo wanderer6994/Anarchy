@@ -16,5 +16,19 @@
         {
             _value = PermissionCalculator.Remove(_value, permission);
         }
+
+
+        public static EditablePermissions operator+(EditablePermissions instance, Permission permission)
+        {
+            instance.Add(permission);
+            return instance;
+        }
+
+        
+        public static EditablePermissions operator-(EditablePermissions instance, Permission permission)
+        {
+            instance.Remove(permission);
+            return instance;
+        }
     }
 }

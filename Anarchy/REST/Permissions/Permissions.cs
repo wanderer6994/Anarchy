@@ -1,6 +1,8 @@
 ﻿namespace Discord
 {
+#pragma warning disable CS0660, CS0661
     public class Permissions
+#pragma warning restore CS0660, CS0661
     {
         protected uint _value;
 
@@ -25,19 +27,6 @@
         public static implicit operator uint(Permissions instance)
         {
             return instance._value;
-        }
-
-
-        public override bool Equals(object obj)
-        {
-            return obj is Permissions permissions &&
-                   _value == permissions._value;
-        }
-
-
-        public override int GetHashCode()
-        {
-            return -1939223833 + _value.GetHashCode();
         }
 
 

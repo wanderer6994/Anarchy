@@ -11,7 +11,6 @@
 
 ### Improvements
 - Modified many models to not be dependant on the containing model's info, making them a lot more secure.
-- User == and != comparisons are now compared by Id, making it much more reliable (more models will work like that soon).
 - Fixed the client logging out whenever a password is being set.
 - Removed ActivitiyAssets because of them being unusable.
 - There have also been a lot of name changes to methods and models (sorry, i'll try to keep those low from now on).
