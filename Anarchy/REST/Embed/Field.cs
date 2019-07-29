@@ -4,6 +4,12 @@ namespace Discord
 {
     public class EmbedField
     {
+        public EmbedField()
+        {
+
+        }
+
+
         internal EmbedField(string name, string content, bool inline)
         {
             Name = name;
