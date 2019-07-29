@@ -23,7 +23,7 @@ socketClient.Login("your token here"); //This is passed to the Token property (f
 ```csharp
 DiscordClient client = new DiscordClient("your token here");
 
-PartialInvite invite = client.JoinGuild("fortnite");
+GuildInvite invite = client.JoinGuild("fortnite");
 client.LeaveGuild(invite.Guild.Id);
 ```
 
@@ -120,6 +120,3 @@ private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs
 ```
 
 Example projects can be found in 'Example projects'.
-
-
-sourced by platin api

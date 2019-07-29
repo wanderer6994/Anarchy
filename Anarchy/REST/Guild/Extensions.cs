@@ -134,10 +134,10 @@ namespace Discord
         /// Joins a guild
         /// </summary>
         /// <returns>The invite used to join the guild</returns>
-        public static PartialInvite JoinGuild(this DiscordClient client, string invCode)
+        public static GuildInvite JoinGuild(this DiscordClient client, string invCode)
         {
             return client.HttpClient.Post($"/invite/{invCode}")
-                                .Deserialize<PartialInvite>().SetClient(client);
+                                .Deserialize<GuildInvite>().SetClient(client);
         }
 
 

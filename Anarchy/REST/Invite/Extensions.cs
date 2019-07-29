@@ -12,12 +12,13 @@ namespace Discord
         /// <param name="channelId">ID of the channel</param>
         /// <param name="properties">Options for creating the invite</param>
         /// <returns>The created invite</returns>
-        public static PartialInvite CreateInvite(this DiscordClient client, ulong channelId, InviteProperties properties = null)
+        public static Invite CreateInvite(this DiscordClient client, ulong channelId, InviteProperties properties = null)
         {
-            if (properties == null) properties = new InviteProperties();
+            if (properties == null)
+                properties = new InviteProperties();
 
             return client.HttpClient.Post($"/channels/{channelId}/invites", JsonConvert.SerializeObject(properties))
-                                .Deserialize<PartialInvite>().SetClient(client);
+                                .Deserialize<Invite>().SetClient(client);
         }
 
 
@@ -26,21 +27,30 @@ namespace Discord
         /// </summary>
         /// <param name="invCode">The invite's code</param>
         /// <returns>The deleted invite</returns>
-        public static PartialInvite DeleteInvite(this DiscordClient client, string invCode)
+        public static Invite DeleteInvite(this DiscordClient client, string invCode)
         {
             return client.HttpClient.Delete($"/invites/{invCode}")
-                                .Deserialize<PartialInvite>().SetClient(client);
+                                .Deserialize<Invite>().SetClient(client);
         }
         #endregion
 
 
-        /// <summary>
-        /// Gets an invite
-        /// </summary>
-        public static Invite GetInvite(this DiscordClient client, string invCode)
+        private static T getInvite<T>(this DiscordClient client, string invCode) where T : Invite
         {
             return client.HttpClient.Get($"/invite/{invCode}?with_counts=true")
-                                .Deserialize<Invite>().SetClient(client);
+                                .Deserialize<T>().SetClient(client);
+        }
+
+
+        public static GroupInvite GetGroupInvite(this DiscordClient client, string invCode)
+        {
+            return client.getInvite<GroupInvite>(invCode);
+        }
+
+
+        public static GuildInvite GetGuildInvite(this DiscordClient client, string invCode)
+        {
+            return client.getInvite<GuildInvite>(invCode);
         }
 
 
@@ -48,10 +58,10 @@ namespace Discord
         /// Gets a guild's invites
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
-        public static IReadOnlyList<Invite> GetGuildInvites(this DiscordClient client, ulong guildId)
+        public static IReadOnlyList<GuildInvite> GetGuildInvites(this DiscordClient client, ulong guildId)
         {
             return client.HttpClient.Get($"/guilds/{guildId}/invites")
-                                .Deserialize<IReadOnlyList<Invite>>().SetClientsInList(client);
+                                .Deserialize<IReadOnlyList<GuildInvite>>().SetClientsInList(client);
         }
     }
 }

@@ -86,7 +86,7 @@ namespace Discord
         /// Creates an invite
         /// </summary>
         /// <param name="properties">Options for creating the invite</param>
-        public PartialInvite CreateInvite(InviteProperties properties = null)
+        public Invite CreateInvite(InviteProperties properties = null)
         {
             return Client.CreateInvite(Id, properties);
         }

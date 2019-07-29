@@ -154,7 +154,7 @@ namespace Discord
         /// </summary>
         /// <param name="properties">Options for creating the invite</param>
         /// <returns>The created invite</returns>
-        public PartialInvite CreateInvite(InviteProperties properties = null)
+        public Invite CreateInvite(InviteProperties properties = null)
         {
             return Client.CreateInvite(Id, properties);
         }

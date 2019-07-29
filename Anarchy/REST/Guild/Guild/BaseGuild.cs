@@ -142,7 +142,7 @@ namespace Discord
         /// <summary>
         /// Gets an invite
         /// </summary>
-        public IReadOnlyList<Invite> GetInvites()
+        public IReadOnlyList<GuildInvite> GetInvites()
         {
             return Client.GetGuildInvites(Id);
         }

@@ -10,10 +10,10 @@ namespace Discord
         /// </summary>
         /// <param name="inviteCode">Invite for the group</param>
         /// <returns>The invite used</returns>
-        public static PartialInvite JoinGroup(this DiscordClient client, string inviteCode)
+        public static GroupInvite JoinGroup(this DiscordClient client, string inviteCode)
         {
             return client.HttpClient.Post($"/invites/{inviteCode}")
-                                .Deserialize<PartialInvite>().SetClient(client);
+                                .Deserialize<GroupInvite>().SetClient(client);
         }
 
 

@@ -3,7 +3,7 @@
 namespace Discord
 {
     /// <summary>
-    /// Properties for creating an <see cref="Invite"/>
+    /// Properties for creating an <see cref="GuildInvite"/>
     /// </summary>
     public class InviteProperties
     {

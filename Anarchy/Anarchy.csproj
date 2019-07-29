@@ -68,6 +68,7 @@
     <Compile Include="REST\Channel\Guild\Guild\GuildChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannelProperties.cs" />
+    <Compile Include="REST\Invite\Models\GroupInvite.cs" />
     <Compile Include="REST\Permissions\PermissionOverwrite\Type.cs" />
     <Compile Include="REST\Channel\Private\DM\DMChannel.cs" />
     <Compile Include="REST\Emoji\Emoji\EmojiContainer.cs" />
@@ -91,8 +92,7 @@
     <Compile Include="REST\HTTP\DiscordError.cs" />
     <Compile Include="REST\HTTP\DiscordHttpException.cs" />
     <Compile Include="REST\HTTP\DiscordHttpError.cs" />
-    <Compile Include="REST\Invite\Models\BaseInvite.cs" />
-    <Compile Include="REST\Invite\Models\PartialInvite.cs" />
+    <Compile Include="REST\Invite\Models\Invite.cs" />
     <Compile Include="REST\Message\Deleted\DeletedMessage.cs" />
     <Compile Include="REST\Message\Deleted\EventArgs.cs" />
     <Compile Include="REST\Message\Reaction\Update.cs" />
@@ -189,7 +189,7 @@
     <Compile Include="Gateway\Gateway\Models\Request.cs" />
     <Compile Include="Gateway\Gateway\Models\Response.cs" />
     <Compile Include="REST\Guild\Properties\GuildCreationProperties.cs" />
-    <Compile Include="REST\Invite\Models\Invite.cs" />
+    <Compile Include="REST\Invite\Models\GuildInvite.cs" />
     <Compile Include="REST\GuildMember\Models\GuildMember.cs" />
     <Compile Include="REST\Message\Message\Message.cs" />
     <Compile Include="REST\Message\Message\MessageProperties.cs" />

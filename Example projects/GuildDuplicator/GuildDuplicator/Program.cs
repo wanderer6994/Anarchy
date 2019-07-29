@@ -107,7 +107,7 @@ namespace GuildDuplicator
                 }
 
                 //create the category
-                GuildChannel ourCategory = ourGuild.CreateChannel(new ChannelCreationProperties() { Name = category.Name, Type = ChannelType.Category });
+                GuildChannel ourCategory = ourGuild.CreateChannel(new GuildChannelCreationProperties() { Name = category.Name, Type = ChannelType.Category });
                 ourCategory.Modify(new GuildChannelProperties() { Position = category.Position });
 
                 foreach (var overwrite in category.PermissionOverwrites)
@@ -152,7 +152,7 @@ namespace GuildDuplicator
                         throw;
                 }
 
-                TextChannel ourChannel = ourGuild.CreateTextChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (ulong?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
+                TextChannel ourChannel = ourGuild.CreateTextChannel(new GuildChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (ulong?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
                 ourChannel.Modify(new TextChannelProperties() { Nsfw = channel.Nsfw, Position = channel.Position, Topic = channel.Topic, SlowMode = channel.SlowMode });
 
                 foreach (var overwrite in channel.PermissionOverwrites)
@@ -190,7 +190,7 @@ namespace GuildDuplicator
 
 
                 //create voice channels
-                VoiceChannel ourChannel = ourGuild.CreateVoiceChannel(new ChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (ulong?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
+                VoiceChannel ourChannel = ourGuild.CreateVoiceChannel(new GuildChannelCreationProperties() { Name = channel.Name, ParentId = channel.ParentId != null ? (ulong?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null });
                 ourChannel.Modify(new VoiceChannelProperties() { Bitrate = channel.Bitrate, Position = channel.Position, UserLimit = channel.UserLimit });
 
                 foreach (var overwrite in channel.PermissionOverwrites)
