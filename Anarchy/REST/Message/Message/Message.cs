@@ -36,7 +36,7 @@ namespace Discord
 
 
         [JsonProperty("member")]
-        private readonly PartialGuildMember _authorMember;
+        private readonly GuildMember _authorMember;
 
 
         public GuildMember Author

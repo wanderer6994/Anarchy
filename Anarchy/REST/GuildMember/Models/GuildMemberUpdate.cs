@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
-    public class GuildMemberUpdate : Controllable
+    internal class GuildMemberUpdate : Controllable
     {
         public GuildMemberUpdate()
         {
@@ -20,24 +20,25 @@ namespace Discord
         public GuildMember Member { get; private set; }
 
 
+#pragma warning disable IDE0051
         [JsonProperty("guild_id")]
-        public ulong GuildId
+        private ulong GuildId
         {
             get { return Member.GuildId; }
-            private set { Member.GuildId = value; }
+            set { Member.GuildId = value; }
         }
 
 
         [JsonProperty("nick")]
-        public string Nickname
+        private string Nickname
         {
             get { return Member.Nickname; }
-            private set { Member.Nickname = value; }
+            set { Member.Nickname = value; }
         }
 
 
         [JsonProperty("roles")]
-        public IReadOnlyList<ulong> Roles
+        private IReadOnlyList<ulong> Roles
         {
             get { return Member.Roles; }
             set { Member.Roles = value; }
@@ -45,10 +46,11 @@ namespace Discord
 
 
         [JsonProperty("user")]
-        public User User
+        private User User
         {
             get { return Member.User; }
             set { Member.User = value; }
         }
+#pragma warning restore IDE0051
     }
 }

@@ -71,7 +71,7 @@
     <Compile Include="REST\Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannelProperties.cs" />
     <Compile Include="REST\Invite\Models\GroupInvite.cs" />
-    <Compile Include="REST\Permissions\PermissionOverwrite\Type.cs" />
+    <Compile Include="REST\Permissions\Overwrite\Type.cs" />
     <Compile Include="REST\Channel\Private\DM\DMChannel.cs" />
     <Compile Include="REST\Emoji\Emoji\EmojiContainer.cs" />
     <Compile Include="REST\Emoji\Emoji\UpdatedEventArgs.cs" />
@@ -87,10 +87,9 @@
     <Compile Include="REST\Guild\Ban\UpdateEventArgs.cs" />
     <Compile Include="REST\Guild\Ban\BanContainer.cs" />
     <Compile Include="REST\Guild\Guild\PartialGuild.cs" />
-    <Compile Include="REST\GuildMember\EventArgs\GuildMemberEventArgs.cs" />
+    <Compile Include="REST\GuildMember\EventArgs\MemberEventArgs.cs" />
     <Compile Include="REST\GuildMember\Models\GuildMemberUpdate.cs" />
     <Compile Include="REST\GuildMember\EventArgs\MembersEventArgs.cs" />
-    <Compile Include="REST\GuildMember\Models\PartialGuildMember.cs" />
     <Compile Include="REST\HTTP\DiscordError.cs" />
     <Compile Include="REST\HTTP\DiscordHttpException.cs" />
     <Compile Include="REST\HTTP\DiscordHttpError.cs" />
@@ -114,7 +113,7 @@
     <Compile Include="REST\Channel\Channel\Properties\ChannelProperties.cs" />
     <Compile Include="Gateway\Auth\Models\LoginEventArgs.cs" />
     <Compile Include="REST\Guild\Ban\Ban.cs" />
-    <Compile Include="REST\Guild\Models\GuildPremiumTier.cs" />
+    <Compile Include="REST\Guild\Models\PremiumTier.cs" />
     <Compile Include="REST\Guild\Guild\BaseGuild.cs" />
     <Compile Include="REST\Guild\Guild\SocketGuild.cs" />
     <Compile Include="REST\Embed\Author.cs" />
@@ -167,10 +166,10 @@
     <Compile Include="Multi\Controllable\Extensions.cs" />
     <Compile Include="Multi\JsonExtensions.cs" />
     <Compile Include="REST\Channel\Channel\ChannelType.cs" />
-    <Compile Include="REST\Guild\Models\GuildVerificationLevel.cs" />
-    <Compile Include="REST\User\User\Hypesquad.cs" />
+    <Compile Include="REST\Guild\Models\VerificationLevel.cs" />
+    <Compile Include="REST\User\Profile\Hypesquad.cs" />
     <Compile Include="REST\User\User\NitroType.cs" />
-    <Compile Include="REST\User\User\Status.cs" />
+    <Compile Include="REST\User\Profile\Status.cs" />
     <Compile Include="Multi\Models\DiscordException.cs" />
     <Compile Include="REST\RateLimit\RateLimitException.cs" />
     <Compile Include="Gateway\Gateway\Extensions.cs" />
@@ -190,7 +189,7 @@
     <Compile Include="Gateway\Presence\Presence\Presence.cs" />
     <Compile Include="Gateway\Gateway\Models\Request.cs" />
     <Compile Include="Gateway\Gateway\Models\Response.cs" />
-    <Compile Include="REST\Guild\Properties\GuildCreationProperties.cs" />
+    <Compile Include="REST\Guild\Properties\CreationProperties.cs" />
     <Compile Include="REST\Invite\Models\GuildInvite.cs" />
     <Compile Include="REST\GuildMember\Models\GuildMember.cs" />
     <Compile Include="REST\Message\Message\Message.cs" />
@@ -207,7 +206,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="X-Super-Properties\SPInformation.cs" />
     <Compile Include="REST\Permissions\PermissionCalculator.cs" />
-    <Compile Include="REST\Permissions\PermissionOverwrite\PermissionOverwrite.cs" />
+    <Compile Include="REST\Permissions\Overwrite\PermissionOverwrite.cs" />
     <Compile Include="REST\Permissions\Permission.cs" />
   </ItemGroup>
   <ItemGroup />

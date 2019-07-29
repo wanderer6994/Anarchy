@@ -10,6 +10,7 @@ namespace Discord.Gateway
 #pragma warning disable IDE0052
         private long _startValue;
 #pragma warning restore IDE0052
+
         [JsonIgnore]
         private TimeSpan _start;
         [JsonIgnore]
