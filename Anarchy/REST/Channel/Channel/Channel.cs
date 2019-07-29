@@ -34,9 +34,6 @@ namespace Discord
         /// <param name="properties">Options for modifying the channel</param>
         public void Modify(ChannelProperties properties)
         {
-            if (!properties.NameProperty.Set)
-                return;
-
             Name = Client.ModifyChannel(Id, properties).Name;
         }
 

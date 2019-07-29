@@ -23,7 +23,7 @@ namespace Discord
         }
 
 
-        private readonly Property<uint> DiscriminatorProperty = new Property<uint>();
+        internal Property<uint> DiscriminatorProperty = new Property<uint>();
         [JsonProperty("discriminator")]
         public uint Discriminator
         {

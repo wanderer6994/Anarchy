@@ -37,17 +37,6 @@ namespace Discord
         /// <param name="properties">Options for modifying the channel</param>
         public void Modify(VoiceChannelProperties properties)
         {
-            if (!properties.NameProperty.Set)
-                properties.Name = Name;
-            if (!properties.PositionProperty.Set)
-                properties.Position = Position;
-            if (!properties.ParentProperty.Set)
-                properties.ParentId = ParentId;
-            if (!properties.BitrateProperty.Set)
-                properties.Bitrate = Bitrate;
-            if (!properties.UserLimitProperty.Set)
-                properties.UserLimit = UserLimit;
-
             VoiceChannel channel = Client.ModifyVoiceChannel(Id, properties);
             Name = channel.Name;
             Position = channel.Position;

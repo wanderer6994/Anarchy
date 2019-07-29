@@ -17,7 +17,7 @@ namespace Discord.Webhook
             properties.ChannelId = channelId;
             Hook hook = client.HttpClient.Post($"/channels/{channelId}/webhooks", 
                                     JsonConvert.SerializeObject(properties)).Deserialize<Hook>().SetClient(client);
-            if (!properties.ChannelProperty.Set) hook.Modify(properties);
+            hook.Modify(properties);
             return hook;
         }
 

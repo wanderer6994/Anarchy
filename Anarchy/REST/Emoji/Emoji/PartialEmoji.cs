@@ -16,7 +16,7 @@ namespace Discord
         public bool Animated { get; private set; }
 
 
-        public bool IsCustom
+        public bool Custom
         {
             get { return Id != null; }
         }
@@ -24,7 +24,7 @@ namespace Discord
 
         public string GetMessegable()
         {
-            return IsCustom ? $"<:{Name}:{Id}>" : Name;
+            return Custom ? $"<:{Name}:{Id}>" : Name;
         }
 
 
