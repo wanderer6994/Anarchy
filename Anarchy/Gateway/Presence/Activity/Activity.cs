@@ -2,11 +2,11 @@
 
 namespace Discord.Gateway
 {
-    public class Activity
+    public abstract class Activity
     {
         public Activity()
         {
-            _timestamps = new ActivityTimestamps();
+
         }
 
 
@@ -23,27 +23,6 @@ namespace Discord.Gateway
 
         [JsonProperty("type")]
         public ActivityType Type { get; set; }
-
-
-        [JsonProperty("url")]
-        public string Url { get; set; }
-
-
-        [JsonProperty("details")]
-        public string Details { get; set; }
-
-
-        [JsonProperty("state")]
-        public string State { get; set; }
-
-
-        [JsonProperty("timestamps")]
-        private ActivityTimestamps _timestamps;
-        internal uint? Since
-        {
-            get { return _timestamps.Start; }
-            set { _timestamps.Start = value; }
-        }
 
 
         public override string ToString()

@@ -8,7 +8,7 @@ namespace Discord
     /// </summary>
     public class UserSettings
     {
-        internal Property<string> NameProperty = new Property<string>();
+        private readonly Property<string> NameProperty = new Property<string>();
         [JsonProperty("username")]
         public string Username
         {
@@ -23,7 +23,7 @@ namespace Discord
         }
 
 
-        internal Property<uint> DiscriminatorProperty = new Property<uint>();
+        private readonly Property<uint> DiscriminatorProperty = new Property<uint>();
         [JsonProperty("discriminator")]
         public uint Discriminator
         {
@@ -38,7 +38,7 @@ namespace Discord
         }
 
 
-        internal Property<string> EmailProperty = new Property<string>();
+        private readonly Property<string> EmailProperty = new Property<string>();
         [JsonProperty("email")]
         public string Email
         {
@@ -65,7 +65,7 @@ namespace Discord
 #pragma warning restore IDE1006, IDE0051
 
 
-        internal bool AvatarSet { get; private set; }
+        private bool AvatarSet { get; set; }
         [JsonIgnore]
         public Image Avatar
         {

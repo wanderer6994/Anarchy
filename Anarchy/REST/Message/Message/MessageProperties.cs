@@ -18,9 +18,9 @@ namespace Discord
 
 
         [JsonProperty("nonce")]
-#pragma warning disable 0414
+#pragma warning disable CS0414, IDE0052
         private readonly string _nonce;
-#pragma warning restore 0414
+#pragma warning restore CS0414, IDE0052
 
 
         [JsonProperty("tts")]

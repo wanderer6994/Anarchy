@@ -55,6 +55,8 @@
     <Compile Include="Gateway\Auth\Extensions.cs" />
     <Compile Include="Gateway\GuildMember\Extensions.cs" />
     <Compile Include="Gateway\GuildMember\Models\MemberAmount.cs" />
+    <Compile Include="Gateway\Presence\Activity\GameActivity.cs" />
+    <Compile Include="Gateway\Presence\Activity\StreamActivity.cs" />
     <Compile Include="REST\Channel\Channel\Extensions.cs" />
     <Compile Include="REST\Channel\Guild\Guild\CreationProperties.cs" />
     <Compile Include="REST\Channel\Guild\Extensions.cs" />

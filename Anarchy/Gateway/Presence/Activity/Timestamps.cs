@@ -5,30 +5,38 @@ namespace Discord.Gateway
 {
     internal class ActivityTimestamps
     {
+        private bool _startSet;
         [JsonProperty("start")]
 #pragma warning disable IDE0052
-        private long? _startValue;
+        private long _startValue;
 #pragma warning restore IDE0052
-        private TimeSpan? _startSpan;
         [JsonIgnore]
-        public uint? Start
+        private TimeSpan _start;
+        [JsonIgnore]
+        public TimeSpan Start
         {
-            get { return _startSpan.HasValue ? (uint?)_startSpan.Value.Hours : null; }
+            get { return _start; }
             set
             {
-                if (value == null)
-                {
-                    _startValue = null;
-                    _startSpan = null;
-                }
-                else
-                {
-                    _startSpan = (TimeSpan?)new TimeSpan((int)value, 0, 0);
-                    _startValue = new DateTimeOffset(DateTime.UtcNow, _startSpan.Value)
-                                                  .ToUnixTimeMilliseconds();
-                }
-                
+                _start = new TimeSpan(value.Hours > 14 ? 14 : value.Hours, value.Minutes, 0);
+                DateTime time = DateTime.UtcNow;
+                _startValue = new DateTimeOffset(time.Year, 
+                                                 time.Month,
+                                                 time.Day,
+                                                 time.Hour,
+                                                 time.Minute,
+                                                 time.Second,
+                                                 _start)
+                                              .ToUnixTimeMilliseconds();
+
+                _startSet = true;
             }
+        }
+
+
+        public bool ShouldSerialize_startValue()
+        {
+            return _startSet;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Discord
     /// </summary>
     public class VoiceChannelProperties : GuildChannelProperties
     {
-        internal Property<uint> BitrateProperty = new Property<uint>();
+        private readonly Property<uint> BitrateProperty = new Property<uint>();
         [JsonProperty("bitrate")]
         public uint Bitrate
         {
@@ -22,7 +22,7 @@ namespace Discord
         }
 
 
-        internal Property<uint> UserLimitProperty = new Property<uint>();
+        private readonly Property<uint> UserLimitProperty = new Property<uint>();
         [JsonProperty("user_limit")]
         public uint UserLimit
         {

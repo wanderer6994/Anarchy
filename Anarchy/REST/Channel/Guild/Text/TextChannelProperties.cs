@@ -7,7 +7,7 @@ namespace Discord
     /// </summary>
     public class TextChannelProperties : GuildChannelProperties
     {
-        internal Property<string> TopicProperty = new Property<string>();
+        private readonly Property<string> TopicProperty = new Property<string>();
         [JsonProperty("topic")]
         public string Topic
         {
@@ -22,7 +22,7 @@ namespace Discord
         }
 
 
-        internal Property<bool> NsfwProperty = new Property<bool>();
+        private readonly Property<bool> NsfwProperty = new Property<bool>();
         [JsonProperty("nsfw")]
         public bool Nsfw
         {
@@ -37,7 +37,7 @@ namespace Discord
         }
 
 
-        internal Property<int> SlowModeProperty = new Property<int>();
+        private readonly Property<int> SlowModeProperty = new Property<int>();
         [JsonProperty("rate_limit_per_user")]
         public int SlowMode
         {

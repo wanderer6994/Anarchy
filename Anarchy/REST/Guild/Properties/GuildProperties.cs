@@ -8,7 +8,7 @@ namespace Discord
     /// </summary>
     public class GuildProperties
     {
-        internal Property<string> NameProperty = new Property<string>();
+        private readonly Property<string> NameProperty = new Property<string>();
         [JsonProperty("name")]
         public string Name
         {
@@ -23,7 +23,7 @@ namespace Discord
         }
 
 
-        internal Property<string> RegionProperty = new Property<string>();
+        private readonly Property<string> RegionProperty = new Property<string>();
         [JsonProperty("region")]
         public string Region
         {
@@ -49,7 +49,7 @@ namespace Discord
         }
 #pragma warning restore IDE1006, IDE0051
 
-        internal bool IconSet { get; private set; }
+        private bool IconSet { get; set; }
         [JsonIgnore]
         public Image Icon
         {
@@ -69,7 +69,7 @@ namespace Discord
         #endregion 
 
 
-        internal Property<ulong> OwnerProperty = new Property<ulong>();
+        private readonly Property<ulong> OwnerProperty = new Property<ulong>();
         [JsonProperty("owner_id")]
         public ulong OwnerId
         {
@@ -84,7 +84,7 @@ namespace Discord
         }
 
 
-        internal Property<GuildVerificationLevel> VerificationProperty = new Property<GuildVerificationLevel>();
+        private readonly Property<GuildVerificationLevel> VerificationProperty = new Property<GuildVerificationLevel>();
         [JsonProperty("verification_level")]
         public GuildVerificationLevel VerificationLevel
         {
@@ -93,12 +93,24 @@ namespace Discord
         }
 
 
-        internal Property<GuildDefaultNotifications> NotificationsProperty = new Property<GuildDefaultNotifications>();
+        public bool ShouldSerializeVerificationLevel()
+        {
+            return VerificationProperty.Set;
+        }
+
+
+        private readonly Property<GuildDefaultNotifications> NotificationsProperty = new Property<GuildDefaultNotifications>();
         [JsonProperty("default_message_notifications")]
         public GuildDefaultNotifications DefaultNotifications
         {
             get { return NotificationsProperty; }
             set { NotificationsProperty.Value = value; }
+        }
+
+
+        public bool ShouldSerializeDefaultNotifications()
+        {
+            return NotificationsProperty.Set;
         }
     }
 }

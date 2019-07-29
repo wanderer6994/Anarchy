@@ -4,11 +4,11 @@ using System.Drawing;
 namespace Discord
 {
     /// <summary>
-    /// Options for modifying a role
+    /// Options for creating/modifying a role
     /// </summary>
     public class RoleProperties
     {
-        internal Property<string> NameProperty = new Property<string>();
+        private readonly Property<string> NameProperty = new Property<string>();
         [JsonProperty("name")]
         public string Name
         {
@@ -23,7 +23,7 @@ namespace Discord
         }
 
 
-        internal Property<EditablePermissions> PermissionsProperty = new Property<EditablePermissions>();
+        private readonly Property<EditablePermissions> PermissionsProperty = new Property<EditablePermissions>();
         [JsonProperty("permissions")]
 #pragma warning disable IDE1006, IDE0051
         private uint _permissions
@@ -44,7 +44,7 @@ namespace Discord
         }
 
 
-        internal Property<uint> ColorProperty = new Property<uint>();
+        private readonly Property<uint> ColorProperty = new Property<uint>();
         [JsonProperty("color")]
 #pragma warning disable IDE1006, IDE0051
         private uint _color
@@ -66,7 +66,7 @@ namespace Discord
         }
 
 
-        internal Property<bool> SeperatedProperty = new Property<bool>();
+        private readonly Property<bool> SeperatedProperty = new Property<bool>();
         [JsonProperty("hoist")]
         public bool Seperated
         {
@@ -81,7 +81,7 @@ namespace Discord
         }
 
 
-        internal Property<bool> MentionableProperty = new Property<bool>();
+        private readonly Property<bool> MentionableProperty = new Property<bool>();
         [JsonProperty("mentionable")]
         public bool Mentionable
         {

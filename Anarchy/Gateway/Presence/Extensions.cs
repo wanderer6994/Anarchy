@@ -19,12 +19,10 @@ namespace Discord.Gateway
         /// <summary>
         /// Sets the client's activity
         /// </summary>
-        /// <param name="since">How long the client has been playing for</param>
-        public static void SetActivity(this DiscordSocketClient client, Activity activity, uint? since = null)
+        public static void SetActivity(this DiscordSocketClient client, Activity activity)
         {
             var req = new GatewayRequest<Presence>(GatewayOpcode.PresenceChange);
             req.Data.Activity = activity;
-            req.Data.Activity.Since = since;
             client.Socket.Send(req);
         }
     }

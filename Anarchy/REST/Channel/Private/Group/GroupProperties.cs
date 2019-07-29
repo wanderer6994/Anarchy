@@ -19,7 +19,7 @@ namespace Discord
 #pragma warning restore IDE1006, IDE0051
 
 
-        internal bool IconSet { get; private set; }
+        private bool IconSet { get; set; }
         [JsonIgnore]
         public Image Icon
         {
