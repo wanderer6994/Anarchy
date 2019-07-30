@@ -72,15 +72,48 @@ namespace Discord
 
 
         /// <summary>
+        /// Gets a list of messages from a channel
+        /// </summary>
+        /// <param name="channelId">ID of the channel</param>
+        /// <param name="filters">Options for filtering out messages</param>
+        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId, MessageFilters filters = null)
+        {
+            if (filters == null)
+                filters = new MessageFilters();
+
+            string parameters = "";
+            if (filters.LimitProperty.Set) parameters += $"limit={filters.Limit}&";
+            if (filters.BeforeProperty.Set) parameters += $"before={filters.BeforeId}&";
+            if (filters.AfterProperty.Set) parameters += $"after={filters.AfterId}";
+
+            IReadOnlyList<Message> messages = client.HttpClient.Get($"/channels/{channelId}/messages?{parameters}")
+                                                          .Deserialize<IReadOnlyList<Message>>().SetClientsInList(client);
+
+            if (filters.UserProperty.Set)
+            {
+                List<Message> temp = new List<Message>();
+                foreach (var msg in messages)
+                {
+                    if (msg.Author.User.Id == filters.UserId)
+                        temp.Add(msg);
+                }
+
+
+                messages = temp;
+            }
+
+            return messages;
+        }
+
+
+        /// <summary>
         /// Gets a list of messages in a channel
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
         /// <param name="limit">The max amount of messages to return</param>
-        /// <param name="afterId">The ID to offset from</param>
-        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId, uint limit = 100, ulong afterId = 0)
+        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId, uint limit = 100)
         {
-            return client.HttpClient.Get($"/channels/{channelId}/messages?limit={limit}{(afterId != 0 ? $"&after={afterId}" : "")}")
-                                .Deserialize<IReadOnlyList<Message>>().SetClientsInList(client);
+            return client.GetChannelMessages(channelId, new MessageFilters() { Limit = limit });
         }
 
 

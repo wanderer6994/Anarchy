@@ -94,17 +94,5 @@ namespace Discord
         {
             RemovePermissionOverwrite(overwrite.Id);
         }
-
-
-        public static implicit operator GuildChannelCreationProperties(GuildChannel instance)
-        {
-            var properties = new GuildChannelCreationProperties
-            {
-                Name = instance.Name,
-                Type = instance.Type,
-                ParentId = instance.ParentId
-            };
-            return properties;
-        }
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="REST\Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannelProperties.cs" />
     <Compile Include="REST\Invite\Models\GroupInvite.cs" />
+    <Compile Include="REST\Message\Message\MessageFilters.cs" />
     <Compile Include="REST\Permissions\Overwrite\Type.cs" />
     <Compile Include="REST\Channel\Private\DM\DMChannel.cs" />
     <Compile Include="REST\Emoji\Emoji\EmojiContainer.cs" />
@@ -103,7 +104,6 @@
     <Compile Include="Gateway\Presence\Activity\Timestamps.cs" />
     <Compile Include="Gateway\Presence\Activity\Type.cs" />
     <Compile Include="REST\AuditLog\Extensions.cs" />
-    <Compile Include="REST\AuditLog\Models\AuditLog.cs" />
     <Compile Include="REST\AuditLog\Models\ActionType.cs" />
     <Compile Include="REST\AuditLog\Models\Change.cs" />
     <Compile Include="REST\AuditLog\Models\Entry.cs" />
@@ -159,6 +159,8 @@
     <Compile Include="DiscordSocketClient.cs" />
     <Compile Include="REST\Emoji\Emoji\EmojiProperties.cs" />
     <Compile Include="Gateway\Voice\Models\VoiceStateEventArgs.cs" />
+    <Compile Include="REST\Voice\Extensions.cs" />
+    <Compile Include="REST\Voice\VoiceRegion.cs" />
     <Compile Include="REST\Webhook\Extensions.cs" />
     <Compile Include="REST\Webhook\Models\WebhookProfile.cs" />
     <Compile Include="REST\Webhook\Models\WebhookProperties.cs" />

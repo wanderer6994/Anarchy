@@ -81,13 +81,23 @@ namespace Discord
 
 
         /// <summary>
+        /// Gets a list of messages from the channel
+        /// </summary>
+        /// <param name="filters">Options for filtering out messages</param>
+        public IReadOnlyList<Message> GetMessages(MessageFilters filters = null)
+        {
+            return Client.GetChannelMessages(Id, filters);
+        }
+
+
+        /// <summary>
         /// Gets a list of messages in the channel
         /// </summary>
         /// <param name="limit">The max amount of messages to return</param>
         /// <param name="afterId">The ID to offset from</param>
-        public IReadOnlyList<Message> GetMessages(uint limit = 100, uint afterId = 0)
+        public IReadOnlyList<Message> GetMessages(uint limit = 100)
         {
-            return Client.GetChannelMessages(Id, limit, afterId);
+            return Client.GetChannelMessages(Id, limit);
         }
 
 

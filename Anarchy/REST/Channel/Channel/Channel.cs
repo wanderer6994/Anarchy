@@ -48,12 +48,6 @@ namespace Discord
         }
 
 
-        public static implicit operator ChannelCreationProperties(Channel instance)
-        {
-            return new ChannelCreationProperties { Name = instance.Name, Type = instance.Type };
-        }
-
-
         public override string ToString()
         {
             return Name;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace Discord
 {
@@ -14,8 +15,8 @@ namespace Discord
             if (filters == null)
                 filters = new AuditLogFilters();
 
-            return client.HttpClient.Get($"/guilds/{guildId}/audit-logs?{(filters.UserIdProperty.Set ? $"user_id={filters.UserId}" : "")}&{(filters.ActionTypeProperty.Set ? $"action_type={(int)filters.ActionType}" : "")}&{(filters.BeforeIdProperty.Set ? $"before={filters.BeforeId}" : "")}&{(filters.LimitProperty.Set ? $"limit={filters.Limit}" : "")}")
-                    .Deserialize<AuditLog>().Entries;
+            return (IReadOnlyList<AuditLogEntry>)client.HttpClient.Get($"/guilds/{guildId}/audit-logs?{(filters.UserIdProperty.Set ? $"user_id={filters.UserId}" : "")}&{(filters.ActionTypeProperty.Set ? $"action_type={(int)filters.ActionType}" : "")}&{(filters.BeforeIdProperty.Set ? $"before={filters.BeforeId}" : "")}&{(filters.LimitProperty.Set ? $"limit={filters.Limit}" : "")}")
+                    .Deserialize<JObject>().GetValue("audit_log_entries").ToObject(typeof(IReadOnlyList<AuditLogEntry>));
         }
     }
 }

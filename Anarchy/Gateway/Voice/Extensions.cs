@@ -1,28 +1,9 @@
-﻿using Newtonsoft.Json;
-using Discord.Gateway;
+﻿using Discord.Gateway;
 
-namespace Discord
+namespace Discord.Gateway
 {
     public static class VoiceExtensions
     {
-        /// <summary>
-        /// Changes a user's voice state in the specified guild
-        /// </summary>
-        /// <param name="guildId">ID of the guild</param>
-        /// <param name="userId">ID of the user</param>
-        /// <param name="muted">Whether the member should be muted or not (null for 'don't change')</param>
-        /// <param name="deafened">Whether the member should be deafened or not (null for 'don't change')</param>
-        public static void ChangeGuildMemberVoiceState(this DiscordClient client, ulong guildId, ulong userId, bool? muted = null, bool? deafened = null)
-        {
-            GuildMemberProperties properties = new GuildMemberProperties();
-            if (muted != null)
-                properties.Muted = muted.Value;
-            if (deafened != null)
-                properties.Deafened = deafened.Value;
-            client.ModifyGuildMember(guildId, userId, properties);
-        }
-
-
         private static void ChangeVoiceState(this DiscordSocketClient client, ulong guildId, ulong? channelId, bool muted = false, bool deafened = false)
         {
             var req = new GatewayRequest<VoiceStateChange>(GatewayOpcode.VoiceStateUpdate);

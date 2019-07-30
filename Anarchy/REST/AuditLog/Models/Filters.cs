@@ -18,16 +18,16 @@
         }
 
 
-        internal Property<long> BeforeIdProperty = new Property<long>();
-        public long BeforeId
+        internal Property<ulong> BeforeIdProperty = new Property<ulong>();
+        public ulong BeforeId
         {
             get { return BeforeIdProperty; }
             set { BeforeIdProperty.Value = value; }
         }
 
 
-        internal Property<int> LimitProperty = new Property<int>();
-        public int Limit
+        internal Property<uint> LimitProperty = new Property<uint>();
+        public uint Limit
         {
             get { return LimitProperty; }
             set { LimitProperty.Value = value; }

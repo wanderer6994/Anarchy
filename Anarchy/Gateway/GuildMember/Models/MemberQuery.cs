@@ -7,17 +7,14 @@ namespace Discord.Gateway
     /// </summary>
     internal class GatewayMemberQuery
     {
-        public GatewayMemberQuery()
-        {
-            Query = "";
-        }
-
         [JsonProperty("guild_id")]
         public ulong GuildId { get; set; }
 
 
         [JsonProperty("query")]
-        public string Query { get; set; }
+#pragma warning disable CS0414, IDE0044, IDE0051
+        private string _query = "";
+#pragma warning restore CS0414, IDE0044, IDE0051
 
 
         [JsonProperty("limit")]

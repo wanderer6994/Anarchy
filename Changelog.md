@@ -6,6 +6,7 @@
 - Added more gateway events.
 - Added some groundlaying voice functionality (more coming soon :)).
 - Added support for modifying guild members further than their nickname.
+- Added options for filtering messages.
 - Added support for deleting and disabling accounts.
 - Added more user-related DiscordErrors.
 
