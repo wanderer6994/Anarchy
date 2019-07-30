@@ -132,7 +132,7 @@ namespace Discord.Gateway
         {
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
-    
+
             switch (payload.Opcode)
             {
                 case GatewayOpcode.Event:

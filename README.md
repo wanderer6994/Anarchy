@@ -61,7 +61,7 @@ channel.SendMessage("hey look it's an embed!", false, embed });
 DiscordClient client = new DiscordClient("your token here");
 
 Guild newGuild = client.CreateGuild(new GuildCreationProperties() { Name = "cool stuff", Icon = Image.FromFile("icon.png"), Region = "eu-central" });
-GuildChannel newChannel = newGuild.CreateChannel(new ChannelCreationProperties() { Name = "my new channel" });
+GuildChannel newChannel = newGuild.CreateChannel(new GuildChannelCreationProperties() { Name = "my new channel" });
 ```
 
 ## Using gateway events
