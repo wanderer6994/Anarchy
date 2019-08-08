@@ -14,6 +14,7 @@ namespace Discord.Gateway
             {
                 User.SetClient(Client);
                 Guilds.SetClientsInList(Client);
+                Relationships.SetClientsInList(Client);
             };
         }
 

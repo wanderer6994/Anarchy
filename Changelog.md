@@ -1,5 +1,12 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.7.0.0
+
+### Additions
+- Added Badge to user (this could be anything ranging from their hypesquad to discord partner).
+
+
+
 # 0.6.0.0
 
 ### Additions

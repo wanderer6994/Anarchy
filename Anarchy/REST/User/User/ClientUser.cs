@@ -31,6 +31,12 @@ namespace Discord
         public NitroType Nitro { get; private set; }
 
 
+        public new Badge Badge
+        {
+            get { return (Badge)(_flags == 0 ? 0 : _flags - 32); }
+        }
+
+
         /// <summary>
         /// Updates the user's info
         /// </summary>

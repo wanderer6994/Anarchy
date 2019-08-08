@@ -13,6 +13,7 @@ namespace Discord
     {
         private readonly HttpClient _httpClient;
         private readonly DiscordClient _discordClient;
+        private static JSchema _errorSchema = new JSchemaGenerator().Generate(typeof(DiscordHttpError));
 
         public HttpRequestHeaders Headers
         {
@@ -46,8 +47,7 @@ namespace Discord
 
             if (resp.StatusCode == HttpStatusCode.BadRequest)
             {
-                JSchema schema = new JSchemaGenerator().Generate(typeof(DiscordHttpError));
-                if (!resp.Deserialize<JObject>().IsValid(schema))
+                if (!resp.Deserialize<JObject>().IsValid(_errorSchema))
                     throw new InvalidParametersException(_discordClient, resp.Content.ReadAsStringAsync().Result);
             }
 

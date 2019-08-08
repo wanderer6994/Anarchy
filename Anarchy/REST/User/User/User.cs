@@ -22,7 +22,38 @@ namespace Discord
         public string AvatarId { get; protected set; }
 
 
-        [JsonProperty("bot")]
+        [JsonProperty("flags")]
+        protected uint _flags;
+
+        public Badge Badge
+        {
+            get
+            {
+                return (Badge)_flags;
+            }
+        }
+
+
+        public Hypesquad Hypesquad
+        {
+            get
+            {
+                switch (Badge)
+                {
+                    case Badge.HypeBravery:
+                        return Hypesquad.Bravery;
+                    case Badge.HypeBrilliance:
+                        return Hypesquad.Brilliance;
+                    case Badge.HypeBalance:
+                        return Hypesquad.Balance;
+                    default:
+                        return Hypesquad.None;
+                }
+            }
+        }
+
+
+    [JsonProperty("bot")]
 #pragma warning disable 0414, 0649
         private readonly bool _bot;
 #pragma warning restore 0414, 0649

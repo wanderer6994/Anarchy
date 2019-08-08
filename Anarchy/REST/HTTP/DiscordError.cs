@@ -49,10 +49,10 @@
         PasswordDoesNotMatch = 50018,
         CannotPinMessageInOtherChannel = 50019,
         CannotExecuteOnSysMessage = 50025,
+        InvalidRecipient = 50033,
         InvalidOAuthAccessToken = 50034,
         InvalidFormBody,
         InvalidAPIVersion = 50041,
-        InvalidRecipient = 80004,
         ReactionBlocked = 90001,
         ResourceOverloaded = 130000
     }
