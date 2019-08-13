@@ -13,7 +13,9 @@ namespace Discord
     {
         private readonly HttpClient _httpClient;
         private readonly DiscordClient _discordClient;
+#pragma warning disable IDE0044
         private static JSchema _errorSchema = new JSchemaGenerator().Generate(typeof(DiscordHttpError));
+#pragma warning restore IDE0044
 
         public HttpRequestHeaders Headers
         {

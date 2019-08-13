@@ -37,7 +37,8 @@ namespace Discord
                 catch
                 {
                     HttpClient.Headers.Remove("Authorization");
-                    HttpClient.Headers.Add("Authorization", previousToken);
+                    if (previousToken != null)
+                        HttpClient.Headers.Add("Authorization", previousToken);
 
                     throw;
                 }

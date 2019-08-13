@@ -15,6 +15,7 @@ namespace Discord.Gateway
                 User.SetClient(Client);
                 Guilds.SetClientsInList(Client);
                 Relationships.SetClientsInList(Client);
+                PrivateChannels.SetClientsInList(Client);
             };
         }
 
@@ -33,7 +34,7 @@ namespace Discord.Gateway
 
 
         [JsonProperty("private_channels")]
-        public List<Channel> PrivateChannels { get; private set; }
+        public List<DMChannel> PrivateChannels { get; private set; }
 
 
         [JsonProperty("relationships")]

@@ -3,7 +3,7 @@
 # 0.7.0.0
 
 ### Additions
-- Added Badge to user (this could be anything ranging from their hypesquad to discord partner).
+- Added Badge to user (WIP).
 
 
 

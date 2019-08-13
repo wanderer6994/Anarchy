@@ -53,6 +53,7 @@
         InvalidOAuthAccessToken = 50034,
         InvalidFormBody,
         InvalidAPIVersion = 50041,
+        InvalidGuild = 50055,
         ReactionBlocked = 90001,
         ResourceOverloaded = 130000
     }

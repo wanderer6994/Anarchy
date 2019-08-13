@@ -6,7 +6,7 @@ namespace Discord.Gateway
     {
         public ClientUser User { get; private set; }
         public IReadOnlyList<SocketGuild> Guilds { get; private set; }
-        public IReadOnlyList<Channel> PrivateChannels { get; private set; }
+        public IReadOnlyList<DMChannel> PrivateChannels { get; private set; }
         public IReadOnlyList<Relationship> Relationships { get; private set; }
 
 
