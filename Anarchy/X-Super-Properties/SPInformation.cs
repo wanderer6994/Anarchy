@@ -33,5 +33,11 @@ namespace Discord
                 OnPropertiesUpdated?.Invoke(this, new SPUpdatedEventArgs(this));
             }
         }
+
+
+        public static implicit operator SuperProperties(SPInformation instance)
+        {
+            return instance.Properties;
+        }
     }
 }

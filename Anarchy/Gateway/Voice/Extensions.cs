@@ -6,12 +6,15 @@ namespace Discord.Gateway
     {
         private static void ChangeVoiceState(this DiscordSocketClient client, ulong guildId, ulong? channelId, bool muted = false, bool deafened = false)
         {
-            var req = new GatewayRequest<VoiceStateChange>(GatewayOpcode.VoiceStateUpdate);
-            req.Data.GuildId = guildId;
-            req.Data.ChannelId = channelId;
-            req.Data.Muted = muted;
-            req.Data.Deafened = deafened;
-            client.Socket.Send(req);
+            VoiceStateChange state = new VoiceStateChange()
+            {
+                GuildId =  guildId,
+                ChannelId = channelId,
+                Muted = muted,
+                Deafened = deafened
+            };
+
+            client.Socket.Send(GatewayOpcode.VoiceStateUpdate, state);
         }
 
 

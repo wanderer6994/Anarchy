@@ -10,9 +10,9 @@ namespace Discord.Gateway
         /// <param name="status">The new status</param>
         public static void SetStatus(this DiscordSocketClient client, UserStatus status)
         {
-            var req = new GatewayRequest<Presence>(GatewayOpcode.PresenceChange);
-            req.Data.Status = status;
-            client.Socket.Send(req);
+            var presence = new Presence() { Status = status };
+
+            client.Socket.Send(GatewayOpcode.PresenceChange, presence);
         }
 
 
@@ -21,9 +21,9 @@ namespace Discord.Gateway
         /// </summary>
         public static void SetActivity(this DiscordSocketClient client, Activity activity)
         {
-            var req = new GatewayRequest<Presence>(GatewayOpcode.PresenceChange);
-            req.Data.Activity = activity;
-            client.Socket.Send(req);
+            var presence = new Presence() { Activity = activity };
+
+            client.Socket.Send(GatewayOpcode.PresenceChange, presence);
         }
     }
 }

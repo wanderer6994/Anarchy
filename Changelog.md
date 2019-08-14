@@ -1,9 +1,13 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
-# 0.7.0.0
+# 0.6.1.0
 
 ### Additions
 - Added Badge to user (WIP).
+- Added a few more errors to DiscordError.
+
+### Improvements
+- Minor code readability improvements and bug fixes.
 
 
 

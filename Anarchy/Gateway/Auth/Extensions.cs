@@ -7,20 +7,25 @@
         /// </summary>
         internal static void LoginToGateway(this DiscordSocketClient client)
         {
-            var req = new GatewayRequest<GatewayIdentification>(GatewayOpcode.Identify);
-            req.Data.Token = client.Token;
-            req.Data.Properties = client.SuperPropertiesInfo.Properties;
-            client.Socket.Send(req);
+            var identification = new GatewayIdentification()
+            {
+                Token = client.Token,
+                Properties = client.SuperPropertiesInfo
+            };
+
+            client.Socket.Send(GatewayOpcode.Identify, identification);
         }
 
 
         internal static void Resume(this DiscordSocketClient client)
         {
-            var req = new GatewayRequest<GatewayResume>(GatewayOpcode.Resume);
-            req.Data.Token = client.Token;
-            req.Data.SessionId = client.SessionId;
-            req.Data.Sequence = client.Sequence;
-            client.Socket.Send(req);
+            var resume = new GatewayResume()
+            {
+                Token = client.Token,
+                SessionId = client.SessionId,
+                Sequence = client.Sequence
+            };
+            client.Socket.Send(GatewayOpcode.Resume, resume);
         }
     }
 }

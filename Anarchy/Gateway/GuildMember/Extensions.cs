@@ -12,10 +12,13 @@ namespace Discord.Gateway
         /// <param name="limit">Max amount of members to receive (<see cref="MemberAmount"/> might help)</param>
         public static void GetGuildMembers(this DiscordSocketClient client, ulong guildId, uint limit = 100)
         {
-            var req = new GatewayRequest<GatewayMemberQuery>(GatewayOpcode.RequestGuildMembers);
-            req.Data.GuildId = guildId;
-            req.Data.Limit = limit;
-            client.Socket.Send(req);
+            var query = new GatewayMemberQuery()
+            {
+                GuildId = guildId,
+                Limit = limit
+            };
+
+            client.Socket.Send(GatewayOpcode.RequestGuildMembers, query);
         }
 
 

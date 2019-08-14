@@ -54,6 +54,7 @@
         InvalidFormBody,
         InvalidAPIVersion = 50041,
         InvalidGuild = 50055,
+        IncomingFriendRequestsDisabled = 80000,
         ReactionBlocked = 90001,
         ResourceOverloaded = 130000
     }
