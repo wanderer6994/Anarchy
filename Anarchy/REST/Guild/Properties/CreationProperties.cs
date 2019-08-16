@@ -6,7 +6,7 @@ namespace Discord
     /// <summary>
     /// Options for creating a <see cref="Guild"/>
     /// </summary>
-    public class GuildCreationProperties
+    internal class GuildCreationProperties
     {
         [JsonProperty("name")]
         public string Name { get; set; }

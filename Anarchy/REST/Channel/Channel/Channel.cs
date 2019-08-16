@@ -42,9 +42,9 @@ namespace Discord
         /// Deletes the channel
         /// </summary>
         /// <returns>The deleted <see cref="Channel"/></returns>
-        public Channel Delete()
+        public void Delete()
         {
-            return Client.DeleteChannel(Id);
+            Name = Client.DeleteChannel(Id).Name;
         }
 
 

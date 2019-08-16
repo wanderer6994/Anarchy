@@ -21,6 +21,32 @@ namespace Discord
 
 
         /// <summary>
+        /// Updates the guild's info
+        /// </summary>
+        public void Update()
+        {
+            Guild guild = Client.GetGuild(Id);
+            Name = guild.Name;
+            IconId = guild.IconId;
+        }
+
+
+        /// <summary>
+        /// Modifies the guild
+        /// </summary>
+        /// <param name="properties">Options for modifying the guild</param>
+        public void Modify(GuildProperties properties)
+        {
+            if (!properties.IconSet)
+                properties.IconId = IconId;
+
+            Guild guild = Client.ModifyGuild(Id, properties);
+            Name = guild.Name;
+            IconId = guild.IconId;
+        }
+
+
+        /// <summary>
         /// Deletes the guild
         /// </summary>
         public void Delete()

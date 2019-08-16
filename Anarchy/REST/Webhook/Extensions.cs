@@ -39,9 +39,9 @@ namespace Discord.Webhook
         /// Deletes a webhook
         /// </summary>
         /// <param name="webhookId">ID of the webhook</param>
-        public static void DeleteChannelWebhook(this DiscordClient client, ulong webhookId)
+        public static void DeleteChannelWebhook(this DiscordClient client, ulong webhookId, string token = null)
         {
-            client.HttpClient.Delete($"/webhooks/{webhookId}");
+            client.HttpClient.Delete($"/webhooks/{webhookId}/{token}");
         }
         #endregion
 

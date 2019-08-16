@@ -74,7 +74,7 @@ namespace Discord
         /// <summary>
         /// Updates the guild's info
         /// </summary>
-        public void Update()
+        public new void Update()
         {
             Guild guild = Client.GetGuild(Id);
             Name = guild.Name;
@@ -93,8 +93,11 @@ namespace Discord
         /// Modifies the guild
         /// </summary>
         /// <param name="properties">Options for modifying the guild</param>
-        public void Modify(GuildProperties properties)
+        public new void Modify(GuildProperties properties)
         {
+            if (!properties.IconSet)
+                properties.IconId = IconId;
+
             Guild guild = Client.ModifyGuild(Id, properties);
             Name = guild.Name;
             Region = guild.Region;

@@ -40,16 +40,32 @@ namespace Discord
 
         #region icon
         private readonly DiscordImage _image = new DiscordImage();
+        private string _iconId;
+        private bool _useBase64;
+        internal bool IconSet;
 
         [JsonProperty("icon")]
 #pragma warning disable IDE1006, IDE0051
         private string _icon
         {
-            get { return _image.Base64; }
+            get { return _useBase64 ? _image.Base64 : _iconId; }
         }
 #pragma warning restore IDE1006, IDE0051
 
-        private bool IconSet { get; set; }
+
+        public string IconId
+        {
+            get { return _iconId; }
+            set
+            {
+                _iconId = value;
+                _useBase64 = false;
+                IconSet = true;
+            }
+        }
+
+
+
         [JsonIgnore]
         public Image Icon
         {
@@ -57,14 +73,9 @@ namespace Discord
             set
             { 
                 _image.Image = value;
+                _useBase64 = true;
                 IconSet = true;
             }
-        }
-
-
-        public bool ShouldSerializeIcon()
-        {
-            return IconSet;
         }
         #endregion 
 

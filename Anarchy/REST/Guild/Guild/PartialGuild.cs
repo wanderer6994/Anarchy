@@ -33,7 +33,7 @@ namespace Discord
         /// <summary>
         /// Gets the full guild (<see cref="Guild"/>)
         /// </summary>
-        public Guild GetFullGuild()
+        public Guild GetGuild()
         {
             return Client.GetGuild(Id);
         }

@@ -53,10 +53,10 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         public static IReadOnlyList<Emoji> GetGuildEmojis(this DiscordClient client, ulong guildId)
         {
-            var reactions = client.HttpClient.Get($"/guilds/{guildId}/emojis")
+            var emojis = client.HttpClient.Get($"/guilds/{guildId}/emojis")
                                         .Deserialize<IReadOnlyList<Emoji>>().SetClientsInList(client);
-            foreach (var reaction in reactions) reaction.GuildId = guildId;
-            return reactions;
+            foreach (var emoji in emojis) emoji.GuildId = guildId;
+            return emojis;
         }
 
 

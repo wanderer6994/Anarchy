@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public abstract class Invite : Controllable
+    public class Invite : Controllable
     {
         public Invite()
         {
@@ -25,9 +25,9 @@ namespace Discord
         /// Deletes the invite
         /// </summary>
         /// <returns></returns>
-        public Invite Delete()
+        public void Delete()
         {
-            return Client.DeleteInvite(Code);
+            Inviter = Client.DeleteInvite(Code).Inviter;
         }
         
 

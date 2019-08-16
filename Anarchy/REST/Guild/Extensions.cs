@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 
 namespace Discord
 {
@@ -12,8 +12,14 @@ namespace Discord
         /// </summary>
         /// <param name="properties">Options for creating the guild</param>
         /// <returns>The created <see cref="Guild"/></returns>
-        public static Guild CreateGuild(this DiscordClient client, GuildCreationProperties properties)
+        public static Guild CreateGuild(this DiscordClient client, string name, Image icon = null, string region = null)
         {
+            GuildCreationProperties properties = new GuildCreationProperties() { Name = name };
+            if (icon != null)
+                properties.Icon = icon;
+            if (region != null)
+                properties.Region = region;
+
             return client.HttpClient.Post("/guilds", JsonConvert.SerializeObject(properties))
                                 .Deserialize<Guild>().SetClient(client);
         }

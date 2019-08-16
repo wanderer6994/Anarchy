@@ -26,6 +26,16 @@ namespace Discord
         [JsonProperty("user")]
         public User User { get; private set; }
 
+
+        [JsonProperty("premium_since")]
+        private string _premiumSince;
+
+        public Nitro Nitro
+        {
+            get { return new Nitro(_premiumSince); }
+        }
+
+
         [JsonProperty("mutual_guilds")]
         public IReadOnlyList<MutualGuild> MutualGuilds { get; private set; }
 

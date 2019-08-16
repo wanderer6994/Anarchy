@@ -47,7 +47,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="websocket-sharp-with-proxy-support">
-      <HintPath>..\..\..\..\Downloads\Anarchy-0.3.0.1\Debug\websocket-sharp-with-proxy-support.dll</HintPath>
+      <HintPath>bin\Debug\websocket-sharp-with-proxy-support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -142,13 +142,14 @@
     <Compile Include="Gateway\Presence\Presence\UpdatedEventArgs.cs" />
     <Compile Include="REST\Relationship\Models\Relationship.cs" />
     <Compile Include="REST\Relationship\Models\RelationshipType.cs" />
+    <Compile Include="REST\User\Profile\Nitro.cs" />
     <Compile Include="REST\User\User\Type.cs" />
     <Compile Include="REST\Role\Models\Role.cs" />
     <Compile Include="REST\Role\Models\RoleEventArgs.cs" />
     <Compile Include="REST\Role\Models\RoleProperties.cs" />
-    <Compile Include="REST\User\EventArgs\UserEventArgs.cs" />
+    <Compile Include="REST\User\User\UserEventArgs.cs" />
     <Compile Include="REST\User\User\ClientUser.cs" />
-    <Compile Include="REST\User\EventArgs\UserListEventArgs.cs" />
+    <Compile Include="REST\User\User\UserListEventArgs.cs" />
     <Compile Include="REST\HTTP\DiscordHttpClient.cs" />
     <Compile Include="REST\Guild\Guild\Guild.cs" />
     <Compile Include="REST\Message\Message\Attachment.cs" />

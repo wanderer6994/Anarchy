@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Drawing;
 using System.Net.Http;
 
@@ -23,37 +24,10 @@ namespace Discord
 
 
         [JsonProperty("flags")]
-        protected uint _flags;
-
-        public Badge Badge
-        {
-            get
-            {
-                return (Badge)_flags;
-            }
-        }
+        public Badge Badges { get; private set; }
 
 
-        public Hypesquad Hypesquad
-        {
-            get
-            {
-                switch (Badge)
-                {
-                    case Badge.HypeBravery:
-                        return Hypesquad.Bravery;
-                    case Badge.HypeBrilliance:
-                        return Hypesquad.Brilliance;
-                    case Badge.HypeBalance:
-                        return Hypesquad.Balance;
-                    default:
-                        return Hypesquad.None;
-                }
-            }
-        }
-
-
-    [JsonProperty("bot")]
+        [JsonProperty("bot")]
 #pragma warning disable 0414, 0649
         private readonly bool _bot;
 #pragma warning restore 0414, 0649
@@ -67,6 +41,18 @@ namespace Discord
                     return UserType.Webhook;
 
                 return _bot ? UserType.Bot : UserType.User;
+            }
+        }
+
+
+
+        public Hypesquad Hypesquad
+        {
+            get
+            {
+                return (Hypesquad)Enum.Parse(typeof(Hypesquad), 
+                                        (Badges & (Badge.HypeBravery | Badge.HypeBrilliance | Badge.HypeBalance))
+                                         .ToString().Replace("Hype", ""));
             }
         }
 

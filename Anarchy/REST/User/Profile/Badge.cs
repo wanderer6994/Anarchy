@@ -1,5 +1,8 @@
-﻿namespace Discord
+﻿using System;
+
+namespace Discord
 {
+    [Flags]
     public enum Badge
     {
         None,

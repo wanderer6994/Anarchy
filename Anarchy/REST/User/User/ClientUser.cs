@@ -31,12 +31,6 @@ namespace Discord
         public NitroType Nitro { get; private set; }
 
 
-        public new Badge Badge
-        {
-            get { return (Badge)(_flags == 0 ? 0 : _flags - 32); }
-        }
-
-
         /// <summary>
         /// Updates the user's info
         /// </summary>
@@ -50,7 +44,7 @@ namespace Discord
         /// Changes the user's profile
         /// </summary>
         /// <param name="settings">Options for changing the profile</param>
-        public void ChangeProfile(UserSettings settings)
+        public void Modify(UserSettings settings)
         {
             if (settings.Email == null)
                 settings.Email = Email;
@@ -76,13 +70,17 @@ namespace Discord
         /// <summary>
         /// Deletes the account
         /// </summary>
-        /// <param name="password">Password of the account</param>
+        /// <param name="password">The account's password</param>
         public void Delete(string password)
         {
             Client.HttpClient.Post("/users/@me/delete", $"{{\"password\":\"{password}\"}}");
         }
 
 
+        /// <summary>
+        /// Disables the account
+        /// </summary>
+        /// <param name="password">The account's password</param>
         public void Disable(string password)
         {
             Client.HttpClient.Post("/users/@me/disable", $"{{\"password\":\"{password}\"}}");

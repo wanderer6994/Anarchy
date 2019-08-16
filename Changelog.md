@@ -3,10 +3,13 @@
 # 0.6.1.0
 
 ### Additions
-- Added Badge to user (WIP).
+- Added Badges to user (also with a new Hypesquad property).
+- Added Nitro to Profile.
 - Added a few more errors to DiscordError.
 
 ### Improvements
+- client.CreateGuild() now no longer takes in a 'GuildCreationProperties', but instead takes in it's members.
+- PartialGuild now also supports modifying and updating.
 - Minor code readability improvements and bug fixes.
 
 
