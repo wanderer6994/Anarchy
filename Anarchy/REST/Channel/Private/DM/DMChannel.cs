@@ -69,16 +69,6 @@ namespace Discord
 
 
         /// <summary>
-        /// Gets a list of messages from the channel
-        /// </summary>
-        /// <param name="limit">The max amount of messages to return</param>
-        public IReadOnlyList<Message> GetMessages(uint limit = 100)
-        {
-            return Client.GetChannelMessages(Id, limit);
-        }
-
-
-        /// <summary>
         /// Gets the channel's pinned messages
         /// </summary>
         public IReadOnlyList<Message> GetPinnedMessages()

@@ -42,6 +42,12 @@ namespace Discord
         }
 
 
+        public static Invite GetInvite(this DiscordClient client, string invCode)
+        {
+            return client.getInvite<Invite>(invCode);
+        }
+
+
         public static GroupInvite GetGroupInvite(this DiscordClient client, string invCode)
         {
             return client.getInvite<GroupInvite>(invCode);

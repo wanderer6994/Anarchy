@@ -91,23 +91,12 @@ namespace Discord
 
 
         /// <summary>
-        /// Gets a list of messages in the channel
-        /// </summary>
-        /// <param name="limit">The max amount of messages to return</param>
-        /// <param name="afterId">The ID to offset from</param>
-        public IReadOnlyList<Message> GetMessages(uint limit = 100)
-        {
-            return Client.GetChannelMessages(Id, limit);
-        }
-
-
-        /// <summary>
         /// Bulk deletes messages (this is a bot only endpoint)
         /// </summary>
         /// <param name="messages">IDs of the messages</param>
         public void DeleteMessages(List<ulong> messages)
         {
-            Client.DeleteChannelMessages(Id, messages);
+            Client.DeleteMessages(Id, messages);
         }
 
 

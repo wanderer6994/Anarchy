@@ -2,7 +2,7 @@
 
 namespace Discord.Gateway
 {
-    public abstract class Activity
+    public class Activity
     {
         public Activity()
         {

@@ -65,7 +65,6 @@ namespace Discord
         }
 
 
-
         [JsonIgnore]
         public Image Icon
         {

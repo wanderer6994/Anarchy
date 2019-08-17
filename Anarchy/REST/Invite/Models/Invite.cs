@@ -21,6 +21,16 @@ namespace Discord
         public User Inviter { get; private set; }
 
 
+        [JsonProperty("guild")]
+        private Guild _guild;
+
+
+        public InviteType Type
+        {
+            get { return _guild != null ? InviteType.Guild : InviteType.Group; }
+        }
+
+
         /// <summary>
         /// Deletes the invite
         /// </summary>

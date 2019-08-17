@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Discord
 {
@@ -51,7 +52,7 @@ namespace Discord
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
         /// <param name="messages">IDs of the messages</param>
-        public static void DeleteChannelMessages(this DiscordClient client, ulong channelId, List<ulong> messages)
+        public static void DeleteMessages(this DiscordClient client, ulong channelId, List<ulong> messages)
         {
             client.HttpClient.Post($"/channels/{channelId}/messages/bulk-delete", $"{{\"messages\":{JsonConvert.SerializeObject(messages)}}}");
         }
@@ -71,16 +72,14 @@ namespace Discord
         }
 
 
+        #region get channel messages
         /// <summary>
         /// Gets a list of messages from a channel
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
         /// <param name="filters">Options for filtering out messages</param>
-        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId, MessageFilters filters = null)
+        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId, MessageFilters filters)
         {
-            if (filters == null)
-                filters = new MessageFilters();
-
             string parameters = "";
             if (filters.LimitProperty.Set) parameters += $"limit={filters.Limit}&";
             if (filters.BeforeProperty.Set) parameters += $"before={filters.BeforeId}&";
@@ -90,31 +89,32 @@ namespace Discord
                                                           .Deserialize<IReadOnlyList<Message>>().SetClientsInList(client);
 
             if (filters.UserProperty.Set)
-            {
-                List<Message> temp = new List<Message>();
-                foreach (var msg in messages)
-                {
-                    if (msg.Author.User.Id == filters.UserId)
-                        temp.Add(msg);
-                }
-
-
-                messages = temp;
-            }
+                messages = messages.Where(msg => msg.Author.User.Id == filters.UserId).ToList();
 
             return messages;
         }
 
 
         /// <summary>
-        /// Gets a list of messages in a channel
+        /// Gets a list of messages from a channel
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
-        /// <param name="limit">The max amount of messages to return</param>
-        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId, uint limit = 100)
+        /// <param name="limit">Max amount of messages to receive</param>
+        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId, uint limit)
         {
             return client.GetChannelMessages(channelId, new MessageFilters() { Limit = limit });
         }
+
+
+        /// <summary>
+        /// Gets a list of messages from a channel
+        /// </summary>
+        /// <param name="channelId">ID of the channel</param>
+        public static IReadOnlyList<Message> GetChannelMessages(this DiscordClient client, ulong channelId)
+        {
+            return client.GetChannelMessages(channelId, new MessageFilters());
+        }
+        #endregion
 
 
         /// <summary>

@@ -1,5 +1,11 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.6.1.1
+- Readded GetInvite() method.
+- Added Type in Invite, telling the user if it's for a guild or a group.
+- Multiple bug fixes.
+
+
 # 0.6.1.0
 
 ### Additions

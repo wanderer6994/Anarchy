@@ -69,6 +69,7 @@
     <Compile Include="REST\Channel\Guild\Guild\GuildChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannelProperties.cs" />
+    <Compile Include="REST\Invite\Models\InviteType.cs" />
     <Compile Include="REST\User\Profile\Badge.cs" />
     <Compile Include="REST\Invite\Models\GroupInvite.cs" />
     <Compile Include="REST\Message\Message\MessageFilters.cs" />
