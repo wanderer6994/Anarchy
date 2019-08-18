@@ -48,6 +48,7 @@
         InvalidBulkDeleteAmount,
         PasswordDoesNotMatch = 50018,
         CannotPinMessageInOtherChannel = 50019,
+        InvalidPhoneNumber = 50022,
         CannotExecuteOnSysMessage = 50025,
         InvalidRecipient = 50033,
         InvalidOAuthAccessToken = 50034,
