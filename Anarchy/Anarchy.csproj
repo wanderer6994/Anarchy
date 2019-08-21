@@ -70,6 +70,10 @@
     <Compile Include="REST\Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannelProperties.cs" />
     <Compile Include="REST\Invite\Models\InviteType.cs" />
+    <Compile Include="REST\OAuth2\Models\AuthorizedApp.cs" />
+    <Compile Include="REST\OAuth2\Models\OAuth2Application.cs" />
+    <Compile Include="REST\OAuth2\Extensions.cs" />
+    <Compile Include="REST\User\ConnectedAccount\Extensions.cs" />
     <Compile Include="REST\User\Profile\Badge.cs" />
     <Compile Include="REST\Invite\Models\GroupInvite.cs" />
     <Compile Include="REST\Message\Message\MessageFilters.cs" />

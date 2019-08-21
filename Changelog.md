@@ -1,7 +1,9 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
 # 0.6.1.1
-- Readded GetInvite() method.
+- Re-added GetInvite() method.
+- Added some OAuth2 support.
+- Improved Connections functionality.
 - Added Type in Invite, telling the user if it's for a guild or a group.
 - Multiple bug fixes.
 

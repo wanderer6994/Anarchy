@@ -7,7 +7,11 @@ namespace Discord
     {
         public Profile()
         {
-            OnClientUpdated += (sender, e) => User.SetClient(Client);
+            OnClientUpdated += (sender, e) => 
+            {
+                User.SetClient(Client);
+                ConnectedAccounts.SetClientsInList(Client);
+            };
         }
 
 
@@ -28,7 +32,7 @@ namespace Discord
 
 
         [JsonProperty("premium_since")]
-        private string _premiumSince;
+        private readonly string _premiumSince;
 
         public Nitro Nitro
         {

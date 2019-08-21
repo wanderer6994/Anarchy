@@ -3,7 +3,7 @@ using System;
 
 namespace Discord
 {
-    public class ConnectedAccount
+    public class ConnectedAccount : Controllable
     {
         [JsonProperty("id")]
         public string Id { get; private set; }
@@ -28,6 +28,12 @@ namespace Discord
 
         [JsonProperty("verified")]
         public bool Verified { get; private set; }
+
+
+        public void Remove()
+        {
+            Client.RemoveConnectedAccount(Type, Id);
+        }
 
 
         public override string ToString()
