@@ -94,8 +94,8 @@ namespace Discord
         {
             if (house == Hypesquad.None)
                 Client.HttpClient.Delete("/hypesquad/online");
-
-            Client.HttpClient.Post("/hypesquad/online", $"{{\"house_id\":{(int)house}}}");
+            else
+                Client.HttpClient.Post("/hypesquad/online", $"{{\"house_id\":{(int)house}}}");
         }
     }
 }

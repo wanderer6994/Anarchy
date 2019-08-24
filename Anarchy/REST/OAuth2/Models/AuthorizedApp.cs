@@ -5,6 +5,10 @@ namespace Discord
 {
     public class AuthorizedApp : Controllable
     {
+        [JsonProperty("id")]
+        public ulong Id { get; private set; }
+
+
         [JsonProperty("scopes")]
         public IReadOnlyList<string> Scopes { get; private set; }
 
@@ -17,7 +21,7 @@ namespace Discord
         /// </summary>
         public void Remove()
         {
-            Client.RemoveAuthorizedApp(Application.Id);
+            Client.RemoveAuthorizedApp(Id);
         }
     }
 }

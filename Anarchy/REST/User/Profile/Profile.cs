@@ -32,7 +32,9 @@ namespace Discord
 
 
         [JsonProperty("premium_since")]
+#pragma warning disable CS0649
         private readonly string _premiumSince;
+#pragma warning restore CS0649
 
         public Nitro Nitro
         {

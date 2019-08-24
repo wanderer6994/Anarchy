@@ -22,7 +22,9 @@ namespace Discord
 
 
         [JsonProperty("guild")]
-        private Guild _guild;
+#pragma warning disable CS0649
+        private readonly Guild _guild;
+#pragma warning restore CS0649
 
 
         public InviteType Type

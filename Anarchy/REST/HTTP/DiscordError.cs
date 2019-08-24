@@ -13,7 +13,7 @@
         UnknownOverwrite,
         UnknownProvider,
         UnknownRole,
-        UnknownToken,
+        UnknownAuthAppToken,
         UnknownUser,
         UnknownEmoji,
         UnknownWebhook,

@@ -11,6 +11,7 @@ namespace Discord
         }
 
 
+        //doesnt work btw
         /// <summary>
         /// Removes an authorized app from the current user
         /// </summary>
