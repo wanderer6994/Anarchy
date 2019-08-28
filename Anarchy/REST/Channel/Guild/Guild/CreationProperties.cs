@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class GuildChannelCreationProperties : ChannelCreationProperties
+    internal class GuildChannelCreationProperties : ChannelCreationProperties
     {
         [JsonProperty("parent_id")]
         public ulong? ParentId { get; set; }

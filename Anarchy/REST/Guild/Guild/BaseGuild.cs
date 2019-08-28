@@ -88,9 +88,9 @@ namespace Discord
         /// </summary>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created channel</returns>
-        public GuildChannel CreateChannel(GuildChannelCreationProperties properties)
+        public GuildChannel CreateChannel(string name, ChannelType type, ulong? parentId = null)
         {
-            return Client.CreateGuildChannel(Id, properties);
+            return Client.CreateGuildChannel(Id, name, type, parentId);
         }
 
 
@@ -99,9 +99,9 @@ namespace Discord
         /// </summary>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created channel</returns>
-        public TextChannel CreateTextChannel(GuildChannelCreationProperties properties)
+        public TextChannel CreateTextChannel(string name, ulong? parentId = null)
         {
-            return Client.CreateTextChannel(Id, properties);
+            return Client.CreateTextChannel(Id, name, parentId);
         }
 
 
@@ -110,9 +110,9 @@ namespace Discord
         /// </summary>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created channel</returns>
-        public VoiceChannel CreateVoiceChannel(GuildChannelCreationProperties properties)
+        public VoiceChannel CreateVoiceChannel(string name, ulong? parentId = null)
         {
-            return Client.CreateVoiceChannel(Id, properties);
+            return Client.CreateVoiceChannel(Id, name, parentId);
         }
 
 

@@ -71,10 +71,10 @@ namespace Discord
         }
 
 
-        private static T createGuildChannel<T>(this DiscordClient client, ulong guildId, ChannelCreationProperties properties) where T : GuildChannel
+        private static T createGuildChannel<T>(this DiscordClient client, ulong guildId, string name, ChannelType type, ulong? parentId) where T : GuildChannel
         {
             return client.HttpClient.Post($"/guilds/{guildId}/channels",
-                                JsonConvert.SerializeObject(properties)).Deserialize<T>().SetClient(client);
+                                JsonConvert.SerializeObject(new GuildChannelCreationProperties() { Name = name, Type = type, ParentId = parentId })).Deserialize<T>().SetClient(client);
         }
 
 
@@ -84,9 +84,9 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created <see cref="GuildChannel"/></returns>
-        public static GuildChannel CreateGuildChannel(this DiscordClient client, ulong guildId, GuildChannelCreationProperties properties)
+        public static GuildChannel CreateGuildChannel(this DiscordClient client, ulong guildId, string name, ChannelType type, ulong? parentId = null)
         {
-            return client.createGuildChannel<GuildChannel>(guildId, properties);
+            return client.createGuildChannel<GuildChannel>(guildId, name, type, parentId);
         }
 
 
@@ -96,10 +96,9 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created <see cref="TextChannel"/></returns>
-        public static TextChannel CreateTextChannel(this DiscordClient client, ulong guildId, GuildChannelCreationProperties properties)
+        public static TextChannel CreateTextChannel(this DiscordClient client, ulong guildId, string name, ulong? parentId = null)
         {
-            properties.Type = ChannelType.Text;
-            return client.createGuildChannel<TextChannel>(guildId, properties);
+            return client.createGuildChannel<TextChannel>(guildId, name, ChannelType.Text, parentId);
         }
 
 
@@ -109,10 +108,9 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created <see cref="VoiceChannel"/></returns>
-        public static VoiceChannel CreateVoiceChannel(this DiscordClient client, ulong guildId, GuildChannelCreationProperties properties)
+        public static VoiceChannel CreateVoiceChannel(this DiscordClient client, ulong guildId, string name, ulong? parentId)
         {
-            properties.Type = ChannelType.Voice;
-            return client.createGuildChannel<VoiceChannel>(guildId, properties);
+            return client.createGuildChannel<VoiceChannel>(guildId, name, ChannelType.Voice, parentId);
         }
 
 

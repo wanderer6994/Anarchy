@@ -167,7 +167,7 @@ namespace Discord
         /// Bans the member from the guild
         /// </summary>
         /// <param name="reason">The reason for banning the user</param>
-        /// <param name="deleteMessageDays">Amount of days to purge messages</param>
+        /// <param name="deleteMessageDays">Amount of days to purge messages (max is 7)</param>
         public void Ban(string reason = null, uint deleteMessageDays = 0)
         {
             Client.BanGuildMember(GuildId, User.Id, reason, deleteMessageDays);

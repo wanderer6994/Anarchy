@@ -71,7 +71,7 @@ namespace Discord.Webhook
         /// </summary>
         public void Delete()
         {
-            Client.DeleteChannelWebhook(Id);
+            Client.DeleteChannelWebhook(Id, Token);
         }
 
 
