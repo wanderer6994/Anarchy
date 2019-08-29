@@ -89,9 +89,6 @@ namespace Discord.Gateway
             Socket.OnMessage += SocketDataReceived;
             Socket.OnClose += Socket_OnClose;
             Socket.Connect();
-
-            if (LoggedIn)
-                this.Resume();
         }
 
         private void Socket_OnClose(object sender, CloseEventArgs e)
@@ -108,7 +105,7 @@ namespace Discord.Gateway
                     }
                     catch
                     {
-                        Thread.Sleep(80);
+                        Thread.Sleep(100);
                     }
                 }
             }
@@ -222,13 +219,15 @@ namespace Discord.Gateway
                     }
                     break;
                 case GatewayOpcode.InvalidSession:
-                    Logout();
+                    this.LoginToGateway();
                     break;
                 case GatewayOpcode.Connected:
-                    this.StartHeartbeatHandlersAsync(payload.Deserialize<JObject>().GetValue("heartbeat_interval").ToObject<uint>());
-
                     if (!LoggedIn)
                         this.LoginToGateway();
+                    else
+                        this.Resume();
+
+                    this.StartHeartbeatHandlersAsync(payload.Deserialize<JObject>().GetValue("heartbeat_interval").ToObject<uint>());
                     break;
             }
         }
