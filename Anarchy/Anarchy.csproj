@@ -69,6 +69,8 @@
     <Compile Include="REST\Channel\Guild\Guild\GuildChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannelProperties.cs" />
+    <Compile Include="REST\Embed\EmbedError.cs" />
+    <Compile Include="REST\Embed\EmbedException.cs" />
     <Compile Include="REST\Invite\Models\InviteType.cs" />
     <Compile Include="REST\OAuth2\Models\AuthorizedApp.cs" />
     <Compile Include="REST\OAuth2\Models\OAuth2Application.cs" />

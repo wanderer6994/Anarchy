@@ -5,7 +5,19 @@ namespace Discord
     public class EmbedFooter
     {
         [JsonProperty("text")]
-        public string Text { get; set; }
+        private string _text;
+
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                if (value.Length > 2048)
+                    throw new EmbedException(EmbedError.FooterTextTooLong);
+
+                _text = value;
+            }
+        }
 
 
         [JsonProperty("icon_url")]

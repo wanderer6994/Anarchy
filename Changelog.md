@@ -7,6 +7,8 @@
 - Improved Connections functionality.
 - Added Type in Invite, telling the user if it's for a guild or a group.
 - Multiple bug fixes.
+- Fixed connection resuming (like actually this time).
+- Added EmbedException to prevent sending invalid embeds.
 
 
 # 0.6.1.0

@@ -17,7 +17,13 @@ namespace Discord
         public string Title
         {
             get { return _embed.Title; }
-            set { _embed.Title = value; }
+            set
+            {
+                if (value.Length > 256)
+                    throw new EmbedException(EmbedError.TitleTooLong);
+
+                _embed.Title = value;
+            }
         }
 
 
@@ -31,7 +37,13 @@ namespace Discord
         public string Description
         {
             get { return _embed.Description; }
-            set { _embed.Description = value; }
+            set
+            {
+                if (value.Length > 2048)
+                    throw new EmbedException(EmbedError.DescriptionTooLong);
+
+                _embed.Description = value;
+            }
         }
 
 
@@ -44,6 +56,14 @@ namespace Discord
 
         public EmbedMaker AddField(string name, string content, bool inline = false)
         {
+            if (_embed.Fields.Count == 25)
+                throw new EmbedException(EmbedError.TooManyFields);
+            if (name.Length > 256)
+                throw new EmbedException(EmbedError.FieldNameTooLong);
+            if (content.Length > 1024)
+                throw new EmbedException(EmbedError.FieldContentTooLong);
+
+
             List<EmbedField> fields = _embed.Fields.ToList();
             fields.Add(new EmbedField(name, content, inline));
             _embed.Fields = fields;

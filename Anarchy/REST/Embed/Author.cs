@@ -5,7 +5,19 @@ namespace Discord
     public class EmbedAuthor
     {
         [JsonProperty("name")]
-        public string Name { get; set; }
+        private string _name;
+
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (value.Length > 256)
+                    throw new EmbedException(EmbedError.AuthorNameToolong);
+
+                _name = value;
+            }
+        }
 
 
         [JsonProperty("url")]
