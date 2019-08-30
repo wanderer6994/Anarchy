@@ -1,14 +1,19 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
-# 0.6.1.1
-- Changed guild channel creation stuff (sorry for name changes).
+# 0.6.2.0
+
+### Additions
 - Re-added GetInvite() method.
 - Added some OAuth2 support.
-- Improved Connections functionality.
 - Added Type in Invite, telling the user if it's for a guild or a group.
-- Multiple bug fixes.
-- Fixed connection resuming (like actually this time).
 - Added EmbedException to prevent sending invalid embeds.
+
+### Improvements
+- Changed guild channel creation stuff (sorry for name changes).
+- Improved Connections functionality.
+- Fixed connection resuming (like actually this time).
+- Other minor bug fixes.
+
 
 
 # 0.6.1.0

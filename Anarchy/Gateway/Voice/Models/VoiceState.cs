@@ -6,15 +6,16 @@ namespace Discord.Gateway
     {
         public VoiceState()
         {
-            OnClientUpdated += (sender, e) =>
-            {
-                Member.SetClient(Client);
-            };
+            OnClientUpdated += (sender, e) => Member.SetClient(Client);
         }
 
 
         [JsonProperty("channel_id")]
         public ulong? ChannelId { get; private set; }
+
+
+        [JsonProperty("member")]
+        public GuildMember Member { get; private set; }
 
 
         private ulong? _guildId;
@@ -45,9 +46,5 @@ namespace Discord.Gateway
 
         [JsonProperty("user_id")]
         public ulong UserId { get; private set; }
-
-
-        [JsonProperty("member")]
-        public GuildMember Member { get; private set; }
     }
 }
