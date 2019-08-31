@@ -75,6 +75,7 @@
     <Compile Include="REST\OAuth2\Models\AuthorizedApp.cs" />
     <Compile Include="REST\OAuth2\Models\OAuth2Application.cs" />
     <Compile Include="REST\OAuth2\Extensions.cs" />
+    <Compile Include="REST\Relationship\Models\RelationshipEventArgs.cs" />
     <Compile Include="REST\User\ConnectedAccount\Extensions.cs" />
     <Compile Include="REST\User\Profile\Badge.cs" />
     <Compile Include="REST\Invite\Models\GroupInvite.cs" />

@@ -2,6 +2,7 @@
 
 # 0.6.2.1
 - Added OnUserUpdated event.
+- Added user-only gateway events.
 
 
 

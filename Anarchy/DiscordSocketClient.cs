@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Threading;
 using WebSocketSharp;
 
@@ -19,6 +20,7 @@ namespace Discord.Gateway
         public delegate void ReactionHandler(DiscordSocketClient client, ReactionEventArgs args);
         public delegate void RoleHandler(DiscordSocketClient client, RoleEventArgs args);
         public delegate void BanUpdateHandler(DiscordSocketClient client, BanUpdateEventArgs args);
+        public delegate void RelationshipHandler(DiscordSocketClient client, RelationshipEventArgs args);
 
         public delegate void LoginHandler(DiscordSocketClient client, LoginEventArgs args);
         public event LoginHandler OnLoggedIn;
@@ -67,6 +69,9 @@ namespace Discord.Gateway
 
         public event BanUpdateHandler OnUserBanned;
         public event BanUpdateHandler OnUserUnbanned;
+
+        public event RelationshipHandler OnRelationshipAdded;
+        public event RelationshipHandler OnRelationshipRemoved;
         #endregion
 
 
@@ -225,6 +230,12 @@ namespace Discord.Gateway
                             break;
                         case "GUILD_BAN_REMOVE":
                             OnUserUnbanned?.Invoke(this, new BanUpdateEventArgs(payload.Deserialize<BanContainer>().SetClient(this)));
+                            break;
+                        case "RELATIONSHIP_ADD":
+                            OnRelationshipAdded?.Invoke(this, new RelationshipEventArgs(payload.Deserialize<Relationship>().SetClient(this)));
+                            break;
+                        case "RELATIONSHIP_REMOVE":
+                            OnRelationshipRemoved?.Invoke(this, new RelationshipEventArgs(payload.Deserialize<Relationship>().SetClient(this)));
                             break;
                     }
                     break;
