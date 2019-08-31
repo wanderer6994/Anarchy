@@ -1,5 +1,10 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.6.2.1
+- Added OnUserUpdated event.
+
+
+
 # 0.6.2.0
 
 ### Additions

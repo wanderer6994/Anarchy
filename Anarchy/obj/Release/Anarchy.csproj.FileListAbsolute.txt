@@ -1,4 +1,3 @@
-C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csprojAssemblyReference.cache
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csproj.CoreCompileInputs.cache
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Anarchy.dll
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Anarchy.pdb

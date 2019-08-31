@@ -10,6 +10,7 @@ namespace Discord.Gateway
     public class DiscordSocketClient : DiscordClient
     {
         #region events
+        public delegate void UserHandler(DiscordSocketClient client, UserEventArgs args);
         public delegate void GuildHandler(DiscordSocketClient client, GuildEventArgs args);
         public delegate void GuildMemberUpdateHandler(DiscordSocketClient client, GuildMemberEventArgs args);
         public delegate void ChannelHandler(DiscordSocketClient client, ChannelEventArgs args);
@@ -21,8 +22,9 @@ namespace Discord.Gateway
 
         public delegate void LoginHandler(DiscordSocketClient client, LoginEventArgs args);
         public event LoginHandler OnLoggedIn;
-        public delegate void LogoutHandler(DiscordSocketClient client, UserEventArgs args);
-        public event LogoutHandler OnLoggedOut;
+        public event UserHandler OnLoggedOut;
+
+        public event UserHandler OnUserUpdated;
 
         public event GuildHandler OnJoinedGuild;
         public event GuildHandler OnGuildUpdated;
@@ -141,6 +143,14 @@ namespace Discord.Gateway
                             this.User = login.User;
                             this.SessionId = login.SessionId;
                             OnLoggedIn?.Invoke(this, new LoginEventArgs(login));
+                            break;
+                        case "USER_UPDATE":
+                            User user = payload.Deserialize<User>().SetClient(this);
+
+                            if (user.Id == User.Id)
+                                User.Update(user);
+
+                            OnUserUpdated?.Invoke(this, new UserEventArgs(user));
                             break;
                         case "GUILD_CREATE":
                             OnJoinedGuild?.Invoke(this, new GuildEventArgs(payload.Deserialize<Guild>().SetClient(this)));

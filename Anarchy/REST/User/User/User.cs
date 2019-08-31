@@ -24,7 +24,7 @@ namespace Discord
 
 
         [JsonProperty("flags")]
-        public Badge Badges { get; private set; }
+        public Badge Badges { get; protected set; }
 
 
         [JsonProperty("bot")]

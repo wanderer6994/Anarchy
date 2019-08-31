@@ -40,6 +40,15 @@ namespace Discord
         }
 
 
+        internal void Update(User user)
+        {
+            Username = user.Username;
+            Discriminator = user.Discriminator;
+            AvatarId = user.AvatarId;
+            Badges = user.Badges;
+        }
+
+
         /// <summary>
         /// Changes the user's profile
         /// </summary>
