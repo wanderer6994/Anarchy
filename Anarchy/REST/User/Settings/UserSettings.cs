@@ -13,12 +13,15 @@ namespace Discord
 
         private readonly Property<string> ThemeProperty = new Property<string>();
         [JsonProperty("theme")]
-        private string _theme;
+        private string _theme
+        {
+            get { return ThemeProperty.Value; }
+        }
 
         public Theme Theme
         {
             get { return (Theme)Enum.Parse(typeof(Theme), _theme, true); }
-            set { _theme = value.ToString().ToLower(); }
+            set { ThemeProperty.Value = value.ToString().ToLower(); }
         }
 
 
@@ -74,11 +77,16 @@ namespace Discord
         }
 
 
-        private readonly Property<string> LocaleProperty = new Property<string>();
+        private readonly Property<Language> LocaleProperty = new Property<Language>();
         [JsonProperty("locale")]
-        public string Language
+        private string _locale
         {
-            get { return LocaleProperty; }
+            get { return LanguageUtils.ConvertToString(LocaleProperty); }
+        }
+
+        public Language Language
+        {
+            get { return LocaleProperty.Value; }
             set { LocaleProperty.Value = value; }
         }
 
