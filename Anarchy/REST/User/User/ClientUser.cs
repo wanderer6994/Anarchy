@@ -23,6 +23,10 @@ namespace Discord
         public bool TwoFactorAuth { get; private set; }
 
 
+        [JsonProperty("explicit_content_filter")]
+        public ExplicitContentFilter ExplicitContentFilter { get; private set; }
+
+
         [JsonProperty("locale")]
         public string Language { get; private set; }
 
@@ -53,7 +57,7 @@ namespace Discord
         /// Changes the user's profile
         /// </summary>
         /// <param name="settings">Options for changing the profile</param>
-        public void Modify(UserSettings settings)
+        public void ChangeProfile(UserProfile settings)
         {
             if (settings.Email == null)
                 settings.Email = Email;
@@ -62,17 +66,36 @@ namespace Discord
             if (settings.Username == null)
                 settings.Username = Username;
 
-            ClientUser user = Client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings)).Deserialize<ClientUser>();
+            ClientUser user = Client.HttpClient.Patch("/users/@me/", JsonConvert.SerializeObject(settings)).Deserialize<ClientUser>();
             Email = user.Email;
             EmailVerified = user.EmailVerified;
             Username = user.Username;
             Discriminator = user.Discriminator;
             TwoFactorAuth = user.TwoFactorAuth;
-            Language = user.Language;
             Nitro = user.Nitro;
 
             if (user.Token != null)
                 Client.Token = user.Token;
+        }
+
+
+        /// <summary>
+        /// Gets the users settings
+        /// </summary>
+        public UserSettings GetSettings()
+        {
+            return Client.HttpClient.Patch("/users/@me/settings")
+                                .Deserialize<UserSettings>();
+        }
+
+
+        /// <summary>
+        /// Changes the user's settings
+        /// </summary>
+        public UserSettings ChangeSettings(UserSettings settings)
+        {
+            return Client.HttpClient.Patch("/users/@me/settings", JsonConvert.SerializeObject(settings))
+                                .Deserialize<UserSettings>();
         }
 
 

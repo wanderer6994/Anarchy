@@ -25,6 +25,7 @@
                 SessionId = client.SessionId,
                 Sequence = client.Sequence
             };
+
             client.Socket.Send(GatewayOpcode.Resume, resume);
         }
     }

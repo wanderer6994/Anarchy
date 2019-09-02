@@ -5,9 +5,7 @@ namespace Discord.Gateway
     public class Activity
     {
         public Activity()
-        {
-
-        }
+        { }
 
 
         public Activity(string name, ActivityType type) : this()

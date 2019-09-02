@@ -3,6 +3,11 @@
 # 0.6.2.1
 - Added OnUserUpdated event.
 - Added user-only gateway events.
+- Added Local to UserSettings allowing you to change the client's language.
+- Added methods to Guild for getting members.
+- Added functionality for getting/changing more personal settings.
+- client.User.Modify() was changed to ChangeProfile() because of new settings functions.
+
 
 
 

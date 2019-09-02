@@ -6,7 +6,7 @@ namespace Discord
     /// <summary>
     /// Options for changing the account's profile
     /// </summary>
-    public class UserSettings
+    public class UserProfile
     {
         private readonly Property<string> NameProperty = new Property<string>();
         [JsonProperty("username")]

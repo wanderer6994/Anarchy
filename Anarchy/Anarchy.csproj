@@ -151,6 +151,7 @@
     <Compile Include="REST\Relationship\Models\Relationship.cs" />
     <Compile Include="REST\Relationship\Models\RelationshipType.cs" />
     <Compile Include="REST\User\Profile\Nitro.cs" />
+    <Compile Include="REST\User\Settings\ExplicitContentFilter.cs" />
     <Compile Include="REST\User\User\Type.cs" />
     <Compile Include="REST\Role\Models\Role.cs" />
     <Compile Include="REST\Role\Models\RoleEventArgs.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="DiscordSocketClient.cs" />
     <Compile Include="REST\Emoji\Emoji\EmojiProperties.cs" />
     <Compile Include="Gateway\Voice\Models\VoiceStateEventArgs.cs" />
+    <Compile Include="REST\User\Settings\UserSettings.cs" />
     <Compile Include="REST\Voice\Extensions.cs" />
     <Compile Include="REST\Voice\VoiceRegion.cs" />
     <Compile Include="REST\Webhook\Extensions.cs" />
@@ -208,7 +210,7 @@
     <Compile Include="REST\RateLimit\RateLimit.cs" />
     <Compile Include="REST\Emoji\Emoji\Emoji.cs" />
     <Compile Include="REST\User\User\User.cs" />
-    <Compile Include="REST\User\User\Settings.cs" />
+    <Compile Include="REST\User\Settings\UserProfile.cs" />
     <Compile Include="X-Super-Properties\SPUpdatedEventArgs.cs" />
     <Compile Include="X-Super-Properties\SuperProperties.cs" />
     <Compile Include="REST\Webhook\Models\Hook.cs" />

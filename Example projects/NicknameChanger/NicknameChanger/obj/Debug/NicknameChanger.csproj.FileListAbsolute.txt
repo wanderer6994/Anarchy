@@ -12,3 +12,4 @@ C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameCha
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\obj\Debug\NicknameChanger.pdb
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Debug\Newtonsoft.Json.Schema.dll
 C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Debug\Newtonsoft.Json.Schema.xml
+C:\Users\ilink\source\repos\Anarchy\Example projects\NicknameChanger\NicknameChanger\bin\Debug\Newtonsoft.Json.xml

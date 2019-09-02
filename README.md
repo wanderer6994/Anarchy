@@ -53,7 +53,7 @@ embed.Footer.Text = "Made by iLinked";
 embed.Author.Name = "iLinked";
 embed.Author.Url = "https://youtube.com/iLinked";
 
-channel.SendMessage("hey look it's an embed!", false, embed });
+channel.SendMessage("hey look it's an embed!", false, embed);
 ```
 
 ## Creating guilds and channels

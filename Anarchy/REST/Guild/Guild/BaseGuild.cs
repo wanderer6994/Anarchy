@@ -177,7 +177,7 @@ namespace Discord
         /// <summary>
         /// Gets the guild's webhooks
         /// </summary>
-        public IReadOnlyList<Webhook.Hook> GetWebhooks()
+        public IReadOnlyList<Hook> GetWebhooks()
         {
             return Client.GetGuildWebhooks(Id);
         }
@@ -190,6 +190,38 @@ namespace Discord
         public IReadOnlyList<AuditLogEntry> GetAuditLog(AuditLogFilters filters = null)
         {
             return Client.GetAuditLog(Id, filters);
+        }
+
+
+        /// <summary>
+        /// Gets a member from the server
+        /// </summary>
+        /// <param name="userId">ID of the user</param>
+        /// <returns></returns>
+        public GuildMember GetMember(ulong userId)
+        {
+            return Client.GetGuildMember(Id, userId);
+        }
+
+
+        /// <summary>
+        /// Gets a list of members from the server
+        /// </summary>
+        /// <param name="limit">Max amount of members to receive</param>
+        /// <param name="afterId">ID to offset from</param>
+        public IReadOnlyList<GuildMember> GetMembers(uint limit = 100, ulong afterId = 0)
+        {
+            return Client.GetGuildMembers(Id, limit, afterId);
+        }
+
+
+        /// <summary>
+        /// Gets all members from the guild.
+        /// Warning: This is an incredibly slow method. If you have a <see cref="DiscordSocketClient"/> use client.GetAllGuildMembers() instead.
+        /// </summary>
+        public IReadOnlyList<GuildMember> GetAllMembers()
+        {
+            return Client.GetAllGuildMembers(Id);
         }
 
 
