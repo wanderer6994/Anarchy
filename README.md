@@ -100,7 +100,18 @@ private static void Client_OnLeftGuild(DiscordSocketClient client, GuildEventArg
 }
 ```
 
-## Voice channels (NEW)
+## Changing client settings
+```csharp
+DiscordClient client = new DiscordClient("your token here");
+
+client.User.ChangeProfile(new UserProfile() { Avatar = Image.FromFile("lol.png") }); //this function is for updating profile related settings
+
+client.User.ChangeSettings(new UserSettings() { Language = Language.EnglishUS }); //this is for changing any other setting
+```
+
+
+
+## Voice channels
 ```csharp
 static void Main()
 {
