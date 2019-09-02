@@ -152,6 +152,8 @@
     <Compile Include="REST\Relationship\Models\RelationshipType.cs" />
     <Compile Include="REST\User\Profile\Nitro.cs" />
     <Compile Include="REST\User\Settings\ExplicitContentFilter.cs" />
+    <Compile Include="REST\User\Settings\FriendSourceFlags.cs" />
+    <Compile Include="REST\User\Settings\Theme.cs" />
     <Compile Include="REST\User\User\Type.cs" />
     <Compile Include="REST\Role\Models\Role.cs" />
     <Compile Include="REST\Role\Models\RoleEventArgs.cs" />
