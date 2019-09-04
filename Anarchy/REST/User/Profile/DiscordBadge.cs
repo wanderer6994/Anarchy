@@ -3,7 +3,7 @@
 namespace Discord
 {
     [Flags]
-    public enum Badge
+    public enum DiscordBadge
     {
         None,
         DiscordEmployeee = 1 << 0,

@@ -166,5 +166,15 @@ namespace Discord
         {
             client.HttpClient.Patch($"/guilds/{guildId}/members/@me/nick", $"{{\"nick\":\"{nickname}\"}}");
         }
+
+
+        /// <summary>
+        /// Acknowledges all messages and pings in a guild
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        public static void AcknowledgeGuildMessages(this DiscordClient client, ulong guildId)
+        {
+            client.HttpClient.Post($"/guilds/{guildId}/ack");
+        }
     }
 }

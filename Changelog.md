@@ -1,5 +1,12 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.6.2.2
+
+### Additions
+- Added functions for acknowledging messages (AcknowladgeGuildMessages/AcknowladgeMessage).
+- Added support for detecting CF rate limits (RateLimitExceptions with a RetryAfter of 0).
+- Did a few name changes for avoiding having same names as other libs.
+
 # 0.6.2.1
 
 ### Additions

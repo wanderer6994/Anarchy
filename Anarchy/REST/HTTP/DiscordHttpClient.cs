@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Discord
 {
@@ -72,7 +73,17 @@ namespace Discord
                 Content = json != null ? new StringContent(json, Encoding.UTF8, "application/json") : null
             };
 
-            var resp = _httpClient.SendAsync(msg).Result;
+            HttpResponseMessage resp = null;
+
+            try
+            {
+                resp = _httpClient.SendAsync(msg).Result;
+            }
+            catch (JsonReaderException)
+            {
+                if (resp.Content.ReadAsStringAsync().Result.StartsWith("<"))
+                    throw new RateLimitException(_discordClient, 0);
+            }
             CheckResponse(resp);
             return resp;
         }

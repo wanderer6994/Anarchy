@@ -165,5 +165,11 @@ namespace Discord
             client.HttpClient.Delete($"/channels/{channelId}/pins/{messageId}");
         }
         #endregion
+
+
+        public static void AcknowledgeMessage(this DiscordClient client, ulong channelId, ulong messageId)
+        {
+            client.HttpClient.Post($"/channels/{channelId}/messages/{messageId}/ack");
+        }
     }
 }

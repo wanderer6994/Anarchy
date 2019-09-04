@@ -24,7 +24,7 @@ namespace Discord
 
 
         [JsonProperty("flags")]
-        public Badge Badges { get; protected set; }
+        public DiscordBadge Badges { get; protected set; }
 
 
         [JsonProperty("bot")]
@@ -51,7 +51,7 @@ namespace Discord
             get
             {
                 return (Hypesquad)Enum.Parse(typeof(Hypesquad), 
-                                        (Badges & (Badge.HypeBravery | Badge.HypeBrilliance | Badge.HypeBalance))
+                                        (Badges & (DiscordBadge.HypeBravery | DiscordBadge.HypeBrilliance | DiscordBadge.HypeBalance))
                                          .ToString().Replace("Hype", ""));
             }
         }
@@ -72,7 +72,7 @@ namespace Discord
         /// <summary>
         /// Gets the user's profile
         /// </summary>
-        public Profile GetProfile()
+        public DiscordProfile GetProfile()
         {
             return Client.GetProfile(Id);
         }

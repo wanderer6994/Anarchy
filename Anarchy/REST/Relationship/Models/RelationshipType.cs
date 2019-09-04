@@ -2,7 +2,8 @@
 {
     public enum RelationshipType
     {
-        Friends = 1,
+        None,
+        Friends,
         Blocked,
         IncomingRequest,
         OutgoingRequest

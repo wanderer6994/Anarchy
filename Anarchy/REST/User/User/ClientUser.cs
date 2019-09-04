@@ -8,7 +8,7 @@ namespace Discord
     public class ClientUser : User
     {
         [JsonProperty("token")]
-        public string Token { get; private set; }
+        internal string Token { get; private set; }
 
 
         [JsonProperty("email")]
@@ -66,7 +66,7 @@ namespace Discord
             if (settings.Username == null)
                 settings.Username = Username;
 
-            ClientUser user = Client.HttpClient.Patch("/users/@me/", JsonConvert.SerializeObject(settings)).Deserialize<ClientUser>();
+            ClientUser user = Client.HttpClient.Patch("/users/@me", JsonConvert.SerializeObject(settings)).Deserialize<ClientUser>();
             Email = user.Email;
             EmailVerified = user.EmailVerified;
             Username = user.Username;

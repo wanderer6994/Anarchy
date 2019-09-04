@@ -65,6 +65,15 @@ namespace Discord
 
 
         /// <summary>
+        /// Acknowledges all messages and pings in the guild
+        /// </summary>
+        public void AcknowledgeMessages()
+        {
+            Client.AcknowledgeGuildMessages(Id);
+        }
+
+
+        /// <summary>
         /// Changes the client's nickname for this guild
         /// </summary>
         /// <param name="nickname">New nickname</param>

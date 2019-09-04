@@ -40,10 +40,10 @@ namespace Discord
         /// Gets a user's profile
         /// </summary>
         /// <param name="userId">ID of the user</param>
-        public static Profile GetProfile(this DiscordClient client, ulong userId)
+        public static DiscordProfile GetProfile(this DiscordClient client, ulong userId)
         {
             return client.HttpClient.Get($"/users/{userId}/profile")
-                                .Deserialize<Profile>().SetClient(client);
+                                .Deserialize<DiscordProfile>().SetClient(client);
         }
 
 

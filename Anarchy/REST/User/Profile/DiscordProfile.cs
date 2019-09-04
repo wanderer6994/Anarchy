@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
-    public class Profile : Controllable
+    public class DiscordProfile : Controllable
     {
-        public Profile()
+        public DiscordProfile()
         {
             OnClientUpdated += (sender, e) => 
             {
@@ -20,7 +20,7 @@ namespace Discord
         /// </summary>
         public void Update()
         {
-            Profile profile = Client.GetProfile(User.Id);
+            DiscordProfile profile = Client.GetProfile(User.Id);
             User = profile.User;
             MutualGuilds = profile.MutualGuilds;
             ConnectedAccounts = profile.ConnectedAccounts;

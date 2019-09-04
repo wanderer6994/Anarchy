@@ -9,3 +9,4 @@ C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Newtonsoft.Json.Schema.x
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csproj.CopyComplete
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.dll
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.pdb
+C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csprojAssemblyReference.cache
