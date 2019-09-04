@@ -77,7 +77,7 @@
     <Compile Include="REST\OAuth2\Extensions.cs" />
     <Compile Include="REST\Relationship\Models\RelationshipEventArgs.cs" />
     <Compile Include="REST\User\ConnectedAccount\Extensions.cs" />
-    <Compile Include="REST\User\Profile\Badge.cs" />
+    <Compile Include="REST\User\Profile\DiscordBadge.cs" />
     <Compile Include="REST\Invite\Models\GroupInvite.cs" />
     <Compile Include="REST\Message\Message\MessageFilters.cs" />
     <Compile Include="REST\Permissions\Overwrite\Type.cs" />
@@ -135,7 +135,7 @@
     <Compile Include="REST\User\ConnectedAccount\AccountType.cs" />
     <Compile Include="REST\User\ConnectedAccount\ConnectedAccount.cs" />
     <Compile Include="REST\User\Profile\MutualGuild.cs" />
-    <Compile Include="REST\User\Profile\Profile.cs" />
+    <Compile Include="REST\User\Profile\DiscordProfile.cs" />
     <Compile Include="REST\Role\Models\RoleContainer.cs" />
     <Compile Include="Gateway\GuildMember\Models\MemberQuery.cs" />
     <Compile Include="REST\Guild\Models\DefaultNotifications.cs" />
