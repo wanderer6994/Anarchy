@@ -20,5 +20,25 @@ namespace Discord
         {
             client.HttpClient.Delete($"/oauth2/tokens/{appId}");
         }
+
+
+        public static OAuth2Application CreateApplication(this DiscordClient client, string name)
+        {
+            return client.HttpClient.Post("/oauth2/applications", $"{{\"name\":\"{name}\"}}")
+                                .Deserialize<OAuth2Application>().SetClient(client);
+        }
+
+
+        public static ApplicationBot AddApplicationBot(this DiscordClient client, ulong appId)
+        {
+            return client.HttpClient.Post($"/oauth2/applications/{appId}/bot")
+                                .Deserialize<ApplicationBot>();
+        }
+
+
+        public static void DeleteApplication(this DiscordClient client, ulong appId)
+        {
+            client.HttpClient.Delete($"/oauth2/applications/{appId}");
+        }
     }
 }

@@ -72,6 +72,11 @@
     <Compile Include="REST\Embed\EmbedError.cs" />
     <Compile Include="REST\Embed\EmbedException.cs" />
     <Compile Include="REST\Invite\Models\InviteType.cs" />
+    <Compile Include="REST\Nitro\Extensions.cs" />
+    <Compile Include="REST\Nitro\Models\NitroBoost.cs" />
+    <Compile Include="REST\Nitro\Models\NitroGift.cs" />
+    <Compile Include="REST\Nitro\Models\NitroSubscriptionPlan.cs" />
+    <Compile Include="REST\OAuth2\Models\ApplicationBot.cs" />
     <Compile Include="REST\OAuth2\Models\AuthorizedApp.cs" />
     <Compile Include="REST\OAuth2\Models\OAuth2Application.cs" />
     <Compile Include="REST\OAuth2\Extensions.cs" />
@@ -184,7 +189,7 @@
     <Compile Include="REST\Channel\Channel\ChannelType.cs" />
     <Compile Include="REST\Guild\Models\VerificationLevel.cs" />
     <Compile Include="REST\User\Profile\Hypesquad.cs" />
-    <Compile Include="REST\User\User\NitroType.cs" />
+    <Compile Include="REST\Nitro\Models\NitroType.cs" />
     <Compile Include="REST\User\Profile\Status.cs" />
     <Compile Include="Multi\Models\DiscordException.cs" />
     <Compile Include="REST\RateLimit\RateLimitException.cs" />

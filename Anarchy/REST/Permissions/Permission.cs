@@ -1,5 +1,8 @@
-﻿namespace Discord
+﻿using System;
+
+namespace Discord
 {
+    [Flags]
     public enum Permission
     {
         CreateInstantInvite = 0x00000001,

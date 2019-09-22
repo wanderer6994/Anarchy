@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
-    public class OAuth2Application
+    public class OAuth2Application : Controllable
     {
         [JsonProperty("id")]
         public ulong Id { get; private set; }
@@ -36,6 +36,18 @@ namespace Discord
 
         [JsonProperty("bot_require_code_grant")]
         public bool RequiresCodeGrant { get; private set; }
+
+
+        public ApplicationBot AddBot()
+        {
+            return Client.AddApplicationBot(Id);
+        }
+
+
+        public void Delete()
+        {
+            Client.DeleteApplication(Id);
+        }
 
 
         /// <summary>

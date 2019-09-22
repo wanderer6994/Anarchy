@@ -32,7 +32,7 @@ namespace Discord
             }
             set
             {
-                _image.Image = value;
+                _image.SetImage(value);
             }
         }
         #endregion

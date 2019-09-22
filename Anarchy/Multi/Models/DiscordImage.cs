@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace Discord
 {
@@ -9,32 +10,42 @@ namespace Discord
     /// </summary>
     public class DiscordImage
     {
+        public DiscordImage()
+        { }
+
+        public DiscordImage(string base64)
+        {
+            Base64 = base64;
+
+            MemoryStream ms = new MemoryStream(Convert.FromBase64String(base64.Split(',')[1]));
+            Image = Image.FromStream(ms);
+            ms.Dispose();
+        }
+
         public string Base64 { get; private set; }
 
-        private Image _image;
-        public Image Image
+        public Image Image { get; private set; }
+
+
+        public void SetImage(Image img)
         {
-            get { return _image; }
-            set
+            if (img == null)
+                Base64 = null;
+            else
             {
-                if (value == null)
-                    Base64 = null;
-                else
-                {
-                    string type;
+                string type;
 
-                    if (ImageFormat.Jpeg.Equals(value.RawFormat))
-                        type = "jpeg";
-                    else if (ImageFormat.Png.Equals(value.RawFormat))
-                        type = "png";
-                    else if (ImageFormat.Gif.Equals(value.RawFormat))
-                        type = "gif";
-                    else return;
+                if (ImageFormat.Jpeg.Equals(img.RawFormat))
+                    type = "jpeg";
+                else if (ImageFormat.Png.Equals(img.RawFormat))
+                    type = "png";
+                else if (ImageFormat.Gif.Equals(img.RawFormat))
+                    type = "gif";
+                else return;
 
-                    Base64 = $"data:image/{type};base64," + 
-                            Convert.ToBase64String((byte[])new ImageConverter().ConvertTo(value, typeof(byte[])));
-                    _image = value;
-                }
+                Base64 = $"data:image/{type};base64," +
+                        Convert.ToBase64String((byte[])new ImageConverter().ConvertTo(img, typeof(byte[])));
+                Image = img;
             }
         }
 

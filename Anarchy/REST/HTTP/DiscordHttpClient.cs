@@ -66,12 +66,14 @@ namespace Discord
         /// <param name="json">JSON content</param>
         private HttpResponseMessage Send(HttpMethod method, string endpoint, string json = null)
         {
+#pragma warning disable IDE0068
             HttpRequestMessage msg = new HttpRequestMessage
             {
                 Method = method,
                 RequestUri = new Uri("https://discordapp.com/api/v6" + endpoint),
                 Content = json != null ? new StringContent(json, Encoding.UTF8, "application/json") : null
             };
+#pragma warning restore IDE0068
 
             HttpResponseMessage resp = null;
 
@@ -81,7 +83,7 @@ namespace Discord
             }
             catch (JsonReaderException)
             {
-                if (resp.Content.ReadAsStringAsync().Result.StartsWith("<"))
+                if (resp.Content.ReadAsStringAsync().Result.Contains("<"))
                     throw new RateLimitException(_discordClient, 0);
             }
             CheckResponse(resp);

@@ -26,7 +26,7 @@ namespace Discord
             get { return _image.Image; }
             set
             {
-                _image.Image = value;
+                _image.SetImage(value);
                 IconSet = true;
             }
         }

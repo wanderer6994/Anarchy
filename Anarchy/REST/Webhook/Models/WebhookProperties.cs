@@ -27,10 +27,12 @@ namespace Discord.Webhook
         private readonly DiscordImage _image = new DiscordImage();
 
         [JsonProperty("avatar")]
+#pragma warning disable IDE0051, IDE1006
         private string _avatar
         {
-            get { return _image.Base64; }
+            get { return _image; }
         }
+#pragma warning restore IDE0051, IDE1006
 
         private bool AvatarSet { get; set; }
         [JsonIgnore]
@@ -42,7 +44,7 @@ namespace Discord.Webhook
             }
             set
             {
-                _image.Image = value;
+                _image.SetImage(value);
                 AvatarSet = true;
             }
         }

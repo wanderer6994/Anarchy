@@ -1,5 +1,12 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.6.3.0
+
+### Additions
+- Added nitro boost support.
+- Added nitro gift support.
+- Added support for setting images to base64 format at constructor.
+
 # 0.6.2.2
 
 ### Additions
