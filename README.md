@@ -1,7 +1,6 @@
 # About
 Anarchy is an opensource Discord API wrapper that focuses on making bot programming easy.<br>
 iLinked (https://youtube.com/iLinked) is in charge of this project, and has written the wrapper from scratch.<br>
-Kade (https://www.nulled.to/user/1865333-howigokoa) has made 'Kades-Discord-Changer', which is an example project.<br>
 
 Oh and also: if you're using a bot token make sure to prefix the token with 'Bot '.<br><br>
 

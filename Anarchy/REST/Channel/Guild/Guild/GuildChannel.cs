@@ -10,7 +10,7 @@ namespace Discord
     public class GuildChannel : Channel
     {   
         [JsonProperty("guild_id")]
-        public ulong GuildId { get; private set; }
+        public ulong GuildId { get; internal set; }
 
 
         [JsonProperty("position")]

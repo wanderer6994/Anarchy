@@ -18,6 +18,7 @@
         UnknownEmoji,
         UnknownWebhook,
         UnknownGiftCode = 10038,
+        UnknownGuildSubscriptionCooldown = 10050,
         UserOnly = 20001,
         BotOnly,
         MaximumGuilds = 30001,

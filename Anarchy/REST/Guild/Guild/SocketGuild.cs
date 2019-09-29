@@ -23,8 +23,19 @@ namespace Discord.Gateway
         public uint MemberCount { get; private set; }
 
 
+        private IReadOnlyList<GuildChannel> _channels;
         [JsonProperty("channels")]
-        public IReadOnlyList<GuildChannel> Channels { get; private set; }
+        public IReadOnlyList<GuildChannel> Channels
+        {
+            get { return _channels; }
+            set
+            {
+                _channels = value;
+
+                foreach (var channel in _channels)
+                    channel.GuildId = Id;
+            }
+        }
 
 
         [JsonProperty("joined_at")]
