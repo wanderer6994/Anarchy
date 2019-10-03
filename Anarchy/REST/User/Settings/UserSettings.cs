@@ -5,12 +5,6 @@ namespace Discord
 {
     public class UserSettings
     {
-        public UserSettings()
-        {
-            AllowFriendRequestsFrom = new FriendSourceFlags();
-        }
-
-
         private readonly Property<string> ThemeProperty = new Property<string>();
         [JsonProperty("theme")]
         private string _theme
@@ -125,8 +119,5 @@ namespace Discord
         {
             return GifProperty.Set;
         }
-
-
-        public FriendSourceFlags AllowFriendRequestsFrom { get; set; }
     }
 }

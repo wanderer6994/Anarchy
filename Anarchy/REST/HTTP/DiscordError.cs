@@ -61,6 +61,7 @@
         InvalidGuild = 50055,
         GuildSubscriptionCooldown = 50069,
         IncomingFriendRequestsDisabled = 80000,
+        InvalidDiscriminator = 80004,
         ReactionBlocked = 90001,
         ResourceOverloaded = 130000
     }

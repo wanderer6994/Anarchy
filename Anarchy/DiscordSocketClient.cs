@@ -26,6 +26,9 @@ namespace Discord.Gateway
         public event LoginHandler OnLoggedIn;
         public event UserHandler OnLoggedOut;
 
+        public delegate void SettingsHandler(DiscordSocketClient client, SettingsUpdatedEventArgs args);
+        public event SettingsHandler OnSettingsUpdated;
+
         public event UserHandler OnUserUpdated;
 
         public event GuildHandler OnJoinedGuild;
@@ -148,6 +151,9 @@ namespace Discord.Gateway
                             this.User = login.User;
                             this.SessionId = login.SessionId;
                             OnLoggedIn?.Invoke(this, new LoginEventArgs(login));
+                            break;
+                        case "USER_SETTINGS_UPDATE":
+                            OnSettingsUpdated?.Invoke(this, new SettingsUpdatedEventArgs(payload.Deserialize<Settings>()));
                             break;
                         case "USER_UPDATE":
                             User user = payload.Deserialize<User>().SetClient(this);

@@ -5,6 +5,7 @@
 ### Additions
 - Added nitro boost support.
 - Added nitro gift support.
+- Added more gateway events (for an example OnSettingsUpdated).
 - Added support for setting images to base64 format at constructor.
 
 # 0.6.2.2
