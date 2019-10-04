@@ -26,6 +26,15 @@ namespace Discord
 
 
         /// <summary>
+        /// Sends a friend request to a user
+        /// </summary>
+        public static void SendFriendRequest(this DiscordClient client, ulong userId)
+        {
+            client.HttpClient.Put($"/users/@me/relationships/{userId}");
+        }
+
+
+        /// <summary>
         /// Blocks a user
         /// </summary>
         /// <param name="userId">ID of the user</param>
