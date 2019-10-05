@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using WebSocketSharp;
 
 namespace Discord.Gateway
@@ -28,6 +29,11 @@ namespace Discord.Gateway
 
         public delegate void SettingsHandler(DiscordSocketClient client, SettingsUpdatedEventArgs args);
         public event SettingsHandler OnSettingsUpdated;
+
+
+        public delegate void ProfileHandler(DiscordSocketClient client, ProfileUpdatedEventArgs args);
+        public event ProfileHandler OnProfileUpdated;
+
 
         public event UserHandler OnUserUpdated;
 
@@ -140,6 +146,8 @@ namespace Discord.Gateway
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
 
+            Console.WriteLine(payload);
+
             switch (payload.Opcode)
             {
                 case GatewayOpcode.Event:
@@ -242,6 +250,13 @@ namespace Discord.Gateway
                             break;
                         case "RELATIONSHIP_REMOVE":
                             OnRelationshipRemoved?.Invoke(this, new RelationshipEventArgs(payload.Deserialize<Relationship>().SetClient(this)));
+                            break;
+                        case "USER_CONNECTIONS_UPDATE":
+                            Task.Run(() =>
+                            {
+                                DiscordProfile profile = this.User.GetProfile();
+                                OnProfileUpdated?.Invoke(this, new ProfileUpdatedEventArgs(profile));
+                            });
                             break;
                     }
                     break;

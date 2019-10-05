@@ -2,9 +2,13 @@
 
 # 0.6.3.1
 
-### Improvements
+### Additions
 - Added implicit convertions for objects with IDs.
+- Added event OnProfileUpdated.
+
+### Improvements
 - Many other minor improvements.
+
 
 
 # 0.6.3.0
