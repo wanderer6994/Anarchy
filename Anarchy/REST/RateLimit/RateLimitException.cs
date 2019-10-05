@@ -2,9 +2,9 @@
 {
     public class RateLimitException : DiscordException
     {
-        public uint RetryAfter { get; private set; }
+        public int RetryAfter { get; private set; }
 
-        internal RateLimitException(DiscordClient client, uint retryAfter) : base(client, $"Please wait {retryAfter} milliseconds")
+        internal RateLimitException(DiscordClient client, int retryAfter) : base(client, $"Ratelimited for {retryAfter} milliseconds")
         {
             RetryAfter = retryAfter;
         }

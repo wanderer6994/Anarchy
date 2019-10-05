@@ -32,9 +32,9 @@ namespace Discord
         /// Modifies the channel
         /// </summary>
         /// <param name="properties">Options for modifying the channel</param>
-        public void Modify(ChannelProperties properties)
+        public void Modify(string name)
         {
-            Name = Client.ModifyChannel(Id, properties).Name;
+            Name = Client.ModifyChannel(Id, name).Name;
         }
 
 
@@ -51,6 +51,12 @@ namespace Discord
         public override string ToString()
         {
             return Name;
+        }
+
+
+        public static implicit operator ulong(Channel instance)
+        {
+            return instance.Id;
         }
     }
 }

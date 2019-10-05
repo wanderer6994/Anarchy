@@ -26,5 +26,11 @@ namespace Discord
 
         [JsonProperty("id")]
         public ulong Id { get; private set; }
+
+
+        public static implicit operator ulong(NitroSubscriptionPlan instance)
+        {
+            return instance.Id;
+        }
     }
 }

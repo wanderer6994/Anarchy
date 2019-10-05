@@ -26,9 +26,9 @@ namespace Discord.Gateway
 
 
         [JsonProperty("since")]
-#pragma warning disable CS0169
+#pragma warning disable CS0169, IDE0051
         private readonly long _since;
-#pragma warning restore CS0169
+#pragma warning restore CS0169, IDE0051
 
 
         [JsonProperty("afk")]

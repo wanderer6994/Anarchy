@@ -100,6 +100,15 @@ namespace Discord
 
 
         /// <summary>
+        /// Sends a password reset request to the client's email
+        /// </summary>
+        public void RequestPasswordReset()
+        {
+            Client.HttpClient.Post("/auth/forgot", $"{{\"email\":\"{Email}\"}}");
+        }
+
+
+        /// <summary>
         /// Deletes the account
         /// </summary>
         /// <param name="password">The account's password</param>

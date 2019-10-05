@@ -1,5 +1,12 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.6.3.1
+
+### Improvements
+- Added implicit convertions for objects with IDs.
+- Many other minor improvements.
+
+
 # 0.6.3.0
 
 ### Additions

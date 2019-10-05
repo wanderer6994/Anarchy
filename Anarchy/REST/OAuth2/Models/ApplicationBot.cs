@@ -28,5 +28,11 @@ namespace Discord
         {
             return $"{Username}#{Discriminator}";
         }
+
+
+        public static implicit operator ulong(ApplicationBot instance)
+        {
+            return instance.Id;
+        }
     }
 }

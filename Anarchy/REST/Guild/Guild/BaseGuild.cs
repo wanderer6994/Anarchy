@@ -262,14 +262,21 @@ namespace Discord
             if (IconId == null)
                 return null;
 
+#pragma warning disable IDE0067
             return (Bitmap)new ImageConverter()
                         .ConvertFrom(new HttpClient().GetByteArrayAsync($"https://cdn.discordapp.com/icons/{Id}/{IconId}.png").Result);
+#pragma warning restore IDE0067
         }
 
 
         public override string ToString()
         {
             return Name;
+        }
+
+        public static implicit operator ulong(BaseGuild instance)
+        {
+            return instance.Id;
         }
     }
 }

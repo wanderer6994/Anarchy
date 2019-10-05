@@ -13,12 +13,18 @@ namespace Discord
 
 
         [JsonProperty("retry_after")]
-        public uint RetryAfter { get; private set; }
+        public int RetryAfter { get; private set; }
 
 
         public override string ToString()
         {
             return RetryAfter.ToString();
+        }
+
+
+        public static implicit operator int(RateLimit instance)
+        {
+            return instance.RetryAfter;
         }
     }
 }

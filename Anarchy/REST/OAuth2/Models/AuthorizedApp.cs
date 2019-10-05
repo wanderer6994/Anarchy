@@ -23,5 +23,11 @@ namespace Discord
         {
             Client.RemoveAuthorizedApp(Id);
         }
+
+
+        public static implicit operator ulong(AuthorizedApp instance)
+        {
+            return instance.Id;
+        }
     }
 }

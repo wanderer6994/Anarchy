@@ -40,5 +40,11 @@ namespace Discord
         {
             return Name;
         }
+
+
+        public static implicit operator string(ConnectedAccount instance)
+        {
+            return instance.Id;
+        }
     }
 }

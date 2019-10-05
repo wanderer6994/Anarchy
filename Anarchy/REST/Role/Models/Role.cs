@@ -76,5 +76,11 @@ namespace Discord
         {
             return Name;
         }
+
+
+        public static implicit operator ulong(Role instance)
+        {
+            return instance.Id;
+        }
     }
 }

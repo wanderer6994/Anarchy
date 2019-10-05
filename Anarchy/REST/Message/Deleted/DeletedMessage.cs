@@ -14,5 +14,11 @@ namespace Discord
 
         [JsonProperty("guild_id")]
         public ulong GuildId { get; private set; }
+
+
+        public static implicit operator ulong(DeletedMessage instance)
+        {
+            return instance.Id;
+        }
     }
 }

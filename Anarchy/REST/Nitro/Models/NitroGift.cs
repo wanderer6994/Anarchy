@@ -62,5 +62,17 @@ namespace Discord
         {
             return SubscriptionPlan.Name;
         }
+
+
+        public static implicit operator ulong(NitroGift instance)
+        {
+            return instance.Id;
+        }
+
+
+        public static implicit operator string(NitroGift instance)
+        {
+            return instance.Code;
+        }
     }
 }

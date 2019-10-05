@@ -123,14 +123,22 @@ namespace Discord
             if (AvatarId == null)
                 return null;
 
+#pragma warning disable IDE0067
             return (Bitmap)new ImageConverter()
                         .ConvertFrom(new HttpClient().GetByteArrayAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png").Result);
+#pragma warning restore IDE0067
         }
 
 
         public override string ToString()
         {
             return $"{Username}#{"0000".Remove(4 - Discriminator.ToString().Length) + Discriminator.ToString()}";
+        }
+
+
+        public static implicit operator ulong(User instance)
+        {
+            return instance.Id;
         }
     }
 }

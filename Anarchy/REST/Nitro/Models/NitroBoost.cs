@@ -18,5 +18,11 @@ namespace Discord
 
         [JsonProperty("ended")]
         public bool Ended { get; private set; }
+
+
+        public static implicit operator ulong(NitroBoost instance)
+        {
+            return instance.Id;
+        }
     }
 }

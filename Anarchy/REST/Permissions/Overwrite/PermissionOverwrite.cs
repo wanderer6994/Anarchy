@@ -27,6 +27,7 @@ namespace Discord
         }
 
 
+#pragma warning disable IDE1006, IDE0051
         [JsonProperty("deny")]
         private uint _deny
         {
@@ -45,11 +46,18 @@ namespace Discord
         }
         [JsonIgnore]
         public EditablePermissions Allow { get; set; }
+#pragma warning restore IDE1006, IDE0051
 
 
         public override string ToString()
         {
             return Type.ToString();
+        }
+
+
+        public static implicit operator ulong(PermissionOverwrite instance)
+        {
+            return instance.Id;
         }
     }
 }

@@ -31,5 +31,11 @@ namespace Discord
         {
             return Name;
         }
+
+
+        public static implicit operator string(VoiceRegion instance)
+        {
+            return instance.Id;
+        }
     }
 }

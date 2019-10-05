@@ -187,5 +187,11 @@ namespace Discord
         {
             return User.ToString();
         }
+
+
+        public static implicit operator ulong(GuildMember instance)
+        {
+            return instance.User.Id;
+        }
     }
 }

@@ -59,8 +59,16 @@ namespace Discord
             if (IconId == null)
                 return null;
 
+#pragma warning disable IDE0067
             return (Bitmap)new ImageConverter()
                         .ConvertFrom(new HttpClient().GetByteArrayAsync($"https://cdn.discordapp.com/app-icons/{Id}/{IconId}.png").Result);
+#pragma warning restore IDE0067
+        }
+
+
+        public static implicit operator ulong(OAuth2Application instance)
+        {
+            return instance.Id;
         }
     }
 }

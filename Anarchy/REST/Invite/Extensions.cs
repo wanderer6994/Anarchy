@@ -34,12 +34,13 @@ namespace Discord
         }
         #endregion
 
-
+#pragma warning disable IDE1006
         private static T getInvite<T>(this DiscordClient client, string invCode) where T : Invite
         {
             return client.HttpClient.Get($"/invite/{invCode}?with_counts=true")
                                 .Deserialize<T>().SetClient(client);
         }
+#pragma warning restore IDE1006
 
 
         public static Invite GetInvite(this DiscordClient client, string invCode)

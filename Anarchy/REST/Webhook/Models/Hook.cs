@@ -107,14 +107,22 @@ namespace Discord.Webhook
             if (AvatarId == null)
                 return null;
 
+#pragma warning disable IDE0067
             return (Bitmap)new ImageConverter().ConvertFrom(new HttpClient().GetAsync($"https://cdn.discordapp.com/avatars/{Id}/{AvatarId}.png")
                                                                     .Result.Content.ReadAsByteArrayAsync().Result);
+#pragma warning restore IDE0067
         }
 
 
         public override string ToString()
         {
             return Token;
+        }
+
+
+        public static implicit operator ulong(Hook instance)
+        {
+            return instance.Id;
         }
     }
 }

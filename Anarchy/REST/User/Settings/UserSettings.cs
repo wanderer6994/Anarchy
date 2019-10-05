@@ -5,6 +5,7 @@ namespace Discord
 {
     public class UserSettings
     {
+#pragma warning disable IDE1006
         private readonly Property<string> ThemeProperty = new Property<string>();
         [JsonProperty("theme")]
         private string _theme
@@ -73,10 +74,12 @@ namespace Discord
 
         private readonly Property<Language> LocaleProperty = new Property<Language>();
         [JsonProperty("locale")]
+#pragma warning disable IDE0051
         private string _locale
         {
-            get { return LanguageUtils.ConvertToString(LocaleProperty); }
+            get { return LanguageUtils.LanguageToString(LocaleProperty); }
         }
+#pragma warning restore IDE0051
 
         public Language Language
         {
@@ -119,5 +122,7 @@ namespace Discord
         {
             return GifProperty.Set;
         }
+
+#pragma warning restore IDE1006
     }
 }

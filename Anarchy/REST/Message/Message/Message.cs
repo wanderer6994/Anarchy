@@ -195,6 +195,12 @@ namespace Discord
         {
             return Author.ToString();
         }
+
+
+        public static implicit operator ulong(Message instance)
+        {
+            return instance.Id;
+        }
 #pragma warning restore CS0649
     }
 }

@@ -33,5 +33,11 @@ namespace Discord
         {
             return Type.ToString();
         }
+
+
+        public static implicit operator ulong(AuditLogEntry instance)
+        {
+            return instance.Id;
+        }
     }
 }

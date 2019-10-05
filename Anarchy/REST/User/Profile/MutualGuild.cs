@@ -16,5 +16,11 @@ namespace Discord
         {
             return Id.ToString();
         }
+
+
+        public static implicit operator ulong(MutualGuild instance)
+        {
+            return instance.Id;
+        }
     }
 }

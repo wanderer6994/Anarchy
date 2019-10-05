@@ -47,5 +47,11 @@ namespace Discord
         {
             return Code;
         }
+
+
+        public static implicit operator string(Invite instance)
+        {
+            return instance.Code;
+        }
     }
 }

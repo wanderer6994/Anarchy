@@ -11,11 +11,13 @@ namespace Discord
     {
         private readonly Property<string> ThemeProperty = new Property<string>();
         [JsonProperty("theme")]
+#pragma warning disable IDE1006
         private string _theme
         {
             get { return ThemeProperty.Value; }
             set { ThemeProperty.Value = value; }
         }
+#pragma warning restore IDE1006
 
         public Theme Theme
         {

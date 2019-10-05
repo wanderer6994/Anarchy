@@ -27,5 +27,11 @@ namespace Discord
         {
             return $"{Type} {User}";
         }
+
+
+        public static implicit operator ulong(Relationship instance)
+        {
+            return instance.User.Id;
+        }
     }
 }
