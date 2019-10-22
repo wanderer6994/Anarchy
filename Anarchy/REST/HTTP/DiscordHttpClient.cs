@@ -10,10 +10,11 @@ using Newtonsoft.Json;
 
 namespace Discord
 {
-    internal class DiscordHttpClient
+    public class DiscordHttpClient
     {
         private readonly HttpClient _httpClient;
         private readonly DiscordClient _discordClient;
+
 #pragma warning disable IDE0044
         private static JSchema _errorSchema = new JSchemaGenerator().Generate(typeof(DiscordHttpError));
 #pragma warning restore IDE0044
@@ -23,10 +24,15 @@ namespace Discord
             get { return _httpClient.DefaultRequestHeaders; }
         }
 
-        public DiscordHttpClient(DiscordClient discordClient)
+
+        public string Proxy { get; set; }
+
+
+        public DiscordHttpClient(DiscordClient discordClient, string proxy = null)
         {
-            _httpClient = new HttpClient();
+            _httpClient = new HttpClient(new HttpClientHandler() { Proxy = new WebProxy(proxy) });
             _discordClient = discordClient;
+            Proxy = proxy;
         }
         
 
@@ -46,7 +52,7 @@ namespace Discord
                 return;
 
             if (resp.StatusCode == (HttpStatusCode)429)
-                throw new RateLimitException(_discordClient, resp.Deserialize<RateLimit>().RetryAfter);
+                throw new RateLimitException(_discordClient, resp.Deserialize<RateLimit>());
 
             if (resp.StatusCode == HttpStatusCode.BadRequest)
             {
@@ -66,11 +72,14 @@ namespace Discord
         /// <param name="json">JSON content</param>
         private HttpResponseMessage Send(HttpMethod method, string endpoint, string json = null)
         {
+            if (!endpoint.StartsWith("http"))
+                endpoint = "https://discordapp.com/api/v6" + endpoint;
+
 #pragma warning disable IDE0068
             HttpRequestMessage msg = new HttpRequestMessage
             {
                 Method = method,
-                RequestUri = new Uri("https://discordapp.com/api/v6" + endpoint),
+                RequestUri = new Uri(endpoint),
                 Content = json != null ? new StringContent(json, Encoding.UTF8, "application/json") : null
             };
 #pragma warning restore IDE0068

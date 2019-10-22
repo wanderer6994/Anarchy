@@ -8,7 +8,7 @@ namespace Discord
     /// </summary>
     public class DiscordClient
     {
-        internal DiscordHttpClient HttpClient { get; private set; }
+        public DiscordHttpClient HttpClient { get; private set; }
         public SPInformation SuperPropertiesInfo { get; private set; }
         public ClientUser User { get; internal set; }
         public string Token
@@ -44,6 +44,7 @@ namespace Discord
                 }
             }
         }
+
         public string UserAgent
         {
             get { return SuperPropertiesInfo.Properties.UserAgent; }
@@ -54,7 +55,7 @@ namespace Discord
                 SuperPropertiesInfo.Properties.UserAgent = value;
             }
         }
-        
+
         public DiscordClient()
         {
             HttpClient = new DiscordHttpClient(this);
@@ -62,7 +63,17 @@ namespace Discord
 
             SuperPropertiesInfo = new SPInformation();
             SuperPropertiesInfo.OnPropertiesUpdated += OnPropertiesUpdated;
-            SuperPropertiesInfo.Base64 = "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiQ2hyb21lIiwiZGV2aWNlIjoiIiwiYnJvd3Nlcl91c2VyX2FnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzc0LjAuMzcyOS4xNjkgU2FmYXJpLzUzNy4zNiIsImJyb3dzZXJfdmVyc2lvbiI6Ijc0LjAiLCJvc192ZXJzaW9uIjoiMTAiLCJyZWZlcnJlciI6IiIsInJlZmVycmluZ19kb21haW4iOiIiLCJyZWZlcnJlcl9jdXJyZW50IjoiIiwicmVmZXJyaW5nX2RvbWFpbl9jdXJyZW50IjoiIiwicmVsZWFzZV9jaGFubmVsIjoic3RhYmxlIiwiY2xpZW50X2J1aWxkX251bWJlciI6NDM0MTIsImNsaWVudF9ldmVudF9zb3VyY2UiOm51bGx9";
+            SuperPropertiesInfo.Base64 = "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRmlyZWZveCIsImRldmljZSI6IiIsImJyb3dzZXJfdXNlcl9hZ2VudCI6Ik1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQ7IHJ2OjY5LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjkuMCIsImJyb3dzZXJfdmVyc2lvbiI6IjY5LjAiLCJvc192ZXJzaW9uIjoiMTAiLCJyZWZlcnJlciI6IiIsInJlZmVycmluZ19kb21haW4iOiIiLCJyZWZlcnJlcl9jdXJyZW50IjoiIiwicmVmZXJyaW5nX2RvbWFpbl9jdXJyZW50IjoiIiwicmVsZWFzZV9jaGFubmVsIjoic3RhYmxlIiwiY2xpZW50X2J1aWxkX251bWJlciI6NDc2MzAsImNsaWVudF9ldmVudF9zb3VyY2UiOm51bGx9";
+        }
+
+        public DiscordClient(string proxy, bool fuckoff) // fuckoff is only cuz overloading is gay
+        {
+            HttpClient = new DiscordHttpClient(this, proxy);
+            HttpClient.UpdateFingerprint();
+
+            SuperPropertiesInfo = new SPInformation();
+            SuperPropertiesInfo.OnPropertiesUpdated += OnPropertiesUpdated;
+            SuperPropertiesInfo.Base64 = "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRmlyZWZveCIsImRldmljZSI6IiIsImJyb3dzZXJfdXNlcl9hZ2VudCI6Ik1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQ7IHJ2OjY5LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjkuMCIsImJyb3dzZXJfdmVyc2lvbiI6IjY5LjAiLCJvc192ZXJzaW9uIjoiMTAiLCJyZWZlcnJlciI6IiIsInJlZmVycmluZ19kb21haW4iOiIiLCJyZWZlcnJlcl9jdXJyZW50IjoiIiwicmVmZXJyaW5nX2RvbWFpbl9jdXJyZW50IjoiIiwicmVsZWFzZV9jaGFubmVsIjoic3RhYmxlIiwiY2xpZW50X2J1aWxkX251bWJlciI6NDc2MzAsImNsaWVudF9ldmVudF9zb3VyY2UiOm51bGx9";
         }
 
         public DiscordClient(string token) : this()

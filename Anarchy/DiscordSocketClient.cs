@@ -102,6 +102,7 @@ namespace Discord.Gateway
             Token = token;
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
+            Socket.SetProxy("http://" + HttpClient.Proxy, "", "");
             Socket.OnMessage += SocketDataReceived;
             Socket.OnClose += Socket_OnClose;
             Socket.Connect();
@@ -145,8 +146,6 @@ namespace Discord.Gateway
         {
             GatewayResponse payload = result.Data.Deserialize<GatewayResponse>();
             Sequence = payload.Sequence;
-
-            Console.WriteLine(payload);
 
             switch (payload.Opcode)
             {
