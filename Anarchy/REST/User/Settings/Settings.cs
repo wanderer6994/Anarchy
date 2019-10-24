@@ -53,5 +53,9 @@ namespace Discord
 
         [JsonProperty("gif_auto_play")]
         public bool PlayGifsAutomatically { get; internal set; }
+
+
+        [JsonProperty("custom_status")]
+        public CustomStatus CustomStatus { get; internal set; }
     }
 }

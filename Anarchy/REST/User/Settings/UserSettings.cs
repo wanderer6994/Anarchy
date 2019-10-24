@@ -123,6 +123,9 @@ namespace Discord
             return GifProperty.Set;
         }
 
+
+        [JsonProperty("custom_status")]
+        public CustomStatus CustomStatus { get; set; }
 #pragma warning restore IDE1006
     }
 }

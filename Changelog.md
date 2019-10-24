@@ -1,5 +1,10 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.6.3.2
+- Added support for setting custom statuses.
+
+
+
 # 0.6.3.1
 
 ### Additions

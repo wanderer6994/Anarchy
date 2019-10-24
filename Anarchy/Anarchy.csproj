@@ -157,6 +157,7 @@
     <Compile Include="REST\Relationship\Models\RelationshipType.cs" />
     <Compile Include="REST\User\Profile\Nitro.cs" />
     <Compile Include="REST\User\Profile\ProfileUpdatedEventArgs.cs" />
+    <Compile Include="REST\User\Settings\CustomStatus.cs" />
     <Compile Include="REST\User\Settings\ExplicitContentFilter.cs" />
     <Compile Include="REST\User\Settings\FriendSourceFlags.cs" />
     <Compile Include="REST\User\Settings\Language.cs" />
