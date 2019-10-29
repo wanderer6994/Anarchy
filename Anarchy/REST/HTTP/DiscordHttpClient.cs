@@ -1,63 +1,73 @@
 ﻿using System;
 using System.Text;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Leaf.xNet;
 
 namespace Discord
 {
     public class DiscordHttpClient
     {
-        private readonly HttpClient _httpClient;
         private readonly DiscordClient _discordClient;
 
 #pragma warning disable IDE0044
         private static JSchema _errorSchema = new JSchemaGenerator().Generate(typeof(DiscordHttpError));
 #pragma warning restore IDE0044
 
-        public HttpRequestHeaders Headers
+        public string AuthToken
         {
-            get { return _httpClient.DefaultRequestHeaders; }
+            get { return _discordClient.Token; }
+        }
+
+        public string UserAgent { get; set; }
+        public string SuperProperties { get; set; }
+        public string Fingerprint { get; private set; }
+
+
+        public ProxyClient Proxy { get; private set; }
+
+
+        public void SetProxy(ProxyType proxyType, string proxy)
+        {
+            Proxy = ProxyClient.Parse(proxyType, proxy);
         }
 
 
-        public string Proxy { get; set; }
-
-
-        public DiscordHttpClient(DiscordClient discordClient, string proxy = null)
+        public DiscordHttpClient(DiscordClient discordClient)
         {
-            _httpClient = new HttpClient(new HttpClientHandler() { Proxy = new WebProxy(proxy) });
             _discordClient = discordClient;
-            Proxy = proxy;
+        }
+
+
+        public DiscordHttpClient(DiscordClient client, string proxy, ProxyType proxyType) : this(client)
+        {
+            SetProxy(proxyType, proxy);
         }
         
 
         public void UpdateFingerprint()
         {
-            Headers.Remove("X-Fingerprint");
-            Headers.Add("X-Fingerprint", Get("/experiments").Deserialize<JObject>().GetValue("fingerprint").ToString());
+            Fingerprint = Get("/experiments").Deserialize<JObject>().GetValue("fingerprint").ToString();
         }
 
 
         /// <summary>
         /// Checks an HTTP response for errors
         /// </summary>
-        private void CheckResponse(HttpResponseMessage resp)
+        private void CheckResponse(HttpResponse resp)
         {
             if (resp.StatusCode <= HttpStatusCode.NoContent)
                 return;
 
             if (resp.StatusCode == (HttpStatusCode)429)
-                throw new RateLimitException(_discordClient, resp.Deserialize<RateLimit>());
+                throw new RateLimitException(_discordClient, resp.ToString().Deserialize<RateLimit>());
 
             if (resp.StatusCode == HttpStatusCode.BadRequest)
             {
                 if (!resp.Deserialize<JObject>().IsValid(_errorSchema))
-                    throw new InvalidParametersException(_discordClient, resp.Content.ReadAsStringAsync().Result);
+                    throw new InvalidParametersException(_discordClient, resp.ToString());
             }
 
             throw new DiscordHttpException(_discordClient, resp.Deserialize<DiscordHttpError>());
@@ -70,63 +80,74 @@ namespace Discord
         /// <param name="method">HTTP method to use</param>
         /// <param name="endpoint">API endpoint (fx. /users/@me)</param>
         /// <param name="json">JSON content</param>
-        private HttpResponseMessage Send(HttpMethod method, string endpoint, string json = null)
+        private HttpResponse Send(HttpMethod method, string endpoint, string json = null)
         {
             if (!endpoint.StartsWith("http"))
                 endpoint = "https://discordapp.com/api/v6" + endpoint;
 
 #pragma warning disable IDE0068
-            HttpRequestMessage msg = new HttpRequestMessage
-            {
-                Method = method,
-                RequestUri = new Uri(endpoint),
-                Content = json != null ? new StringContent(json, Encoding.UTF8, "application/json") : null
-            };
-#pragma warning restore IDE0068
+            HttpRequest msg = new HttpRequest();
+            msg.AddHeader(HttpHeader.ContentType, "application/json");
+            msg.AddHeader("X-Super-Properties", SuperProperties);
+            msg.Proxy = Proxy;
+            msg.UserAgent = UserAgent;
+            msg.Authorization = AuthToken;
 
-            HttpResponseMessage resp = null;
+            HttpResponse resp;
 
-            try
+            switch (method)
             {
-                resp = _httpClient.SendAsync(msg).Result;
+                case HttpMethod.GET:
+                    resp = msg.Get(endpoint);
+                    break;
+                case HttpMethod.POST:
+                    resp = msg.Post(endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null);
+                    break;
+                case HttpMethod.PUT:
+                    resp = msg.Put(endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null);
+                    break;
+                case HttpMethod.PATCH:
+                    resp = msg.Patch(endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null);
+                    break;
+                case HttpMethod.DELETE:
+                    resp = msg.Delete(endpoint);
+                    break;
+                default:
+                    return null;
             }
-            catch (JsonReaderException)
-            {
-                if (resp.Content.ReadAsStringAsync().Result.Contains("<"))
-                    throw new RateLimitException(_discordClient, 0);
-            }
+
             CheckResponse(resp);
             return resp;
         }
 
 
-        public HttpResponseMessage Get(string endpoint)
+        public HttpResponse Get(string endpoint)
         {
-            return Send(HttpMethod.Get, endpoint);
+            return Send(HttpMethod.GET, endpoint);
         }
 
 
-        public HttpResponseMessage Post(string endpoint, string json = "")
+        public HttpResponse Post(string endpoint, string json = "")
         {
-            return Send(HttpMethod.Post, endpoint, json);
+            return Send(HttpMethod.POST, endpoint, json);
         }
 
 
-        public HttpResponseMessage Delete(string endpoint)
+        public HttpResponse Delete(string endpoint)
         {
-            return Send(HttpMethod.Delete, endpoint);
+            return Send(HttpMethod.DELETE, endpoint);
         }
 
 
-        public HttpResponseMessage Put(string endpoint, string json = "")
+        public HttpResponse Put(string endpoint, string json = "")
         {
-            return Send(HttpMethod.Put, endpoint, json);
+            return Send(HttpMethod.PUT, endpoint, json);
         }
 
 
-        public HttpResponseMessage Patch(string endpoint, string json = "")
+        public HttpResponse Patch(string endpoint, string json = "")
         {
-            return Send(new HttpMethod("PATCH"), endpoint, json);
+            return Send(HttpMethod.PATCH, endpoint, json);
         }
     }
 }

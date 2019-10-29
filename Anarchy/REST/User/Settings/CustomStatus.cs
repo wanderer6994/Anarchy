@@ -4,9 +4,9 @@ namespace Discord
 {
     public class CustomStatus
     {
-        private readonly Property<ulong> EmojiProperty = new Property<ulong>();
+        private readonly Property<ulong?> EmojiProperty = new Property<ulong?>();
         [JsonProperty("emoji_id")]
-        public ulong EmojiId
+        public ulong? EmojiId
         {
             get { return EmojiProperty; }
             set { EmojiProperty.Value = value; }

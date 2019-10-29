@@ -8,3 +8,5 @@ C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Debug\Anarchy.pdb
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Debug\Anarchy.csprojAssemblyReference.cache
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Debug\Leaf.xNet.dll
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Debug\Leaf.xNet.xml
