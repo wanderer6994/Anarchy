@@ -89,7 +89,8 @@ namespace Discord
             HttpRequest msg = new HttpRequest();
             msg.IgnoreProtocolErrors = true;
             msg.AddHeader(HttpHeader.ContentType, "application/json");
-            msg.AddHeader("X-Super-Properties", SuperProperties);
+            if (SuperProperties != null)
+                msg.AddHeader("X-Super-Properties", SuperProperties);
             msg.Proxy = Proxy;
             msg.UserAgent = UserAgent;
             msg.Authorization = AuthToken;
