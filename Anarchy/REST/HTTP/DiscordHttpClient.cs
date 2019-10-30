@@ -87,13 +87,14 @@ namespace Discord
 
 #pragma warning disable IDE0068
             HttpRequest msg = new HttpRequest();
+            msg.IgnoreProtocolErrors = true;
             msg.AddHeader(HttpHeader.ContentType, "application/json");
             msg.AddHeader("X-Super-Properties", SuperProperties);
             msg.Proxy = Proxy;
             msg.UserAgent = UserAgent;
             msg.Authorization = AuthToken;
 
-            HttpResponse resp;
+            HttpResponse resp = null;
 
             switch (method)
             {
