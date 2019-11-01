@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Discord;
+using Discord.Gateway;
 using Leaf.xNet;
 
 namespace Testing
@@ -13,19 +14,21 @@ namespace Testing
     {
         static void Main()
         {
-            foreach (var proxy in File.ReadAllLines("Proxies.txt"))
-            {
-                try
-                {
-                    DiscordClient client = new DiscordClient(proxy, ProxyType.Socks4);
+            DiscordSocketClient client = new DiscordSocketClient();
+            client.OnLoggedIn += Client_OnLoggedIn;
+            client.Login("")
+        }
 
-                    Console.WriteLine("ayyy we did it chief");
-                }
-                catch
+        private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
+        {
+            Task.Run(() =>
+            {
+                foreach (var member in client.GetAllGuildMembers(637346043377483813))
                 {
-                    Console.WriteLine("bruh moment");
+                    if (member.User.Username == "Alex Jones")
+                        member.Ban();
                 }
-            }
+            });
         }
     }
 }

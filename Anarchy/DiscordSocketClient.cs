@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Leaf.xNet;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -91,6 +92,7 @@ namespace Discord.Gateway
 
 
         public DiscordSocketClient() : base() { }
+        public DiscordSocketClient(string proxy, ProxyType proxyType) : base(proxy, proxyType) { }
         ~DiscordSocketClient()
         {
             Logout();
@@ -102,7 +104,7 @@ namespace Discord.Gateway
             Token = token;
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
-            Socket.SetProxy("http://" + HttpClient.Proxy, "", "");
+            Socket.SetProxy($"{HttpClient.Proxy.Host}:{HttpClient.Proxy.Port}", "", "");
             Socket.OnMessage += SocketDataReceived;
             Socket.OnClose += Socket_OnClose;
             Socket.Connect();
