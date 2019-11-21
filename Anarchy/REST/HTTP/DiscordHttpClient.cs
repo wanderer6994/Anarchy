@@ -82,7 +82,9 @@ namespace Discord
         /// <param name="json">JSON content</param>
         private HttpResponse Send(HttpMethod method, string endpoint, string json = null)
         {
-            if (!endpoint.StartsWith("http"))
+            bool isEndpoint = !endpoint.StartsWith("http");
+
+            if (isEndpoint)
                 endpoint = "https://discordapp.com/api/v6" + endpoint;
 
 #pragma warning disable IDE0068
@@ -95,28 +97,7 @@ namespace Discord
             msg.UserAgent = UserAgent;
             msg.Authorization = AuthToken;
 
-            HttpResponse resp = null;
-
-            switch (method)
-            {
-                case HttpMethod.GET:
-                    resp = msg.Get(endpoint);
-                    break;
-                case HttpMethod.POST:
-                    resp = msg.Post(endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null);
-                    break;
-                case HttpMethod.PUT:
-                    resp = msg.Put(endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null);
-                    break;
-                case HttpMethod.PATCH:
-                    resp = msg.Patch(endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null);
-                    break;
-                case HttpMethod.DELETE:
-                    resp = msg.Delete(endpoint);
-                    break;
-                default:
-                    return null;
-            }
+            HttpResponse resp = msg.Raw(method, endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null);
 
             CheckResponse(resp);
             return resp;

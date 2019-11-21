@@ -104,7 +104,11 @@ namespace Discord.Gateway
             Token = token;
 
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
-            Socket.SetProxy($"{HttpClient.Proxy.Host}:{HttpClient.Proxy.Port}", "", "");
+            if (HttpClient.Proxy != null)
+            {
+                if (HttpClient.Proxy.Type == ProxyType.HTTP) //WebSocketSharp only supports HTTP proxies
+                    Socket.SetProxy($"http://{HttpClient.Proxy.Host}:{HttpClient.Proxy.Port}", "", "");
+            }
             Socket.OnMessage += SocketDataReceived;
             Socket.OnClose += Socket_OnClose;
             Socket.Connect();

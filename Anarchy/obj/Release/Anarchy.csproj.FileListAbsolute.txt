@@ -1,4 +1,3 @@
-C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csproj.CoreCompileInputs.cache
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Anarchy.dll
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Anarchy.pdb
 C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Newtonsoft.Json.dll
@@ -10,3 +9,5 @@ C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csproj.CopyCompl
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.dll
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.pdb
 C:\Users\ilink\source\repos\Anarchy\Anarchy\obj\Release\Anarchy.csprojAssemblyReference.cache
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Leaf.xNet.dll
+C:\Users\ilink\source\repos\Anarchy\Anarchy\bin\Release\Leaf.xNet.xml

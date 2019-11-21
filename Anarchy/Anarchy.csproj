@@ -74,6 +74,8 @@
     <Compile Include="REST\Channel\Guild\Guild\GuildChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Text\TextChannelProperties.cs" />
     <Compile Include="REST\Channel\Guild\Voice\VoiceChannelProperties.cs" />
+    <Compile Include="REST\Discovery\DiscoveryGuild.cs" />
+    <Compile Include="REST\Discovery\Extensions.cs" />
     <Compile Include="REST\Embed\EmbedError.cs" />
     <Compile Include="REST\Embed\EmbedException.cs" />
     <Compile Include="REST\Invite\Models\InviteType.cs" />

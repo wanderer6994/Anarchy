@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Gateway;
 using Leaf.xNet;
+using System.Threading;
 
 namespace Testing
 {
@@ -14,21 +15,10 @@ namespace Testing
     {
         static void Main()
         {
-            DiscordSocketClient client = new DiscordSocketClient();
-            client.OnLoggedIn += Client_OnLoggedIn;
-            client.Login("")
-        }
+            DiscordClient client = new DiscordClient("NjQzMTIyNTA4OTA3ODA2Nzcw.XdRJAQ.NbRZN7QetwBFFk-ifx20Fm-j-pE");
+            client.QueryGuilds(40);
 
-        private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
-        {
-            Task.Run(() =>
-            {
-                foreach (var member in client.GetAllGuildMembers(637346043377483813))
-                {
-                    if (member.User.Username == "Alex Jones")
-                        member.Ban();
-                }
-            });
+            Thread.Sleep(-1);
         }
     }
 }

@@ -39,6 +39,10 @@ namespace Discord
         public GuildPremiumTier PremiumTier { get; private set; }
 
 
+        [JsonProperty("features")]
+        public IReadOnlyList<string> Features { get; private set; }
+
+
         private IReadOnlyList<Role> _roles;
         [JsonProperty("roles")]
         public IReadOnlyList<Role> Roles
