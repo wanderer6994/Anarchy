@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace Discord
 {
@@ -20,6 +21,13 @@ namespace Discord
                     @class.Client = client;
             }
             return classes;
+        }
+
+
+        internal static T SetJson<T>(this T @class, JObject obj) where T : ControllableEx
+        {
+            @class.Json = obj;
+            return @class;
         }
     }
 }

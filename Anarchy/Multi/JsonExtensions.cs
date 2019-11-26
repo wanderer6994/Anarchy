@@ -2,6 +2,8 @@
 using Newtonsoft.Json;
 using Discord.Gateway;
 using Leaf.xNet;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace Discord
 {
@@ -13,16 +15,18 @@ namespace Discord
         }
 
 
-        public static T Deserialize<T>(this HttpResponseMessage httpResponse)
-        {
-            return httpResponse.Content.ReadAsStringAsync().Result.Deserialize<T>();
-        }
-
-
         public static T Deserialize<T>(this HttpResponse response)
         {
             return response.ToString().Deserialize<T>();
         }
+
+
+        public static T DeserializeEx<T>(this HttpResponse response) where T : ControllableEx
+        {
+            JObject json = JObject.Parse(response.ToString());
+            return ((T)json.ToObject(typeof(T))).SetJson(json);
+        }
+
 
 
         public static T Deserialize<T>(this GatewayResponse response)

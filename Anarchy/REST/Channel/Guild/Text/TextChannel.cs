@@ -48,6 +48,7 @@ namespace Discord
         public void Modify(TextChannelProperties properties)
         {
             TextChannel channel = Client.ModifyTextChannel(Id, properties);
+            Json = channel.Json;
             Name = channel.Name;
             Topic = channel.Topic;
             Nsfw = channel.Nsfw;

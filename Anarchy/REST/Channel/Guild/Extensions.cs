@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Discord
 {
@@ -20,13 +17,13 @@ namespace Discord
         private static Treturn modifyChannel<Treturn, TProperties>(this DiscordClient client, ulong channelId, TProperties properties) where TProperties : GuildChannelProperties where Treturn : GuildChannel
         {
             return client.HttpClient.Patch($"/channels/{channelId}",
-                                JsonConvert.SerializeObject(properties)).Deserialize<Treturn>().SetClient(client);
+                                JsonConvert.SerializeObject(properties)).DeserializeEx<Treturn>().SetClient(client);
         }
 
         private static T deleteChannel<T>(this DiscordClient client, ulong channelId) where T : GuildChannel
         {
             return client.HttpClient.Delete($"/channels/{channelId}")
-                .Deserialize<T>().SetClient(client);
+                .DeserializeEx<T>().SetClient(client);
         }
 
 
@@ -45,6 +42,7 @@ namespace Discord
         /// Gets a guild channel
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
+        [Obsolete("This method is depricated. Please use GetChannel().ToGuildChannel() instead")]
         public static GuildChannel GetGuildChannel(this DiscordClient client, ulong channelId)
         {
             return client.getChannel<GuildChannel>(channelId);
@@ -55,6 +53,7 @@ namespace Discord
         /// Gets a guild text channel
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
+        [Obsolete("This method is depricated. Please use GetChannel().ToTextChannel() instead")]
         public static TextChannel GetTextChannel(this DiscordClient client, ulong channelId)
         {
             return client.getChannel<TextChannel>(channelId);
@@ -65,6 +64,7 @@ namespace Discord
         /// Gets a guild voice channel
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
+        [Obsolete("This method is depricated. Please use GetChannel().ToVoiceChannel() instead")]
         public static VoiceChannel GetVoiceChannel(this DiscordClient client, ulong channelId)
         {
             return client.getChannel<VoiceChannel>(channelId);
@@ -74,7 +74,7 @@ namespace Discord
         private static T createGuildChannel<T>(this DiscordClient client, ulong guildId, string name, ChannelType type, ulong? parentId) where T : GuildChannel
         {
             return client.HttpClient.Post($"/guilds/{guildId}/channels",
-                                JsonConvert.SerializeObject(new GuildChannelCreationProperties() { Name = name, Type = type, ParentId = parentId })).Deserialize<T>().SetClient(client);
+                                JsonConvert.SerializeObject(new GuildChannelCreationProperties() { Name = name, Type = type, ParentId = parentId })).DeserializeEx<T>().SetClient(client);
         }
 
 
@@ -96,6 +96,7 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created <see cref="TextChannel"/></returns>
+        [Obsolete("This method is depricated. Please use CreateGuildChannel().ToTextChannel() instead")]
         public static TextChannel CreateTextChannel(this DiscordClient client, ulong guildId, string name, ulong? parentId = null)
         {
             return client.createGuildChannel<TextChannel>(guildId, name, ChannelType.Text, parentId);
@@ -108,6 +109,7 @@ namespace Discord
         /// <param name="guildId">ID of the guild</param>
         /// <param name="properties">Options for creating the channel</param>
         /// <returns>The created <see cref="VoiceChannel"/></returns>
+        [Obsolete("This method is depricated. Please use CreateGuildChannel().ToVoiceChannel() instead")]
         public static VoiceChannel CreateVoiceChannel(this DiscordClient client, ulong guildId, string name, ulong? parentId)
         {
             return client.createGuildChannel<VoiceChannel>(guildId, name, ChannelType.Voice, parentId);

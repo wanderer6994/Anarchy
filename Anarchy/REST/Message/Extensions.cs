@@ -83,7 +83,7 @@ namespace Discord
             string parameters = "";
             if (filters.LimitProperty.Set) parameters += $"limit={filters.Limit}&";
             if (filters.BeforeProperty.Set) parameters += $"before={filters.BeforeId}&";
-            if (filters.AfterProperty.Set) parameters += $"after={filters.AfterId}";
+            if (filters.AfterProperty.Set) parameters += $"after={filters.AfterId}&";
 
             IReadOnlyList<Message> messages = client.HttpClient.Get($"/channels/{channelId}/messages?{parameters}")
                                                           .Deserialize<IReadOnlyList<Message>>().SetClientsInList(client);

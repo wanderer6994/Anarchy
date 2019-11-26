@@ -23,7 +23,9 @@ namespace Discord
         /// </summary>
         public override void Update()
         {
-            Recipients = Client.GetDMChannel(Id).Recipients;
+            DMChannel channel = Client.GetDMChannel(Id);
+            Json = channel.Json;
+            Recipients = channel.Recipients;
         }
 
 

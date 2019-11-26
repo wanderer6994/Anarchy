@@ -27,7 +27,7 @@ namespace Discord
         public static DMChannel GetDMChannel(this DiscordClient client, ulong channelId)
         {
             return client.HttpClient.Get($"/channels/{channelId}")
-                    .Deserialize<DMChannel>().SetClient(client);
+                    .DeserializeEx<DMChannel>().SetClient(client);
         }
 
 
@@ -39,7 +39,7 @@ namespace Discord
         public static DMChannel CreateDM(this DiscordClient client, ulong recipientId)
         {
             return client.HttpClient.Post($"/users/@me/channels", $"{{\"recipient_id\":\"{recipientId}\"}}")
-                    .Deserialize<DMChannel>().SetClient(client);
+                    .DeserializeEx<DMChannel>().SetClient(client);
         }
 
 
@@ -51,7 +51,7 @@ namespace Discord
         public static DMChannel CloseDM(this DiscordClient client, ulong channelId)
         {
             return client.HttpClient.Delete($"/channels/{channelId}")
-                    .Deserialize<DMChannel>().SetClient(client);
+                    .DeserializeEx<DMChannel>().SetClient(client);
         }
     }
 }

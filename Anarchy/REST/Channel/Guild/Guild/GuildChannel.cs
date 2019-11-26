@@ -30,7 +30,8 @@ namespace Discord
         /// </summary>
         public override void Update()
         {
-            GuildChannel channel = Client.GetGuildChannel(Id);
+            GuildChannel channel = Client.GetChannel(Id).ToGuildChannel();
+            Json = channel.Json;
             Name = channel.Name;
             Position = channel.Position;
             ParentId = channel.ParentId;
@@ -45,6 +46,7 @@ namespace Discord
         public void Modify(GuildChannelProperties properties)
         {
             GuildChannel channel = Client.ModifyGuildChannel(Id, properties);
+            Json = channel.Json;
             Name = channel.Name;
             Position = channel.Position;
             ParentId = channel.ParentId;

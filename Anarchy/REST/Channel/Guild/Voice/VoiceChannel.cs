@@ -22,6 +22,7 @@ namespace Discord
         public override void Update()
         {
             VoiceChannel channel = Client.GetVoiceChannel(Id);
+            Json = channel.Json;
             Name = channel.Name;
             Bitrate = channel.Bitrate;
             UserLimit = channel.UserLimit;

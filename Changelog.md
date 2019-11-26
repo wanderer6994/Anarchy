@@ -1,7 +1,16 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
-# 0.6.3.2
+# 0.6.4.0
+
+### Additions
+- Added proxy support.
 - Added support for setting custom statuses.
+- Added server discovery functionality.
+- Added the ability to disable anti-track.
+- A bunch of other shit i can't remember, lol.
+
+### Improvements
+- WIP: on objects that have multiple types (like channels) - instead of needing to make another HTTP request, it saves the json from the request and deserializes to that if asked.
 
 
 

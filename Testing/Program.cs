@@ -15,10 +15,15 @@ namespace Testing
     {
         static void Main()
         {
-            DiscordClient client = new DiscordClient("NjQzMTIyNTA4OTA3ODA2Nzcw.XdRJAQ.NbRZN7QetwBFFk-ifx20Fm-j-pE");
-            client.QueryGuilds(40);
+            DiscordSocketClient client = new DiscordSocketClient();
+            client.OnLoggedIn += Client_OnLoggedIn;
+            client.Login("NjQzMTIyNTA4OTA3ODA2Nzcw.XdaZHA.E-rKnCMCYuxwMHYUZ_JQnMcveTM");
 
             Thread.Sleep(-1);
+        }
+
+        private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
+        {
         }
     }
 }

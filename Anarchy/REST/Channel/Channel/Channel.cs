@@ -5,7 +5,7 @@ namespace Discord
     /// <summary>
     /// Represents a universal channel object. This is not specific to any sort of channel
     /// </summary>
-    public class Channel : Controllable
+    public class Channel : ControllableEx
     {
         [JsonProperty("id")]
         public ulong Id { get; private set; }
@@ -24,7 +24,9 @@ namespace Discord
         /// </summary>
         public virtual void Update()
         {
-            Name = Client.GetChannel(Id).Name;
+            Channel channel = Client.GetChannel(Id);
+            Json = channel.Json;
+            Name = channel.Name;
         }
 
 
@@ -34,7 +36,9 @@ namespace Discord
         /// <param name="properties">Options for modifying the channel</param>
         public void Modify(string name)
         {
-            Name = Client.ModifyChannel(Id, name).Name;
+            Channel channel = Client.ModifyChannel(Id, name);
+            Json = channel.Json;
+            Name = channel.Name;
         }
 
 
@@ -57,6 +61,54 @@ namespace Discord
         public static implicit operator ulong(Channel instance)
         {
             return instance.Id;
+        }
+
+
+        // Note: the reason the Json == null checks are here is because Anarchy currently does not have a method for getting the children of a JObject which is a list
+
+        
+        public GuildChannel ToGuildChannel()
+        {
+            if (Json == null)
+                return Client.GetGuildChannel(Id);
+            else
+                return ((GuildChannel)Json.ToObject(typeof(GuildChannel))).SetClient(Client).SetJson(Json);
+        }
+
+
+        public TextChannel ToTextChannel()
+        {
+            if (Json == null)
+                return Client.GetTextChannel(Id);
+            else
+                return ((TextChannel)Json.ToObject(typeof(TextChannel))).SetClient(Client).SetJson(Json);
+        }
+
+
+        public VoiceChannel ToVoiceChannel()
+        {
+            if (Json == null)
+                return Client.GetVoiceChannel(Id);
+            else
+                return ((VoiceChannel)Json.ToObject(typeof(VoiceChannel))).SetClient(Client).SetJson(Json);
+        }
+
+
+        public DMChannel ToDMChannel()
+        {
+            if (Json == null)
+                return Client.GetDMChannel(Id);
+            else
+                return ((DMChannel)Json.ToObject(typeof(DMChannel))).SetClient(Client).SetJson(Json);
+        }
+
+
+        public Group ToGroup()
+        {
+            if (Json == null)
+                return Client.GetGroup(Id);
+            else
+                return ((Group)Json.ToObject(typeof(Group))).SetClient(Client).SetJson(Json);
         }
     }
 }

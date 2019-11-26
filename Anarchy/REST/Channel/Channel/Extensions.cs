@@ -11,7 +11,7 @@ namespace Discord
         public static Channel GetChannel(this DiscordClient client, ulong channelId)
         {
             return client.HttpClient.Get($"/channels/{channelId}")
-                                .Deserialize<Channel>().SetClient(client);
+                                .DeserializeEx<Channel>().SetClient(client);
         }
 
 
@@ -26,7 +26,7 @@ namespace Discord
             ChannelProperties properties = new ChannelProperties() { Name = name };
 
             return client.HttpClient.Patch($"/channels/{channelId}",
-                    JsonConvert.SerializeObject(properties)).Deserialize<Channel>().SetClient(client);
+                    JsonConvert.SerializeObject(properties)).DeserializeEx<Channel>().SetClient(client);
         }
 
 
@@ -38,7 +38,7 @@ namespace Discord
         public static Channel DeleteChannel(this DiscordClient client, ulong channelId)
         {
             return client.HttpClient.Delete($"/channels/{channelId}")
-                                .Deserialize<Channel>().SetClient(client);
+                                .DeserializeEx<Channel>().SetClient(client);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Discord
         public override void Update()
         {
             Group group = Client.GetGroup(Id);
+            Json = group.Json;
             Name = group.Name;
             IconId = group.IconId;
             OwnerId = group.OwnerId;
@@ -37,6 +38,7 @@ namespace Discord
         public void Modify(GroupProperties properties)
         {
             Group group = Client.ModifyGroup(Id, properties);
+            Json = group.Json;
             Name = group.Name;
             IconId = group.IconId;
             OwnerId = group.OwnerId;
