@@ -91,20 +91,7 @@ namespace GuildDuplicator
             List<CategoryDupe> ourCategories = new List<CategoryDupe>();
             foreach (var c in channels.Categories)
             {
-                GuildChannel category;
-
-                try
-                {
-                    category = client.GetGuildChannel(c.Id);
-                }
-                catch (DiscordHttpException e)
-                {
-                    //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Code == DiscordError.MissingAccess)
-                        continue;
-                    else
-                        throw;
-                }
+                GuildChannel category = c.ToGuildChannel();
 
                 //create the category
                 GuildChannel ourCategory = ourGuild.CreateChannel(category.Name, ChannelType.Category);
@@ -137,20 +124,7 @@ namespace GuildDuplicator
             //duplicate text channels
             foreach (var c in channels.TextChannels)
             {
-                TextChannel channel;
-
-                try
-                {
-                    channel = client.GetTextChannel(c.Id);
-                }
-                catch (DiscordHttpException e)
-                {
-                    //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Code == DiscordError.MissingAccess)
-                        continue;
-                    else
-                        throw;
-                }
+                TextChannel channel = c.ToTextChannel();
 
                 TextChannel ourChannel = ourGuild.CreateTextChannel(channel.Name, channel.ParentId != null ? (ulong?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null);
                 ourChannel.Modify(new TextChannelProperties() { Nsfw = channel.Nsfw, Position = channel.Position, Topic = channel.Topic, SlowMode = channel.SlowMode });
@@ -173,21 +147,7 @@ namespace GuildDuplicator
             //duplicate voice channels
             foreach (var c in channels.VoiceChannels)
             {
-                VoiceChannel channel;
-
-                try
-                {
-                    channel = client.GetVoiceChannel(c.Id);
-                }
-                catch (DiscordHttpException e)
-                {
-                    //ofcourse you could make it return no matter what error, but this is better for debugging
-                    if (e.Code == DiscordError.MissingAccess)
-                        continue;
-                    else
-                        throw;
-                }
-
+                VoiceChannel channel = c.ToVoiceChannel();
 
                 //create voice channels
                 VoiceChannel ourChannel = ourGuild.CreateVoiceChannel(channel.Name, channel.ParentId != null ? (ulong?)ourCategories.First(ca => ca.TargetCategory.Id == channel.ParentId).OurCategory.Id : null);

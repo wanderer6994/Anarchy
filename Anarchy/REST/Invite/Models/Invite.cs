@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    public class Invite : Controllable
+    public class Invite : ControllableEx
     {
         public Invite()
         {
@@ -52,6 +52,18 @@ namespace Discord
         public static implicit operator string(Invite instance)
         {
             return instance.Code;
+        }
+
+
+        public GuildInvite ToGuildInvite()
+        {
+            return ((GuildInvite)Json.ToObject(typeof(GuildInvite))).SetClient(Client).SetJson(Json);
+        }
+
+
+        public GroupInvite ToGroupInvite()
+        {
+            return ((GroupInvite)Json.ToObject(typeof(GroupInvite))).SetClient(Client).SetJson(Json);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Discord
 {
@@ -97,6 +98,20 @@ namespace Discord
             foreach (var role in roles)
                 role.GuildId = guildId;
             return roles;
+        }
+
+
+        /// <summary>
+        /// Gets a specific role from a guild.
+        /// 
+        /// Please keep in mind that this is only a wrapper around GetGuildRoles, so if you care about speed you might wanna do it differently
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        /// <param name="roleId">ID of the role</param>
+        /// <returns></returns>
+        public static Role GetGuildRole(this DiscordClient client, ulong guildId, ulong roleId)
+        {
+            return client.GetGuildRoles(guildId).First(r => r.Id == roleId);
         }
     }
 }

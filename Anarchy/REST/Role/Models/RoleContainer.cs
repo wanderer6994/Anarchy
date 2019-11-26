@@ -4,6 +4,11 @@ namespace Discord.Gateway
 {
     internal class RoleContainer : Controllable
     {
+        public RoleContainer()
+        {
+            OnClientUpdated += (sender, e) => Role.SetClient(Client);
+        }
+
         private ulong _guildId;
         [JsonProperty("guild_id")]
         public ulong GuildId

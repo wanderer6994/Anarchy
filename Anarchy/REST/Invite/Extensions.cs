@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Discord
@@ -38,7 +39,7 @@ namespace Discord
         private static T getInvite<T>(this DiscordClient client, string invCode) where T : Invite
         {
             return client.HttpClient.Get($"/invite/{invCode}?with_counts=true")
-                                .Deserialize<T>().SetClient(client);
+                                .DeserializeEx<T>().SetClient(client);
         }
 #pragma warning restore IDE1006
 
@@ -49,12 +50,14 @@ namespace Discord
         }
 
 
+        [Obsolete("This method is depricated. Please use GetInvite().ToGroupInvite() instead")]
         public static GroupInvite GetGroupInvite(this DiscordClient client, string invCode)
         {
             return client.getInvite<GroupInvite>(invCode);
         }
 
 
+        [Obsolete("This method is depricated. Please use GetInvite().ToGuildInvite() instead")]
         public static GuildInvite GetGuildInvite(this DiscordClient client, string invCode)
         {
             return client.getInvite<GuildInvite>(invCode);

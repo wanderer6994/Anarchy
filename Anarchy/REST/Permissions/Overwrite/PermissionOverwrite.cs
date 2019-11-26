@@ -34,6 +34,7 @@ namespace Discord
             get { return Deny; }
             set { Deny = new EditablePermissions(value); }
         }
+
         [JsonIgnore]
         public EditablePermissions Deny { get; set; }
 

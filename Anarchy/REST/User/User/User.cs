@@ -57,6 +57,12 @@ namespace Discord
         }
 
 
+        public DateTimeOffset CreatedAt
+        {
+            get { return DateTimeOffset.FromUnixTimeMilliseconds((long)((Id >> 22) + 1420070400000UL)); }
+        }
+
+
         /// <summary>
         /// Updates the user's info
         /// </summary>

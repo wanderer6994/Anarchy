@@ -35,7 +35,7 @@ namespace Discord
                     if (previousToken != null)
                         _token = previousToken;
 
-                    throw;
+                    throw new InvalidTokenException(value);
                 }
             }
         }
