@@ -16,5 +16,12 @@ namespace Discord
         {
             return client.QueryGuilds("", limit, offset);
         }
+
+
+        public static Guild LurkGuild(this DiscordClient client, ulong guildId, string sessionId = null)
+        {
+            return client.HttpClient.Put($"https://discordapp.com/api/v6/guilds/{guildId}/members/@me?lurker=true&session_id={sessionId}")
+                                .Deserialize<Guild>().SetClient(client);
+        }
     }
 }

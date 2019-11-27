@@ -3,13 +3,12 @@ using Newtonsoft.Json;
 using Discord.Gateway;
 using Leaf.xNet;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 
 namespace Discord
 {
-    internal static class JsonExtensions
+    public static class JsonExtensions
     {
-        public static T Deserialize<T>(this string content)
+        internal static T Deserialize<T>(this string content)
         {
             return JsonConvert.DeserializeObject<T>(content);
         }
@@ -29,7 +28,7 @@ namespace Discord
 
 
 
-        public static T Deserialize<T>(this GatewayResponse response)
+        internal static T Deserialize<T>(this GatewayResponse response)
         {
             return response.Data.ToString().Deserialize<T>();
         }
