@@ -72,24 +72,35 @@ namespace Discord
             Deafened = member.Deafened;
         }
 
+
         /// <summary>
-        /// Changes the member's nickname for this guild
+        /// Modifies the specified guild member
         /// </summary>
-        /// <param name="nickname">New nickname</param>
-        public void ChangeNickname(string nickname)
+        /// <param name="properties">Things to change</param>
+        public void Modify(GuildMemberProperties properties)
         {
-            Client.ChangeNickname(GuildId, User.Id, nickname);
+            Client.ModifyGuildMember(GuildId, User.Id, properties);
+        }
+
+        /// <summary>
+        /// Mutes the user in the specified guild
+        /// </summary>
+        /// <param name="unmute">Unmute the user instead of muting them</param>
+        public void Mute(bool unmute = false)
+        {
+            Client.ModifyGuildMember(GuildId, User.Id, new GuildMemberProperties() { Muted = !unmute });
         }
 
 
         /// <summary>
-        /// Changes a user's voice state in the specified guild
+        /// Deafenes the user in the specified guild
         /// </summary>
-        /// <param name="muted">Whether the member should be muted or not (null for 'don't change')</param>
-        /// <param name="deafened">Whether the member should be deafened or not (null for 'don't change')</param>
-        public void ChangeVoiceState(bool? muted = null, bool? deafened = null)
+        /// <param name="guildId">ID of the guild</param>
+        /// <param name="userId">ID of the user</param>
+        /// <param name="undeafen">Undeafen the user instead of deafening them</param>
+        public void Deafen(bool undeafen = false)
         {
-            Client.ChangeGuildMemberVoiceState(GuildId, User.Id, muted, deafened);
+            Client.ModifyGuildMember(GuildId, User.Id, new GuildMemberProperties() { Deafened = !undeafen });
         }
 
 

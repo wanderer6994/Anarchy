@@ -57,11 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gateway\Auth\Extensions.cs" />
+    <Compile Include="Gateway\Auth\Models\LoginGuild.cs" />
     <Compile Include="Gateway\GuildMember\Extensions.cs" />
     <Compile Include="Gateway\GuildMember\Models\MemberAmount.cs" />
     <Compile Include="Gateway\Presence\Activity\GameActivity.cs" />
     <Compile Include="Gateway\Presence\Activity\StreamActivity.cs" />
-    <Compile Include="InvalidTokenException.cs" />
+    <Compile Include="REST\InvalidTokenException.cs" />
     <Compile Include="Multi\Controllable\ControllableEx.cs" />
     <Compile Include="Multi\Models\InvalidConvertionException.cs" />
     <Compile Include="REST\Channel\Channel\Extensions.cs" />

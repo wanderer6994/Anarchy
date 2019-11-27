@@ -13,22 +13,27 @@ namespace Discord
                                 .Deserialize<IReadOnlyList<VoiceRegion>>();
         }
 
-
         /// <summary>
-        /// Changes a user's voice state in the specified guild
+        /// Mutes the user in the specified guild
         /// </summary>
         /// <param name="guildId">ID of the guild</param>
         /// <param name="userId">ID of the user</param>
-        /// <param name="muted">Whether the member should be muted or not (null for 'don't change')</param>
-        /// <param name="deafened">Whether the member should be deafened or not (null for 'don't change')</param>
-        public static void ChangeGuildMemberVoiceState(this DiscordClient client, ulong guildId, ulong userId, bool? muted = null, bool? deafened = null)
+        /// <param name="unmute">Unmute the user instead of muting them</param>
+        public static void MuteGuildMember(this DiscordClient client, ulong guildId, ulong userId, bool unmute = false)
         {
-            GuildMemberProperties properties = new GuildMemberProperties();
-            if (muted != null)
-                properties.Muted = muted.Value;
-            if (deafened != null)
-                properties.Deafened = deafened.Value;
-            client.ModifyGuildMember(guildId, userId, properties);
+            client.ModifyGuildMember(guildId, userId, new GuildMemberProperties() { Muted = !unmute });
+        }
+
+
+        /// <summary>
+        /// Deafenes the user in the specified guild
+        /// </summary>
+        /// <param name="guildId">ID of the guild</param>
+        /// <param name="userId">ID of the user</param>
+        /// <param name="undeafen">Undeafen the user instead of deafening them</param>
+        public static void DeafenGuildMember(this DiscordClient client, ulong guildId, ulong userId, bool undeafen = false)
+        {
+            client.ModifyGuildMember(guildId, userId, new GuildMemberProperties() { Deafened = !undeafen });
         }
     }
 }

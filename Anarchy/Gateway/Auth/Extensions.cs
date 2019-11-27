@@ -19,14 +19,7 @@
 
         internal static void Resume(this DiscordSocketClient client)
         {
-            var resume = new GatewayResume()
-            {
-                Token = client.Token,
-                SessionId = client.SessionId,
-                Sequence = client.Sequence
-            };
-
-            client.Socket.Send(GatewayOpcode.Resume, resume);
+            client.Socket.Send(GatewayOpcode.Resume, new GatewayResume(client));
         }
     }
 }
