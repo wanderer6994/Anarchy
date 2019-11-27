@@ -69,6 +69,9 @@ namespace Discord
         
         public GuildChannel ToGuildChannel()
         {
+            if (Type == ChannelType.DM || Type == ChannelType.Group)
+                throw new InvalidConvertionException(Client, "Channel is not of a guild");
+
             if (Json == null)
                 return Client.GetGuildChannel(Id);
             else
@@ -78,6 +81,9 @@ namespace Discord
 
         public TextChannel ToTextChannel()
         {
+            if (Type == ChannelType.Text)
+                throw new InvalidConvertionException(Client, "Channel is not a guild text channel");
+
             if (Json == null)
                 return Client.GetTextChannel(Id);
             else
@@ -87,6 +93,9 @@ namespace Discord
 
         public VoiceChannel ToVoiceChannel()
         {
+            if (Type == ChannelType.Text)
+                throw new InvalidConvertionException(Client, "Channel is not a guild voice channel");
+
             if (Json == null)
                 return Client.GetVoiceChannel(Id);
             else
@@ -96,6 +105,9 @@ namespace Discord
 
         public DMChannel ToDMChannel()
         {
+            if (Type != ChannelType.DM)
+                throw new InvalidConvertionException(Client, "Channel is not of type: DM");
+
             if (Json == null)
                 return Client.GetDMChannel(Id);
             else
@@ -105,6 +117,9 @@ namespace Discord
 
         public Group ToGroup()
         {
+            if (Type != ChannelType.Group)
+                throw new InvalidConvertionException(Client, "Channel is not of type: Group");
+
             if (Json == null)
                 return Client.GetGroup(Id);
             else

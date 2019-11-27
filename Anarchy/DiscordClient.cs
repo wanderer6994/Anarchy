@@ -55,11 +55,15 @@ namespace Discord
             HttpClient = new DiscordHttpClient(this);
 
             SuperPropertiesInfo = new SPInformation();
-            SuperPropertiesInfo.OnPropertiesUpdated += OnPropertiesUpdated;
+            SuperPropertiesInfo.OnPropertiesUpdated += (sender, args) => 
+            {
+                HttpClient.SuperProperties = args.Properties.Base64;
+                UserAgent = args.Properties.Properties.UserAgent;
+            };
 
             if (antiTrack)
             {
-                SuperPropertiesInfo.Base64 = "eyJvcyI6IkxpbnV4IiwiYnJvd3NlciI6IkZpcmVmb3giLCJkZXZpY2UiOiIiLCJicm93c2VyX3VzZXJfYWdlbnQiOiJNb3ppbGxhLzUuMCAoWDExOyBMaW51eCB4ODZfNjQ7IHJ2OjY5LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjkuMCIsImJyb3dzZXJfdmVyc2lvbiI6IjY5LjAiLCJvc192ZXJzaW9uIjoiIiwicmVmZXJyZXIiOiIiLCJyZWZlcnJpbmdfZG9tYWluIjoiIiwicmVmZXJyZXJfY3VycmVudCI6IiIsInJlZmVycmluZ19kb21haW5fY3VycmVudCI6IiIsInJlbGVhc2VfY2hhbm5lbCI6InN0YWJsZSIsImNsaWVudF9idWlsZF9udW1iZXIiOjQ4NDcwLCJjbGllbnRfZXZlbnRfc291cmNlIjpudWxsfQ==";
+                SuperPropertiesInfo.Base64 = "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRGlzY29yZCBDbGllbnQiLCJyZWxlYXNlX2NoYW5uZWwiOiJzdGFibGUiLCJjbGllbnRfdmVyc2lvbiI6IjAuMC4zMDUiLCJvc192ZXJzaW9uIjoiMTAuMC4xODM2MiIsIm9zX2FyY2giOiJ4NjQiLCJjbGllbnRfYnVpbGRfbnVtYmVyIjo1MDIzNSwiY2xpZW50X2V2ZW50X3NvdXJjZSI6bnVsbH0=";
 
                 HttpClient.UpdateFingerprint();
             }
@@ -70,10 +74,10 @@ namespace Discord
             Token = token;
         }
 
+
         public DiscordClient(string proxy, ProxyType proxyType, bool antiTrack = true) : this(antiTrack)
         {
             HttpClient.SetProxy(proxyType, proxy);
-            HttpClient.UpdateFingerprint();
         }
 
 
@@ -82,13 +86,6 @@ namespace Discord
             Token = token;
         }
         
-
-        private void OnPropertiesUpdated(object sender, SPUpdatedEventArgs args)
-        {
-            HttpClient.SuperProperties = args.Properties.Base64;
-            UserAgent = args.Properties.Properties.UserAgent;
-        }
-
 
         public override string ToString()
         {

@@ -63,6 +63,7 @@
     <Compile Include="Gateway\Presence\Activity\StreamActivity.cs" />
     <Compile Include="InvalidTokenException.cs" />
     <Compile Include="Multi\Controllable\ControllableEx.cs" />
+    <Compile Include="Multi\Models\InvalidConvertionException.cs" />
     <Compile Include="REST\Channel\Channel\Extensions.cs" />
     <Compile Include="REST\Channel\Guild\Guild\CreationProperties.cs" />
     <Compile Include="REST\Channel\Guild\Extensions.cs" />

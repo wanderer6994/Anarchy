@@ -57,12 +57,18 @@ namespace Discord
 
         public GuildInvite ToGuildInvite()
         {
+            if (Type != InviteType.Guild)
+                throw new InvalidConvertionException(Client, "Invite is not of a guild");
+
             return ((GuildInvite)Json.ToObject(typeof(GuildInvite))).SetClient(Client).SetJson(Json);
         }
 
 
         public GroupInvite ToGroupInvite()
         {
+            if (Type != InviteType.Group)
+                throw new InvalidConvertionException(Client, "Invite is not of a group");
+
             return ((GroupInvite)Json.ToObject(typeof(GroupInvite))).SetClient(Client).SetJson(Json);
         }
     }

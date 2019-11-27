@@ -1,6 +1,5 @@
 ﻿using Leaf.xNet;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WebSocketSharp;
@@ -106,7 +105,7 @@ namespace Discord.Gateway
             Socket = new WebSocket("wss://gateway.discord.gg/?v=6&encoding=json");
             if (HttpClient.Proxy != null)
             {
-                if (HttpClient.Proxy.Type == ProxyType.HTTP) //WebSocketSharp only supports HTTP proxies
+                if (HttpClient.Proxy.Type == ProxyType.HTTP) //WebSocketSharp only supports HTTP proxies :(
                     Socket.SetProxy($"http://{HttpClient.Proxy.Host}:{HttpClient.Proxy.Port}", "", "");
             }
             Socket.OnMessage += SocketDataReceived;
