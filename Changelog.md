@@ -11,7 +11,7 @@
 
 ### Improvements
 - WIP: on objects that have multiple types (like channels) - instead of needing to make another HTTP request, it saves the json from the request and deserializes to that if asked.
-
+- Improved the Settings class (used in OnSettingsUpdated).
 
 
 # 0.6.3.1

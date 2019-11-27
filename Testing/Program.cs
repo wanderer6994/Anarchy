@@ -15,8 +15,16 @@ namespace Testing
     {
         static void Main()
         {
-            DiscordClient client = new DiscordClient("NjQzMTIyNTA4OTA3ODA2Nzcw.Xd4UiQ.xvSvAnm_pQ1YKTQgyelMMDkweOQ");
-            Guild haxx = client.LurkGuild(client.GetInvite("fortnite").ToGuildInvite().Guild.Id, "09d3e9ea20f487e05a45077d38979805");
+            DiscordSocketClient client = new DiscordSocketClient();
+            client.OnLoggedIn += Client_OnLoggedIn;
+            client.Login("NjQzMTIyNTA4OTA3ODA2Nzcw.Xd4WBg.hsK6VeL0x9G8K6NGd__h7OcgJx0");
+
+            Thread.Sleep(-1);
+        }
+
+        private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
+        {
+            Console.WriteLine("Logged in, lol");
         }
     }
 }
