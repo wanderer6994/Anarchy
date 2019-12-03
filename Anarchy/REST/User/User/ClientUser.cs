@@ -84,7 +84,7 @@ namespace Discord
         /// </summary>
         public UserSettings GetSettings()
         {
-            return Client.HttpClient.Patch("/users/@me/settings")
+            return Client.HttpClient.Get("/users/@me/settings")
                                 .Deserialize<UserSettings>();
         }
 

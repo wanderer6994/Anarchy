@@ -26,7 +26,7 @@ namespace Discord
         public string Fingerprint { get; private set; }
 
 
-        public ProxyClient Proxy { get; private set; }
+        public ProxyClient Proxy { get; set; }
 
 
         public void SetProxy(ProxyType proxyType, string proxy)

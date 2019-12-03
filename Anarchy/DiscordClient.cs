@@ -1,4 +1,5 @@
 ﻿using Leaf.xNet;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,12 +31,16 @@ namespace Discord
                 {
                     this.GetClientUser();
                 }
-                catch
+                catch (DiscordHttpException)
                 {
                     if (previousToken != null)
                         _token = previousToken;
 
                     throw new InvalidTokenException(value);
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
         }
