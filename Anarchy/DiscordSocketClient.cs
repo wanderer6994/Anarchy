@@ -194,7 +194,7 @@ namespace Discord.Gateway
                             OnGuildMemberUpdated?.Invoke(this, new GuildMemberEventArgs(payload.Deserialize<GuildMember>().SetClient(this)));
                             break;
                         case "GUILD_MEMBERS_CHUNK":
-                            OnGuildMembersReceived?.Invoke(this, new GuildMembersEventArgs(payload.Deserialize<GuildMemberList>().Members.SetClientsInList(this)));
+                            OnGuildMembersReceived?.Invoke(this, new GuildMembersEventArgs(payload.Deserialize<GuildMemberList>().SetClient(this)));
                             break;
                         case "PRESENCE_UPDATE":
                             OnUserPresenceUpdated?.Invoke(this, new PresenceUpdatedEventArgs(payload.Deserialize<PresenceUpdate>()));

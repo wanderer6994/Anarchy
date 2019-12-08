@@ -38,9 +38,9 @@ namespace Discord
 
                     throw new InvalidTokenException(value);
                 }
-                catch (Exception ex)
+                catch
                 {
-
+                    throw;
                 }
             }
         }

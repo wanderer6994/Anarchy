@@ -32,7 +32,7 @@ namespace Discord.Gateway
             IReadOnlyList<GuildMember> newMembers = new List<GuildMember>();
             client.OnGuildMembersReceived += (c, args) =>
             {
-                if (args.Members[0].GuildId == guildId)
+                if (args.GuildId == guildId)
                 {
                     newMembers = args.Members;
                     members.AddRange(newMembers);
