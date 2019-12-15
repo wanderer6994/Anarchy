@@ -53,5 +53,16 @@ namespace Discord
             return client.HttpClient.Delete($"/channels/{channelId}")
                     .DeserializeEx<DMChannel>().SetClient(client);
         }
+
+
+        /// <summary>
+        /// Changes the call region (fx. hongkong) for the private channel
+        /// </summary>
+        /// <param name="channelId">ID of the private channel</param>
+        /// <param name="regionId">The region ID (fx. hongkong)</param>
+        public static void ChangePrivateCallRegion(this DiscordClient client, ulong channelId, string regionId)
+        {
+            client.HttpClient.Patch($"/channels/{channelId}/call", $"{{\"region\":\"{regionId}\"}}");
+        }
     }
 }

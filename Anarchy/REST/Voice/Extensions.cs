@@ -5,6 +5,15 @@ namespace Discord
     public static class VoiceExtensions
     {
         /// <summary>
+        /// Opens a call on the specified channel
+        /// </summary>
+        /// <param name="channelId">ID of the private channel</param>
+        public static void StartCall(this DiscordClient client, ulong channelId)
+        {
+            client.HttpClient.Post($"/channels/{channelId}/call/ring", $"{{\"recipients\":null}}");
+        }
+
+        /// <summary>
         /// Gets all available voice regions
         /// </summary>
         public static IReadOnlyList<VoiceRegion> GetVoiceRegions(this DiscordClient client)

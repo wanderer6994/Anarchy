@@ -176,6 +176,8 @@ namespace Discord
         /// <returns>The created webhook</returns>
         public Hook CreateWebhook(WebhookProperties properties)
         {
+            properties.ChannelId = Id;
+
             return Client.CreateChannelWebhook(Id, properties);
         }
     }

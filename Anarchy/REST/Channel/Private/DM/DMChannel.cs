@@ -38,6 +38,12 @@ namespace Discord
         }
 
 
+        public void ChangeCallRegion(string regionId)
+        {
+            Client.ChangePrivateCallRegion(Id, regionId);
+        }
+
+
         #region messages
         /// <summary>
         /// Triggers a 'user typing...'

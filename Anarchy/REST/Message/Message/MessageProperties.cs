@@ -29,5 +29,11 @@ namespace Discord
 
         [JsonProperty("embed")]
         public Embed Embed { get; set; }
+
+
+        public bool ShouldSerializeEmbed()
+        {
+            return Embed != null;
+        }
     }
 }

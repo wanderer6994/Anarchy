@@ -81,7 +81,7 @@ namespace Discord
 
         public TextChannel ToTextChannel()
         {
-            if (Type == ChannelType.Text)
+            if (Type != ChannelType.Text)
                 throw new InvalidConvertionException(Client, "Channel is not a guild text channel");
 
             if (Json == null)

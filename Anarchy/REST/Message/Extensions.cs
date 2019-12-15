@@ -1,7 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 
 namespace Discord
 {
@@ -18,7 +22,7 @@ namespace Discord
         public static Message SendMessage(this DiscordClient client, ulong channelId, string message, bool tts = false, Embed embed = null)
         {
             return client.HttpClient.Post($"/channels/{channelId}/messages",
-                                JsonConvert.SerializeObject(new MessageProperties() { Content = message, Tts = tts, Embed = embed })).Deserialize<Message>().SetClient(client);
+                               JsonConvert.SerializeObject(new MessageProperties() { Content = message, Tts = tts, Embed = embed })).Deserialize<Message>().SetClient(client);
         }
 
 

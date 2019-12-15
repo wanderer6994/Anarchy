@@ -1,10 +1,9 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 using Leaf.xNet;
+using System.Linq;
 
 namespace Discord
 {
@@ -80,7 +79,7 @@ namespace Discord
         /// <param name="method">HTTP method to use</param>
         /// <param name="endpoint">API endpoint (fx. /users/@me)</param>
         /// <param name="json">JSON content</param>
-        private HttpResponse Send(HttpMethod method, string endpoint, string json = null)
+        private HttpResponse Send(HttpMethod method, string endpoint, HttpContent content, string contentType)
         {
             bool isEndpoint = !endpoint.StartsWith("http");
 
@@ -90,47 +89,62 @@ namespace Discord
 #pragma warning disable IDE0068
             HttpRequest msg = new HttpRequest();
             msg.IgnoreProtocolErrors = true;
-            msg.AddHeader(HttpHeader.ContentType, "application/json");
+            msg.AddHeader(HttpHeader.ContentType, contentType);
             if (SuperProperties != null)
                 msg.AddHeader("X-Super-Properties", SuperProperties);
             msg.Proxy = Proxy;
             msg.UserAgent = UserAgent;
             msg.Authorization = AuthToken;
 
-            HttpResponse resp = msg.Raw(method, endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null);
+            HttpResponse resp = msg.Raw(method, endpoint, content);
 
             CheckResponse(resp);
             return resp;
         }
 
+        public HttpResponse SendJson(HttpMethod method, string endpoint, string json = null)
+        {
+            return Send(method, endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null, "application/json");
+        }
+
+
+        public HttpResponse SendMultipart(HttpMethod method, string endpoint, System.Net.Http.MultipartFormDataContent content)
+        {
+            string data = content.ReadAsStringAsync().Result;
+
+            string contentType = "multipart/form-data; boundary=" + data.Split('\n')[0].Replace("\r", "");
+
+            return Send(method, endpoint, new StringContent(data, Encoding.UTF8), contentType);
+        }
+
 
         public HttpResponse Get(string endpoint)
         {
-            return Send(HttpMethod.GET, endpoint);
+            return SendJson(HttpMethod.GET, endpoint);
         }
 
 
         public HttpResponse Post(string endpoint, string json = "")
         {
-            return Send(HttpMethod.POST, endpoint, json);
+            return SendJson(HttpMethod.POST, endpoint, json);
         }
 
 
         public HttpResponse Delete(string endpoint)
         {
-            return Send(HttpMethod.DELETE, endpoint);
+            return SendJson(HttpMethod.DELETE, endpoint);
         }
 
 
         public HttpResponse Put(string endpoint, string json = "")
         {
-            return Send(HttpMethod.PUT, endpoint, json);
+            return SendJson(HttpMethod.PUT, endpoint, json);
         }
 
 
         public HttpResponse Patch(string endpoint, string json = "")
         {
-            return Send(HttpMethod.PATCH, endpoint, json);
+            return SendJson(HttpMethod.PATCH, endpoint, json);
         }
     }
 }
