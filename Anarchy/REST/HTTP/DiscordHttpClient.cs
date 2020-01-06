@@ -23,6 +23,7 @@ namespace Discord
         public string UserAgent { get; set; }
         public string SuperProperties { get; set; }
         public string Fingerprint { get; private set; }
+        public string ApiBaseEndpoint { get; set; } = "https://discordapp.com/api/v6";
 
 
         public ProxyClient Proxy { get; set; }
@@ -84,7 +85,7 @@ namespace Discord
             bool isEndpoint = !endpoint.StartsWith("http");
 
             if (isEndpoint)
-                endpoint = "https://discordapp.com/api/v6" + endpoint;
+                endpoint = ApiBaseEndpoint + endpoint;
 
 #pragma warning disable IDE0068
             HttpRequest msg = new HttpRequest();
@@ -102,7 +103,7 @@ namespace Discord
             return resp;
         }
 
-        public HttpResponse SendJson(HttpMethod method, string endpoint, string json = null)
+        public HttpResponse SendJson(HttpMethod method, string endpoint, string json = "{}")
         {
             return Send(method, endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null, "application/json");
         }
