@@ -40,8 +40,15 @@ namespace Discord
         [JsonProperty("roles")]
         private IReadOnlyList<ulong> Roles
         {
-            get { return Member.Roles; }
-            set { Member.Roles = value; }
+            get 
+            {
+                List<ulong> roles = new List<ulong>();
+
+                foreach (var role in Member.Roles)
+                    roles.Add(role.Id);
+
+                return roles;
+            }
         }
 
 
@@ -49,7 +56,6 @@ namespace Discord
         private User User
         {
             get { return Member.User; }
-            set { Member.User = value; }
         }
 #pragma warning restore IDE0051
     }

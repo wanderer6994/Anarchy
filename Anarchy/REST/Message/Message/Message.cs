@@ -43,7 +43,7 @@ namespace Discord
         {
             get
             {
-                GuildMember member = new GuildMember() { GuildId = GuildId == null ? 0 : GuildId.Value, User = _authorUser }
+                GuildMember member = new GuildMember() { GuildId = Guild == null ? 0 : Guild.Id, User = _authorUser }
                                             .SetClient(Client);
                 if (_authorMember != null)
                 {
@@ -98,17 +98,37 @@ namespace Discord
 
         [JsonProperty("pinned")]
         public bool Pinned { get; private set; }
-      
+
 
         [JsonProperty("channel_id")]
-        public ulong ChannelId { get; private set; }
+        private ulong _channelId;
+
+        public MinimalChannel Channel
+        {
+            get
+            {
+                return new MinimalChannel(_channelId).SetClient(Client);
+            }
+        }
 
 
         /// <summary>
         /// This will only be set if the message is received through the gateway
         /// </summary>
         [JsonProperty("guild_id")]
-        public ulong? GuildId { get; private set; }
+        private ulong? _guildId;
+
+
+        public MinimalGuild Guild
+        {
+            get
+            {
+                if (_guildId.HasValue)
+                    return new MinimalGuild(_guildId.Value);
+                else
+                    return null;
+            }
+        }
 
 
         [JsonProperty("type")]
@@ -124,7 +144,7 @@ namespace Discord
             if (Type != MessageType.Default)
                 return;
 
-            Message msg = Client.EditMessage(ChannelId, Id, message);
+            Message msg = Client.EditMessage(Channel.Id, Id, message);
             Content = msg.Content;
             Pinned = msg.Pinned;
             Mentions = msg.Mentions;
@@ -139,7 +159,7 @@ namespace Discord
         /// </summary>
         public void Delete()
         {
-            Client.DeleteMessage(ChannelId, Id);
+            Client.DeleteMessage(Channel.Id, Id);
         }
 
 
@@ -151,7 +171,7 @@ namespace Discord
         /// <param name="afterId">The reaction ID to offset from</param>
         public IReadOnlyList<User> GetReactions(string reaction, uint limit = 25, ulong afterId = 0)
         {
-            return Client.GetMessageReactions(ChannelId, Id, reaction, limit, afterId);
+            return Client.GetMessageReactions(Channel.Id, Id, reaction, limit, afterId);
         }
 
 
@@ -160,7 +180,7 @@ namespace Discord
         /// </summary>
         public void AddReaction(string reaction)
         {
-            Client.AddMessageReaction(ChannelId, Id, reaction);
+            Client.AddMessageReaction(Channel.Id, Id, reaction);
         }
 
 
@@ -178,7 +198,7 @@ namespace Discord
         /// </summary>
         public void RemoveReaction(string reaction)
         {
-            Client.RemoveMessageReaction(ChannelId, Id, reaction);
+            Client.RemoveMessageReaction(Channel.Id, Id, reaction);
         }
 
 

@@ -3,12 +3,8 @@ using System.Drawing;
 
 namespace Discord
 {
-    public class Role : Controllable
+    public class Role : MinimalRole
     {
-        [JsonProperty("id")]
-        public ulong Id { get; private set; }
-
-
         [JsonProperty("name")]
         public string Name { get; private set; }
 
@@ -24,9 +20,6 @@ namespace Discord
 
         [JsonProperty("position")]
         public int Position { get; private set; }
-
-
-        public ulong GuildId { get; internal set; }
 
 
         [JsonProperty("hoist")]
@@ -52,23 +45,14 @@ namespace Discord
         /// Modifies the role
         /// </summary>
         /// <param name="properties">Options for modifying the role</param>
-        public void Modify(RoleProperties properties)
+        public new void Modify(RoleProperties properties)
         {
-            Role role = Client.ModifyGuildRole(GuildId, Id, properties);
+            Role role = base.Modify(properties);
             Name = role.Name;
             Permissions = role.Permissions;
             Color = role.Color;
             Seperated = role.Seperated;
             Position = role.Position;
-        }
-
-
-        /// <summary>
-        /// Deletes the role
-        /// </summary>
-        public void Delete()
-        {
-            Client.DeleteGuildRole(GuildId, Id);
         }
 
 

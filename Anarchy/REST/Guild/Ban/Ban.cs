@@ -18,7 +18,15 @@ namespace Discord
         public User User { get; private set; }
 
 
-        public ulong GuildId { get; internal set; }
+        internal ulong GuildId { get; set; }
+
+        public MinimalGuild Guild
+        {
+            get
+            {
+                return new MinimalGuild(GuildId);
+            }
+        }
 
 
         /// <summary>

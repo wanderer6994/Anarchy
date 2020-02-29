@@ -5,12 +5,8 @@ namespace Discord
     /// <summary>
     /// Represents a universal channel object. This is not specific to any sort of channel
     /// </summary>
-    public class Channel : ControllableEx
+    public class Channel : MinimalChannel
     {
-        [JsonProperty("id")]
-        public ulong Id { get; private set; }
-
-
         [JsonProperty("name")]
         public string Name { get; protected set; }
 
@@ -34,21 +30,11 @@ namespace Discord
         /// Modifies the channel
         /// </summary>
         /// <param name="properties">Options for modifying the channel</param>
-        public void Modify(string name)
+        public new void Modify(string name)
         {
-            Channel channel = Client.ModifyChannel(Id, name);
+            Channel channel = base.Modify(name);
             Json = channel.Json;
             Name = channel.Name;
-        }
-
-
-        /// <summary>
-        /// Deletes the channel
-        /// </summary>
-        /// <returns>The deleted <see cref="Channel"/></returns>
-        public void Delete()
-        {
-            Name = Client.DeleteChannel(Id).Name;
         }
 
 

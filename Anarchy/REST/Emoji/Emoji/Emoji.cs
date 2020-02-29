@@ -14,8 +14,15 @@ namespace Discord
         public User Creator { get; private set; }
 
 
-        public ulong GuildId { get; internal set; }
+        internal ulong GuildId { get; set; }
 
+        public MinimalGuild Guild
+        {
+            get
+            {
+                return new MinimalGuild(GuildId);
+            }
+        }
 
         /// <summary>
         /// Updates the emoji's info

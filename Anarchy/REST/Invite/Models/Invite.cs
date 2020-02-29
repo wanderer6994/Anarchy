@@ -23,7 +23,7 @@ namespace Discord
 
         [JsonProperty("guild")]
 #pragma warning disable CS0649
-        private readonly Guild _guild;
+        private readonly BaseGuild _guild;
 #pragma warning restore CS0649
 
 

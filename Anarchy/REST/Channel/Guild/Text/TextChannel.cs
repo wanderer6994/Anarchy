@@ -31,7 +31,7 @@ namespace Discord
         /// </summary>
         public override void Update()
         {
-            TextChannel channel = Client.GetTextChannel(Id);
+            TextChannel channel = Client.GetChannel(Id).ToTextChannel();
             Name = channel.Name;
             Topic = channel.Topic;
             Nsfw = channel.Nsfw;

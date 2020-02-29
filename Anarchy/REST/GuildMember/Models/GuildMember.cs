@@ -13,7 +13,16 @@ namespace Discord
 
 
         [JsonProperty("guild_id")]
-        public ulong GuildId { get; internal set; }
+        internal ulong GuildId { get; set; }
+
+
+        public MinimalGuild Guild
+        {
+            get
+            {
+                return new MinimalGuild(GuildId);
+            }
+        }
 
 
         [JsonProperty("user")]
@@ -25,7 +34,20 @@ namespace Discord
 
 
         [JsonProperty("roles")]
-        public IReadOnlyList<ulong> Roles { get; internal set; }
+        private IReadOnlyList<ulong> _roles;
+
+        public IReadOnlyList<MinimalRole> Roles
+        {
+            get
+            {
+                var roles = new List<MinimalRole>();
+
+                foreach (var role in _roles)
+                    roles.Add(new MinimalRole(GuildId, role).SetClient(Client));
+
+                return roles;
+            }
+        }
 
 
         [JsonProperty("joined_at")]
@@ -67,7 +89,7 @@ namespace Discord
             GuildMember member = Client.GetGuildMember(GuildId, User.Id);
             User = member.User;
             Nickname = member.Nickname;
-            Roles = member.Roles;
+            _roles = member._roles;
             Muted = member.Muted;
             Deafened = member.Deafened;
         }

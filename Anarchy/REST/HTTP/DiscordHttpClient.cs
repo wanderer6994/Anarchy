@@ -125,7 +125,7 @@ namespace Discord
         }
 
 
-        public HttpResponse Post(string endpoint, string json = "")
+        public HttpResponse Post(string endpoint, string json = "{}")
         {
             return SendJson(HttpMethod.POST, endpoint, json);
         }
@@ -137,13 +137,13 @@ namespace Discord
         }
 
 
-        public HttpResponse Put(string endpoint, string json = "")
+        public HttpResponse Put(string endpoint, string json = "{}")
         {
             return SendJson(HttpMethod.PUT, endpoint, json);
         }
 
 
-        public HttpResponse Patch(string endpoint, string json = "")
+        public HttpResponse Patch(string endpoint, string json = "{}")
         {
             return SendJson(HttpMethod.PATCH, endpoint, json);
         }

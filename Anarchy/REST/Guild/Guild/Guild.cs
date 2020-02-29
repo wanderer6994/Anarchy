@@ -35,6 +35,10 @@ namespace Discord
         public GuildDefaultNotifications DefaultNotifications { get; set; }
 
 
+        [JsonProperty("system_channel_id")]
+        public ulong? SystemChannelId { get; private set; }
+
+
         [JsonProperty("premium_tier")]
         public GuildPremiumTier PremiumTier { get; private set; }
 

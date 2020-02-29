@@ -63,6 +63,12 @@
     <Compile Include="Gateway\GuildMember\Models\MemberAmount.cs" />
     <Compile Include="Gateway\Presence\Activity\GameActivity.cs" />
     <Compile Include="Gateway\Presence\Activity\StreamActivity.cs" />
+    <Compile Include="REST\Billing\BillingAddress.cs" />
+    <Compile Include="REST\Billing\Extensions.cs" />
+    <Compile Include="REST\Billing\Payment.cs" />
+    <Compile Include="REST\Billing\PaymentMethod.cs" />
+    <Compile Include="REST\Channel\Channel\MinimalChannel.cs" />
+    <Compile Include="REST\Guild\Guild\MinimalGuild.cs" />
     <Compile Include="REST\InvalidTokenException.cs" />
     <Compile Include="Multi\Controllable\ControllableEx.cs" />
     <Compile Include="Multi\Models\InvalidConvertionException.cs" />
@@ -84,6 +90,7 @@
     <Compile Include="REST\Embed\EmbedError.cs" />
     <Compile Include="REST\Embed\EmbedException.cs" />
     <Compile Include="REST\Invite\Models\InviteType.cs" />
+    <Compile Include="REST\Message\Message\ChannelMention.cs" />
     <Compile Include="REST\Nitro\Extensions.cs" />
     <Compile Include="REST\Nitro\Models\NitroBoost.cs" />
     <Compile Include="REST\Nitro\Models\NitroGift.cs" />
@@ -93,6 +100,7 @@
     <Compile Include="REST\OAuth2\Models\OAuth2Application.cs" />
     <Compile Include="REST\OAuth2\Extensions.cs" />
     <Compile Include="REST\Relationship\Models\RelationshipEventArgs.cs" />
+    <Compile Include="REST\Role\Models\MinimalRole.cs" />
     <Compile Include="REST\User\ConnectedAccount\Extensions.cs" />
     <Compile Include="REST\User\Profile\DiscordBadge.cs" />
     <Compile Include="REST\Invite\Models\GroupInvite.cs" />
@@ -249,8 +257,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="REST\Guild\Features\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
