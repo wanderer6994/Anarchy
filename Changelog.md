@@ -1,5 +1,12 @@
 (Please keep in mind that these are only the major/important changes. There have been way more than written here)<br>
 
+# 0.6.5.0
+### Additions
+- Added a command handler (can only be used by a DiscordSocketClient). Explaining how it works is too much here, so i have added an example project for it.
+- Added "minimalistic" models which help speed up various parts of your bot.
+
+
+
 # 0.6.4.0
 
 ### Additions

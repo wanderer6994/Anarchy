@@ -46,7 +46,7 @@ namespace Discord.Commands
 
                     if (Prefix.Length < contents[0].Length)
                     {
-                        string command = contents[0].Substring(Prefix.Length, Prefix.Length);
+                        string command = new string(contents[0].Skip(Prefix.Length).ToArray());
 
                         if (TryGetCommand(command, out KeyValuePair<string, Type> cmd))
                         {
