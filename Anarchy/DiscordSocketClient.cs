@@ -1,4 +1,5 @@
-﻿using Leaf.xNet;
+﻿using Discord.Commands;
+using Leaf.xNet;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -88,6 +89,7 @@ namespace Discord.Gateway
         internal uint? Sequence { get; set; }
         internal string SessionId { get; set; }
         public bool LoggedIn { get; private set; }
+        public CommandHandler CommandHandler { get; private set; }
 
 
         public DiscordSocketClient() : base() { }
@@ -109,28 +111,26 @@ namespace Discord.Gateway
                     Socket.SetProxy($"http://{HttpClient.Proxy.Host}:{HttpClient.Proxy.Port}", "", "");
             }
             Socket.OnMessage += SocketDataReceived;
-            Socket.OnClose += Socket_OnClose;
-            Socket.Connect();
-        }
-
-        private void Socket_OnClose(object sender, CloseEventArgs e)
-        {
-            if (LoggedIn)
+            Socket.OnClose += (sender, e) => 
             {
-                while (true)
+                if (LoggedIn)
                 {
-                    try
+                    while (true)
                     {
-                        Login(Token);
+                        try
+                        {
+                            Login(Token);
 
-                        return;
-                    }
-                    catch
-                    {
-                        Thread.Sleep(1000);
+                            return;
+                        }
+                        catch
+                        {
+                            Thread.Sleep(1000);
+                        }
                     }
                 }
-            }
+            };
+            Socket.Connect();
         }
 
 
@@ -144,6 +144,12 @@ namespace Discord.Gateway
 
                 OnLoggedOut?.Invoke(this, new UserEventArgs(User));
             }
+        }
+
+
+        public void CreateCommandHandler(string prefix)
+        {
+            CommandHandler = new CommandHandler(prefix, this);
         }
 
 

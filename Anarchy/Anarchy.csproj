@@ -57,6 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandAttribute.cs" />
+    <Compile Include="Commands\CommandHandler.cs" />
     <Compile Include="Gateway\Auth\Extensions.cs" />
     <Compile Include="Gateway\Auth\Models\LoginGuild.cs" />
     <Compile Include="Gateway\GuildMember\Extensions.cs" />
