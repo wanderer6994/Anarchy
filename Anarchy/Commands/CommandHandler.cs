@@ -50,7 +50,7 @@ namespace Discord.Commands
 
                         if (TryGetCommand(command, out KeyValuePair<string, Type> cmd))
                         {
-                            object classInstance = Activator.CreateInstance(cmd.Value, contents.Skip(1).ToArray(), args.Message);
+                            object classInstance = Activator.CreateInstance(cmd.Value, contents.Skip(1).ToArray());
 
                             MethodInfo cmdMethod = cmd.Value.GetMethod("Execute");
 

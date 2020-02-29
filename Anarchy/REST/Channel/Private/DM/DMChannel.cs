@@ -6,7 +6,7 @@ namespace Discord
     /// <summary>
     /// Represents a <see cref="Channel"/> specific to direct message channels
     /// </summary>
-    public class DMChannel : Channel
+    public class DMChannel : Channel, MessageChannel
     {
         public DMChannel()
         {

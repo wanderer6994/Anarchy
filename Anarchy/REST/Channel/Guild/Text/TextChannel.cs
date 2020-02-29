@@ -7,7 +7,7 @@ namespace Discord
     /// <summary>
     /// Represents a <see cref="Channel"/> specific to guild text channels
     /// </summary>
-    public class TextChannel : GuildChannel
+    public class TextChannel : GuildChannel, MessageChannel
     {
         [JsonProperty("topic")]
         public string Topic { get; private set; }

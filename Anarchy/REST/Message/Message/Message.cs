@@ -103,11 +103,11 @@ namespace Discord
         [JsonProperty("channel_id")]
         private ulong _channelId;
 
-        public MinimalChannel Channel
+        public MinimalTextChannel Channel
         {
             get
             {
-                return new MinimalChannel(_channelId).SetClient(Client);
+                return new MinimalTextChannel(_channelId).SetClient(Client);
             }
         }
 

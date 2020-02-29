@@ -71,6 +71,8 @@
     <Compile Include="REST\Billing\Payment.cs" />
     <Compile Include="REST\Billing\PaymentMethod.cs" />
     <Compile Include="REST\Channel\Channel\MinimalChannel.cs" />
+    <Compile Include="REST\Channel\Channel\MessageChannel.cs" />
+    <Compile Include="REST\Channel\Channel\MinimalTextChannel.cs" />
     <Compile Include="REST\Guild\Guild\MinimalGuild.cs" />
     <Compile Include="REST\InvalidTokenException.cs" />
     <Compile Include="Multi\Controllable\ControllableEx.cs" />

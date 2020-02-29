@@ -59,7 +59,7 @@ namespace Discord
                 throw new InvalidConvertionException(Client, "Channel is not of a guild");
 
             if (Json == null)
-                return Client.GetGuildChannel(Id);
+                return Client.GetChannel(Id).ToGuildChannel();
             else
                 return ((GuildChannel)Json.ToObject(typeof(GuildChannel))).SetClient(Client).SetJson(Json);
         }
@@ -71,7 +71,7 @@ namespace Discord
                 throw new InvalidConvertionException(Client, "Channel is not a guild text channel");
 
             if (Json == null)
-                return Client.GetTextChannel(Id);
+                return Client.GetChannel(Id).ToTextChannel();
             else
                 return ((TextChannel)Json.ToObject(typeof(TextChannel))).SetClient(Client).SetJson(Json);
         }
@@ -83,7 +83,7 @@ namespace Discord
                 throw new InvalidConvertionException(Client, "Channel is not a guild voice channel");
 
             if (Json == null)
-                return Client.GetVoiceChannel(Id);
+                return Client.GetChannel(Id).ToVoiceChannel();
             else
                 return ((VoiceChannel)Json.ToObject(typeof(VoiceChannel))).SetClient(Client).SetJson(Json);
         }
