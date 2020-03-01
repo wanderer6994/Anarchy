@@ -1,7 +1,4 @@
 ﻿using Leaf.xNet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Discord
 {
@@ -31,15 +28,10 @@ namespace Discord
                 {
                     this.GetClientUser();
                 }
-                catch (DiscordHttpException)
-                {
-                    if (previousToken != null)
-                        _token = previousToken;
-
-                    throw new InvalidTokenException(value);
-                }
                 catch
                 {
+                    _token = previousToken;
+
                     throw;
                 }
             }
@@ -55,7 +47,7 @@ namespace Discord
             }
         }
 
-        public DiscordClient(bool antiTrack = true)
+        public DiscordClient(bool getFingerprint = true)
         {
             HttpClient = new DiscordHttpClient(this);
 
@@ -66,15 +58,13 @@ namespace Discord
                 UserAgent = args.Properties.Properties.UserAgent;
             };
 
-            if (antiTrack)
-            {
-                SuperProperties.Base64 = "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRGlzY29yZCBDbGllbnQiLCJyZWxlYXNlX2NoYW5uZWwiOiJzdGFibGUiLCJjbGllbnRfdmVyc2lvbiI6IjAuMC4zMDUiLCJvc192ZXJzaW9uIjoiMTAuMC4xODM2MiIsIm9zX2FyY2giOiJ4NjQiLCJjbGllbnRfYnVpbGRfbnVtYmVyIjo1MDIzNSwiY2xpZW50X2V2ZW50X3NvdXJjZSI6bnVsbH0=";
+            SuperProperties.Base64 = "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRGlzY29yZCBDbGllbnQiLCJyZWxlYXNlX2NoYW5uZWwiOiJzdGFibGUiLCJjbGllbnRfdmVyc2lvbiI6IjAuMC4zMDUiLCJvc192ZXJzaW9uIjoiMTAuMC4xODM2MiIsIm9zX2FyY2giOiJ4NjQiLCJjbGllbnRfYnVpbGRfbnVtYmVyIjo1MDIzNSwiY2xpZW50X2V2ZW50X3NvdXJjZSI6bnVsbH0=";
 
+            if (getFingerprint)
                 HttpClient.UpdateFingerprint();
-            }
         }
 
-        public DiscordClient(string token, bool antiTrack = true) : this(antiTrack)
+        public DiscordClient(string token, bool getFingerprint = true) : this(getFingerprint)
         {
             Token = token;
         }

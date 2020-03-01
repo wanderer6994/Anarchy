@@ -74,7 +74,7 @@
     <Compile Include="REST\Channel\Channel\MessageChannel.cs" />
     <Compile Include="REST\Channel\Channel\MinimalTextChannel.cs" />
     <Compile Include="REST\Guild\Guild\MinimalGuild.cs" />
-    <Compile Include="REST\InvalidTokenException.cs" />
+    <Compile Include="REST\HTTP\InvalidTokenException.cs" />
     <Compile Include="Multi\Controllable\ControllableEx.cs" />
     <Compile Include="Multi\Models\InvalidConvertionException.cs" />
     <Compile Include="REST\Channel\Channel\Extensions.cs" />

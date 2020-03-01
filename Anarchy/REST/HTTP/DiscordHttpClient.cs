@@ -49,7 +49,7 @@ namespace Discord
 
         public void UpdateFingerprint()
         {
-            Fingerprint = Get("/experiments").Deserialize<JObject>().GetValue("fingerprint").ToString();
+            Fingerprint = Get("/experiments").Deserialize<JObject>().Value<string>("fingerprint");
         }
 
 
@@ -58,19 +58,20 @@ namespace Discord
         /// </summary>
         private void CheckResponse(HttpResponse resp)
         {
-            if (resp.StatusCode <= HttpStatusCode.NoContent)
-                return;
-
-            if (resp.StatusCode == (HttpStatusCode)429)
-                throw new RateLimitException(_discordClient, resp.ToString().Deserialize<RateLimit>());
-
-            if (resp.StatusCode == HttpStatusCode.BadRequest)
+            if (resp.StatusCode > HttpStatusCode.NoContent)
             {
-                if (!resp.Deserialize<JObject>().IsValid(_errorSchema))
-                    throw new InvalidParametersException(_discordClient, resp.ToString());
-            }
+                if (resp.StatusCode == (HttpStatusCode)429)
+                    throw new RateLimitException(_discordClient, resp.ToString().Deserialize<RateLimit>());
+                else if (resp.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    if (!resp.Deserialize<JObject>().IsValid(_errorSchema))
+                        throw new InvalidParametersException(_discordClient, resp.ToString());
+                }
+                else if (resp.StatusCode == HttpStatusCode.Unauthorized)
+                    throw new InvalidTokenException(AuthToken);
 
-            throw new DiscordHttpException(_discordClient, resp.Deserialize<DiscordHttpError>());
+                throw new DiscordHttpException(_discordClient, resp.Deserialize<DiscordHttpError>());
+            }
         }
 
 
@@ -80,72 +81,61 @@ namespace Discord
         /// <param name="method">HTTP method to use</param>
         /// <param name="endpoint">API endpoint (fx. /users/@me)</param>
         /// <param name="json">JSON content</param>
-        private HttpResponse Send(HttpMethod method, string endpoint, HttpContent content, string contentType)
+        private HttpResponse Send(HttpMethod method, string endpoint, string json = "{}")
         {
             bool isEndpoint = !endpoint.StartsWith("http");
 
             if (isEndpoint)
                 endpoint = ApiBaseEndpoint + endpoint;
 
+            bool hasData = method == HttpMethod.POST || method == HttpMethod.PATCH || method == HttpMethod.PUT;
+
 #pragma warning disable IDE0068
             HttpRequest msg = new HttpRequest();
             msg.IgnoreProtocolErrors = true;
-            msg.AddHeader(HttpHeader.ContentType, contentType);
-            if (SuperProperties != null)
-                msg.AddHeader("X-Super-Properties", SuperProperties);
+            if (hasData)
+                msg.AddHeader(HttpHeader.ContentType, "application/json");
+            if (Fingerprint != null)
+                msg.AddHeader("X-Fingerprint", Fingerprint);
+            msg.AddHeader("X-Super-Properties", SuperProperties);
             msg.Proxy = Proxy;
             msg.UserAgent = UserAgent;
             msg.Authorization = AuthToken;
 
-            HttpResponse resp = msg.Raw(method, endpoint, content);
+            HttpResponse resp = msg.Raw(method, endpoint, hasData ? new StringContent(json) : null);
 
             CheckResponse(resp);
             return resp;
         }
 
-        public HttpResponse SendJson(HttpMethod method, string endpoint, string json = "{}")
-        {
-            return Send(method, endpoint, json != null ? new StringContent(json, Encoding.UTF8) : null, "application/json");
-        }
-
-
-        public HttpResponse SendMultipart(HttpMethod method, string endpoint, System.Net.Http.MultipartFormDataContent content)
-        {
-            string data = content.ReadAsStringAsync().Result;
-
-            string contentType = "multipart/form-data; boundary=" + data.Split('\n')[0].Replace("\r", "");
-
-            return Send(method, endpoint, new StringContent(data, Encoding.UTF8), contentType);
-        }
-
 
         public HttpResponse Get(string endpoint)
         {
-            return SendJson(HttpMethod.GET, endpoint);
+            return Send(HttpMethod.GET, endpoint);
         }
 
 
         public HttpResponse Post(string endpoint, string json = "{}")
         {
-            return SendJson(HttpMethod.POST, endpoint, json);
+            return Send(HttpMethod.POST, endpoint, json);
         }
 
 
         public HttpResponse Delete(string endpoint)
         {
-            return SendJson(HttpMethod.DELETE, endpoint);
+            return Send(HttpMethod.DELETE, endpoint);
         }
 
 
         public HttpResponse Put(string endpoint, string json = "{}")
         {
-            return SendJson(HttpMethod.PUT, endpoint, json);
+            return Send(HttpMethod.PUT, endpoint, json);
         }
 
 
         public HttpResponse Patch(string endpoint, string json = "{}")
         {
-            return SendJson(HttpMethod.PATCH, endpoint, json);
+            return Send(HttpMethod.PATCH, endpoint, json);
         }
     }
 }
