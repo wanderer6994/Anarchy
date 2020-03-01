@@ -4,6 +4,7 @@
 ### Additions
 - Added a command handler (can only be used by a DiscordSocketClient). Explaining how it works is too much here, so i have added an example project for it.
 - Added "minimalistic" models which help speed up various parts of your bot.
+- Removed methods previously marked obsolete.
 
 
 

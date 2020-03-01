@@ -50,20 +50,6 @@ namespace Discord
         }
 
 
-        [Obsolete("This method is depricated. Please use GetInvite().ToGroupInvite() instead")]
-        public static GroupInvite GetGroupInvite(this DiscordClient client, string invCode)
-        {
-            return client.getInvite<GroupInvite>(invCode);
-        }
-
-
-        [Obsolete("This method is depricated. Please use GetInvite().ToGuildInvite() instead")]
-        public static GuildInvite GetGuildInvite(this DiscordClient client, string invCode)
-        {
-            return client.getInvite<GuildInvite>(invCode);
-        }
-
-
         /// <summary>
         /// Gets a guild's invites
         /// </summary>

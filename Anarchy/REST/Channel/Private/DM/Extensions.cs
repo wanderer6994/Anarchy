@@ -44,18 +44,6 @@ namespace Discord
 
 
         /// <summary>
-        /// Closes a direct messaging channel (does not delete the messages)
-        /// </summary>
-        /// <param name="channelId">ID of the channel</param>
-        /// <returns>The closed <see cref="DMChannel"/></returns>
-        public static DMChannel CloseDM(this DiscordClient client, ulong channelId)
-        {
-            return client.HttpClient.Delete($"/channels/{channelId}")
-                    .DeserializeEx<DMChannel>().SetClient(client);
-        }
-
-
-        /// <summary>
         /// Changes the call region (fx. hongkong) for the private channel
         /// </summary>
         /// <param name="channelId">ID of the private channel</param>

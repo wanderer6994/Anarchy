@@ -53,15 +53,15 @@ namespace Discord
         }
 
 
+        // This does the same as DeleteChannel(), i just decided to leave it be because DeleteChannel() is a weird name for a function for leaving groups
         /// <summary>
-        /// Leaves a group
+        /// Leaves a group.
         /// </summary>
         /// <param name="groupId">ID of the group</param>
         /// <returns>The leaved <see cref="Group"/></returns>
-        public static Group LeaveGroup(this DiscordClient client, ulong groupId)
+        public static Channel LeaveGroup(this DiscordClient client, ulong groupId)
         {
-            return client.HttpClient.Delete($"/channels/{groupId}")
-                .DeserializeEx<Group>().SetClient(client);
+            return client.DeleteChannel(groupId);
         }
 
 

@@ -34,7 +34,10 @@ namespace Discord
         /// </summary>
         public void Leave()
         {
-            Client.CloseDM(Id);
+            DMChannel group = Client.DeleteChannel(Id).ToDMChannel();
+
+            Name = group.Name;
+            Recipients = group.Recipients;
         }
 
 

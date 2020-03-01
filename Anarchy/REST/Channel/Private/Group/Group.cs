@@ -84,6 +84,17 @@ namespace Discord
         }
 
 
+        public new void Leave()
+        {
+            Group group = Client.DeleteChannel(Id).ToGroup();
+
+            Name = group.Name;
+            Recipients = group.Recipients;
+            IconId = group.IconId;
+            OwnerId = group.OwnerId;
+        }
+
+
         /// <summary>
         /// Creates an invite
         /// </summary>
