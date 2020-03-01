@@ -20,12 +20,6 @@ namespace Discord
                                 JsonConvert.SerializeObject(properties)).DeserializeEx<Treturn>().SetClient(client);
         }
 
-        private static T deleteChannel<T>(this DiscordClient client, ulong channelId) where T : GuildChannel
-        {
-            return client.HttpClient.Delete($"/channels/{channelId}")
-                .DeserializeEx<T>().SetClient(client);
-        }
-
 
         /// <summary>
         /// Gets a guild's channels
@@ -34,7 +28,7 @@ namespace Discord
         public static IReadOnlyList<GuildChannel> GetGuildChannels(this DiscordClient client, ulong guildId)
         {
             return client.HttpClient.Get($"/guilds/{guildId}/channels")
-                                .Deserialize<IReadOnlyList<GuildChannel>>().SetClientsInList(client);
+                                .DeserializeExArray<GuildChannel>().SetClientsInList(client);
         }
 
 
@@ -157,9 +151,10 @@ namespace Discord
         /// </summary>
         /// <param name="channelId">ID of the channel</param>
         /// <returns>The deleted <see cref="GuildChannel"/></returns>
+        [Obsolete("This method is depricated. Use DeleteChannel() instead instead", true)]
         public static GuildChannel DeleteGuildChannel(this DiscordClient client, ulong channelId)
         {
-            return client.deleteChannel<GuildChannel>(channelId);
+            return null;
         }
 
 

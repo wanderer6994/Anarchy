@@ -11,7 +11,7 @@ namespace Discord
     public class DiscordClient
     {
         public DiscordHttpClient HttpClient { get; private set; }
-        public SPInformation SuperPropertiesInfo { get; private set; }
+        public SPInformation SuperProperties { get; private set; }
         public ClientUser User { get; internal set; }
 
         private string _token;
@@ -47,11 +47,11 @@ namespace Discord
 
         public string UserAgent
         {
-            get { return SuperPropertiesInfo.Properties.UserAgent; }
+            get { return SuperProperties.Properties.UserAgent; }
             set
             {
                 HttpClient.UserAgent = value;
-                SuperPropertiesInfo.Properties.UserAgent = value;
+                SuperProperties.Properties.UserAgent = value;
             }
         }
 
@@ -59,8 +59,8 @@ namespace Discord
         {
             HttpClient = new DiscordHttpClient(this);
 
-            SuperPropertiesInfo = new SPInformation();
-            SuperPropertiesInfo.OnPropertiesUpdated += (sender, args) => 
+            SuperProperties = new SPInformation();
+            SuperProperties.OnPropertiesUpdated += (sender, args) => 
             {
                 HttpClient.SuperProperties = args.Properties.Base64;
                 UserAgent = args.Properties.Properties.UserAgent;
@@ -68,7 +68,7 @@ namespace Discord
 
             if (antiTrack)
             {
-                SuperPropertiesInfo.Base64 = "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRGlzY29yZCBDbGllbnQiLCJyZWxlYXNlX2NoYW5uZWwiOiJzdGFibGUiLCJjbGllbnRfdmVyc2lvbiI6IjAuMC4zMDUiLCJvc192ZXJzaW9uIjoiMTAuMC4xODM2MiIsIm9zX2FyY2giOiJ4NjQiLCJjbGllbnRfYnVpbGRfbnVtYmVyIjo1MDIzNSwiY2xpZW50X2V2ZW50X3NvdXJjZSI6bnVsbH0=";
+                SuperProperties.Base64 = "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiRGlzY29yZCBDbGllbnQiLCJyZWxlYXNlX2NoYW5uZWwiOiJzdGFibGUiLCJjbGllbnRfdmVyc2lvbiI6IjAuMC4zMDUiLCJvc192ZXJzaW9uIjoiMTAuMC4xODM2MiIsIm9zX2FyY2giOiJ4NjQiLCJjbGllbnRfYnVpbGRfbnVtYmVyIjo1MDIzNSwiY2xpZW50X2V2ZW50X3NvdXJjZSI6bnVsbH0=";
 
                 HttpClient.UpdateFingerprint();
             }

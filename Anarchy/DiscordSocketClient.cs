@@ -165,7 +165,8 @@ namespace Discord.Gateway
                     {
                         case "READY":
                             LoggedIn = true;
-                            Login login = payload.Deserialize<Login>().SetClient(this);
+                            Login login = payload.Deserialize<Login>().SetJson(payload.Deserialize<JObject>()).SetClient(this);
+
                             this.User = login.User;
                             this.SessionId = login.SessionId;
                             OnLoggedIn?.Invoke(this, new LoginEventArgs(login));

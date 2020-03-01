@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Discord
 {
-    public class MinimalGuild : Controllable
+    public class MinimalGuild : ControllableEx // the only reason this has Ex is bcuz of LoginGuild, lol
     {
         [JsonProperty("id")]
         public ulong Id { get; private set; }

@@ -15,7 +15,7 @@ namespace Discord
         public static IReadOnlyList<DMChannel> GetPrivateChannels(this DiscordClient client)
         {
             return client.HttpClient.Get($"/users/@me/channels")
-                                .Deserialize<IReadOnlyList<DMChannel>>().SetClientsInList(client);
+                                .DeserializeExArray<DMChannel>().SetClientsInList(client);
         }
 
 

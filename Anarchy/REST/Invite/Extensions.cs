@@ -71,7 +71,7 @@ namespace Discord
         public static IReadOnlyList<GuildInvite> GetGuildInvites(this DiscordClient client, ulong guildId)
         {
             return client.HttpClient.Get($"/guilds/{guildId}/invites")
-                                .Deserialize<IReadOnlyList<GuildInvite>>().SetClientsInList(client);
+                                .DeserializeExArray<GuildInvite>().SetClientsInList(client);
         }
     }
 }

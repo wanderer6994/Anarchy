@@ -58,10 +58,7 @@ namespace Discord
             if (Type == ChannelType.DM || Type == ChannelType.Group)
                 throw new InvalidConvertionException(Client, "Channel is not of a guild");
 
-            if (Json == null)
-                return Client.GetChannel(Id).ToGuildChannel();
-            else
-                return ((GuildChannel)Json.ToObject(typeof(GuildChannel))).SetClient(Client).SetJson(Json);
+            return ((GuildChannel)Json.ToObject(typeof(GuildChannel))).SetClient(Client).SetJson(Json);
         }
 
 
@@ -70,10 +67,7 @@ namespace Discord
             if (Type != ChannelType.Text)
                 throw new InvalidConvertionException(Client, "Channel is not a guild text channel");
 
-            if (Json == null)
-                return Client.GetChannel(Id).ToTextChannel();
-            else
-                return ((TextChannel)Json.ToObject(typeof(TextChannel))).SetClient(Client).SetJson(Json);
+            return ((TextChannel)Json.ToObject(typeof(TextChannel))).SetClient(Client).SetJson(Json);
         }
 
 
@@ -82,10 +76,7 @@ namespace Discord
             if (Type == ChannelType.Text)
                 throw new InvalidConvertionException(Client, "Channel is not a guild voice channel");
 
-            if (Json == null)
-                return Client.GetChannel(Id).ToVoiceChannel();
-            else
-                return ((VoiceChannel)Json.ToObject(typeof(VoiceChannel))).SetClient(Client).SetJson(Json);
+            return ((VoiceChannel)Json.ToObject(typeof(VoiceChannel))).SetClient(Client).SetJson(Json);
         }
 
 
@@ -94,10 +85,7 @@ namespace Discord
             if (Type != ChannelType.DM)
                 throw new InvalidConvertionException(Client, "Channel is not of type: DM");
 
-            if (Json == null)
-                return Client.GetDMChannel(Id);
-            else
-                return ((DMChannel)Json.ToObject(typeof(DMChannel))).SetClient(Client).SetJson(Json);
+            return ((DMChannel)Json.ToObject(typeof(DMChannel))).SetClient(Client).SetJson(Json);
         }
 
 
@@ -106,10 +94,7 @@ namespace Discord
             if (Type != ChannelType.Group)
                 throw new InvalidConvertionException(Client, "Channel is not of type: Group");
 
-            if (Json == null)
-                return Client.GetGroup(Id);
-            else
-                return ((Group)Json.ToObject(typeof(Group))).SetClient(Client).SetJson(Json);
+            return ((Group)Json.ToObject(typeof(Group))).SetClient(Client).SetJson(Json);
         }
     }
 }

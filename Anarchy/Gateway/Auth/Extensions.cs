@@ -10,7 +10,7 @@
             var identification = new GatewayIdentification()
             {
                 Token = client.Token,
-                Properties = client.SuperPropertiesInfo
+                Properties = client.SuperProperties
             };
 
             client.Socket.Send(GatewayOpcode.Identify, identification);

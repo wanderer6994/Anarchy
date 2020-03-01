@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
 namespace Discord.Gateway
@@ -6,7 +7,7 @@ namespace Discord.Gateway
     /// <summary>
     /// A successful gateway login
     /// </summary>
-    internal class Login : Controllable
+    internal class Login : ControllableEx
     {
         public Login()
         {
@@ -16,6 +17,10 @@ namespace Discord.Gateway
                 Guilds.SetClientsInList(Client);
                 Relationships.SetClientsInList(Client);
                 PrivateChannels.SetClientsInList(Client);
+            };
+            JsonUpdated += (sender, json) =>
+            {
+                Guilds = json.Value<JArray>("guilds").PopulateListJson<LoginGuild>();
             };
         }
 

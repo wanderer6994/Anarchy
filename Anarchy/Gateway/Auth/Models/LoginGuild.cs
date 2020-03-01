@@ -7,19 +7,15 @@ namespace Discord.Gateway
     /// If you're logging into a user account u can call ToSocketGuild() which will return the full guild.
     /// If you are on a bot account however, please pay attention to the OnJoinedGuild events, which will be dispatched as guilds become available to the bot.
     /// </summary>
-    public class LoginGuild : ControllableEx
+    public class LoginGuild : MinimalGuild
     {
-        [JsonProperty("id")]
-        public ulong Id { get; private set; }
-
-
         /// <summary>
         /// Gets the full guild.
         /// Please only use this method if the account type is User
         /// </summary>
         public SocketGuild ToSocketGuild()
         {
-            return ((SocketGuild)Json.ToObject(typeof(SocketGuild))).SetClient(Client);
+            return ((SocketGuild)Json.ToObject(typeof(SocketGuild))).SetJson(Json).SetClient(Client);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +13,10 @@ namespace Discord.Gateway
         public SocketGuild()
         {
             OnClientUpdated += (sender, e) => Channels.SetClientsInList(Client);
+            JsonUpdated += (sender, json) =>
+            {
+                Channels = json.Value<JArray>("channels").PopulateListJson<GuildChannel>();
+            };
         }
 
 
@@ -24,7 +29,7 @@ namespace Discord.Gateway
 
 
         private IReadOnlyList<GuildChannel> _channels;
-        [JsonProperty("channels")]
+        [JsonIgnore]
         public IReadOnlyList<GuildChannel> Channels
         {
             get { return _channels; }
