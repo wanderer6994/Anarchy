@@ -25,6 +25,7 @@
         MaximumFriends,
         MaximumPins,
         MaximumRoles,
+        MaximumConnections = 30009,
         MaximumReactions = 30010,
         MaximumGuildChannels = 30013,
         MaximumGuildSubscriptions = 30026,
