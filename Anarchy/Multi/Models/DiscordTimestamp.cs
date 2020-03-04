@@ -2,7 +2,7 @@
 
 namespace Discord
 {
-    internal static class DiscordTimestamp
+    public static class DiscordTimestamp
     {
         /// <summary>
         /// Converts Discord timestamps to a <see cref="DateTime"/>
@@ -20,7 +20,7 @@ namespace Discord
                                 int.Parse(date[2]),
                                 int.Parse(time[0]),
                                 int.Parse(time[1]),
-                                int.Parse(time[2].Split('.')[0]),
+                                int.Parse(time[2].Split('+')[0].Split('.')[0]),
                                 int.Parse(time[3]));
         }
 
